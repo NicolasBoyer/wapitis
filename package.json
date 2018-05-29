@@ -1,0 +1,35 @@
+{
+  "name": "wapitis",
+  "version": "0.0.13",
+  "description": "Outils permettant de créer une web app - WebApp utiliTies pour typescript",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NicolasBoyer/wapitis.git"
+  },
+  "keywords": [
+    "Web",
+    "App",
+    "Outils",
+    "Tools",
+    "Utilities",
+    "electron",
+    "jsx"
+  ],
+  "author": "Nicolas Boyer",
+  "license": "MIT",
+  "bin": {
+    "wapitis": "index.js"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "cross-env": "^5.1.6",
+    "electron": "^2.0.2",
+    "electron-builder": "^20.14.7",
+    "figlet": "^1.2.0",
+    "fs-extra": "^6.0.1",
+    "fuse-box": "^3.2.2",
+    "inquirer": "^5.2.0",
+    "typescript": "^2.8.3",
+    "uglify-es": "^3.3.9"
+  }
+}
