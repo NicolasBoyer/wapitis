@@ -5,7 +5,7 @@ Todo:
   ✔ comment intégrer les modules @started(18-05-30 09:20) @done(18-05-31 02:10) @lasted(16h50m44s)
   ☐ service worker @started(18-05-30 09:20)
   ☐ babel ? @started(18-05-30 09:20)
-  ☐ Tester l'intégration de font : probablement juste à ajouter les ext dans copyplugin voire lesquels @started(18-05-31 02:12)
+  ✔ Tester l'intégration de font : probablement juste à ajouter les ext dans copyplugin voire lesquels @started(18-05-31 02:12) @done(18-06-01 00:24) @lasted(22h12m20s)
   ✔ Problème button ou window si on passe pas par new @done(18-05-31 15:07)
   ✔ pb car tsconfig est publié @started(18-05-30 09:20) @done(18-05-30 19:10) @lasted(9h50m31s)
   ✔ voir si besoin que custom.d.ts soit mis par wapitis et sans doute dans library + changement d'appel dans le dom au svg @started(18-05-30 09:20) @done(18-05-31 02:11) @lasted(16h51m3s)

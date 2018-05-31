@@ -16,7 +16,7 @@ const directoryBase = process.cwd();
 process.env.FUSEBOX_TEMP_FOLDER = directoryBase + "/.wapitis";
 
 // REQUIRE
-const { FuseBox, QuantumPlugin, CSSPlugin, WebIndexPlugin, CopyPlugin, EnvPlugin } = require("fuse-box");
+const { FuseBox, QuantumPlugin, CSSPlugin, CSSResourcePlugin, WebIndexPlugin, CopyPlugin, EnvPlugin } = require("fuse-box");
 const { src, task, exec, context } = require("fuse-box/sparky");
 const builder = require("electron-builder");
 
@@ -115,9 +115,16 @@ if (arg) {
 							template: directoryBase  + "/" + wapitisConfig.wwwPath + "/index.html",
 							appendBundles: true
 						}),
-						!this.isElectronTask && CSSPlugin({
-							group: "bundle.css"
-						}),
+						[
+							!this.isElectronTask && CSSResourcePlugin({
+								dist: directoryBase  + "/" + wapitisConfig.distPath + "/assets",
+								resolve: (f) => `./assets/${f}`
+							 }),
+							!this.isElectronTask && CSSPlugin({
+								group: "bundle.css",
+								minify: this.isProduction
+							}),
+						],
 						!this.isElectronTask && CopyPlugin({ files: ["**/*.svg"] }),
 						this.isProduction && QuantumPlugin({
 							bakeApiIntoBundle: this.isElectronTask ? "electron" : "bundle",
