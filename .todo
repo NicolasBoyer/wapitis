@@ -1,0 +1,14 @@
+
+Todo:
+  ✔ Faire l'init puis voir comment faire des modules pour ts puis test @started(18-05-30 09:20) @done(18-05-31 02:11) @lasted(16h51m28s)
+  ☐ wapitis createpage @started(18-05-30 09:20)
+  ✔ comment intégrer les modules @started(18-05-30 09:20) @done(18-05-31 02:10) @lasted(16h50m44s)
+  ☐ service worker @started(18-05-30 09:20)
+  ☐ babel ? @started(18-05-30 09:20)
+  ☐ Tester l'intégration de font : probablement juste à ajouter les ext dans copyplugin voire lesquels @started(18-05-31 02:12)
+  ☐ Problème button ou window si on passe pas par new
+  ✔ pb car tsconfig est publié @started(18-05-30 09:20) @done(18-05-30 19:10) @lasted(9h50m31s)
+  ✔ voir si besoin que custom.d.ts soit mis par wapitis et sans doute dans library + changement d'appel dans le dom au svg @started(18-05-30 09:20) @done(18-05-31 02:11) @lasted(16h51m3s)
+  ✔ probable bug lors de la construction de la librairie @started(18-05-30 09:20) @done(18-05-30 22:47) @lasted(13h27m34s)
+  ✘ Comment gérer le wanted latest ? @started(18-05-30 19:11) @cancelled(18-05-30 22:47) @wasted(3h36m41s)
+  ☐ Finir le readme

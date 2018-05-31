@@ -1,2 +1,2 @@
-import { JSX } from "jsx";
+import { JSX } from "wapitis";
 import "./www/styles/main.css";

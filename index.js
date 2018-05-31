@@ -82,6 +82,10 @@ if (arg) {
 		// PACKAGE JSON
 		const packageJson = JSON.parse(files.readFileSync(directoryBase + "/package.json", "utf8"));
 
+		// Combine custom icons SVG in dom icons SVG
+		const customSVG = files.readFileSync(wapitisConfig.wwwPath + "/assets/img/icons.svg", "utf8");
+		files.appendFile(path.resolve(__dirname, "library/icons.svg"), customSVG, true);
+
 		// PATH IMPORT ALIAS
 		let importFiles = {};
 		let allFiles = files.getAllFiles(directoryBase  + "/" + wapitisConfig.srcPath, [files.getCurrentDirectoryBase(), "tsconfig.json"]);
@@ -89,7 +93,8 @@ if (arg) {
 			let spacer = file.includes("\\") ? "\\" : "/";
 			let fileName = file.substring(file.lastIndexOf(spacer)+1);
 			fileName = fileName.substring(0, fileName.lastIndexOf("."));
-			importFiles[fileName] = file.replace(".." + spacer, "~/").split(spacer).join("/").substring(0, file.lastIndexOf(".")-1);
+			file = file.substring(file.lastIndexOf(wapitisConfig.srcPath.substring(0, wapitisConfig.srcPath.lastIndexOf("/"))) + wapitisConfig.srcPath.length).split(spacer).join("/");
+			importFiles[fileName] = "~/" + file.substring(0, file.lastIndexOf("."));
 		});
 
 		context(class {
@@ -230,10 +235,3 @@ if (arg) {
 	log(chalk.green(chalk.bold("  wapitis electron") + "  ---> lance la web app dans electron avec un serveur local (--dev) ou pour la production(--prod)"));
 	log(chalk.green(chalk.bold("  wapitis clear") + " ---> supprime le cache et le dossier dist"));
 }
-
-
-// Faire l'inir puis voir comment faire des modules pour ts puis test
-// wapitis createpage ?
-// comment intégrer les modules
-// service worker 
-// babel ?

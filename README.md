@@ -8,10 +8,10 @@
 - Générer une application web grâce à [FuseBox](https://fuse-box.org)
 - Générer une application electron
 - Fichiers d'entrée (main.tsx et electronStart.ts), tsconfig préconfigurés et structure www créés via l'initialisation
-
-A venir :
 - Utilisation de jsx via l'import d'un fichier jsx.ts
 - Divers fonctions disponibles grâce à l'import du fichier dom.ts
+
+A venir :
 - Créer vos components via une ligne de commande (pour une bonne intégration dans tsconfig.json et faciliter les imports)
 - Pré-intégration d'un service-worker
 
@@ -24,8 +24,18 @@ A venir :
 - npm install
 - Créer un dossier src
 - npx wapitis init
+- Modifier tsconfig pour intégrer les fichiers ts
+- Intégrer vos icons dans le fichiers icons.svg (exemple à intégrer en image)
+- Intégrer vos css dans le fichier main.css
+- Le point de départ est le dossier main.ts
+- Modifier le fichier electronStart si besoin
 - Coder avec [typescript](https://www.typescriptlang.org)
 - Le dossier dist contient le résultat de la transpilation
+
+<!-- - Préciser l'utilisation du dossier www
+- Montrer exemple DOM + JSX
+- Préciser que pas de babel et donc que chrome aujourd'hui
+- ICON WAPITIS -->
 
 ### CLI
 
@@ -44,6 +54,5 @@ A venir :
 ### Typescript
 
 ```Typescript
-import { DOM } from "dom";
-import { JSX } from "jsx";
+import { DOM, JSX } from "wapitis";
 ```
