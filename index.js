@@ -49,6 +49,13 @@ if (arg) {
 		];
 		  
 		inquirer.prompt(questions).then((answers) => {
+			const wapitisTxt = `{
+	"srcPath": "` + answers.srcproject + `/",
+	"wwwPath": "` + answers.srcproject + `/www",
+	"distPath": "` + answers.srcproject + `/../dist",
+	"startFile": "app.tsx",
+	"electronStartFile": "electronStart.ts"
+}`;		
 			files.appendFile(process.cwd() + "/wapitis.json", wapitisTxt, true);
 			if (answers.installdefaultfiles) {
 				files.copy(path.resolve(__dirname, "files/tsconfig.json"), process.cwd() + "/tsconfig.json");
