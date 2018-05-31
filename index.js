@@ -11,8 +11,7 @@ const path = require('path');
 const log = console.log;
 const arg = process.argv[2];
 
-const infosJson = files.readFileSync(__dirname + "/infos.json", "utf8");
-const directoryBase = infosJson ? JSON.parse(infosJson).projectRoot : null;
+const directoryBase = process.cwd();
 // ENV
 process.env.FUSEBOX_TEMP_FOLDER = directoryBase + "/.wapitis";
 
@@ -50,14 +49,6 @@ if (arg) {
 		];
 		  
 		inquirer.prompt(questions).then((answers) => {
-			files.appendFile(__dirname + "/infos.json", '{"projectRoot":"' + path.resolve(process.cwd()).split("\\").join("/") + '"}', true);
-			const wapitisTxt = `{
-	"srcPath": "` + answers.srcproject + `/",
-	"wwwPath": "` + answers.srcproject + `/www",
-	"distPath": "` + answers.srcproject + `/../dist",
-	"startFile": "app.tsx",
-	"electronStartFile": "electronStart.ts"
-}`;		
 			files.appendFile(process.cwd() + "/wapitis.json", wapitisTxt, true);
 			if (answers.installdefaultfiles) {
 				files.copy(path.resolve(__dirname, "files/tsconfig.json"), process.cwd() + "/tsconfig.json");
