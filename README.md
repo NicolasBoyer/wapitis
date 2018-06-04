@@ -11,9 +11,8 @@
 - Utilisation de jsx via l'import d'un fichier jsx.ts
 - Divers fonctions disponibles grâce à l'import du fichier dom.ts
 - Créer vos components via une ligne de commande (pour une bonne intégration dans tsconfig.json et faciliter les imports)
+- Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne (en cours d'amélioration)
 
-A venir :
-- Pré-intégration d'un service-worker
 
 ## Install
 
