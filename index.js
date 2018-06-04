@@ -8,6 +8,7 @@ const inquirer = require('inquirer');
 const files = require("./lib/files");
 const tools = require("./lib/tools");
 const path = require('path');
+const workboxBuild = require('workbox-build');
 const log = console.log;
 const arg = process.argv[2];
 
@@ -72,6 +73,39 @@ if (arg) {
 
 		// wapitis CONFIG
 		const wapitisConfig = JSON.parse(files.readFileSync(directoryBase + "/wapitis.json", "utf8"));
+
+		// Service worker
+		function buildServiceWorker() {
+			const buildSW = () => {
+				console.log("blip")
+				// This will return a Promise
+				return workboxBuild.generateSW({
+					globDirectory: directoryBase + "/" + wapitisConfig.distPath ,
+					globPatterns: [
+						"**\/*.{html,json,js,css,svg}",
+					],
+					swDest: directoryBase + "/" + wapitisConfig.distPath  + "/sw.js",				
+					// Define runtime caching rules.
+					// runtimeCaching: [{
+					// 	// Match any request ends with .png, .jpg, .jpeg or .svg.
+					// 	urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+				
+					// 	// Apply a cache-first strategy.
+					// 	handler: "cacheFirst",
+				
+					// 	options: {
+					// 		cacheName: 'wapitis-cache',
+					// 		// Only cache 10 images.
+					// 		expiration: {
+					// 			maxEntries: 10,
+					// 		},
+					// 	},
+					// }],
+				});
+			}
+			  
+			buildSW();
+		}
 
 		// Génération de fichiers
 		if (arg === "generate") {
@@ -189,6 +223,7 @@ if (arg) {
 			fuse.dev();
 			context.createBundle(fuse);
 			await fuse.run();
+			buildServiceWorker();
 		});
 
 		task("prod", ["clear"], async context => {
@@ -196,6 +231,7 @@ if (arg) {
 			const fuse = context.getConfig();
 			context.createBundle(fuse);
 			await fuse.run();
+			buildServiceWorker();
 		});
 
 		task("electron", [process.env.NODE_ENV === "production" ? "prod" : "dev"], async context => {
@@ -257,7 +293,6 @@ if (arg) {
 				});
 			}
 		});
-
 	} else {
 		log(chalk.red(arg + " n'est pas pris en charge par wapitis"));
 	}

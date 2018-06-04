@@ -1,6 +1,6 @@
 {
   "name": "wapitis",
-  "version": "0.0.37",
+  "version": "0.0.40",
   "description": "Outils permettant de créer et de gérer une web app - WebApp utiliTies pour typescript",
   "repository": {
     "type": "git",
@@ -34,7 +34,8 @@
     "fuse-box": "^3.2.2",
     "inquirer": "^5.2.0",
     "typescript": "^2.9.1",
-    "uglify-es": "^3.3.9"
+    "uglify-es": "^3.3.9",
+    "workbox-build": "^3.2.0"
   },
   "devDependencies": {}
 }
