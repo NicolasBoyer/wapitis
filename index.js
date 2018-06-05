@@ -74,10 +74,9 @@ if (arg) {
 		// wapitis CONFIG
 		const wapitisConfig = JSON.parse(files.readFileSync(directoryBase + "/wapitis.json", "utf8"));
 
-		// Service worker
-		function buildServiceWorker() {
+		// Service worker, manifest et fichiers pour la web app
+		function buildWebAppFiles() {
 			const buildSW = () => {
-				console.log("blip")
 				// This will return a Promise
 				return workboxBuild.generateSW({
 					globDirectory: directoryBase + "/" + wapitisConfig.distPath ,
@@ -102,9 +101,10 @@ if (arg) {
 					// 	},
 					// }],
 				});
-			}
-			  
+			}			  
 			buildSW();
+			files.copy(directoryBase + "/" + wapitisConfig.srcPath + "www/manifest.json", directoryBase + "/" + wapitisConfig.distPath + "/manifest.json");
+			files.copy(directoryBase + "/" + wapitisConfig.srcPath + "www/assets/icons", directoryBase + "/" + wapitisConfig.distPath + "/assets/icons");
 		}
 
 		// Génération de fichiers
@@ -223,7 +223,7 @@ if (arg) {
 			fuse.dev();
 			context.createBundle(fuse);
 			await fuse.run();
-			buildServiceWorker();
+			buildWebAppFiles();
 		});
 
 		task("prod", ["clear"], async context => {
@@ -231,7 +231,7 @@ if (arg) {
 			const fuse = context.getConfig();
 			context.createBundle(fuse);
 			await fuse.run();
-			buildServiceWorker();
+			buildWebAppFiles();
 		});
 
 		task("electron", [process.env.NODE_ENV === "production" ? "prod" : "dev"], async context => {

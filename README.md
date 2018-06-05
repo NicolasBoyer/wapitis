@@ -13,6 +13,9 @@
 - Créer vos components via une ligne de commande (pour une bonne intégration dans tsconfig.json et faciliter les imports)
 - Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne (en cours d'amélioration)
 
+**En cours :**
+- Intégration d'un manifest et divers améliorations permettant de respecter les besoins d'une progressive web app
+
 
 ## Install
 
@@ -20,8 +23,8 @@
 
 ## Usages
 
-- npm install
 - Créer un dossier src
+- npm install
 - npx wapitis init
 - Utiliser wapitis **$ generate class path/du/fichier.ts(x)** pour générer vos fichiers
 - Intégrer vos icons dans le fichiers icons.svg (exemple à intégrer en image)
