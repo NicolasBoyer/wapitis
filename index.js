@@ -74,7 +74,7 @@ if (arg) {
 		// wapitis CONFIG
 		const wapitisConfig = JSON.parse(files.readFileSync(directoryBase + "/wapitis.json", "utf8"));
 
-		// Service worker, manifest et fichiers pour la web app
+		// Service worker, manifest, polyfills et fichiers pour la web app
 		function buildWebAppFiles() {
 			const buildSW = () => {
 				// This will return a Promise
@@ -103,22 +103,31 @@ if (arg) {
 				});
 			}			  
 			buildSW();
+			// Ajout des scripts necessaires dans le fichier index.html
+			files.readFile(wapitisConfig.distPath + "/index.html", function (err, html) {
+				if (err) throw err;
+				html = html.replace('</head>', '<link rel="manifest" href="manifest.json"/><script src="polyfills.js"></script></head>');
+				html = html.replace('<body>', '<body><script>if ("serviceWorker" in navigator) {window.addEventListener("load", () =>navigator.serviceWorker.register("/sw.js"));}</script>');
+				files.appendFile(wapitisConfig.distPath + "/index.html", html, true);
+			});			
 			files.copy(directoryBase + "/" + wapitisConfig.srcPath + "www/manifest.json", directoryBase + "/" + wapitisConfig.distPath + "/manifest.json");
 			files.copy(directoryBase + "/" + wapitisConfig.srcPath + "www/assets/icons", directoryBase + "/" + wapitisConfig.distPath + "/assets/icons");
+			files.copy(directoryBase + "/" + wapitisConfig.srcPath + "www/polyfills.js", directoryBase + "/" + wapitisConfig.distPath + "/polyfills.js");
 		}
 
 		// Génération de fichiers
 		if (arg === "generate") {
 			const arg2 = process.argv[3];
 			const arg3 = process.argv[4];
-			if (process.argv[3] === "class" && (arg3.includes(".ts") || arg3.includes(".tsx"))) {
+			if (arg2 === "class" && (arg3.includes(".ts") || arg3.includes(".tsx")) || arg2 === "component" && arg3.includes(".tsx")) {
 				log(chalk.green("wapitis generate " + arg2 + " " + wapitisConfig.srcPath + arg3));
 				const classFile = wapitisConfig.srcPath + arg3;
 				if (!files.fileExists(directoryBase + "/" + classFile)) {
 					let className = arg3.substr(arg3.lastIndexOf("/") + 1);
 					className = className.substr(0, className.lastIndexOf("."));
 					className = className.split(/[- _]+/).map((str) => str.charAt(0).toUpperCase() + str.substr(1)).join("");
-					const classText = 
+					if (arg2 === "class") {
+						const classText = 
 (arg3.includes(".tsx") ? 
 `import { JSX } from "wapitis";
 
@@ -127,7 +136,13 @@ if (arg) {
 
 }
 `;
-					files.appendFile(directoryBase + "/" + classFile, classText, true);
+						files.appendFile(directoryBase + "/" + classFile, classText, true);
+					} else if (arg2 === "component") {
+						files.copy(path.resolve(__dirname, "files/component.tsx"), directoryBase + "/" + classFile).then(() => {
+							const componentText = files.readFileSync(directoryBase + "/" + classFile, "utf8");
+							files.appendFile(directoryBase + "/" + classFile, componentText.replace("ClassName", className), true);
+						});
+					}
 					const tsConfigJson = JSON.parse(files.readFileSync(tsconfigFile, "utf8"));
 					const tsConfigJsonPath = "*" in tsConfigJson.compilerOptions.paths ? tsConfigJson.compilerOptions.paths["*"] : tsConfigJson.compilerOptions.paths["*"] = [];
 					const tsConfigClassPath = classFile.substr(0, classFile.lastIndexOf("/") + 1) + "*";
@@ -223,7 +238,7 @@ if (arg) {
 			fuse.dev();
 			context.createBundle(fuse);
 			await fuse.run();
-			buildWebAppFiles();
+			if (process.argv[3] == "--webapp") buildWebAppFiles();
 		});
 
 		task("prod", ["clear"], async context => {
@@ -300,9 +315,10 @@ if (arg) {
 	log(chalk.green(figlet.textSync('WApiTis', { horizontalLayout: 'full' }) + chalk.bold(' ' + JSON.parse(files.readFileSync(__dirname + "/package.json", "utf8")).version)));
 	log("");
 	log(chalk.green(chalk.bold("  wapitis init") + " ---> initialise la web app en créant les fichiers et les dossiers nécessaires"));
-	log(chalk.green(chalk.bold("  wapitis dev") + "  ---> lance la web app dans un serveur local"));
+	log(chalk.green(chalk.bold("  wapitis dev") + "  ---> lance la web app dans un serveur local. --webapp pour générer service worker, manifest et polyfills"));
 	log(chalk.green(chalk.bold("  wapitis prod") + " ---> web app pour la production"));
 	log(chalk.green(chalk.bold("  wapitis electron") + "  ---> lance la webApp dans electron avec un serveur local (--dev) ou pour la production(--prod)"));
 	log(chalk.green(chalk.bold("  wapitis clear") + " ---> supprime le cache et le dossier dist"));
-	log(chalk.green(chalk.bold("  wapitis generate class path/du/fichier.ts(x)") + " ---> génère un fichier relatif à src. tsConfig est mis à jour"));
+	log(chalk.green(chalk.bold("  wapitis generate class path/du/fichier.ts(x)") + " ---> génère une classe relatif à src. tsConfig est mis à jour"));
+	log(chalk.green(chalk.bold("  wapitis generate component path/du/fichier.tsx") + " ---> génère un composant relatif à src. tsConfig est mis à jour"));
 }

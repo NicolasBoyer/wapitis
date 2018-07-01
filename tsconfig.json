@@ -4,6 +4,8 @@
         "module": "es2015",
         "moduleResolution": "node",
         "declaration": true,
+        "jsx": "react",
+        "jsxFactory": "JSX.createElement",
         "outDir": "./library"
     },
     "include": [

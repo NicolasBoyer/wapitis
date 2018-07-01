@@ -4,6 +4,13 @@ import icons from "./icons.svg";
 export namespace DOM {
     export function addIcon(name: string, parent: HTMLElement, elementAfter?: Node | null): SVGSVGElement {
         const svg = elementAfter ? parent.insertBefore(document.createElementNS("http://www.w3.org/2000/svg", "svg"), elementAfter) : parent.appendChild(document.createElementNS("http://www.w3.org/2000/svg", "svg"));
+        // Polyfill -> A supprimer après intégration de shadowdom dans FF et Edge
+        if (!("registerElement" in document)) {
+            const polyfillElt = svg.closest("*[data-polyfillid]");
+            if (polyfillElt) {
+                svg.setAttribute(polyfillElt.getAttribute("data-polyfillid").toLowerCase(), "");
+            }
+        }
         svg.setAttribute("class", "icon icon-" + name);
         svg.setAttribute("aria-hidden", "true");
         const use = svg.appendChild(document.createElementNS("http://www.w3.org/2000/svg", "use"));

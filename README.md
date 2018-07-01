@@ -45,7 +45,7 @@
 
     $ npx wapitis init --> initialise la web app en créant les fichiers et les dossiers nécessaires
 
-    $ npx wapitis dev --> lance la web app dans un serveur local
+    $ npx wapitis dev --> lance la web app dans un serveur local. --webapp pour générer service worker, manifest et polyfills
 
     $ npx wapitis prod --> web app pour la production
 
@@ -53,7 +53,9 @@
 
     $ npx wapitis clear --> supprime le cache et le dossier dist
 
-    $ wapitis generate class path/du/fichier.ts(x) --> génère un fichier relatif à src. tsConfig est mis à jour
+    $ wapitis generate class path/du/fichier.ts(x) --> génère une classe relatif à src. tsConfig est mis à jour
+
+    $ wapitis generate component path/du/fichier.tsx --> génère un composant relatif à src. tsConfig est mis à jour
 
 ### Typescript
 
