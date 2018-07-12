@@ -6,9 +6,10 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 const inquirer = require('inquirer');
 const files = require("./lib/files");
+const swBuilder = require("./lib/swBuilder");
 const tools = require("./lib/tools");
 const path = require('path');
-const workboxBuild = require('workbox-build');
+const compressor = require('node-minify');
 const log = console.log;
 const arg = process.argv[2];
 
@@ -17,7 +18,7 @@ const directoryBase = process.cwd();
 process.env.FUSEBOX_TEMP_FOLDER = directoryBase + "/.wapitis";
 
 // REQUIRE
-const { FuseBox, QuantumPlugin, CSSPlugin, CSSResourcePlugin, WebIndexPlugin, CopyPlugin, EnvPlugin } = require("fuse-box");
+const { FuseBox, QuantumPlugin, CSSPlugin, CSSResourcePlugin, CopyPlugin, EnvPlugin } = require("fuse-box");
 const { src, task, exec, context } = require("fuse-box/sparky");
 const builder = require("electron-builder");
 
@@ -44,6 +45,34 @@ if (arg) {
 					else return 'Entrez le nom de votre dossier source';
 				},
 				default: "src"
+			},
+			{
+				name: 'appName',
+				type: 'input',
+				message: 'Quel est le nom de votre Web App:',
+				validate: function( value ) {
+					if (value.length) return true;
+					else return 'Entrez le nom de votre Web App';
+				}
+			},
+			{
+				name: 'appDesc',
+				type: 'input',
+				message: 'Donnez une description pour votre Web App:',
+				validate: function( value ) {
+					if (value.length) return true;
+					else return 'Donnez une description pour votre Web App';
+				}
+			},
+			{
+				name: 'themeColor',
+				type: 'input',
+				message: 'Entrez une couleur pour le header de votre Web App:',
+				validate: function( value ) {
+					if (value.length) return true;
+					else return 'Entrez une couleur pour le header de votre Web App';
+				},
+				default: "#317EFB"
 			}
 		];
 		  
@@ -54,7 +83,10 @@ if (arg) {
 	"wwwPath": "${answers.srcproject}/www",
 	"distPath": "${answers.srcproject}/../dist",
 	"startFile": "app.tsx",
-	"electronStartFile": "electronStart.ts"
+	"electronStartFile": "electronStart.ts",
+	"appName": "${answers.appName}",
+	"appDesc": "${answers.appDesc}",
+	"themeColor": "${answers.themeColor}"
 }`;		
 			files.appendFile(directoryBase + "/wapitis.json", wapitisTxt, true);
 			files.copy(path.resolve(__dirname, "files/tsconfig.json"), directoryBase + "/tsconfig.json");
@@ -73,46 +105,47 @@ if (arg) {
 
 		// wapitis CONFIG
 		const wapitisConfig = JSON.parse(files.readFileSync(directoryBase + "/wapitis.json", "utf8"));
+		const completeDistPath = path.resolve(directoryBase + "/" + wapitisConfig.distPath);
+		const completeSrcPath = path.resolve(directoryBase + "/" + wapitisConfig.srcPath)
+		const completeWwwPath = path.resolve(directoryBase + "/" + wapitisConfig.wwwPath)
 
 		// Service worker, manifest, polyfills et fichiers pour la web app
+		swBuilder.setOptions({
+			globDirectory : directoryBase,
+			swDest : completeDistPath,
+			indexSrc : completeDistPath,
+			// L'exclusion doit aussi être un pattern
+			excludeFiles : ["icons-192.png","icons-512.png"],
+			globPattern : /\.(?:html|json|js|css|svg|png|jpg|gif)$/
+		});
 		function buildWebAppFiles() {
-			const buildSW = () => {
-				// This will return a Promise
-				return workboxBuild.generateSW({
-					globDirectory: directoryBase + "/" + wapitisConfig.distPath ,
-					globPatterns: [
-						"**\/*.{html,json,js,css,svg}",
-					],
-					swDest: directoryBase + "/" + wapitisConfig.distPath  + "/sw.js",				
-					// Define runtime caching rules.
-					// runtimeCaching: [{
-					// 	// Match any request ends with .png, .jpg, .jpeg or .svg.
-					// 	urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
-				
-					// 	// Apply a cache-first strategy.
-					// 	handler: "cacheFirst",
-				
-					// 	options: {
-					// 		cacheName: 'wapitis-cache',
-					// 		// Only cache 10 images.
-					// 		expiration: {
-					// 			maxEntries: 10,
-					// 		},
-					// 	},
-					// }],
+			return new Promise((resolve) => {
+				files.copy(completeSrcPath + "/www/manifest.json", completeDistPath + "/manifest.json").then(() => {
+					files.copy(completeSrcPath + "/www/assets/icons", completeDistPath + "/assets/icons").then(() => {
+						files.copy(path.resolve(__dirname, "files/polyfills.js"), completeDistPath + "/polyfills.js").then(() => {
+							swBuilder.registerServiceWorker().then(() => resolve());
+						});
+					});
 				});
-			}			  
-			buildSW();
-			// Ajout des scripts necessaires dans le fichier index.html
-			files.readFile(wapitisConfig.distPath + "/index.html", function (err, html) {
-				if (err) throw err;
-				html = html.replace('</head>', '<link rel="manifest" href="manifest.json"/><script src="polyfills.js"></script></head>');
-				html = html.replace('<body>', '<body><script>if ("serviceWorker" in navigator) {window.addEventListener("load", () =>navigator.serviceWorker.register("/sw.js"));}</script>');
-				files.appendFile(wapitisConfig.distPath + "/index.html", html, true);
-			});			
-			files.copy(directoryBase + "/" + wapitisConfig.srcPath + "www/manifest.json", directoryBase + "/" + wapitisConfig.distPath + "/manifest.json");
-			files.copy(directoryBase + "/" + wapitisConfig.srcPath + "www/assets/icons", directoryBase + "/" + wapitisConfig.distPath + "/assets/icons");
-			files.copy(directoryBase + "/" + wapitisConfig.srcPath + "www/polyfills.js", directoryBase + "/" + wapitisConfig.distPath + "/polyfills.js");
+			});
+		}
+
+		// Modify index file
+		function buildIndexFile(isProd) {
+			return new Promise((resolve) => {
+				files.readFile(path.resolve(__dirname, "files/index.html"), (err, html) => {
+					if (err) throw err;
+					html = html.replace("$appDesc$", wapitisConfig.appDesc);
+					html = html.replace("$themeColor$", wapitisConfig.themeColor);
+					html = html.replace("$appName$", wapitisConfig.appName);
+					if (isProd) {
+						const quantumFile = JSON.parse(files.readFileSync(completeDistPath + "/quantum.json", "utf8"));
+						html = html.replace("$bundle$", `<script src="${quantumFile.bundle.relativePath}"></script>`);
+						files.remove(completeDistPath + "/quantum.json");
+					} else html = html.replace("$bundle$", '<script src="bundle.js"></script>');
+					files.appendFile(completeDistPath + "/index.html", html, true).then(() => resolve());
+				});
+			});
 		}
 
 		// Génération de fichiers
@@ -177,8 +210,8 @@ if (arg) {
 		context(class {
 			getConfig() {
 				return FuseBox.init({
-					homeDir: directoryBase  + "/" + wapitisConfig.srcPath,
-					output: directoryBase  + "/" + wapitisConfig.distPath + "/$name.js",
+					homeDir: completeSrcPath,
+					output: completeDistPath + "/$name.js",
 					tsConfig : tsconfigFile,
 					target : this.isElectronTask ? "server" : "browser",
 					sourceMaps: !this.isProduction && !this.isElectronTask,
@@ -189,14 +222,9 @@ if (arg) {
 						EnvPlugin({
 							NODE_ENV: this.isProduction ? "production" : "development"
 						}),
-						!this.isElectronTask && WebIndexPlugin({
-							path: ".",
-							template: directoryBase  + "/" + wapitisConfig.wwwPath + "/index.html",
-							appendBundles: true
-						}),
 						[
 							!this.isElectronTask && CSSResourcePlugin({
-								dist: directoryBase  + "/" + wapitisConfig.distPath + "/assets",
+								dist: completeDistPath + "/assets",
 								resolve: (f) => `./assets/${f}`
 							 }),
 							!this.isElectronTask && CSSPlugin({
@@ -206,6 +234,7 @@ if (arg) {
 						],
 						!this.isElectronTask && CopyPlugin({ files: ["**/*.svg"] }),
 						this.isProduction && QuantumPlugin({
+							manifest : "quantum.json",
 							bakeApiIntoBundle: this.isElectronTask ? "electron" : "bundle",
 							target : this.isElectronTask ? "electron" : "browser",
 							uglify : true,
@@ -229,7 +258,7 @@ if (arg) {
 
 		task("clear:cache", () => src(directoryBase + "/.wapitis/").clean(directoryBase + "/.wapitis/").exec());
 
-		task("clear:dist", () => src(directoryBase  + "/" + wapitisConfig.distPath + "/").clean(directoryBase + "/" + wapitisConfig.distPath + "/").exec());
+		task("clear:dist", () => src(completeDistPath + "/").clean(completeDistPath + "/").exec());
 
 		task("clear", ["clear:cache", "clear:dist"]);
 
@@ -238,7 +267,10 @@ if (arg) {
 			fuse.dev();
 			context.createBundle(fuse);
 			await fuse.run();
-			if (process.argv[3] == "--webapp") buildWebAppFiles();
+			buildIndexFile().then(() => {
+				if (process.argv[3] === "--webapp") buildWebAppFiles();
+				else swBuilder.unregisterServiceWorker();
+			});
 		});
 
 		task("prod", ["clear"], async context => {
@@ -246,7 +278,18 @@ if (arg) {
 			const fuse = context.getConfig();
 			context.createBundle(fuse);
 			await fuse.run();
-			buildWebAppFiles();
+			buildIndexFile(true).then(() => {
+				buildWebAppFiles().then(() => {
+					compressor.minify({
+						compressor: "babel-minify",
+						input: completeDistPath + "/sw.js",
+						output: completeDistPath + "/sw.js",
+						callback: function(err, min) {
+							console.log("Service Worker minified !")
+						}
+					});
+				});
+			});
 		});
 
 		task("electron", [process.env.NODE_ENV === "production" ? "prod" : "dev"], async context => {
@@ -256,7 +299,7 @@ if (arg) {
 			if (process.env.NODE_ENV === "production" ) {        
 				await fuse.run().then(() => {
 					// launch electron build
-					files.copy(directoryBase + "/" + wapitisConfig.distPath, __dirname + "/dist");
+					files.copy(completeDistPath, __dirname + "/dist");
 					builder.build({
 						config: {
 							"copyright": packageJson.author,
@@ -297,14 +340,14 @@ if (arg) {
 					.then((result) => {
 						let spacer = result[1].includes("\\") ? "\\" : "/";
 						let fileName = result[1].substring(result[1].lastIndexOf(spacer)+1);
-						files.copy(result[1], directoryBase + "/" + wapitisConfig.distPath + "/" + packageJson.name + "_" + packageJson.version + "_" + formatDateToYYYYMMDDHHMM(new Date()) + "_setup" + fileName.substring(fileName.lastIndexOf("."))).then(() => files.remove(__dirname + "/dist"));
+						files.copy(result[1], completeDistPath + "/" + packageJson.name + "_" + packageJson.version + "_" + formatDateToYYYYMMDDHHMM(new Date()) + "_setup" + fileName.substring(fileName.lastIndexOf("."))).then(() => files.remove(__dirname + "/dist"));
 					})
 					.catch((error) => log(error));
 				});
 			} else {
 				await fuse.run().then(() => {
 					// launch electron dev
-					tools.runCommand("npx electron " + directoryBase + "/" + wapitisConfig.distPath + "/electron.js");
+					tools.runCommand("npx electron " + completeDistPath + "/electron.js");
 				});
 			}
 		});
