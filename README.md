@@ -1,4 +1,6 @@
 # WApiTis
+![](logo.png)
+
 **Attention** : En cours de création
 
 > WebApp utiliTies pour typescript
