@@ -62,3 +62,11 @@
 ```Typescript
 import { DOM, JSX } from "wapitis";
 ```
+
+### Service Worker
+Récupérer un message pour préciser par exemple que le cache a été mis à jour
+```JS
+navigator.serviceWorker.addEventListener('message', event => {
+    // ...
+    console.log(event.data.msg, event.origin);
+});
