@@ -32,7 +32,7 @@ Todo:
   ✔ question pour name etc pour remplir wapitis.json @started(18-07-12 00:58) @done(18-07-12 01:08) @lasted(10m52s)
   ✔ .tss dans generate marche alors que cela ne devrait pas @started(18-07-13 01:27) @done(18-07-13 01:40) @lasted(13m4s)
   ☐ Rendre web app à 100% en tout cas au max @started(18-06-05 01:27)
-  ☐ Finir le readme
+  ✔ Finir le readme @done(18-07-13 14:12)
   ☐ AJouter capacitor ? @started(18-06-28 14:24)
   ☐ Probablement icon de electron en prod à rajouter et tester @started(18-07-13 01:23)
   ☐ Tester bouton ajout home @started(18-07-11 00:22)

@@ -1,7 +1,7 @@
 # WApiTis
 ![](logo.png)
 
-**Attention** : En cours de création
+<!-- **Attention** : En cours de création -->
 
 > WebApp utiliTies pour typescript
 
@@ -16,8 +16,10 @@
 - Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne
 
 **TODO :**
+- Commiter un exemple d'utilisation sur un autre git (Speedui)
 - Intégration de [Capacitor](https://capacitor.ionicframework.com/)
 - Gestion d'une liaison avec IndexedDB dans le Service Worker pour les données provenant d'une base de données
+- Icon de electron en prod
 
 
 ## Install
@@ -29,20 +31,18 @@
 - Créer un dossier src
 - npm install
 - npx wapitis init
-- Modifier les fichiers du dossier www
+- Modifier les fichiers du dossier www, contenant les fichiers main.css, icons.svg, manifest.json et icons pour la webapp
 - Utiliser wapitis **$ generate class path/du/fichier.ts(x)** ou **$ generate component path/du/fichier.tsx** pour générer vos fichiers
-- Intégrer vos icons dans le fichiers icons.svg (exemple à intégrer en image)
+- Pour l'utilisation du component, voir la section Typescript
+- Intégrer vos icons dans le fichier icons.svg
+![](svgExample.png)
 - Intégrer vos css dans le fichier main.css
 - Le point de départ est le dossier main.ts
 - Modifier le fichier electronStart si besoin
 - Coder avec [typescript](https://www.typescriptlang.org)
+- Pour l'utilisation de DOM et JSX, voir la section Typescript
 - Compiler avec wapitis dev, prod ou electron
 - Le dossier dist contient le résultat de la transpilation (html ou electron)
-
-<!-- - Préciser l'utilisation du dossier www
-- Montrer exemple DOM + JSX
-- Préciser que pas de babel et donc que chrome aujourd'hui
-- ICON WAPITIS -->
 
 ### CLI
 
@@ -64,12 +64,61 @@
 
 ### Typescript
 
+Import de DOM et JSX
 ```Typescript
 import { DOM, JSX } from "wapitis";
 ```
+Exemple d'utilisation de DOM
+```Typescript
+this._icon = DOM.addIcon(this.type, this._renderElements.parentNode as HTMLElement, this._renderElements);
+```
+DOM possède les méthodes suivantes :
+```Typescript
+addIcon(name: string, parent: HTMLElement, elementAfter?: Node | null): SVGSVGElement {};
+changeIcon(svg: SVGSVGElement, name: string): SVGSVGElement {};
+removeIcon(svg: SVGSVGElement, parent: HTMLElement) {};
+setAttribute(element: HTMLElement, name: string, value: any) {};
+generateId() {};
+dispatchEvent(name: string, property: object, parent: HTMLElement = document.body) {};
+getWindowSize() {};
+parseStyleToNumber(style: string | null) {};
+removeClassByPrefix(element: HTMLElement, prefix: string) {};
+```
+JSX utilisé dans la fonction render() du component
+```Typescript
+_render() {
+    return (
+        <div>
+            <div class="bbox"></div>
+        </div>
+    );
+}
+```
+La fonction connectedCallback() permet de déclarer les éléments de la fonction render()
+```Typescript
+this._bbox = this._renderElements.querySelector(".bbox") as HTMLElement;
+```
+Le component permet de mettre la structure html dans la fonction render() (Cf. plus haut) et les styles dans la fonction style
+```Typescript
+_style() {
+    return  `
+        span {
+            display: none;
+        }
+    `;
+}
+```
+La déclaration d'un component s'exécute ainsi :
+```Typescript
+@Component.register("prefixe-balise")
+
+export default class Balise extends Component {
+}
+```
+disconnectedCallback() et attributeChangedCallback(attrName: string, oldVal: any, newVal: any) à utiliser comme dans n'importe quel Custom Element
 
 ### Service Worker
-Récupérer un message pour préciser par exemple que le cache a été mis à jour
+Possibilité de récupérer un message pour préciser que le cache a été mis à jour
 ```JS
 navigator.serviceWorker.addEventListener('message', event => {
     // ...
