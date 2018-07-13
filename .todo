@@ -38,3 +38,5 @@ Todo:
   ☐ Mise en place possibilité indexedDB @started(18-07-11 01:30)
   ✔ Plus de rechargement quand on modifie index @started(18-07-11 13:43) @done(18-07-12 00:58) @lasted(11h15m20s)
   ✔ question pour name etc pour remplir wapitis.json @started(18-07-12 00:58) @done(18-07-12 01:08) @lasted(10m52s)
+  ☐ Probablement icon de electron en prod à rajouter @started(18-07-13 01:23)
+  ✔ .tss dans generate marche alors que cela ne devrait pas @started(18-07-13 01:27) @done(18-07-13 01:40) @lasted(13m4s)

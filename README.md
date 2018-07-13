@@ -28,6 +28,7 @@
 - Créer un dossier src
 - npm install
 - npx wapitis init
+- Modifier les fichiers du dossier www, comme le manifest.json
 - Utiliser wapitis **$ generate class path/du/fichier.ts(x)** pour générer vos fichiers
 - Intégrer vos icons dans le fichiers icons.svg (exemple à intégrer en image)
 - Intégrer vos css dans le fichier main.css
