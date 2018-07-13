@@ -12,11 +12,12 @@
 - Fichiers d'entrée (main.tsx et electronStart.ts), tsconfig préconfigurés et structure www créés via l'initialisation
 - Utilisation de jsx via l'import d'un fichier jsx.ts
 - Divers fonctions disponibles grâce à l'import du fichier dom.ts
-- Créer vos components via une ligne de commande (pour une bonne intégration dans tsconfig.json et faciliter les imports)
-- Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne (en cours d'amélioration)
+- Créer vos components et vos classes via une ligne de commande (pour une bonne intégration dans tsconfig.json et faciliter les imports)
+- Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne
 
-**En cours :**
-- Intégration d'un manifest et divers améliorations permettant de respecter les besoins d'une progressive web app
+**TODO :**
+- Intégration de [Capacitor](https://capacitor.ionicframework.com/)
+- Gestion d'une liaison avec IndexedDB dans le Service Worker pour les données provenant d'une base de données
 
 
 ## Install
@@ -28,14 +29,15 @@
 - Créer un dossier src
 - npm install
 - npx wapitis init
-- Modifier les fichiers du dossier www, comme le manifest.json
-- Utiliser wapitis **$ generate class path/du/fichier.ts(x)** pour générer vos fichiers
+- Modifier les fichiers du dossier www
+- Utiliser wapitis **$ generate class path/du/fichier.ts(x)** ou **$ generate component path/du/fichier.tsx** pour générer vos fichiers
 - Intégrer vos icons dans le fichiers icons.svg (exemple à intégrer en image)
 - Intégrer vos css dans le fichier main.css
 - Le point de départ est le dossier main.ts
 - Modifier le fichier electronStart si besoin
 - Coder avec [typescript](https://www.typescriptlang.org)
-- Le dossier dist contient le résultat de la transpilation
+- Compiler avec wapitis dev, prod ou electron
+- Le dossier dist contient le résultat de la transpilation (html ou electron)
 
 <!-- - Préciser l'utilisation du dossier www
 - Montrer exemple DOM + JSX
