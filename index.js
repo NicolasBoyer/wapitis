@@ -92,9 +92,15 @@ if (arg) {
 			files.copy(path.resolve(__dirname, "files/tsconfig.json"), directoryBase + "/tsconfig.json");
 			files.copy(path.resolve(__dirname, "files/app.tsx"), directoryBase + "/" + answers.srcproject + "/app.tsx");
 			files.copy(path.resolve(__dirname, "files/electronStart.ts"), directoryBase + "/" + answers.srcproject + "/electronStart.ts");
-			files.copy(path.resolve(__dirname, "files/www"), directoryBase + "/" + answers.srcproject + "/www");
-			packageJson.main = answers.srcproject + "/../dist/electron.js";
-			files.appendFile(directoryBase + "/package.json", JSON.stringify(packageJson, null, 2), true);
+			const manifestJson = JSON.parse(files.readFileSync(path.resolve(__dirname, "files/www/manifest.json"), "utf8"));
+			manifestJson.short_name = answers.appName;
+			manifestJson.name = answers.appName;
+			manifestJson.theme_color = answers.themeColor;
+			files.appendFile(path.resolve(__dirname, "files/www/manifest.json"), JSON.stringify(manifestJson, null, 2), true).then(() => {
+				files.copy(path.resolve(__dirname, "files/www"), directoryBase + "/" + answers.srcproject + "/www");
+				packageJson.main = answers.srcproject + "/../dist/electron.js";
+				files.appendFile(directoryBase + "/package.json", JSON.stringify(packageJson, null, 2), true);
+			});
 		});
 	} else if (arg === "dev" || arg === "prod" || arg === "clear" || arg === "electron" || arg === "generate") {
 
@@ -147,12 +153,20 @@ if (arg) {
 				});
 			});
 		}
+		function cleanIndexFile() {
+			files.readFile(completeDistPath + "/index.html", (err, html) => {
+				if (err) throw err;
+				html = html.replace("$headScripts$", "");
+				html = html.replace("$bodyScript$", "");        
+				files.appendFile(completeDistPath + "/index.html", html, true);
+			});
+		}
 
 		// Génération de fichiers
 		if (arg === "generate") {
 			const arg2 = process.argv[3];
 			const arg3 = process.argv[4];
-			if (arg2 === "class" && (arg3.includes(".ts") || arg3.includes(".tsx")) || arg2 === "component" && arg3.includes(".tsx")) {
+			if (arg2 === "class" && (arg3.split('.').pop() === "ts" || arg3.split('.').pop() === "tsx") || arg2 === "component" && arg3.split('.').pop() === "tsx") {
 				log(chalk.green("wapitis generate " + arg2 + " " + wapitisConfig.srcPath + arg3));
 				const classFile = wapitisConfig.srcPath + arg3;
 				if (!files.fileExists(directoryBase + "/" + classFile)) {
@@ -232,7 +246,7 @@ if (arg) {
 								minify: this.isProduction
 							}),
 						],
-						!this.isElectronTask && CopyPlugin({ files: ["**/*.svg"] }),
+						!this.isElectronTask && CopyPlugin({ files: ["**/*.svg"], dest: "assets", resolve: "assets/" }),
 						this.isProduction && QuantumPlugin({
 							manifest : "quantum.json",
 							bakeApiIntoBundle: this.isElectronTask ? "electron" : "bundle",
@@ -268,8 +282,10 @@ if (arg) {
 			context.createBundle(fuse);
 			await fuse.run();
 			buildIndexFile().then(() => {
-				if (process.argv[3] === "--webapp") buildWebAppFiles();
-				else swBuilder.unregisterServiceWorker();
+				if (!isElectron) {
+					if (process.argv[3] === "--webapp") buildWebAppFiles();
+					else swBuilder.unregisterServiceWorker();
+				} else cleanIndexFile();
 			});
 		});
 
@@ -279,16 +295,18 @@ if (arg) {
 			context.createBundle(fuse);
 			await fuse.run();
 			buildIndexFile(true).then(() => {
-				buildWebAppFiles().then(() => {
-					compressor.minify({
-						compressor: "babel-minify",
-						input: completeDistPath + "/sw.js",
-						output: completeDistPath + "/sw.js",
-						callback: function(err, min) {
-							console.log("Service Worker minified !")
-						}
+				if (!isElectron) {
+					buildWebAppFiles().then(() => {
+						compressor.minify({
+							compressor: "babel-minify",
+							input: completeDistPath + "/sw.js",
+							output: completeDistPath + "/sw.js",
+							callback: function(err, min) {
+								console.log("Service Worker minified !")
+							}
+						});
 					});
-				});
+				} else cleanIndexFile();
 			});
 		});
 
@@ -340,6 +358,7 @@ if (arg) {
 					.then((result) => {
 						let spacer = result[1].includes("\\") ? "\\" : "/";
 						let fileName = result[1].substring(result[1].lastIndexOf(spacer)+1);
+						files.remove(completeDistPath);
 						files.copy(result[1], completeDistPath + "/" + packageJson.name + "_" + packageJson.version + "_" + formatDateToYYYYMMDDHHMM(new Date()) + "_setup" + fileName.substring(fileName.lastIndexOf("."))).then(() => files.remove(__dirname + "/dist"));
 					})
 					.catch((error) => log(error));
