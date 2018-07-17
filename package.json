@@ -4,7 +4,7 @@
   "description": "Outils permettant de créer et de gérer une web app - WebApp utiliTies pour typescript",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NicolasBoyer/wapitis.git"
+    "url": "git+https://github.com/NicolasBoyer/wapitis.git"
   },
   "keywords": [
     "Web",
@@ -37,5 +37,9 @@
     "typescript": "^2.9.2",
     "uglify-es": "^3.3.9"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "bugs": {
+    "url": "https://github.com/NicolasBoyer/wapitis/issues"
+  },
+  "homepage": "https://github.com/NicolasBoyer/wapitis#readme"
 }
