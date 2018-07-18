@@ -1,5 +1,5 @@
 # WApiTis
-![](img/logo.png)
+![](ui/logo.png)
 
 <!-- **Attention** : En cours de création -->
 
@@ -35,7 +35,7 @@
 - Utiliser wapitis **$ generate class path/du/fichier.ts(x)** ou **$ generate component path/du/fichier.tsx** pour générer vos fichiers
 - Pour l'utilisation du component, voir la section Typescript
 - Intégrer vos icons dans le fichier icons.svg
-![](img/svgExample.png)
+![](ui/svgExample.png)
 - Intégrer vos css dans le fichier main.css
 - Le point de départ est le dossier main.ts
 - Modifier le fichier electronStart si besoin
