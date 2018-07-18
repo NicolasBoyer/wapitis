@@ -2,6 +2,6 @@
 src
 TOREMEMBER.md
 .todo
-/ui/logo.png
-/ui/svgExample.png
+/ui/*.png
 *.psd
+/ui/*.svg
