@@ -5,9 +5,9 @@
 const chalk = require('chalk');
 const figlet = require('figlet');
 const inquirer = require('inquirer');
-const files = require("./lib/files");
-const swBuilder = require("./lib/swbuilder");
-const tools = require("./lib/tools");
+const files = require("./helpers/files");
+const swBuilder = require("./helpers/swbuilder");
+const tools = require("./helpers/tools");
 const path = require('path');
 const compressor = require('node-minify');
 const log = console.log;
@@ -89,15 +89,15 @@ if (arg) {
 	"themeColor": "${answers.themeColor}"
 }`;		
 			files.appendFile(directoryBase + "/wapitis.json", wapitisTxt, true);
-			files.copy(path.resolve(__dirname, "files/tsconfig.json"), directoryBase + "/tsconfig.json");
-			files.copy(path.resolve(__dirname, "files/app.tsx"), directoryBase + "/" + answers.srcproject + "/app.tsx");
-			files.copy(path.resolve(__dirname, "files/electronStart.ts"), directoryBase + "/" + answers.srcproject + "/electronStart.ts");
-			const manifestJson = JSON.parse(files.readFileSync(path.resolve(__dirname, "files/www/manifest.json"), "utf8"));
+			files.copy(path.resolve(__dirname, ".includes/tsconfig.json"), directoryBase + "/tsconfig.json");
+			files.copy(path.resolve(__dirname, ".includes/app.tsx"), directoryBase + "/" + answers.srcproject + "/app.tsx");
+			files.copy(path.resolve(__dirname, ".includes/electronStart.ts"), directoryBase + "/" + answers.srcproject + "/electronStart.ts");
+			const manifestJson = JSON.parse(files.readFileSync(path.resolve(__dirname, ".includes/www/manifest.json"), "utf8"));
 			manifestJson.short_name = answers.appName;
 			manifestJson.name = answers.appName;
 			manifestJson.theme_color = answers.themeColor;
-			files.appendFile(path.resolve(__dirname, "files/www/manifest.json"), JSON.stringify(manifestJson, null, 2), true).then(() => {
-				files.copy(path.resolve(__dirname, "files/www"), directoryBase + "/" + answers.srcproject + "/www");
+			files.appendFile(path.resolve(__dirname, ".includes/www/manifest.json"), JSON.stringify(manifestJson, null, 2), true).then(() => {
+				files.copy(path.resolve(__dirname, ".includes/www"), directoryBase + "/" + answers.srcproject + "/www");
 				packageJson.main = answers.srcproject + "/../dist/electron.js";
 				files.appendFile(directoryBase + "/package.json", JSON.stringify(packageJson, null, 2), true);
 			});
@@ -128,7 +128,7 @@ if (arg) {
 			return new Promise((resolve) => {
 				files.copy(completeSrcPath + "/www/manifest.json", completeDistPath + "/manifest.json").then(() => {
 					files.copy(completeSrcPath + "/www/assets/icons", completeDistPath + "/assets/icons").then(() => {
-						files.copy(path.resolve(__dirname, "files/polyfills.js"), completeDistPath + "/polyfills.js").then(() => {
+						files.copy(path.resolve(__dirname, ".includes/polyfills.js"), completeDistPath + "/polyfills.js").then(() => {
 							swBuilder.registerServiceWorker().then(() => resolve());
 						});
 					});
@@ -139,7 +139,7 @@ if (arg) {
 		// Modify index file
 		function buildIndexFile(isProd) {
 			return new Promise((resolve) => {
-				files.readFile(path.resolve(__dirname, "files/index.html"), (err, html) => {
+				files.readFile(path.resolve(__dirname, ".includes/index.html"), (err, html) => {
 					if (err) throw err;
 					html = html.replace("$appDesc$", wapitisConfig.appDesc);
 					html = html.replace("$themeColor$", wapitisConfig.themeColor);
@@ -185,7 +185,7 @@ if (arg) {
 `;
 						files.appendFile(directoryBase + "/" + classFile, classText, true);
 					} else if (arg2 === "component") {
-						files.copy(path.resolve(__dirname, "files/component.tsx"), directoryBase + "/" + classFile).then(() => {
+						files.copy(path.resolve(__dirname, ".includes/component.tsx"), directoryBase + "/" + classFile).then(() => {
 							const componentText = files.readFileSync(directoryBase + "/" + classFile, "utf8");
 							files.appendFile(directoryBase + "/" + classFile, componentText.replace("ClassName", className), true);
 						});
