@@ -112,8 +112,7 @@ if (arg) {
 		// wapitis CONFIG
 		const wapitisConfig = JSON.parse(files.readFileSync(directoryBase + "/wapitis.json", "utf8"));
 		const completeDistPath = path.resolve(directoryBase + "/" + wapitisConfig.distPath);
-		const completeSrcPath = path.resolve(directoryBase + "/" + wapitisConfig.srcPath)
-		const completeWwwPath = path.resolve(directoryBase + "/" + wapitisConfig.wwwPath)
+		const completeSrcPath = path.resolve(directoryBase + "/" + wapitisConfig.srcPath);
 
 		// Service worker, manifest, polyfills et fichiers pour la web app
 		swBuilder.setOptions({
