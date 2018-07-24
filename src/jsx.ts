@@ -1,10 +1,12 @@
 declare global {
     namespace JSX {
         // On considère tout élément JSX comme un HTMLElement
-        // tslint:disable-next-line:interface-name
         interface Element extends HTMLElement {
             [key: string]: any;
         }
+        interface ElementAttributesProperty {
+            _jsxProps: any;  
+		}
         interface IntrinsicElements {
             [key: string]: any;
         }
@@ -16,11 +18,7 @@ export interface IConstructor<T> {
 }
 
 export class JSXServices {
-    /**
-     * React-like createElement function so we can use JSX in our TypeScript/JavaScript code.
-     */
-    public createElement<T extends HTMLElement>(tag: IConstructor<T>, attributes?: { [name: string]: any }, ...children: any[]): T;
-    public createElement<K extends keyof HTMLElementTagNameMap>(tag: K, attributes?: { [name: string]: any }, ...children: any[]): HTMLElementTagNameMap[K];
+    /** API React. */
     public createElement(tag: string | IConstructor<HTMLElement>, attributes: { [name: string]: any }, ...children: any[]): Element {
         let element: HTMLElement;
         if (typeof tag === "string") {
@@ -46,6 +44,7 @@ export class JSXServices {
         return element;
     }
 
+    /** API React. */
     appendChildren(element: Element | DocumentFragment, children: any) {
         if (Array.isArray(children)) {
             children.forEach((ch) => JSX.appendChildren(element, ch));

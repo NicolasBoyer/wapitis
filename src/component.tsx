@@ -4,6 +4,7 @@ export abstract class Component extends HTMLElement {
     [key: string]: any;
     protected _defaultAttributes: Array<{name: string, value: any, executeAtLast?: boolean}> = [];
     protected _renderElements: HTMLElement;
+    private _jsxProps: any;
 
     static register(tagName?: string) {
         return <T extends HTMLElement>(type: new () => T) => {
