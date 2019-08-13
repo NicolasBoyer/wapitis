@@ -31,7 +31,7 @@ export namespace DOM {
 
     export function setAttribute(element: HTMLElement, name: string, value: any) {
         try {
-            value = JSON.parse(value);
+            value = typeof value === "object" ? JSON.stringify(value) : JSON.parse(value);
             if (Number(value) || value === 0) {
                 const style: any = name;
                 element.style[style] = value + "px";

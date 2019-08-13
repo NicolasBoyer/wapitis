@@ -30,7 +30,7 @@ export class JSXServices {
         for (const name in attributes) {
             if (name && attributes.hasOwnProperty(name)) {
                 const attr = attributes[name];
-                if (typeof attr === "function") {
+                if (typeof attr === "function" || typeof attr === "object") {
                     (element as any)[name] = attr;
                 } else if (attr !== null) {
                     element.setAttribute(name, attr);

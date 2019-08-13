@@ -2,7 +2,7 @@ import { DOM, JSX } from ".";
 
 export abstract class Component extends HTMLElement {
     [key: string]: any;
-    protected _defaultAttributes: Array<{name: string, value: any, executeAtLast?: boolean}> = [];
+    protected _defaultAttributes: Array<{ name: string, value: any, executeAtLast?: boolean }> = [];
     protected _renderElements: HTMLElement;
     private _jsxProps: any;
 
@@ -11,7 +11,7 @@ export abstract class Component extends HTMLElement {
             if (!tagName) {
                 tagName = `x-${type.name.toLowerCase()}`;
             }
-            if (customElements.get(tagName)){
+            if (customElements.get(tagName)) {
                 return;
             }
             customElements.define(tagName, type)
@@ -53,7 +53,7 @@ export abstract class Component extends HTMLElement {
     // Opts
     private _setOpts() {
         const options = Object();
-        const executeAtLast: Array<{name: string, value: string}> = [];
+        const executeAtLast: Array<{ name: string, value: string }> = [];
         // Attributes
         if (this.attributes) {
             const attributes = Array.prototype.slice.call(this.attributes);
@@ -65,7 +65,7 @@ export abstract class Component extends HTMLElement {
         if (this._options) {
             Object.keys(this._options).forEach((element: any) => {
                 // camelCase to dash
-                const name = element.replace( /([a-z])([A-Z])/g, "$1-$2" ).toLowerCase();
+                const name = element.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
                 if (!options[name]) {
                     options[name] = this._options[element];
                 }
@@ -74,7 +74,7 @@ export abstract class Component extends HTMLElement {
         // Attributs par défaut
         for (const defaultAttr of this._defaultAttributes) {
             if (defaultAttr.executeAtLast) {
-                executeAtLast.push({name: defaultAttr.name, value: defaultAttr.value});
+                executeAtLast.push({ name: defaultAttr.name, value: defaultAttr.value });
             }
             if (!options[defaultAttr.name] && !defaultAttr.executeAtLast) {
                 options[defaultAttr.name] = defaultAttr.value;
@@ -85,7 +85,7 @@ export abstract class Component extends HTMLElement {
             if (options.hasOwnProperty(name)) {
                 // dash to camelCase
                 // tslint:disable-next-line:only-arrow-functions
-                this[name.replace(/-([a-z])/g, function(g) { return g[1].toUpperCase(); })] = options[name];
+                this[name.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); })] = options[name];
             }
         }
         // Attributs à intialiser en dernier (center)
