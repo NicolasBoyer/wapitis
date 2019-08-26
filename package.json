@@ -1,6 +1,6 @@
 {
   "name": "wapitis",
-  "version": "1.0.19",
+  "version": "2.0.0",
   "description": "Outils permettant de créer et de gérer une web app - WebApp utiliTies pour typescript",
   "repository": {
     "type": "git",
@@ -20,21 +20,24 @@
   "author": "Nicolas Boyer",
   "license": "MIT",
   "scripts": {
-    "transpile": "node ./transpile.js"
+    "transpile": "node ./transpile.js",
+    "test": "node ./index.js",
+    "test-init": "node ./index.js init",
+    "test-dev": "node ./index.js dev"
   },
   "bin": {
     "wapitis": "index.js"
   },
   "dependencies": {
-    "chalk": "^2.4.1",
-    "electron": "^2.0.13",
-    "electron-builder": "^20.34.0",
-    "figlet": "^1.2.1",
-    "fs-extra": "^7.0.1",
-    "fuse-box": "^3.6.0",
-    "inquirer": "^6.2.0",
+    "chalk": "^2.4.2",
+    "electron": "^6.0.4",
+    "electron-builder": "^21.2.0",
+    "figlet": "^1.2.3",
+    "fs-extra": "^8.1.0",
+    "fuse-box": "^3.7.1",
+    "inquirer": "^7.0.0",
     "node-minify": "^3.6.0",
-    "typescript": "^3.1.6",
+    "typescript": "^3.5.3",
     "uglify-es": "^3.3.9"
   },
   "devDependencies": {},
