@@ -20,10 +20,7 @@
   "author": "Nicolas Boyer",
   "license": "MIT",
   "scripts": {
-    "transpile": "node ./transpile.js",
-    "test": "node ./index.js",
-    "test-init": "node ./index.js init",
-    "test-dev": "node ./index.js dev"
+    "transpile": "node ./transpile.js"
   },
   "bin": {
     "wapitis": "index.js"
