@@ -24,7 +24,7 @@
     "baseUrl": ".",
     "strictPropertyInitialization": false,
     "paths": {
-      "electron" : [
+      "electron": [
         "node_modules/electron"
       ]
     }

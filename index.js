@@ -18,7 +18,8 @@ const directoryBase = process.cwd();
 process.env.FUSEBOX_TEMP_FOLDER = directoryBase + "/.wapitis";
 
 // REQUIRE
-const { FuseBox, QuantumPlugin, CSSPlugin, CSSResourcePlugin, CopyPlugin, EnvPlugin } = require("fuse-box");
+const { FuseBox, QuantumPlugin, CSSResourcePlugin, CopyPlugin, EnvPlugin } = require("fuse-box");
+const { CSSPlugin } = require("fbcssplugin");
 const { src, task, exec, context } = require("fuse-box/sparky");
 const builder = require("electron-builder");
 
@@ -26,11 +27,11 @@ const builder = require("electron-builder");
 const packageJson = JSON.parse(files.readFileSync(directoryBase + "/package.json", "utf8"));
 
 function formatDateToYYYYMMDDHHMM(date) {
-    function pad2(n) {  // always returns a string
-        return (n < 10 ? '0' : '') + n;
-    }
-    // return date.getFullYear() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds());
-    return date.getFullYear() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes());
+	function pad2(n) {  // always returns a string
+		return (n < 10 ? '0' : '') + n;
+	}
+	// return date.getFullYear() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds());
+	return date.getFullYear() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes());
 }
 
 if (arg) {
@@ -40,7 +41,7 @@ if (arg) {
 				name: 'srcproject',
 				type: 'input',
 				message: 'Quel est le nom de votre dossier source:',
-				validate: function( value ) {
+				validate: function (value) {
 					if (value.length) return true;
 					else return 'Entrez le nom de votre dossier source';
 				},
@@ -50,7 +51,7 @@ if (arg) {
 				name: 'appName',
 				type: 'input',
 				message: 'Quel est le nom de votre Web App:',
-				validate: function( value ) {
+				validate: function (value) {
 					if (value.length) return true;
 					else return 'Entrez le nom de votre Web App';
 				}
@@ -59,7 +60,7 @@ if (arg) {
 				name: 'appDesc',
 				type: 'input',
 				message: 'Donnez une description pour votre Web App:',
-				validate: function( value ) {
+				validate: function (value) {
 					if (value.length) return true;
 					else return 'Donnez une description pour votre Web App';
 				}
@@ -68,17 +69,17 @@ if (arg) {
 				name: 'themeColor',
 				type: 'input',
 				message: 'Entrez une couleur pour le header de votre Web App:',
-				validate: function( value ) {
+				validate: function (value) {
 					if (value.length) return true;
 					else return 'Entrez une couleur pour le header de votre Web App';
 				},
 				default: "#317EFB"
 			}
 		];
-		  
+
 		inquirer.prompt(questions).then((answers) => {
-			const wapitisTxt = 
-`{
+			const wapitisTxt =
+				`{
 	"srcPath": "${answers.srcproject}/",
 	"wwwPath": "${answers.srcproject}/www",
 	"distPath": "${answers.srcproject}/../dist",
@@ -87,19 +88,27 @@ if (arg) {
 	"appName": "${answers.appName}",
 	"appDesc": "${answers.appDesc}",
 	"themeColor": "${answers.themeColor}"
-}`;		
+}`;
 			files.appendFile(directoryBase + "/wapitis.json", wapitisTxt, true);
 			files.copy(path.resolve(__dirname, ".includes/tsconfig.json"), directoryBase + "/tsconfig.json");
 			files.copy(path.resolve(__dirname, ".includes/app.tsx"), directoryBase + "/" + answers.srcproject + "/app.tsx");
+			files.copy(path.resolve(__dirname, ".includes/custom.d.ts"), directoryBase + "/" + answers.srcproject + "/custom.d.ts");
 			files.copy(path.resolve(__dirname, ".includes/electronStart.ts"), directoryBase + "/" + answers.srcproject + "/electronStart.ts");
+			packageJson.scripts = {};
+			packageJson.scripts.init = "npx wapitis init";
+			packageJson.scripts.dev = "npx wapitis dev";
+			packageJson.scripts.prod = "npx wapitis prod";
+			packageJson.scripts.electronDev = "npx wapitis electron --dev";
+			packageJson.scripts.electronProd = "npx wapitis electron --prod";
+			packageJson.scripts.clear = "npx wapitis clear";
+			packageJson.main = answers.srcproject + "/../dist/electron.js";
+			files.appendFile(directoryBase + "/package.json", JSON.stringify(packageJson, null, 2), true);
 			const manifestJson = JSON.parse(files.readFileSync(path.resolve(__dirname, ".includes/www/manifest.json"), "utf8"));
 			manifestJson.short_name = answers.appName;
 			manifestJson.name = answers.appName;
 			manifestJson.theme_color = answers.themeColor;
-			files.appendFile(path.resolve(__dirname, ".includes/www/manifest.json"), JSON.stringify(manifestJson, null, 2), true).then(() => {
-				files.copy(path.resolve(__dirname, ".includes/www"), directoryBase + "/" + answers.srcproject + "/www");
-				packageJson.main = answers.srcproject + "/../dist/electron.js";
-				files.appendFile(directoryBase + "/package.json", JSON.stringify(packageJson, null, 2), true);
+			files.copy(path.resolve(__dirname, ".includes/www"), directoryBase + "/" + answers.srcproject + "/www").then(() => {
+				files.appendFile(directoryBase + "/" + answers.srcproject + "/www/manifest.json", JSON.stringify(manifestJson, null, 2), true);
 			});
 		});
 	} else if (arg === "dev" || arg === "prod" || arg === "clear" || arg === "electron" || arg === "generate") {
@@ -116,12 +125,13 @@ if (arg) {
 
 		// Service worker, manifest, polyfills et fichiers pour la web app
 		swBuilder.setOptions({
-			globDirectory : directoryBase,
-			swDest : completeDistPath,
-			indexSrc : completeDistPath,
+			globDirectory: directoryBase,
+			swDest: completeDistPath,
+			indexSrc: completeDistPath,
 			// L'exclusion doit aussi être un pattern
-			excludeFiles : ["icons-192.png","icons-512.png"],
-			globPattern : /\.(?:html|json|js|css|svg|png|jpg|gif)$/
+			excludeFiles: ["icons-192.png", "icons-512.png"],
+			patterns: { core: /\.(?:html|xhtml|json|js|css|txt|xml|ico)$/, fonts: /\.(?:eot|ttf|woff|woff2|otf)$/, attachments: /\.(?:doc|docx|odg|odp|ods|odt|pdf|ppt|rtf|xls|xlsx|zip)$/, images: /\.(?:svg|png|jpg|gif)$/, videos: /\.(?:srt|vtt|avi|mov|mp3|mp4|mpg|opus|webm)$/ }
+			// globPattern: /\.(?:html|json|js|css|svg|png|jpg|gif)$/
 		});
 		function buildWebAppFiles() {
 			return new Promise((resolve) => {
@@ -156,7 +166,7 @@ if (arg) {
 			files.readFile(completeDistPath + "/index.html", (err, html) => {
 				if (err) throw err;
 				html = html.replace("$headScripts$", "");
-				html = html.replace("$bodyScript$", "");        
+				html = html.replace("$bodyScript$", "");
 				files.appendFile(completeDistPath + "/index.html", html, true);
 			});
 		}
@@ -165,7 +175,7 @@ if (arg) {
 		if (arg === "generate") {
 			const arg2 = process.argv[3];
 			const arg3 = process.argv[4];
-			if (arg2 === "class" && (arg3.split('.').pop() === "ts" || arg3.split('.').pop() === "tsx") || arg2 === "component" && arg3.split('.').pop() === "tsx") {
+			if ((arg2 === "class" || arg2 === "component") && (arg3.split('.').pop() === "ts" || arg3.split('.').pop() === "tsx")) {
 				log(chalk.green("wapitis generate " + arg2 + " " + wapitisConfig.srcPath + arg3));
 				const classFile = wapitisConfig.srcPath + arg3;
 				if (!files.fileExists(directoryBase + "/" + classFile)) {
@@ -173,48 +183,48 @@ if (arg) {
 					className = className.substr(0, className.lastIndexOf("."));
 					className = className.split(/[- _]+/).map((str) => str.charAt(0).toUpperCase() + str.substr(1)).join("");
 					if (arg2 === "class") {
-						const classText = 
-(arg3.includes(".tsx") ? 
-`import { JSX } from "wapitis";
+						const classText =
+							(arg3.includes(".tsx") ?
+								`import { JSX } from "wapitis";
 
 ` : "") +
-`export default class ${className} {
+							`export default class ${className} {
 
 }
 `;
 						files.appendFile(directoryBase + "/" + classFile, classText, true);
 					} else if (arg2 === "component") {
-						files.copy(path.resolve(__dirname, ".includes/component.tsx"), directoryBase + "/" + classFile).then(() => {
+						files.copy(path.resolve(__dirname, ".includes/component.ts"), directoryBase + "/" + classFile).then(() => {
 							const componentText = files.readFileSync(directoryBase + "/" + classFile, "utf8");
 							files.appendFile(directoryBase + "/" + classFile, componentText.replace("ClassName", className), true);
 						});
 					}
 					const tsConfigJson = JSON.parse(files.readFileSync(tsconfigFile, "utf8"));
 					const tsConfigJsonPath = "*" in tsConfigJson.compilerOptions.paths ? tsConfigJson.compilerOptions.paths["*"] : tsConfigJson.compilerOptions.paths["*"] = [];
-					const tsConfigClassPath = classFile.substr(0, classFile.lastIndexOf("/") + 1) + "*";
+					const tsConfigClassPath = classFile.substr(0, classFile.lastIndexOf("/"));
 					if (!tsConfigJsonPath.includes(tsConfigClassPath)) {
 						tsConfigJson.compilerOptions.paths["*"].push(tsConfigClassPath);
 						files.appendFile(directoryBase + "/tsConfig.json", JSON.stringify(tsConfigJson, null, 2), true);
 					}
 					log(chalk.green("Le fichier " + classFile + " a été créé"));
 				} else log(chalk.red("Impossible de générer " + classFile + " : le fichier existe déjà"));
-				
+
 			} else log(chalk.red("Cette commande n'est pas pris en charge par wapitis generate"));
 			return;
 		}
 
 		// Combine custom icons SVG in dom icons SVG
-		if (arg !== "clear") {
-			const customSVG = files.readFileSync(wapitisConfig.wwwPath + "/assets/img/icons.svg", "utf8");
-			files.appendFile(path.resolve(__dirname, "library/icons.svg"), customSVG, true);
-		}
+		// if (arg !== "clear") {
+		// 	const customSVG = files.readFileSync(wapitisConfig.wwwPath + "/assets/img/icons.svg", "utf8");
+		// 	files.appendFile(path.resolve(__dirname, "library/icons.svg"), customSVG, true);
+		// }
 
 		// PATH IMPORT ALIAS
 		let importFiles = {};
-		let allFiles = files.getAllFiles(directoryBase  + "/" + wapitisConfig.srcPath, [files.getCurrentDirectoryBase(), "tsconfig.json"]);
+		let allFiles = files.getAllFiles(directoryBase + "/" + wapitisConfig.srcPath, [files.getCurrentDirectoryBase(), "tsconfig.json"]);
 		allFiles.tsCommonFiles.forEach((file) => {
 			let spacer = file.includes("\\") ? "\\" : "/";
-			let fileName = file.substring(file.lastIndexOf(spacer)+1);
+			let fileName = file.substring(file.lastIndexOf(spacer) + 1);
 			fileName = fileName.substring(0, fileName.lastIndexOf("."));
 			file = file.substring(file.lastIndexOf(wapitisConfig.srcPath.substring(0, wapitisConfig.srcPath.lastIndexOf("/"))) + wapitisConfig.srcPath.length).split(spacer).join("/");
 			importFiles[fileName] = "~/" + file.substring(0, file.lastIndexOf("."));
@@ -225,8 +235,8 @@ if (arg) {
 				return FuseBox.init({
 					homeDir: completeSrcPath,
 					output: completeDistPath + "/$name.js",
-					tsConfig : tsconfigFile,
-					target : this.isElectronTask ? "server" : "browser",
+					tsConfig: tsconfigFile,
+					target: this.isElectronTask ? "server" : "browser",
 					sourceMaps: !this.isProduction && !this.isElectronTask,
 					alias: importFiles,
 					hash: this.isProduction && !isElectron,
@@ -239,19 +249,21 @@ if (arg) {
 							!this.isElectronTask && CSSResourcePlugin({
 								dist: completeDistPath + "/assets",
 								resolve: (f) => `./assets/${f}`
-							 }),
+							}),
 							!this.isElectronTask && CSSPlugin({
-								group: "bundle.css",
+								// group: "bundle.css",
+								outFile: (file) => `${completeDistPath}/styles${file.substring(file.lastIndexOf('/'))}`,
+								inject: (file) => file.includes('main') && `styles${file.substring(file.lastIndexOf('/'))}`,
 								minify: this.isProduction
 							}),
 						],
 						!this.isElectronTask && CopyPlugin({ files: ["**/*.svg"], dest: "assets", resolve: "assets/" }),
 						this.isProduction && QuantumPlugin({
-							manifest : "quantum.json",
+							manifest: "quantum.json",
 							bakeApiIntoBundle: this.isElectronTask ? "electron" : "bundle",
-							target : this.isElectronTask ? "electron" : "browser",
-							uglify : true,
-							treeshake : true,
+							target: this.isElectronTask ? "electron" : "browser",
+							uglify: true,
+							treeshake: true,
 							removeExportsInterop: false
 						})
 					]
@@ -262,7 +274,7 @@ if (arg) {
 				const app = fuse.bundle(bundleName);
 				if (!this.isProduction && !this.isElectronTask) {
 					app.watch();
-					app.hmr({reload : true});
+					app.hmr({ reload: true });
 				}
 				app.instructions("> " + startFile);
 				return app;
@@ -300,7 +312,7 @@ if (arg) {
 							compressor: "babel-minify",
 							input: completeDistPath + "/sw.js",
 							output: completeDistPath + "/sw.js",
-							callback: function(err, min) {
+							callback: function (err, min) {
 								console.log("Service Worker minified !")
 							}
 						});
@@ -313,7 +325,7 @@ if (arg) {
 			context.isElectronTask = true;
 			const fuse = context.getConfig();
 			context.createBundle(fuse, "electron", "[" + wapitisConfig.electronStartFile + "]");
-			if (process.env.NODE_ENV === "production" ) {        
+			if (process.env.NODE_ENV === "production") {
 				await fuse.run().then(() => {
 					// launch electron build
 					files.copy(completeDistPath, __dirname + "/dist");
@@ -324,8 +336,8 @@ if (arg) {
 							"files": [
 								"dist"
 							],
-							"directories" : {
-								"output" : __dirname + "/dist"
+							"directories": {
+								"output": __dirname + "/dist"
 							},
 							"dmg": {
 								"contents": [
@@ -354,13 +366,13 @@ if (arg) {
 							}
 						}
 					})
-					.then((result) => {
-						let spacer = result[1].includes("\\") ? "\\" : "/";
-						let fileName = result[1].substring(result[1].lastIndexOf(spacer)+1);
-						files.remove(completeDistPath);
-						files.copy(result[1], completeDistPath + "/" + packageJson.name + "_" + packageJson.version + "_" + formatDateToYYYYMMDDHHMM(new Date()) + "_setup" + fileName.substring(fileName.lastIndexOf("."))).then(() => files.remove(__dirname + "/dist"));
-					})
-					.catch((error) => log(error));
+						.then((result) => {
+							let spacer = result[1].includes("\\") ? "\\" : "/";
+							let fileName = result[1].substring(result[1].lastIndexOf(spacer) + 1);
+							files.remove(completeDistPath);
+							files.copy(result[1], completeDistPath + "/" + packageJson.name + "_" + packageJson.version + "_" + formatDateToYYYYMMDDHHMM(new Date()) + "_setup" + fileName.substring(fileName.lastIndexOf("."))).then(() => files.remove(__dirname + "/dist"));
+						})
+						.catch((error) => log(error));
 				});
 			} else {
 				await fuse.run().then(() => {
@@ -381,5 +393,5 @@ if (arg) {
 	log(chalk.green(chalk.bold("  wapitis electron") + "  ---> lance la webApp dans electron avec un serveur local (--dev) ou pour la production(--prod)"));
 	log(chalk.green(chalk.bold("  wapitis clear") + " ---> supprime le cache et le dossier dist"));
 	log(chalk.green(chalk.bold("  wapitis generate class path/du/fichier.ts(x)") + " ---> génère une classe relatif à src. tsConfig est mis à jour"));
-	log(chalk.green(chalk.bold("  wapitis generate component path/du/fichier.tsx") + " ---> génère un composant relatif à src. tsConfig est mis à jour"));
+	log(chalk.green(chalk.bold("  wapitis generate component path/du/fichier.ts(x)") + " ---> génère un composant relatif à src. tsConfig est mis à jour"));
 }

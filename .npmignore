@@ -1,6 +1,9 @@
 /tsconfig.json
+tslint.json
 src
 TOREMEMBER.md
 .todo
 ui
 transpile.js
+test
+test_lithtml
