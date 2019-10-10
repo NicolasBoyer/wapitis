@@ -17,7 +17,7 @@ const swbuilder = module.exports = {
             // const distFiles = files.getAllFiles(swDest, excludeFiles).allFiles;
 
             // TODO peut etre un array d'array ??? cf plus bas
-            const targetFiles = {}
+            const cacheFiles = {}
             // let cacheCore = ["./"];
             // let cacheFonts = [];
             // let cacheAttachments = [];
@@ -26,11 +26,11 @@ const swbuilder = module.exports = {
             Object.keys(patterns).forEach((name) => {
                 const pattern = patterns[name]
                 files.getAllFiles(swDest, excludeFiles).allFiles.forEach((file) => {
-                    if (!targetFiles[name]) targetFiles[name] = name === 'core' ? ["./"] : []
+                    if (!cacheFiles[name]) cacheFiles[name] = name === 'core' ? ["./"] : []
                     // TODO en fait il faut juste garder targetFiles et il faut rendre automatique en fonction des caches déclarés puis
                     // TODO la mise à jour ou non va se faire sur l'étude des fichiers dans le swbuilder
                     // TODO avec fs.statSync .mtime je sais si la date du fichier je l'enregistre dans la config et si le fichier existe pas ou est changé je break et je sais que le cache doit etre mis à jour
-                    targetFiles[name].push(path.extname(file).toLowerCase().match(pattern) && file.substring(swDest.length).split("\\").join("/"))
+                    cacheFiles[name].push(path.extname(file).toLowerCase().match(pattern) && file.substring(swDest.length).split("\\").join("/"))
                 })
             })
             // let cacheCore = ["./"];
