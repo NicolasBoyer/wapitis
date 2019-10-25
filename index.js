@@ -122,6 +122,7 @@ if (arg) {
 		const wapitisConfig = JSON.parse(files.readFileSync(directoryBase + "/wapitis.json", "utf8"));
 		const completeDistPath = path.resolve(directoryBase + "/" + wapitisConfig.distPath);
 		const completeSrcPath = path.resolve(directoryBase + "/" + wapitisConfig.srcPath);
+		const allFiles = files.getAllFiles(directoryBase + "/" + wapitisConfig.srcPath, [files.getCurrentDirectoryBase(), "tsconfig.json"])
 
 		// Service worker, manifest, polyfills et fichiers pour la web app
 		swBuilder.setOptions({
@@ -129,8 +130,8 @@ if (arg) {
 			swDest: completeDistPath,
 			indexSrc: completeDistPath,
 			// L'exclusion doit aussi être un pattern
-			excludeFiles: ["icons-192.png", "icons-512.png"],
-			patterns: { core: /\.(?:html|xhtml|json|js|css|txt|xml|ico)$/, fonts: /\.(?:eot|ttf|woff|woff2|otf)$/, attachments: /\.(?:doc|docx|odg|odp|ods|odt|pdf|ppt|rtf|xls|xlsx|zip)$/, images: /\.(?:svg|png|jpg|gif)$/, videos: /\.(?:srt|vtt|avi|mov|mp3|mp4|mpg|opus|webm)$/ }
+			excludeFiles: ["sw.js"],
+			patterns: { core: /\.(?:html|xhtml|json|js|css|txt|xml)$/, fonts: /\.(?:eot|ttf|woff|woff2|otf)$/, attachments: /\.(?:doc|docx|odg|odp|ods|odt|pdf|ppt|rtf|xls|xlsx|zip)$/, images: /\.(?:svg|png|jpg|gif|ico)$/, videos: /\.(?:srt|vtt|avi|mov|mp3|mp4|mpg|opus|webm)$/ }
 			// globPattern: /\.(?:html|json|js|css|svg|png|jpg|gif)$/
 		});
 		function buildWebAppFiles() {
@@ -145,21 +146,23 @@ if (arg) {
 			});
 		}
 
-		// Modify index file
+		// Modify index file and copy favicon.ico
 		function buildIndexFile(isProd) {
 			return new Promise((resolve) => {
-				files.readFile(path.resolve(__dirname, ".includes/index.html"), (err, html) => {
-					if (err) throw err;
-					html = html.replace("$appDesc$", wapitisConfig.appDesc);
-					html = html.replace("$themeColor$", wapitisConfig.themeColor);
-					html = html.replace("$appName$", wapitisConfig.appName);
-					if (isProd) {
-						const quantumFile = JSON.parse(files.readFileSync(completeDistPath + "/quantum.json", "utf8"));
-						html = html.replace("$bundle$", `<script src="${quantumFile.bundle.relativePath}"></script>`);
-						files.remove(completeDistPath + "/quantum.json");
-					} else html = html.replace("$bundle$", '<script src="bundle.js"></script>');
-					files.appendFile(completeDistPath + "/index.html", html, true).then(() => resolve());
-				});
+				files.copy(completeSrcPath + "/www/favicon.ico", completeDistPath + "/favicon.ico").then(() => {
+					files.readFile(path.resolve(__dirname, ".includes/index.html"), (err, html) => {
+						if (err) throw err;
+						html = html.replace("$appDesc$", wapitisConfig.appDesc);
+						html = html.replace("$themeColor$", wapitisConfig.themeColor);
+						html = html.replace("$appName$", wapitisConfig.appName);
+						if (isProd) {
+							const quantumFile = JSON.parse(files.readFileSync(completeDistPath + "/quantum.json", "utf8"));
+							html = html.replace("$bundle$", `<script src="${quantumFile.bundle.relativePath}"></script>`);
+							files.remove(completeDistPath + "/quantum.json");
+						} else html = html.replace("$bundle$", '<script src="bundle.js"></script>');
+						files.appendFile(completeDistPath + "/index.html", html, true).then(() => resolve());
+					});
+				})
 			});
 		}
 		function cleanIndexFile() {
@@ -169,6 +172,24 @@ if (arg) {
 				html = html.replace("$bodyScript$", "");
 				files.appendFile(completeDistPath + "/index.html", html, true);
 			});
+		}
+
+		// FILES TO UPDATE
+		function setFilesToUpdate() {
+			wapitisConfig.filesInfos = wapitisConfig.filesInfos || { mtime: {} }
+			wapitisConfig.filesInfos.update = []
+			let filesToCopy = []
+			filesToCopy = filesToCopy.concat(allFiles.imgFiles).concat(allFiles.fontsFiles).concat(allFiles.datasFiles.filter((file) => !file.includes('\\manifest.json'))).concat(allFiles.attachmentsFiles).concat(allFiles.mediasFiles)
+			filesToCopy.forEach((file) => {
+				const mtime = files.getModifiedTimeFileSync(file)
+				const fileName = file.substring(file.lastIndexOf(file.includes("\\") ? "\\" : "/") + 1)
+				const oldMtime = wapitisConfig.filesInfos.mtime[fileName]
+				if (!(oldMtime && String(new Date(oldMtime)) === String(mtime))) {
+					wapitisConfig.filesInfos.update.push(fileName)
+				}
+				wapitisConfig.filesInfos.mtime[fileName] = mtime
+			})
+			files.appendFile(directoryBase + "/wapitis.json", JSON.stringify(wapitisConfig, null, 2), true)
 		}
 
 		// Génération de fichiers
@@ -221,7 +242,6 @@ if (arg) {
 
 		// PATH IMPORT ALIAS
 		let importFiles = {};
-		let allFiles = files.getAllFiles(directoryBase + "/" + wapitisConfig.srcPath, [files.getCurrentDirectoryBase(), "tsconfig.json"]);
 		allFiles.tsCommonFiles.forEach((file) => {
 			let spacer = file.includes("\\") ? "\\" : "/";
 			let fileName = file.substring(file.lastIndexOf(spacer) + 1);
@@ -248,7 +268,19 @@ if (arg) {
 						[
 							!this.isElectronTask && CSSResourcePlugin({
 								dist: completeDistPath + "/assets",
-								resolve: (f) => `./assets/${f}`
+								resolve: (f) => `../assets/${f}`,
+								filesMapping: (res) => {
+									res.map((fileMapping) => {
+										if (wapitisConfig.filesInfos) {
+											Object.keys(wapitisConfig.filesInfos.mtime).forEach((name) => {
+												if (fileMapping.from.includes(name) && wapitisConfig.filesInfos.update && wapitisConfig.filesInfos.update.includes(name)) {
+													wapitisConfig.filesInfos.update[wapitisConfig.filesInfos.update.indexOf(name)] = fileMapping.to
+												}
+											})
+										}
+									});
+									files.appendFile(directoryBase + "/wapitis.json", JSON.stringify(wapitisConfig, null, 2), true)
+								},
 							}),
 							!this.isElectronTask && CSSPlugin({
 								// group: "bundle.css",
@@ -257,7 +289,7 @@ if (arg) {
 								minify: this.isProduction
 							}),
 						],
-						!this.isElectronTask && CopyPlugin({ files: ["**/*.svg"], dest: "assets", resolve: "assets/" }),
+						!this.isElectronTask && CopyPlugin({ files: ["**/*.svg", "**/*.png", "**/*.jpg", "**/*.gif", "**/*.ico", "**/*.srt", "**/*.vtt", "**/*.avi", "**/*.mov", "**/*.mp3", "**/*.mp4", "**/*.mpg", "**/*.opus", "**/*.webm", "**/*.doc", "**/*.docx", "**/*.odg", "**/*.odp", "**/*.ods", "**/*.odt", "**/*.pdf", "**/*.ppt", "**/*.rtf", "**/*.xls", "**/*.xlsx", "**/*.zip", "**/*.txt", "**/*.xml", "**/*.json"], dest: "assets", resolve: "assets/" }),
 						this.isProduction && QuantumPlugin({
 							manifest: "quantum.json",
 							bakeApiIntoBundle: this.isElectronTask ? "electron" : "bundle",
@@ -288,6 +320,7 @@ if (arg) {
 		task("clear", ["clear:cache", "clear:dist"]);
 
 		task("dev", ["clear"], async context => {
+			if (process.argv[3] === "--webapp" && !isElectron) setFilesToUpdate()
 			const fuse = context.getConfig();
 			fuse.dev();
 			context.createBundle(fuse);
@@ -301,6 +334,7 @@ if (arg) {
 		});
 
 		task("prod", ["clear"], async context => {
+			if (!isElectron) setFilesToUpdate()
 			context.isProduction = true;
 			const fuse = context.getConfig();
 			context.createBundle(fuse);

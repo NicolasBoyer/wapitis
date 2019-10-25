@@ -39,7 +39,8 @@
     "lit-html": "^1.1.2",
     "node-minify": "^3.6.0",
     "typescript": "^3.6.3",
-    "uglify-es": "^3.3.9"
+    "uglify-es": "^3.3.9",
+    "web-push": "^3.4.0"
   },
   "devDependencies": {
     "tslint": "^5.20.0"
