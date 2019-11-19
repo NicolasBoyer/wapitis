@@ -282,7 +282,6 @@ export abstract class Component<T> extends HTMLElement {
      */
     private async _update() {
         if (!this._isConnected) {
-            // TODO A voir si possible de changer ce bout de code
             await new Promise((res) => this._hasConnectedResolver = res)
         }
         if (this._renderRoot && this.shouldUpdate(this._changedProperties)) {
