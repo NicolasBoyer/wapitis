@@ -26,9 +26,9 @@
     "wapitis": "index.js"
   },
   "dependencies": {
-    "@types/node": "^12.7.11",
-    "chalk": "^2.4.2",
-    "electron": "^6.0.10",
+    "@types/node": "^12.12.9",
+    "chalk": "^3.0.0",
+    "electron": "^7.1.1",
     "electron-builder": "^21.2.0",
     "fbcssplugin": "^1.0.3",
     "figlet": "^1.2.4",
@@ -38,12 +38,12 @@
     "lit-element": "^2.2.1",
     "lit-html": "^1.1.2",
     "node-minify": "^3.6.0",
-    "typescript": "^3.6.3",
+    "typescript": "^3.7.2",
     "uglify-es": "^3.3.9",
     "web-push": "^3.4.1"
   },
   "devDependencies": {
-    "tslint": "^5.20.0"
+    "tslint": "^5.20.1"
   },
   "bugs": {
     "url": "https://github.com/NicolasBoyer/wapitis/issues"
