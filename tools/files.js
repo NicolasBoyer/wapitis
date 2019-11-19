@@ -1,4 +1,5 @@
-const fs = require('fs-extra');
+const fsExtra = require('fs-extra');
+const fs = require('fs');
 const path = require('path');
 
 var files = module.exports = {
@@ -36,21 +37,17 @@ var files = module.exports = {
 		return fs.openSync(filePath, 'w');
 	},
 
-	appendFile: (file, text, replace) => {
-		return new Promise((resolve) => {
+	appendFile: async (file, text, replace) => {
+		try {
 			if (replace) {
 				if (fs.existsSync(file)) fs.unlinkSync(file);
-				fs.outputFile(file, text, (err) => {
-					if (err) return console.log(err);
-					resolve();
-				});
+				await fsExtra.outputFile(file, text);
 			} else {
-				fs.appendFile(file, text, (err) => {
-					if (err) return console.log(err);
-					resolve();
-				});
+				await fs.promises.appendFile(file, text);
 			}
-		});
+		} catch (error) {
+			console.error(error)
+		}
 	},
 
 	removeDir: (filePath, excludes = []) => {
@@ -77,17 +74,17 @@ var files = module.exports = {
 		else files.removeFile(filePath);
 	},
 
-	readFile: (filePath, callback) => {
-		if (fs.existsSync(filePath)) fs.readFile(filePath, 'utf8', callback);
+	readFile: async (filePath) => {
+		if (fs.existsSync(filePath)) return await fs.promises.readFile(filePath, 'utf8');
 	},
 
 	readFileSync: (filePath) => {
 		if (fs.existsSync(filePath)) return fs.readFileSync(filePath, 'utf8');
 	},
 
-	readDir: (name, callback) => {
+	readDir: async (name) => {
 		var dir = "./" + name;
-		if (fs.existsSync(dir)) fs.readdir(dir, callback);
+		if (fs.existsSync(dir)) return await fs.promises.readdir(dir);
 	},
 
 	getAllFiles: (dir, excludes = [], filelist = { allFiles: [], tsCommonFiles: [], tsPageFiles: [], importFiles: [], cssFiles: [], jsFiles: [], htmlFiles: [], imgFiles: [], mediasFiles: [], attachmentsFiles: [], datasFiles: [], fontsFiles: [] }) => {
@@ -112,30 +109,37 @@ var files = module.exports = {
 		return filelist;
 	},
 
-	writeFile: (filePath, message, callback) => {
-		if (fs.existsSync(filePath)) fs.writeFile(filePath, message, callback);
+	writeFile: async (filePath, message) => {
+		if (fs.existsSync(filePath)) return await fs.promises.writeFile(filePath, message);
 	},
 
 	createWriteStream: (filePath) => {
 		return fs.createWriteStream(filePath);
 	},
 
-	copy: (oldFile, newFile) => {
-		return new Promise((resolve) => {
-			if (fs.existsSync(oldFile)) {
-				fs.copy(oldFile, newFile, (err) => {
-					if (err) return console.error(err);
-					resolve();
-				});
-			} else console.log('Le fichier ' + oldFile + " n'existe pas.")
-		});
+	copy: async (oldFile, newFile) => {
+		if (fs.existsSync(oldFile)) {
+			try {
+				await fsExtra.copy(oldFile, newFile)
+			} catch (error) {
+				console.error(error)
+			}
+		} else console.log('Le fichier ' + oldFile + " n'existe pas.")
 	},
 
-	watchFile: (filePath, cb) => {
-		fs.watchFile(filePath, (curr, prev) => cb());
+	watchFile: async (filePath) => {
+		return await fs.promises.watchFile(filePath);
 	},
 
 	getModifiedTimeFileSync: (filePath) => {
 		return fs.statSync(filePath).mtime
+	},
+
+	rename: async (oldName, newName) => {
+		try {
+			await fs.promises.rename(oldName, newName)
+		} catch (error) {
+			console.error(error)
+		}
 	}
 };
