@@ -22,11 +22,6 @@
     "alwaysStrict": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
-    "strictPropertyInitialization": false,
-    "paths": {
-      "electron": [
-        "node_modules/electron"
-      ]
-    }
+    "strictPropertyInitialization": false
   }
 }

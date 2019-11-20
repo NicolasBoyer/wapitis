@@ -392,6 +392,10 @@ if (arg) {
 								"artifactName": packageJson.name + ".exe",
 								"uninstallDisplayName": "uninstall_" + packageJson.name + ".exe"
 							},
+							"appId": "NicolasBoyer.Wapitis",
+							"mac": {
+								"category": "NicolasBoyer.Wapitis"
+							},
 							"win": {
 								"target": [
 									"nsis"
