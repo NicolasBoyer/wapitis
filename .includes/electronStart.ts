@@ -45,9 +45,9 @@ function createWindow() {
             label: 'Fichier',
             submenu: [
                 {
+                    accelerator: 'Alt+F4',
                     label: 'Quitter',
-                    role: 'quit',
-                    accelerator: 'Alt+F4'
+                    role: 'quit'
                 }
             ]
         },
@@ -86,8 +86,8 @@ function createWindow() {
                         win.webContents.send('show_about',
                             {
                                 appVersion: app.getVersion(),
-                                electronVersion: process.versions.electron,
                                 chromeVersion: process.versions.chrome,
+                                electronVersion: process.versions.electron,
                                 nodeJsVersion: process.versions.node,
                                 v8Version: process.versions.v8
                             }
