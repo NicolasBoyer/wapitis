@@ -436,7 +436,6 @@ if (arg) {
 		}
 
 		if (arg === "electron" && process.argv[3] === "--publish" && (!process.env.WAPITIS_SOURCES_PROVIDER || !process.env.GH_TOKEN)) {
-			// process.env.GH_TOKEN = '715e5380cadef3fffbba4bd302ff436910eed949'
 			console.log("\nAfin de publier votre application, certaines informations sont nécessaires. Cela permettra de mettre en place un système d'auto-update de votre application Electron et une gestion plus fluide de vos futures release.\nUn code (personal access token) est nécessaire. Il peut être généré et récupéré comme décrit dans le lien suivant :\nhttps://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line.\nVous pourrez ensuite le rentrer ici ou créer directement une variable d\'environnement avec le nom GH_TOKEN.\n")
 			let publishQuestions = [
 				{
