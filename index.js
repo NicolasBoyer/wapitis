@@ -400,9 +400,9 @@ if (arg) {
 									"artifactName": packageJson.name + ".exe",
 									"uninstallDisplayName": "uninstall_" + packageJson.name + ".exe"
 								},
-								"appId": "NicolasBoyer.Wapitis",
+								"appId": packageJson.author + "." + packageJson.name,
 								"mac": {
-									"category": "NicolasBoyer.Wapitis"
+									"category": packageJson.author + "." + packageJson.name
 								},
 								"publish": {
 									"provider": process.env.WAPITIS_SOURCES_PROVIDER
