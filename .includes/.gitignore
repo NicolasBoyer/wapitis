@@ -1,0 +1,16 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# fichiers compilés
+dist
+
+# cache wapiti
+.wapitis
+
+# Dependency directory
+node_modules
+
+# environment
+.env

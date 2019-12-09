@@ -15,7 +15,8 @@ const arg = process.argv[2];
 
 const directoryBase = process.cwd();
 // ENV
-process.env.FUSEBOX_TEMP_FOLDER = directoryBase + "/.wapitis";
+const dotEnv = require('./tools/dotenv')
+dotEnv.config({ initVars: [{ FUSEBOX_TEMP_FOLDER: directoryBase + '/.wapitis' }] })
 
 // REQUIRE
 const { FuseBox, QuantumPlugin, CSSResourcePlugin, CopyPlugin, EnvPlugin } = require("fuse-box");
@@ -91,6 +92,7 @@ if (arg) {
 }`;
 			files.appendFile(directoryBase + "/wapitis.json", wapitisTxt, true);
 			files.copy(path.resolve(__dirname, ".includes/tsconfig.json"), directoryBase + "/tsconfig.json");
+			files.copy(path.resolve(__dirname, ".includes/.env"), directoryBase + "/.env");
 			files.copy(path.resolve(__dirname, ".includes/app.tsx"), directoryBase + "/" + answers.srcproject + "/app.tsx");
 			files.copy(path.resolve(__dirname, ".includes/custom.d.ts"), directoryBase + "/" + answers.srcproject + "/custom.d.ts");
 			files.copy(path.resolve(__dirname, ".includes/electronStart.ts"), directoryBase + "/" + answers.srcproject + "/electronStart.ts");
@@ -116,7 +118,7 @@ if (arg) {
 		// GLOBALS
 		const isElectron = arg === "electron";
 		const tsconfigFile = directoryBase + "/tsconfig.json";
-		if (arg === "electron" && process.argv[3] === "--prod") process.env.NODE_ENV = "production";
+		if (arg === "electron" && process.argv[3] === "--prod" || process.argv[3] === "--publish") process.env.NODE_ENV = "production";
 
 		// wapitis CONFIG
 		const wapitisConfig = JSON.parse(files.readFileSync(directoryBase + "/wapitis.json", "utf8"));
@@ -149,6 +151,7 @@ if (arg) {
 				html = html.replace("$appDesc$", wapitisConfig.appDesc);
 				html = html.replace("$themeColor$", wapitisConfig.themeColor);
 				html = html.replace("$appName$", wapitisConfig.appName);
+				html = html.replace("$electron$", isElectron ? '<script src="index.js"></script>' : '');
 				if (isProd) {
 					const quantumFile = JSON.parse(files.readFileSync(completeDistPath + "/quantum.json", "utf8"));
 					html = html.replace("$bundle$", `<script src="${quantumFile.bundle.relativePath}"></script>`);
@@ -309,122 +312,177 @@ if (arg) {
 			}
 		});
 
-		task("clear:cache", () => src(directoryBase + "/.wapitis/").clean(directoryBase + "/.wapitis/").exec());
+		function startTask() {
+			task("clear:cache", () => src(directoryBase + "/.wapitis/").clean(directoryBase + "/.wapitis/").exec());
 
-		task("clear:dist", () => src(completeDistPath + "/").clean(completeDistPath + "/").exec());
+			task("clear:dist", () => src(completeDistPath + "/").clean(completeDistPath + "/").exec());
 
-		task("clear", ["clear:cache", "clear:dist"]);
+			task("clear", ["clear:cache", "clear:dist"]);
 
-		task("dev", ["clear"], async (context) => {
-			if (process.argv[3] === "--webapp" && !isElectron) setFilesToUpdate()
-			const fuse = context.getConfig();
-			fuse.dev();
-			context.createBundle(fuse);
-			await fuse.run();
-			await buildIndexFile()
-			if (!isElectron) {
-				if (process.argv[3] === "--webapp") buildWebAppFiles();
-				else swBuilder.unregisterServiceWorker();
-			} else cleanIndexFile();
-		});
+			task("dev", ["clear"], async (context) => {
+				if (process.argv[3] === "--webapp" && !isElectron) setFilesToUpdate()
+				const fuse = context.getConfig();
+				fuse.dev();
+				context.createBundle(fuse);
+				await fuse.run();
+				await buildIndexFile()
+				if (!isElectron) {
+					if (process.argv[3] === "--webapp") buildWebAppFiles();
+					else swBuilder.unregisterServiceWorker();
+				} else cleanIndexFile();
+			});
 
-		task("prod", ["clear"], async (context) => {
-			if (!isElectron) setFilesToUpdate()
-			context.isProduction = true;
-			const fuse = context.getConfig();
-			context.createBundle(fuse);
-			await fuse.run();
-			await buildIndexFile(true)
-			if (!isElectron) {
-				await buildWebAppFiles()
-				compressor.minify({
-					compressor: "babel-minify",
-					input: completeDistPath + "/sw.js",
-					output: completeDistPath + "/sw.js",
-					callback: function (err, min) {
-						console.log("Service Worker minified !")
-					}
-				});
-			} else cleanIndexFile();
-		});
-
-		task("electron", [process.env.NODE_ENV === "production" ? "prod" : "dev"], async (context) => {
-			context.isElectronTask = true;
-			const fuse = context.getConfig();
-			context.createBundle(fuse, "electron", "[" + wapitisConfig.electronStartFile + "]");
-			await files.copy(completeSrcPath + "/www/splash", completeDistPath)
-			if (process.env.NODE_ENV === "production") {
-				await fuse.run()
-				// launch electron build
-				await files.rename(completeDistPath + "/favicon.ico", completeDistPath + "/icon.ico")
-				await files.copy(completeDistPath, __dirname + "/dist")
-				try {
-					const result = await builder.build({
-						config: {
-							"copyright": packageJson.author,
-							"productName": packageJson.name,
-							"asarUnpack": "./dist/*",
-							"files": [
-								"dist"
-							],
-							"directories": {
-								"output": __dirname + "/dist"
-							},
-							"dmg": {
-								"contents": [
-									{
-										"x": 130,
-										"y": 220
-									},
-									{
-										"x": 410,
-										"y": 220,
-										"type": "link",
-										"path": "/Applications"
-									}
-								]
-							},
-							"nsis": {
-								"installerIcon": "dist/icon.ico",
-								"uninstallerIcon": "dist/icon.ico",
-								"deleteAppDataOnUninstall": true,
-								"perMachine": true,
-								"artifactName": packageJson.name + ".exe",
-								"uninstallDisplayName": "uninstall_" + packageJson.name + ".exe"
-							},
-							"appId": "NicolasBoyer.Wapitis",
-							"mac": {
-								"category": "NicolasBoyer.Wapitis"
-							},
-							"win": {
-								"target": [
-									"nsis"
-								],
-								"icon": "dist/icon.ico",
-								"requestedExecutionLevel": "requireAdministrator",
-							},
-							"linux": {
-								"target": [
-									"deb",
-									"AppImage"
-								]
-							}
+			task("prod", ["clear"], async (context) => {
+				if (!isElectron) setFilesToUpdate()
+				context.isProduction = true;
+				const fuse = context.getConfig();
+				context.createBundle(fuse);
+				await fuse.run();
+				await buildIndexFile(true)
+				if (!isElectron) {
+					await buildWebAppFiles()
+					compressor.minify({
+						compressor: "babel-minify",
+						input: completeDistPath + "/sw.js",
+						output: completeDistPath + "/sw.js",
+						callback: function (err, min) {
+							console.log("Service Worker minified !")
 						}
-					})
-					let spacer = result[1].includes("\\") ? "\\" : "/";
-					let fileName = result[1].substring(result[1].lastIndexOf(spacer) + 1);
-					files.remove(completeDistPath);
-					await files.copy(result[1], completeDistPath + "/" + packageJson.name + "_" + packageJson.version + "_" + formatDateToYYYYMMDDHHMM(new Date()) + "_setup" + fileName.substring(fileName.lastIndexOf(".")))
-					files.remove(__dirname + "/dist")
-				} catch (error) {
-					log(error)
+					});
+				} else cleanIndexFile();
+			});
+
+			task("electron", [process.env.NODE_ENV === "production" ? "prod" : "dev"], async (context) => {
+				context.isElectronTask = true;
+				const fuse = context.getConfig();
+				context.createBundle(fuse, "electron", "[" + wapitisConfig.electronStartFile + "]");
+				await files.copy(completeSrcPath + "/www/electron", completeDistPath)
+				if (process.env.NODE_ENV === "production") {
+					await fuse.run()
+					// launch electron build
+					await files.rename(completeDistPath + "/favicon.ico", completeDistPath + "/icon.ico")
+					await files.copy(completeDistPath, __dirname + "/dist")
+					try {
+						const result = await builder.build({
+							publish: process.argv[3] === "--publish" ? "always" : "never",
+							config: {
+								"copyright": packageJson.author,
+								"productName": packageJson.name,
+								"asarUnpack": "./dist/*",
+								"files": [
+									"dist"
+								],
+								"directories": {
+									"output": __dirname + "/dist"
+								},
+								"dmg": {
+									"contents": [
+										{
+											"x": 130,
+											"y": 220
+										},
+										{
+											"x": 410,
+											"y": 220,
+											"type": "link",
+											"path": "/Applications"
+										}
+									]
+								},
+								"nsis": {
+									"installerIcon": "dist/icon.ico",
+									"uninstallerIcon": "dist/icon.ico",
+									"deleteAppDataOnUninstall": true,
+									"perMachine": true,
+									"artifactName": packageJson.name + ".exe",
+									"uninstallDisplayName": "uninstall_" + packageJson.name + ".exe"
+								},
+								"appId": "NicolasBoyer.Wapitis",
+								"mac": {
+									"category": "NicolasBoyer.Wapitis"
+								},
+								"publish": {
+									"provider": process.env.WAPITIS_SOURCES_PROVIDER
+								},
+								"win": {
+									"target": [
+										"nsis"
+									],
+									"icon": "dist/icon.ico",
+									"requestedExecutionLevel": "requireAdministrator",
+								},
+								"linux": {
+									"target": [
+										"deb",
+										"AppImage"
+									]
+								}
+							}
+						})
+						let spacer = result[1].includes("\\") ? "\\" : "/";
+						let fileName = result[1].substring(result[1].lastIndexOf(spacer) + 1);
+						files.remove(completeDistPath);
+						await files.copy(result[1], completeDistPath + "/" + packageJson.name + "_" + packageJson.version + "_" + formatDateToYYYYMMDDHHMM(new Date()) + "_setup" + fileName.substring(fileName.lastIndexOf(".")))
+						files.remove(__dirname + "/dist")
+					} catch (error) {
+						log(error)
+					}
+				} else {
+					await fuse.run()
+					// launch electron dev
+					tools.runCommand("npx electron " + completeDistPath + "/electron.js");
 				}
-			} else {
-				await fuse.run()
-				// launch electron dev
-				tools.runCommand("npx electron " + completeDistPath + "/electron.js");
-			}
-		});
+			});
+		}
+
+		if (arg === "electron" && process.argv[3] === "--publish" && (!process.env.WAPITIS_SOURCES_PROVIDER || !process.env.GH_TOKEN)) {
+			// process.env.GH_TOKEN = '715e5380cadef3fffbba4bd302ff436910eed949'
+			console.log("\nAfin de publier votre application, certaines informations sont nécessaires. Cela permettra de mettre en place un système d'auto-update de votre application Electron et une gestion plus fluide de vos futures release.\nUn code (personal access token) est nécessaire. Il peut être généré et récupéré comme décrit dans le lien suivant :\nhttps://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line.\nVous pourrez ensuite le rentrer ici ou créer directement une variable d\'environnement avec le nom GH_TOKEN.\n")
+			let publishQuestions = [
+				{
+					name: 'continue',
+					type: 'confirm',
+					message: 'Voulez vous poursuivre:'
+				}
+			]
+			inquirer.prompt(publishQuestions).then((answers) => {
+				if (answers.continue) {
+					publishQuestions = []
+					if (!process.env.WAPITIS_SOURCES_PROVIDER) {
+						publishQuestions.push({
+							name: 'srcprovider',
+							type: 'input',
+							message: 'Quel est le nom de votre provider:',
+							validate: function (value) {
+								if (value.length) return true;
+								else return 'Entrez le nom de votre provider';
+							},
+							default: "github"
+						})
+					}
+					if (!process.env.GH_TOKEN) {
+						publishQuestions.push({
+							name: 'ghtoken',
+							type: 'input',
+							message: 'Quel est votre personal access token (si vous n\'avez pas de code, rendez vous ici: https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line.):'
+						})
+					}
+
+
+					// TODO à finir : finaliser le fait que si la réponse est bien donné pour GH_Token on a pas de retourn sinon return et info + todo dotenv
+					inquirer.prompt(publishQuestions).then((answers) => {
+						if (!process.env.WAPITIS_SOURCES_PROVIDER) dotEnv.set({ WAPITIS_SOURCES_PROVIDER: answers.srcprovider })
+						if (answers.ghtoken.length && !process.env.GH_TOKEN) dotEnv.set({ GH_TOKEN: answers.ghtoken })
+						else {
+							console.log(chalk.red("Aucun personal access token n'a été renseigné"))
+							return
+						}
+						startTask()
+					})
+				} else return
+			})
+		} else startTask()
+
 	} else {
 		log(chalk.red(arg + " n'est pas pris en charge par wapitis"));
 	}
@@ -434,7 +492,7 @@ if (arg) {
 	log(chalk.green(chalk.bold("  wapitis init") + " ---> initialise la web app en créant les fichiers et les dossiers nécessaires"));
 	log(chalk.green(chalk.bold("  wapitis dev") + "  ---> lance la web app dans un serveur local. --webapp pour générer service worker, manifest et polyfills"));
 	log(chalk.green(chalk.bold("  wapitis prod") + " ---> web app pour la production"));
-	log(chalk.green(chalk.bold("  wapitis electron") + "  ---> lance la webApp dans electron avec un serveur local (--dev) ou pour la production(--prod)"));
+	log(chalk.green(chalk.bold("  wapitis electron") + "  ---> lance la webApp dans electron avec un serveur local (--dev), pour la production (--prod) ou pour une publication directe (--publish)"));
 	log(chalk.green(chalk.bold("  wapitis clear") + " ---> supprime le cache et le dossier dist"));
 	log(chalk.green(chalk.bold("  wapitis generate class path/du/fichier.ts(x)") + " ---> génère une classe relatif à src"));
 	log(chalk.green(chalk.bold("  wapitis generate component path/du/fichier.ts(x)") + " ---> génère un composant relatif à src"));

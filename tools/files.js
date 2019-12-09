@@ -2,7 +2,7 @@ const fsExtra = require('fs-extra');
 const fs = require('fs');
 const path = require('path');
 
-var files = module.exports = {
+const files = module.exports = {
 	getCurrentDirectoryBase: () => {
 		return path.basename(process.cwd());
 	},
@@ -115,6 +115,10 @@ var files = module.exports = {
 
 	createWriteStream: (filePath) => {
 		return fs.createWriteStream(filePath);
+	},
+
+	createReadStream: (filePath) => {
+		return fs.createReadStream(filePath);
 	},
 
 	copy: async (oldFile, newFile) => {
