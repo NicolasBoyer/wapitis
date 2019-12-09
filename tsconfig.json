@@ -6,7 +6,7 @@
         "declaration": true,
         "jsx": "react",
         "jsxFactory": "JSX.createElement",
-        "outDir": "./test_lithtml/node_modules/wapitis/library"
+        "outDir": "./library"
     },
     "include": [
         "src/**/*"
