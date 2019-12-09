@@ -92,7 +92,8 @@ if (arg) {
 }`;
 			files.appendFile(directoryBase + "/wapitis.json", wapitisTxt, true);
 			files.copy(path.resolve(__dirname, ".includes/tsconfig.json"), directoryBase + "/tsconfig.json");
-			files.copy(path.resolve(__dirname, ".includes/.env"), directoryBase + "/.env");
+			files.copy(path.resolve(__dirname, ".includes/tslint.json"), directoryBase + "/tslint.json");
+			files.copy(path.resolve(__dirname, ".includes/.gitignore"), directoryBase + "/.gitignore");
 			files.copy(path.resolve(__dirname, ".includes/app.tsx"), directoryBase + "/" + answers.srcproject + "/app.tsx");
 			files.copy(path.resolve(__dirname, ".includes/custom.d.ts"), directoryBase + "/" + answers.srcproject + "/custom.d.ts");
 			files.copy(path.resolve(__dirname, ".includes/electronStart.ts"), directoryBase + "/" + answers.srcproject + "/electronStart.ts");
@@ -109,8 +110,10 @@ if (arg) {
 			manifestJson.short_name = answers.appName;
 			manifestJson.name = answers.appName;
 			manifestJson.theme_color = answers.themeColor;
-			files.copy(path.resolve(__dirname, ".includes/www"), directoryBase + "/" + answers.srcproject + "/www").then(() => {
-				files.appendFile(directoryBase + "/" + answers.srcproject + "/www/manifest.json", JSON.stringify(manifestJson, null, 2), true);
+			files.copy(path.resolve(__dirname, ".includes/www"), directoryBase + "/" + answers.srcproject + "/www").then(async () => {
+				await files.appendFile(directoryBase + "/" + answers.srcproject + "/www/manifest.json", JSON.stringify(manifestJson, null, 2), true)
+				await tools.runCommand('npm i tslint -D')
+				await tools.runCommand('npm i electron-updater --save')
 			});
 		});
 	} else if (arg === "dev" || arg === "prod" || arg === "clear" || arg === "electron" || arg === "generate") {
@@ -219,13 +222,13 @@ if (arg) {
 							files.appendFile(directoryBase + "/" + classFile, componentText.replace("ClassName", className), true);
 						});
 					}
-					const tsConfigJson = JSON.parse(files.readFileSync(tsconfigFile, "utf8"));
-					const tsConfigJsonPath = "*" in tsConfigJson.compilerOptions.paths ? tsConfigJson.compilerOptions.paths["*"] : tsConfigJson.compilerOptions.paths["*"] = [];
-					const tsConfigClassPath = classFile.substr(0, classFile.lastIndexOf("/"));
-					if (!tsConfigJsonPath.includes(tsConfigClassPath)) {
-						tsConfigJson.compilerOptions.paths["*"].push(tsConfigClassPath);
-						files.appendFile(directoryBase + "/tsConfig.json", JSON.stringify(tsConfigJson, null, 2), true);
-					}
+					// const tsConfigJson = JSON.parse(files.readFileSync(tsconfigFile, "utf8"));
+					// const tsConfigJsonPath = "*" in tsConfigJson.compilerOptions.paths ? tsConfigJson.compilerOptions.paths["*"] : tsConfigJson.compilerOptions.paths["*"] = [];
+					// const tsConfigClassPath = classFile.substr(0, classFile.lastIndexOf("/"));
+					// if (!tsConfigJsonPath.includes(tsConfigClassPath)) {
+					// 	tsConfigJson.compilerOptions.paths["*"].push(tsConfigClassPath);
+					// 	files.appendFile(directoryBase + "/tsConfig.json", JSON.stringify(tsConfigJson, null, 2), true);
+					// }
 					log(chalk.green("Le fichier " + classFile + " a été créé"));
 				} else log(chalk.red("Impossible de générer " + classFile + " : le fichier existe déjà"));
 
