@@ -466,9 +466,6 @@ if (arg) {
 							message: 'Quel est votre personal access token (si vous n\'avez pas de code, rendez vous ici: https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line.):'
 						})
 					}
-
-
-					// TODO à finir : finaliser le fait que si la réponse est bien donné pour GH_Token on a pas de retourn sinon return et info + todo dotenv
 					inquirer.prompt(publishQuestions).then((answers) => {
 						if (!process.env.WAPITIS_SOURCES_PROVIDER) dotEnv.set({ WAPITIS_SOURCES_PROVIDER: answers.srcprovider })
 						if (answers.ghtoken.length && !process.env.GH_TOKEN) dotEnv.set({ GH_TOKEN: answers.ghtoken })
