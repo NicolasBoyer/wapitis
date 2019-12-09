@@ -1,6 +1,7 @@
 const files = require("./files");
 const path = require('path');
-const webpush = require('web-push');
+// A réinstaller si nécessaire !!
+// const webpush = require('web-push');
 let globDirectory, swDest, excludeFiles, patterns, wapitisConfig;
 let sw = `const DEBUG = false;
 
