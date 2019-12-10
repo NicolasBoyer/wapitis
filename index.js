@@ -434,7 +434,7 @@ if (arg) {
 				} else {
 					await fuse.run()
 					// launch electron dev
-					tools.runCommandAsync("npx electron " + completeDistPath + "/electron.js");
+					tools.runCommandAsync("npx electron " + completeDistPath + "/electron.js", { noOutput: true });
 				}
 			});
 		}
