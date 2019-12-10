@@ -117,7 +117,7 @@ if (arg) {
 					tools.runCommandSync('npm i electron-updater --save')
 				});
 			});
-		} else console.log(chalk.red('L\'initialisation a déjà été effectuée, veuillez modifier directement le fichier wapitis.json !'))
+		} else log(chalk.red('L\'initialisation a déjà été effectuée, veuillez modifier directement le fichier wapitis.json !'))
 	} else if (arg === "dev" || arg === "prod" || arg === "clear" || arg === "electron" || arg === "generate") {
 
 		// GLOBALS
@@ -354,7 +354,7 @@ if (arg) {
 						input: completeDistPath + "/sw.js",
 						output: completeDistPath + "/sw.js",
 						callback: function (err, min) {
-							console.log("Service Worker minified !")
+							log("Service Worker minified !")
 						}
 					});
 				} else cleanIndexFile();
@@ -443,7 +443,7 @@ if (arg) {
 		}
 
 		if (arg === "electron" && process.argv[3] === "--publish" && (!process.env.WAPITIS_SOURCES_PROVIDER || !process.env.GH_TOKEN)) {
-			console.log("\nAfin de publier votre application, certaines informations sont nécessaires. Cela permettra de mettre en place un système d'auto-update de votre application Electron et une gestion plus fluide de vos futures release.\nUn code (personal access token) est nécessaire. Il peut être généré et récupéré comme décrit dans le lien suivant :\nhttps://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line.\nVous pourrez ensuite le rentrer ici ou créer directement une variable d\'environnement avec le nom GH_TOKEN.\n")
+			log("\nAfin de publier votre application, certaines informations sont nécessaires. Cela permettra de mettre en place un système d'auto-update de votre application Electron et une gestion plus fluide de vos futures release.\nUn code (personal access token) est nécessaire. Il peut être généré et récupéré comme décrit dans le lien suivant :\nhttps://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line.\nVous pourrez ensuite le rentrer ici ou créer directement une variable d\'environnement avec le nom GH_TOKEN.\n")
 			let publishQuestions = [
 				{
 					name: 'continue',
@@ -473,11 +473,11 @@ if (arg) {
 							message: 'Quel est votre personal access token (si vous n\'avez pas de code, rendez vous ici: https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line.):'
 						})
 					}
-					inquirer.prompt(publishQuestions).then((answers) => {
-						if (!process.env.WAPITIS_SOURCES_PROVIDER) dotEnv.set({ WAPITIS_SOURCES_PROVIDER: answers.srcprovider })
-						if (answers.ghtoken.length && !process.env.GH_TOKEN) dotEnv.set({ GH_TOKEN: answers.ghtoken })
+					inquirer.prompt(publishQuestions).then(async (answers) => {
+						if (!process.env.WAPITIS_SOURCES_PROVIDER) await dotEnv.set({ WAPITIS_SOURCES_PROVIDER: answers.srcprovider })
+						if (answers.ghtoken.length && !process.env.GH_TOKEN) await dotEnv.set({ GH_TOKEN: answers.ghtoken })
 						else {
-							console.log(chalk.red("Aucun personal access token n'a été renseigné"))
+							log(chalk.red("Aucun personal access token n'a été renseigné"))
 							return
 						}
 						startTask()

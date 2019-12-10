@@ -14,7 +14,7 @@ const dotenv = module.exports = {
         directory = options && options.path ? options.path : process.cwd()
         if (!files.fileExists(directory + '/.env')) files.createFile(directory + '/.env')
         else parseEnvVars()
-        if (options && options.initVars && options.initVars.length) options.initVars.forEach((variable) => dotenv.set(variable))
+        if (options && options.initVars && options.initVars.length) options.initVars.forEach(async (variable) => await dotenv.set(variable))
     },
 
     /**
@@ -23,9 +23,9 @@ const dotenv = module.exports = {
      * @export
      * @param {envVar} { x: string }
      */
-    set: (envVar) => {
+    set: async (envVar) => {
         if (!files.fileExists(directory + '/.env')) {
-            console.log(chalk.red('La methode config() n\'a pas été déclarée lors de l\'inialisation !'))
+            console.log(chalk.red('La methode config() n\'a pas été déclarée lors de l\'initialisation !'))
             return
         }
         const key = Object.keys(envVar)[0]
@@ -33,7 +33,7 @@ const dotenv = module.exports = {
         process.env[key] = value
         const envVars = parseEnvVars()
         envVars[key] = value
-        files.appendFile(directory + '/.env', Object.keys(envVars).map((key) => key + '=' + envVars[key]).join('\n'), true)
+        await files.appendFile(directory + '/.env', Object.keys(envVars).map((key) => key + '=' + envVars[key]).join('\n'), true)
     }
 }
 
