@@ -224,25 +224,12 @@ if (arg) {
 							files.appendFile(directoryBase + "/" + classFile, componentText.replace("ClassName", className), true);
 						});
 					}
-					// const tsConfigJson = JSON.parse(files.readFileSync(tsconfigFile, "utf8"));
-					// const tsConfigJsonPath = "*" in tsConfigJson.compilerOptions.paths ? tsConfigJson.compilerOptions.paths["*"] : tsConfigJson.compilerOptions.paths["*"] = [];
-					// const tsConfigClassPath = classFile.substr(0, classFile.lastIndexOf("/"));
-					// if (!tsConfigJsonPath.includes(tsConfigClassPath)) {
-					// 	tsConfigJson.compilerOptions.paths["*"].push(tsConfigClassPath);
-					// 	files.appendFile(directoryBase + "/tsConfig.json", JSON.stringify(tsConfigJson, null, 2), true);
-					// }
 					log(chalk.green("Le fichier " + classFile + " a été créé"));
 				} else log(chalk.red("Impossible de générer " + classFile + " : le fichier existe déjà"));
 
 			} else log(chalk.red("Cette commande n'est pas pris en charge par wapitis generate"));
 			return;
 		}
-
-		// Combine custom icons SVG in dom icons SVG
-		// if (arg !== "clear") {
-		// 	const customSVG = files.readFileSync(wapitisConfig.wwwPath + "/assets/img/icons.svg", "utf8");
-		// 	files.appendFile(path.resolve(__dirname, "library/icons.svg"), customSVG, true);
-		// }
 
 		// PATH IMPORT ALIAS
 		let importFiles = {};
