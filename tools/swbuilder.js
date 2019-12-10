@@ -140,7 +140,7 @@ self.addEventListener('notificationclick', (event) => {
             html = html.replace("$headScripts$", '<link rel="manifest" href="manifest.json"/><script src="polyfills.js"></script>');
             html = html.replace("$bodyScript$", `
 <script>
-// const apiKey = "` + webpush.generateVAPIDKeys().publicKey + `";
+// const apiKey = "webpush.generateVAPIDKeys().publicKey";
 // function urlB64ToUint8Array(base64String) {
 //     const padding = '='.repeat((4 - base64String.length % 4) % 4);
 //     const base64 = (base64String + padding)
