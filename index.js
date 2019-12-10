@@ -113,8 +113,8 @@ if (arg) {
 				manifestJson.theme_color = answers.themeColor;
 				files.copy(path.resolve(__dirname, ".includes/www"), directoryBase + "/" + answers.srcproject + "/www").then(async () => {
 					await files.appendFile(directoryBase + "/" + answers.srcproject + "/www/manifest.json", JSON.stringify(manifestJson, null, 2), true)
-					tools.runCommand('npm i tslint -D')
-					tools.runCommand('npm i electron-updater --save')
+					tools.runCommandSync('npm i tslint -D')
+					tools.runCommandSync('npm i electron-updater --save')
 				});
 			});
 		} else console.log(chalk.red('L\'initialisation a déjà été effectuée, veuillez modifier directement le fichier wapitis.json !'))
@@ -368,61 +368,60 @@ if (arg) {
 					await files.rename(completeDistPath + "/favicon.ico", completeDistPath + "/icon.ico")
 					await files.copy(completeDistPath, __dirname + "/dist")
 					try {
+						const config = {
+							"copyright": packageJson.author,
+							"productName": packageJson.name,
+							"asarUnpack": "./dist/*",
+							"files": [
+								"dist"
+							],
+							"directories": {
+								"output": __dirname + "/dist"
+							},
+							"dmg": {
+								"contents": [
+									{
+										"x": 130,
+										"y": 220
+									},
+									{
+										"x": 410,
+										"y": 220,
+										"type": "link",
+										"path": "/Applications"
+									}
+								]
+							},
+							"nsis": {
+								"installerIcon": "dist/icon.ico",
+								"uninstallerIcon": "dist/icon.ico",
+								"deleteAppDataOnUninstall": true,
+								"perMachine": true,
+								"artifactName": packageJson.name + ".exe",
+								"uninstallDisplayName": "uninstall_" + packageJson.name + ".exe"
+							},
+							"appId": packageJson.author + "." + packageJson.name,
+							"mac": {
+								"category": packageJson.author + "." + packageJson.name
+							},
+							"win": {
+								"target": [
+									"nsis"
+								],
+								"icon": "dist/icon.ico",
+								"requestedExecutionLevel": "requireAdministrator",
+							},
+							"linux": {
+								"target": [
+									"deb",
+									"AppImage"
+								]
+							}
+						}
+						if (process.argv[3] === "--publish") config.publish = { "provider": process.env.WAPITIS_SOURCES_PROVIDER }
 						const result = await builder.build({
 							publish: process.argv[3] === "--publish" ? "always" : "never",
-							config: {
-								"copyright": packageJson.author,
-								"productName": packageJson.name,
-								"asarUnpack": "./dist/*",
-								"files": [
-									"dist"
-								],
-								"directories": {
-									"output": __dirname + "/dist"
-								},
-								"dmg": {
-									"contents": [
-										{
-											"x": 130,
-											"y": 220
-										},
-										{
-											"x": 410,
-											"y": 220,
-											"type": "link",
-											"path": "/Applications"
-										}
-									]
-								},
-								"nsis": {
-									"installerIcon": "dist/icon.ico",
-									"uninstallerIcon": "dist/icon.ico",
-									"deleteAppDataOnUninstall": true,
-									"perMachine": true,
-									"artifactName": packageJson.name + ".exe",
-									"uninstallDisplayName": "uninstall_" + packageJson.name + ".exe"
-								},
-								"appId": packageJson.author + "." + packageJson.name,
-								"mac": {
-									"category": packageJson.author + "." + packageJson.name
-								},
-								"publish": {
-									"provider": process.env.WAPITIS_SOURCES_PROVIDER
-								},
-								"win": {
-									"target": [
-										"nsis"
-									],
-									"icon": "dist/icon.ico",
-									"requestedExecutionLevel": "requireAdministrator",
-								},
-								"linux": {
-									"target": [
-										"deb",
-										"AppImage"
-									]
-								}
-							}
+							config
 						})
 						let spacer = result[1].includes("\\") ? "\\" : "/";
 						let fileName = result[1].substring(result[1].lastIndexOf(spacer) + 1);
@@ -435,7 +434,7 @@ if (arg) {
 				} else {
 					await fuse.run()
 					// launch electron dev
-					tools.runCommand("npx electron " + completeDistPath + "/electron.js");
+					tools.runCommandAsync("npx electron " + completeDistPath + "/electron.js");
 				}
 			});
 		}

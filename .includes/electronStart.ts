@@ -107,7 +107,9 @@ function createWindow() {
 
 app.on('ready', () => {
     createWindow()
-    setTimeout(() => autoUpdater.checkForUpdates(), 1000)
+    if (!DEBUG) {
+        setTimeout(() => autoUpdater.checkForUpdates(), 1000)
+    }
 })
 
 app.on('window-all-closed', () => {
