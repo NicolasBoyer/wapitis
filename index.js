@@ -37,85 +37,87 @@ function formatDateToYYYYMMDDHHMM(date) {
 
 if (arg) {
 	if (arg === "init") {
-		const questions = [
-			{
-				name: 'srcproject',
-				type: 'input',
-				message: 'Quel est le nom de votre dossier source:',
-				validate: function (value) {
-					if (value.length) return true;
-					else return 'Entrez le nom de votre dossier source';
+		if (!files.fileExists(directoryBase + '/wapitis.json')) {
+			const questions = [
+				{
+					name: 'srcproject',
+					type: 'input',
+					message: 'Quel est le nom de votre dossier source:',
+					validate: function (value) {
+						if (value.length) return true;
+						else return 'Entrez le nom de votre dossier source';
+					},
+					default: "src"
 				},
-				default: "src"
-			},
-			{
-				name: 'appName',
-				type: 'input',
-				message: 'Quel est le nom de votre Web App:',
-				validate: function (value) {
-					if (value.length) return true;
-					else return 'Entrez le nom de votre Web App';
-				}
-			},
-			{
-				name: 'appDesc',
-				type: 'input',
-				message: 'Donnez une description pour votre Web App:',
-				validate: function (value) {
-					if (value.length) return true;
-					else return 'Donnez une description pour votre Web App';
-				}
-			},
-			{
-				name: 'themeColor',
-				type: 'input',
-				message: 'Entrez une couleur pour le header de votre Web App:',
-				validate: function (value) {
-					if (value.length) return true;
-					else return 'Entrez une couleur pour le header de votre Web App';
+				{
+					name: 'appName',
+					type: 'input',
+					message: 'Quel est le nom de votre Web App:',
+					validate: function (value) {
+						if (value.length) return true;
+						else return 'Entrez le nom de votre Web App';
+					}
 				},
-				default: "#317EFB"
-			}
-		];
+				{
+					name: 'appDesc',
+					type: 'input',
+					message: 'Donnez une description pour votre Web App:',
+					validate: function (value) {
+						if (value.length) return true;
+						else return 'Donnez une description pour votre Web App';
+					}
+				},
+				{
+					name: 'themeColor',
+					type: 'input',
+					message: 'Entrez une couleur pour le header de votre Web App:',
+					validate: function (value) {
+						if (value.length) return true;
+						else return 'Entrez une couleur pour le header de votre Web App';
+					},
+					default: "#317EFB"
+				}
+			];
 
-		inquirer.prompt(questions).then((answers) => {
-			const wapitisTxt =
-				`{
-	"srcPath": "${answers.srcproject}/",
-	"wwwPath": "${answers.srcproject}/www",
-	"distPath": "${answers.srcproject}/../dist",
-	"startFile": "app.tsx",
-	"electronStartFile": "electronStart.ts",
-	"appName": "${answers.appName}",
-	"appDesc": "${answers.appDesc}",
-	"themeColor": "${answers.themeColor}"
-}`;
-			files.appendFile(directoryBase + "/wapitis.json", wapitisTxt, true);
-			files.copy(path.resolve(__dirname, ".includes/tsconfig.json"), directoryBase + "/tsconfig.json");
-			files.copy(path.resolve(__dirname, ".includes/tslint.json"), directoryBase + "/tslint.json");
-			files.copy(path.resolve(__dirname, ".includes/gitignore"), directoryBase + "/.gitignore");
-			files.copy(path.resolve(__dirname, ".includes/app.tsx"), directoryBase + "/" + answers.srcproject + "/app.tsx");
-			files.copy(path.resolve(__dirname, ".includes/custom.d.ts"), directoryBase + "/" + answers.srcproject + "/custom.d.ts");
-			files.copy(path.resolve(__dirname, ".includes/electronStart.ts"), directoryBase + "/" + answers.srcproject + "/electronStart.ts");
-			packageJson.scripts = {};
-			packageJson.scripts.init = "npx wapitis init";
-			packageJson.scripts.dev = "npx wapitis dev";
-			packageJson.scripts.prod = "npx wapitis prod";
-			packageJson.scripts.electronDev = "npx wapitis electron --dev";
-			packageJson.scripts.electronProd = "npx wapitis electron --prod";
-			packageJson.scripts.clear = "npx wapitis clear";
-			packageJson.main = answers.srcproject + "/../dist/electron.js";
-			files.appendFile(directoryBase + "/package.json", JSON.stringify(packageJson, null, 2), true);
-			const manifestJson = JSON.parse(files.readFileSync(path.resolve(__dirname, ".includes/www/manifest.json"), "utf8"));
-			manifestJson.short_name = answers.appName;
-			manifestJson.name = answers.appName;
-			manifestJson.theme_color = answers.themeColor;
-			files.copy(path.resolve(__dirname, ".includes/www"), directoryBase + "/" + answers.srcproject + "/www").then(async () => {
-				await files.appendFile(directoryBase + "/" + answers.srcproject + "/www/manifest.json", JSON.stringify(manifestJson, null, 2), true)
-				await tools.runCommand('npm i tslint -D')
-				await tools.runCommand('npm i electron-updater --save')
+			inquirer.prompt(questions).then((answers) => {
+				const wapitisTxt =
+					`{
+		"srcPath": "${answers.srcproject}/",
+		"wwwPath": "${answers.srcproject}/www",
+		"distPath": "${answers.srcproject}/../dist",
+		"startFile": "app.tsx",
+		"electronStartFile": "electronStart.ts",
+		"appName": "${answers.appName}",
+		"appDesc": "${answers.appDesc}",
+		"themeColor": "${answers.themeColor}"
+	}`;
+				files.appendFile(directoryBase + "/wapitis.json", wapitisTxt, true);
+				files.copy(path.resolve(__dirname, ".includes/tsconfig.json"), directoryBase + "/tsconfig.json");
+				files.copy(path.resolve(__dirname, ".includes/tslint.json"), directoryBase + "/tslint.json");
+				files.copy(path.resolve(__dirname, ".includes/gitignore"), directoryBase + "/.gitignore");
+				files.copy(path.resolve(__dirname, ".includes/app.tsx"), directoryBase + "/" + answers.srcproject + "/app.tsx");
+				files.copy(path.resolve(__dirname, ".includes/custom.d.ts"), directoryBase + "/" + answers.srcproject + "/custom.d.ts");
+				files.copy(path.resolve(__dirname, ".includes/electronStart.ts"), directoryBase + "/" + answers.srcproject + "/electronStart.ts");
+				packageJson.scripts = {};
+				packageJson.scripts.init = "npx wapitis init";
+				packageJson.scripts.dev = "npx wapitis dev";
+				packageJson.scripts.prod = "npx wapitis prod";
+				packageJson.scripts.electronDev = "npx wapitis electron --dev";
+				packageJson.scripts.electronProd = "npx wapitis electron --prod";
+				packageJson.scripts.clear = "npx wapitis clear";
+				packageJson.main = answers.srcproject + "/../dist/electron.js";
+				files.appendFile(directoryBase + "/package.json", JSON.stringify(packageJson, null, 2), true);
+				const manifestJson = JSON.parse(files.readFileSync(path.resolve(__dirname, ".includes/www/manifest.json"), "utf8"));
+				manifestJson.short_name = answers.appName;
+				manifestJson.name = answers.appName;
+				manifestJson.theme_color = answers.themeColor;
+				files.copy(path.resolve(__dirname, ".includes/www"), directoryBase + "/" + answers.srcproject + "/www").then(async () => {
+					await files.appendFile(directoryBase + "/" + answers.srcproject + "/www/manifest.json", JSON.stringify(manifestJson, null, 2), true)
+					tools.runCommand('npm i tslint -D')
+					tools.runCommand('npm i electron-updater --save')
+				});
 			});
-		});
+		} else console.log(chalk.red('L\'initialisation a déjà été effectuée, veuillez modifier directement le fichier wapitis.json !'))
 	} else if (arg === "dev" || arg === "prod" || arg === "clear" || arg === "electron" || arg === "generate") {
 
 		// GLOBALS
@@ -481,7 +483,6 @@ if (arg) {
 				} else return
 			})
 		} else startTask()
-
 	} else {
 		log(chalk.red(arg + " n'est pas pris en charge par wapitis"));
 	}
