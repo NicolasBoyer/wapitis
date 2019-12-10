@@ -93,7 +93,7 @@ if (arg) {
 			files.appendFile(directoryBase + "/wapitis.json", wapitisTxt, true);
 			files.copy(path.resolve(__dirname, ".includes/tsconfig.json"), directoryBase + "/tsconfig.json");
 			files.copy(path.resolve(__dirname, ".includes/tslint.json"), directoryBase + "/tslint.json");
-			files.copy(path.resolve(__dirname, ".includes/.gitignore"), directoryBase + "/.gitignore");
+			files.copy(path.resolve(__dirname, ".includes/gitignore"), directoryBase + "/.gitignore");
 			files.copy(path.resolve(__dirname, ".includes/app.tsx"), directoryBase + "/" + answers.srcproject + "/app.tsx");
 			files.copy(path.resolve(__dirname, ".includes/custom.d.ts"), directoryBase + "/" + answers.srcproject + "/custom.d.ts");
 			files.copy(path.resolve(__dirname, ".includes/electronStart.ts"), directoryBase + "/" + answers.srcproject + "/electronStart.ts");

@@ -38,6 +38,7 @@ const dotenv = module.exports = {
 }
 
 parseEnvVars = () => {
+    if (!files.fileExists(directory + '/.env')) return
     const variables = {}
     const source = files.readFileSync(directory + '/.env')
     source.toString().split(/\n|\r|\r\n/).forEach((line, index) => {
