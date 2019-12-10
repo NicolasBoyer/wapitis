@@ -304,6 +304,22 @@ if (arg) {
 			}
 		});
 
+		function slugify(str) {
+			const a = 'ãàáäâèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/-,:;'
+			const b = 'aaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh______'
+			const p = new RegExp(a.split('').join('|'), 'g')
+
+			return str.toString().toLowerCase()
+				.replace(/\s+/g, '_')           // Replace spaces with _
+				.replace(p, (c) =>
+					b.charAt(a.indexOf(c)))     // Replace special chars
+				.replace(/&/g, '_and_')         // Replace & with 'and'
+				.replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+				.replace(/\-\-+/g, '_')         // Replace multiple - with single _
+				.replace(/^-+/, '')             // Trim - from start of text
+				.replace(/-+$/, '')            // Trim - from end of text
+		}
+
 		function startTask() {
 			task("clear:cache", () => src(directoryBase + "/.wapitis/").clean(directoryBase + "/.wapitis/").exec());
 
@@ -384,12 +400,12 @@ if (arg) {
 								"uninstallerIcon": "dist/icon.ico",
 								"deleteAppDataOnUninstall": true,
 								"perMachine": true,
-								"artifactName": packageJson.name + ".exe",
-								"uninstallDisplayName": "uninstall_" + packageJson.name + ".exe"
+								"artifactName": slugify(packageJson.name) + ".exe",
+								"uninstallDisplayName": "uninstall_" + slugify(packageJson.name) + ".exe"
 							},
-							"appId": packageJson.author + "." + packageJson.name,
+							"appId": slugify(packageJson.author) + "." + slugify(packageJson.name),
 							"mac": {
-								"category": packageJson.author + "." + packageJson.name
+								"category": slugify(packageJson.author) + "." + slugify(packageJson.name)
 							},
 							"win": {
 								"target": [
@@ -413,7 +429,7 @@ if (arg) {
 						let spacer = result[1].includes("\\") ? "\\" : "/";
 						let fileName = result[1].substring(result[1].lastIndexOf(spacer) + 1);
 						files.remove(completeDistPath);
-						await files.copy(result[1], completeDistPath + "/" + packageJson.name + "_" + packageJson.version + "_" + formatDateToYYYYMMDDHHMM(new Date()) + "_setup" + fileName.substring(fileName.lastIndexOf(".")))
+						await files.copy(result[1], completeDistPath + "/" + slugify(packageJson.name) + "_" + packageJson.version + "_" + formatDateToYYYYMMDDHHMM(new Date()) + "_setup" + fileName.substring(fileName.lastIndexOf(".")))
 						files.remove(__dirname + "/dist")
 					} catch (error) {
 						log(error)
