@@ -34,7 +34,7 @@ const files = module.exports = {
 	},
 
 	createFile: (filePath) => {
-		return fs.openSync(filePath, 'w');
+		return fs.writeFileSync(filePath, '');
 	},
 
 	appendFile: async (file, text, replace) => {
