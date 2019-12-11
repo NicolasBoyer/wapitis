@@ -49,8 +49,6 @@ function showInfos(options) {
 
 ipcRenderer.on('message', (event, options) => showInfos(options))
 
-ipcRenderer.on('message', (event, options) => showInfos(options))
-
 ipcRenderer.on('show_about', (event, arg) => {
     const style = document.createElement('style')
     style.innerHTML = `.about {

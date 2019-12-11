@@ -26,9 +26,9 @@
     "wapitis": "index.js"
   },
   "dependencies": {
-    "@types/node": "^12.12.17",
+    "@types/node": "^12.12.9",
     "chalk": "^3.0.0",
-    "electron": "^7.1.4",
+    "electron": "^7.1.1",
     "electron-builder": "^21.2.0",
     "electron-updater": "^4.2.0",
     "fbcssplugin": "^1.0.3",
