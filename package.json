@@ -1,6 +1,6 @@
 {
   "name": "wapitis",
-  "version": "2.0.18",
+  "version": "2.0.19",
   "description": "Outils permettant de créer et de gérer une web app - WebApp utiliTies pour typescript",
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
   "dependencies": {
     "@types/node": "^12.12.16",
     "chalk": "^3.0.0",
-    "electron": "^7.1.4",
+    "electron": "^7.1.1",
     "electron-builder": "^21.2.0",
     "electron-updater": "^4.2.0",
     "fbcssplugin": "^1.0.3",
