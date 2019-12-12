@@ -4,6 +4,7 @@ import * as path from 'path'
 import * as url from 'url'
 
 const ENV = process.env.NODE_ENV || 'production'
+const ELECTRON_ENV = process.env.ELECTRON_ENV
 const DEBUG = ENV === 'development'
 let win: any
 let splash: any
@@ -101,13 +102,16 @@ function createWindow() {
     if (!DEBUG && menu.items[1].submenu) {
         menu.items[1].submenu.items[2].visible = false
     }
+    if ((DEBUG || ELECTRON_ENV === 'production') && menu.items[2].submenu) {
+        menu.items[2].submenu.items[2].enabled = false
+    }
     Menu.setApplicationMenu(menu)
 
 }
 
 app.on('ready', () => {
     createWindow()
-    if (!DEBUG) {
+    if (ELECTRON_ENV === 'publish') {
         setTimeout(() => autoUpdater.checkForUpdates(), 1000)
     }
 })

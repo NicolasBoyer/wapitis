@@ -123,7 +123,10 @@ if (arg) {
 		// GLOBALS
 		const isElectron = arg === "electron";
 		const tsconfigFile = directoryBase + "/tsconfig.json";
-		if (arg === "electron" && process.argv[3] === "--prod" || process.argv[3] === "--publish") process.env.NODE_ENV = "production";
+		if (arg === "electron") {
+			if (process.argv[3] === "--prod" || process.argv[3] === "--publish") process.env.NODE_ENV = "production";
+			process.env.ELECTRON_ENV = process.argv[3] === "--prod" ? "production" : process.argv[3] === "--publish" ? "publish" : "dev"
+		}
 
 		// wapitis CONFIG
 		const wapitisConfig = JSON.parse(files.readFileSync(directoryBase + "/wapitis.json", "utf8"));
