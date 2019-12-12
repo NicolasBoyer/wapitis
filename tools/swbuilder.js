@@ -1,8 +1,8 @@
-const files = require("./files");
-const path = require('path');
+const files = require('./files')
+const path = require('path')
 // A réinstaller si nécessaire !!
 // const webpush = require('web-push');
-let globDirectory, swDest, excludeFiles, patterns, wapitisConfig;
+let globDirectory, indexSrc, swDest, excludeFiles, patterns, wapitisConfig
 let sw = `const DEBUG = false;
 
 /**
@@ -24,38 +24,38 @@ function showNotification(title, datas = {}) {
         self.registration.showNotification(title, datas);
     }
 }
-`;
+`
 
-const swbuilder = module.exports = {
-    setOptions: (options) => {
-        globDirectory = options.globDirectory;
-        indexSrc = options.indexSrc;
-        swDest = options.swDest;
-        excludeFiles = options.excludeFiles;
-        patterns = options.patterns;
-    },
+module.exports = {
+	setOptions: (options) => {
+		globDirectory = options.globDirectory
+		indexSrc = options.indexSrc
+		swDest = options.swDest
+		excludeFiles = options.excludeFiles
+		patterns = options.patterns
+	},
 
-    registerServiceWorker: async () => {
-        wapitisConfig = JSON.parse(files.readFileSync(globDirectory + "/wapitis.json", "utf8"));
-        const cacheUrls = {}
-        wapitisConfig.cacheVersion = wapitisConfig.cacheVersion || {}
-        Object.keys(patterns).forEach((name) => {
-            const pattern = patterns[name]
-            let isCacheVersionRegister = false
-            files.getAllFiles(swDest, excludeFiles).allFiles.forEach((file) => {
-                if (!cacheUrls[name]) cacheUrls[name] = name === 'core' ? ["./"] : []
-                if (path.extname(file).toLowerCase().match(pattern)) {
-                    cacheUrls[name].push(file.substring(swDest.length).split("\\").join("/"))
-                    const fileName = path.basename(file).split('-')[1] || path.basename(file)
-                    if ((wapitisConfig.filesInfos.update.includes(fileName) || name === 'core') && !isCacheVersionRegister) {
-                        wapitisConfig.cacheVersion[name] = (wapitisConfig.cacheVersion[name] || 0) + 1
-                        isCacheVersionRegister = true
-                    }
-                }
-                // TODO une question se pose quand c fait en html - comment faire fonctionner ça dans ce cas et le prendre en compte
-            })
-        })
-        sw += `
+	registerServiceWorker: async () => {
+		wapitisConfig = JSON.parse(files.readFileSync(globDirectory + '/wapitis.json', 'utf8'))
+		const cacheUrls = {}
+		wapitisConfig.cacheVersion = wapitisConfig.cacheVersion || {}
+		Object.keys(patterns).forEach((name) => {
+			const pattern = patterns[name]
+			let isCacheVersionRegister = false
+			files.getAllFiles(swDest, excludeFiles).allFiles.forEach((file) => {
+				if (!cacheUrls[name]) cacheUrls[name] = name === 'core' ? ['./'] : []
+				if (path.extname(file).toLowerCase().match(pattern)) {
+					cacheUrls[name].push(file.substring(swDest.length).split('\\').join('/'))
+					const fileName = path.basename(file).split('-')[1] || path.basename(file)
+					if ((wapitisConfig.filesInfos.update.includes(fileName) || name === 'core') && !isCacheVersionRegister) {
+						wapitisConfig.cacheVersion[name] = (wapitisConfig.cacheVersion[name] || 0) + 1
+						isCacheVersionRegister = true
+					}
+				}
+				// TODO une question se pose quand c fait en html - comment faire fonctionner ça dans ce cas et le prendre en compte
+			})
+		})
+		sw += `
 const RUNTIME = 'runtime';
 const DATE = '$date$';
 const CACHES_VERSION = $caches_version$;
@@ -129,22 +129,21 @@ self.addEventListener('notificationclick', (event) => {
         event.notification.close();
         event.waitUntil(clients.openWindow(url));
     }
-});`;
-        sw = sw.replace("$current_caches_urls$", JSON.stringify(cacheUrls))
-        sw = sw.replace("$caches_version$", JSON.stringify(wapitisConfig.cacheVersion))
-        sw = sw.replace("$date$", new Date().toLocaleString())
-        await files.appendFile(globDirectory + "/wapitis.json", JSON.stringify(wapitisConfig, null, 2), true);
-        await files.appendFile(swDest + "/sw.js", sw, true);
-        try {
-            let html = await files.readFile(indexSrc + "/index.html")
-            html = html.replace("$headScripts$", '<link rel="manifest" href="manifest.json"/><script src="polyfills.js"></script>');
-            html = html.replace("$bodyScript$", `
+});`
+		sw = sw.replace('$current_caches_urls$', JSON.stringify(cacheUrls))
+		sw = sw.replace('$caches_version$', JSON.stringify(wapitisConfig.cacheVersion))
+		sw = sw.replace('$date$', new Date().toLocaleString())
+		await files.appendFile(globDirectory + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
+		await files.appendFile(swDest + '/sw.js', sw, true)
+		let html = await files.readFile(indexSrc + '/index.html')
+		html = html.replace('$headScripts$', '<link rel="manifest" href="manifest.json"/><script src="polyfills.js"></script>')
+		html = html.replace('$bodyScript$', `
 <script>
 // const apiKey = "webpush.generateVAPIDKeys().publicKey";
 // function urlB64ToUint8Array(base64String) {
 //     const padding = '='.repeat((4 - base64String.length % 4) % 4);
 //     const base64 = (base64String + padding)
-//         .replace(/\-/g, '+')
+//         .replace(/-/g, '+')
 //         .replace(/_/g, '/');
 
 //     const rawData = window.atob(base64);
@@ -307,16 +306,13 @@ window.addEventListener('beforeinstallprompt', (event) => {
     });
 });
 </script>
-            `);
-            await files.appendFile(swDest + "/index.html", html, true);
-        } catch (error) {
-            throw error
-        }
-    },
+            `)
+		await files.appendFile(swDest + '/index.html', html, true)
+	},
 
-    unregisterServiceWorker: async () => {
-        wapitisConfig = JSON.parse(files.readFileSync(globDirectory + "/wapitis.json", "utf8"));
-        sw += `
+	unregisterServiceWorker: async () => {
+		wapitisConfig = JSON.parse(files.readFileSync(globDirectory + '/wapitis.json', 'utf8'))
+		sw += `
 /**
  * Désinstalle le service worker
  */
@@ -339,12 +335,11 @@ async function desactivateSW() {
         return self.clients.claim()
     });
     showNotification('Application désactivée et désinstallée', { body: 'L\\'application a été désinstallée.' });
-}`;
-        await files.appendFile(swDest + "/sw.js", sw, true);
-        try {
-            let html = await files.readFile(indexSrc + "/index.html")
-            html = html.replace("$headScripts$", "");
-            html = html.replace("$bodyScript$", `
+}`
+		await files.appendFile(swDest + '/sw.js', sw, true)
+		let html = await files.readFile(indexSrc + '/index.html')
+		html = html.replace('$headScripts$', '')
+		html = html.replace('$bodyScript$', `
 <script>
 async function requireUnregister() {
     const registration = await navigator.serviceWorker.getRegistrations()
@@ -364,14 +359,11 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 } else {
     console.warn('Le navigateur ne prend pas en charge les services workers ou les push manager');
 }
-</script>`);
-            await files.appendFile(swDest + "/index.html", html, true);
-            if (wapitisConfig.filesInfos) {
-                delete wapitisConfig.filesInfos.update;
-            }
-            await files.appendFile(globDirectory + "/wapitis.json", JSON.stringify(wapitisConfig, null, 2), true);
-        } catch (error) {
-            throw error
-        }
-    }
-};
+</script>`)
+		await files.appendFile(swDest + '/index.html', html, true)
+		if (wapitisConfig.filesInfos) {
+			delete wapitisConfig.filesInfos.update
+		}
+		await files.appendFile(globDirectory + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
+	}
+}

@@ -1,8 +1,8 @@
 const executeSync = require('child_process').execSync
-const util = require('util');
-const executeAsync = util.promisify(require('child_process').exec);
+const util = require('util')
+const executeAsync = util.promisify(require('child_process').exec)
 
-const tools = module.exports = {
+module.exports = {
 	runCommandSync: (cmd, options = {}) => {
 		const folderExec = options.cwd || null
 		if (!options.noOutput) console.log('\n' + cmd + '\n')
