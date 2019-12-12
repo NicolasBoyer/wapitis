@@ -91,37 +91,6 @@ const setFilesToUpdate = () => {
 	files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
 }
 
-const generateFile = (arg2, arg3) => {
-	if (!wapitisConfig) return
-	if ((arg2 === 'class' || arg2 === 'component') && (arg3.split('.').pop() === 'ts' || arg3.split('.').pop() === 'tsx')) {
-		log(chalk.green('wapitis generate ' + arg2 + ' ' + wapitisConfig.srcPath + arg3))
-		const classFile = wapitisConfig.srcPath + arg3
-		if (!files.fileExists(directoryBase + '/' + classFile)) {
-			let className = arg3.substr(arg3.lastIndexOf('/') + 1)
-			className = className.substr(0, className.lastIndexOf('.'))
-			className = className.split(/[- _]+/).map((str) => str.charAt(0).toUpperCase() + str.substr(1)).join('')
-			if (arg2 === 'class') {
-				const classText =
-					(arg3.includes('.tsx')
-						? `import { JSX } from "wapitis";
-
-` : '') +
-					`export default class ${className} {
-
-}
-`
-				files.appendFile(directoryBase + '/' + classFile, classText, true)
-			} else if (arg2 === 'component') {
-				files.copy(path.resolve(__dirname, '.includes/component.ts'), directoryBase + '/' + classFile).then(() => {
-					const componentText = files.readFileSync(directoryBase + '/' + classFile, 'utf8')
-					files.appendFile(directoryBase + '/' + classFile, componentText.replace('ClassName', className), true)
-				})
-			}
-			log(chalk.green('Le fichier ' + classFile + ' a été créé'))
-		} else log(chalk.red('Impossible de générer ' + classFile + ' : le fichier existe déjà'))
-	} else log(chalk.red("Cette commande n'est pas pris en charge par wapitis generate"))
-}
-
 const slugify = (str) => {
 	const a = 'ãàáäâèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/-,:;'
 	const b = 'aaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh______'
@@ -350,96 +319,93 @@ if (arg) {
 			process.env.ELECTRON_ENV = process.argv[3] === '--prod' ? 'production' : process.argv[3] === '--publish' ? 'publish' : 'dev'
 		}
 
-		// Service worker, manifest, polyfills et fichiers pour la web app
-		swBuilder.setOptions({
-			globDirectory: directoryBase,
-			swDest: completeDistPath,
-			indexSrc: completeDistPath,
-			// L'exclusion doit aussi être un pattern
-			excludeFiles: ['sw.js'],
-			patterns: { core: /\.(?:html|xhtml|json|js|css|txt|xml)$/, fonts: /\.(?:eot|ttf|woff|woff2|otf)$/, attachments: /\.(?:doc|docx|odg|odp|ods|odt|pdf|ppt|rtf|xls|xlsx|zip)$/, images: /\.(?:svg|png|jpg|gif|ico)$/, videos: /\.(?:srt|vtt|avi|mov|mp3|mp4|mpg|opus|webm)$/ }
-			// globPattern: /\.(?:html|json|js|css|svg|png|jpg|gif)$/
-		})
-
-		// Génération de fichiers
-		if (arg === 'generate') {
-			const arg2 = process.argv[3]
-			const arg3 = process.argv[4]
-			generateFile(arg2, arg3)
-		}
-
-		// PATH IMPORT ALIAS
-		const importFiles = {}
-		allFiles.tsCommonFiles.forEach((file) => {
-			const spacer = file.includes('\\') ? '\\' : '/'
-			let fileName = file.substring(file.lastIndexOf(spacer) + 1)
-			fileName = fileName.substring(0, fileName.lastIndexOf('.'))
-			file = file.substring(file.lastIndexOf(wapitisConfig.srcPath.substring(0, wapitisConfig.srcPath.lastIndexOf('/'))) + wapitisConfig.srcPath.length).split(spacer).join('/')
-			importFiles[fileName] = '~/' + file.substring(0, file.lastIndexOf('.'))
-		})
-
-		context(class {
-			getConfig () {
-				return FuseBox.init({
-					homeDir: completeSrcPath,
-					output: completeDistPath + '/$name.js',
-					tsConfig: tsconfigFile,
-					target: this.isElectronTask ? 'server' : 'browser',
-					sourceMaps: !this.isProduction && !this.isElectronTask,
-					alias: importFiles,
-					hash: this.isProduction && !isElectron,
-					cache: !this.isProduction,
-					plugins: [
-						EnvPlugin({
-							NODE_ENV: this.isProduction ? 'production' : 'development'
-						}),
-						[
-							!this.isElectronTask && CSSResourcePlugin({
-								dist: completeDistPath + '/assets',
-								resolve: (f) => `../assets/${f}`,
-								filesMapping: (res) => {
-									res.map((fileMapping) => {
-										if (wapitisConfig.filesInfos) {
-											Object.keys(wapitisConfig.filesInfos.mtime).forEach((name) => {
-												if (fileMapping.from.includes(name) && wapitisConfig.filesInfos.update && wapitisConfig.filesInfos.update.includes(name)) {
-													wapitisConfig.filesInfos.update[wapitisConfig.filesInfos.update.indexOf(name)] = fileMapping.to
-												}
-											})
-										}
-									})
-									files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
-								}
-							}),
-							!this.isElectronTask && CSSPlugin({
-								// group: "bundle.css",
-								outFile: (file) => `${completeDistPath}/styles${file.substring(file.lastIndexOf('/'))}`,
-								inject: (file) => file.includes('main') && `styles${file.substring(file.lastIndexOf('/'))}`,
-								minify: this.isProduction
-							})
-						],
-						!this.isElectronTask && CopyPlugin({ files: ['**/*.svg', '**/*.png', '**/*.jpg', '**/*.gif', '**/*.ico', '**/*.srt', '**/*.vtt', '**/*.avi', '**/*.mov', '**/*.mp3', '**/*.mp4', '**/*.mpg', '**/*.opus', '**/*.webm', '**/*.doc', '**/*.docx', '**/*.odg', '**/*.odp', '**/*.ods', '**/*.odt', '**/*.pdf', '**/*.ppt', '**/*.rtf', '**/*.xls', '**/*.xlsx', '**/*.zip', '**/*.txt', '**/*.xml', '**/*.json'], dest: 'assets', resolve: 'assets/' }),
-						this.isProduction && QuantumPlugin({
-							manifest: 'quantum.json',
-							bakeApiIntoBundle: this.isElectronTask ? 'electron' : 'bundle',
-							target: this.isElectronTask ? 'electron' : 'browser',
-							uglify: true,
-							treeshake: true,
-							removeExportsInterop: false
-						})
-					]
+		if (arg === 'dev' || arg === 'prod' || arg === 'electron') {
+			if (arg !== 'electron') {
+				// Service worker, manifest, polyfills et fichiers pour la web app
+				swBuilder.setOptions({
+					globDirectory: directoryBase,
+					swDest: completeDistPath,
+					indexSrc: completeDistPath,
+					// L'exclusion doit aussi être un pattern
+					excludeFiles: ['sw.js'],
+					patterns: { core: /\.(?:html|xhtml|json|js|css|txt|xml)$/, fonts: /\.(?:eot|ttf|woff|woff2|otf)$/, attachments: /\.(?:doc|docx|odg|odp|ods|odt|pdf|ppt|rtf|xls|xlsx|zip)$/, images: /\.(?:svg|png|jpg|gif|ico)$/, videos: /\.(?:srt|vtt|avi|mov|mp3|mp4|mpg|opus|webm)$/ }
+					// globPattern: /\.(?:html|json|js|css|svg|png|jpg|gif)$/
 				})
 			}
 
-			createBundle (fuse, bundleName = 'bundle', startFile = wapitisConfig.startFile) {
-				const app = fuse.bundle(bundleName)
-				if (!this.isProduction && !this.isElectronTask) {
-					app.watch()
-					app.hmr({ reload: true })
+			// PATH IMPORT ALIAS
+			const importFiles = {}
+			allFiles.tsCommonFiles.forEach((file) => {
+				const spacer = file.includes('\\') ? '\\' : '/'
+				let fileName = file.substring(file.lastIndexOf(spacer) + 1)
+				fileName = fileName.substring(0, fileName.lastIndexOf('.'))
+				file = file.substring(file.lastIndexOf(wapitisConfig.srcPath.substring(0, wapitisConfig.srcPath.lastIndexOf('/'))) + wapitisConfig.srcPath.length).split(spacer).join('/')
+				importFiles[fileName] = '~/' + file.substring(0, file.lastIndexOf('.'))
+			})
+
+			context(class {
+				getConfig () {
+					return FuseBox.init({
+						homeDir: completeSrcPath,
+						output: completeDistPath + '/$name.js',
+						tsConfig: tsconfigFile,
+						target: this.isElectronTask ? 'server' : 'browser',
+						sourceMaps: !this.isProduction && !this.isElectronTask,
+						alias: importFiles,
+						hash: this.isProduction && !isElectron,
+						cache: !this.isProduction,
+						plugins: [
+							EnvPlugin({
+								NODE_ENV: this.isProduction ? 'production' : 'development'
+							}),
+							[
+								!this.isElectronTask && CSSResourcePlugin({
+									dist: completeDistPath + '/assets',
+									resolve: (f) => `../assets/${f}`,
+									filesMapping: (res) => {
+										res.map((fileMapping) => {
+											if (wapitisConfig.filesInfos) {
+												Object.keys(wapitisConfig.filesInfos.mtime).forEach((name) => {
+													if (fileMapping.from.includes(name) && wapitisConfig.filesInfos.update && wapitisConfig.filesInfos.update.includes(name)) {
+														wapitisConfig.filesInfos.update[wapitisConfig.filesInfos.update.indexOf(name)] = fileMapping.to
+													}
+												})
+											}
+										})
+										files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
+									}
+								}),
+								!this.isElectronTask && CSSPlugin({
+									// group: "bundle.css",
+									outFile: (file) => `${completeDistPath}/styles${file.substring(file.lastIndexOf('/'))}`,
+									inject: (file) => file.includes('main') && `styles${file.substring(file.lastIndexOf('/'))}`,
+									minify: this.isProduction
+								})
+							],
+							!this.isElectronTask && CopyPlugin({ files: ['**/*.svg', '**/*.png', '**/*.jpg', '**/*.gif', '**/*.ico', '**/*.srt', '**/*.vtt', '**/*.avi', '**/*.mov', '**/*.mp3', '**/*.mp4', '**/*.mpg', '**/*.opus', '**/*.webm', '**/*.doc', '**/*.docx', '**/*.odg', '**/*.odp', '**/*.ods', '**/*.odt', '**/*.pdf', '**/*.ppt', '**/*.rtf', '**/*.xls', '**/*.xlsx', '**/*.zip', '**/*.txt', '**/*.xml', '**/*.json'], dest: 'assets', resolve: 'assets/' }),
+							this.isProduction && QuantumPlugin({
+								manifest: 'quantum.json',
+								bakeApiIntoBundle: this.isElectronTask ? 'electron' : 'bundle',
+								target: this.isElectronTask ? 'electron' : 'browser',
+								uglify: true,
+								treeshake: true,
+								removeExportsInterop: false
+							})
+						]
+					})
 				}
-				app.instructions('> ' + startFile)
-				return app
-			}
-		})
+
+				createBundle (fuse, bundleName = 'bundle', startFile = wapitisConfig.startFile) {
+					const app = fuse.bundle(bundleName)
+					if (!this.isProduction && !this.isElectronTask) {
+						app.watch()
+						app.hmr({ reload: true })
+					}
+					app.instructions('> ' + startFile)
+					return app
+				}
+			})
+		}
 
 		if (arg === 'electron' && process.argv[3] === '--publish' && (!process.env.WAPITIS_SOURCES_PROVIDER || !process.env.GH_TOKEN)) {
 			log('\nAfin de publier votre application, certaines informations sont nécessaires. Cela permettra de mettre en place un système d\'auto-update de votre application Electron et une gestion plus fluide de vos futures release.\nUn code (personal access token) est nécessaire. Il peut être généré et récupéré comme décrit dans le lien suivant :\nhttps://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line.\nVous pourrez ensuite le rentrer ici ou créer directement une variable d\'environnement avec le nom GH_TOKEN.\n')
@@ -483,6 +449,36 @@ if (arg) {
 					})
 				}
 			})
+		} else if (arg === 'generate') {
+			const arg2 = process.argv[3]
+			const arg3 = process.argv[4]
+			if ((arg2 === 'class' || arg2 === 'component') && (arg3.split('.').pop() === 'ts' || arg3.split('.').pop() === 'tsx')) {
+				log(chalk.green('wapitis generate ' + arg2 + ' ' + wapitisConfig.srcPath + arg3))
+				const classFile = wapitisConfig.srcPath + arg3
+				if (!files.fileExists(directoryBase + '/' + classFile)) {
+					let className = arg3.substr(arg3.lastIndexOf('/') + 1)
+					className = className.substr(0, className.lastIndexOf('.'))
+					className = className.split(/[- _]+/).map((str) => str.charAt(0).toUpperCase() + str.substr(1)).join('')
+					if (arg2 === 'class') {
+						const classText =
+							(arg3.includes('.tsx')
+								? `import { JSX } from "wapitis";
+
+		` : '') +
+							`export default class ${className} {
+
+		}
+		`
+						files.appendFile(directoryBase + '/' + classFile, classText, true)
+					} else if (arg2 === 'component') {
+						files.copy(path.resolve(__dirname, '.includes/component.ts'), directoryBase + '/' + classFile).then(() => {
+							const componentText = files.readFileSync(directoryBase + '/' + classFile, 'utf8')
+							files.appendFile(directoryBase + '/' + classFile, componentText.replace('ClassName', className), true)
+						})
+					}
+					log(chalk.green('Le fichier ' + classFile + ' a été créé'))
+				} else log(chalk.red('Impossible de générer ' + classFile + ' : le fichier existe déjà'))
+			} else log(chalk.red("Cette commande n'est pas pris en charge par wapitis generate"))
 		} else startTask(isElectron)
 	} else {
 		log(chalk.red(arg + " n'est pas pris en charge par wapitis"))
