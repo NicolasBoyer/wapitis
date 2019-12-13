@@ -311,7 +311,7 @@ if (arg) {
 			})
 		} else log(chalk.red('L\'initialisation a déjà été effectuée, veuillez modifier directement le fichier wapitis.json !'))
 	} else if (arg === 'dev' || arg === 'prod' || arg === 'clear' || arg === 'electron' || arg === 'generate') {
-		if (!isWapitisFile) log(chalk.red('Lancer d\'abord `npm wapitis init` afin d\'initialiser l\'application'))
+		if (!isWapitisFile) log(chalk.red('Lancer `npx wapitis init` afin d\'initialiser l\'application'))
 		else {
 			// GLOBALS
 			const isElectron = arg === 'electron'
