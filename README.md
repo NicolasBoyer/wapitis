@@ -1,6 +1,6 @@
-# WApiTis
+# WApiTis 2
 ![](ui/logo.png)
 
-**Attention** : En cours de restructuration
+**Une documentation est en cours**
 
 > WebApp utiliTies pour typescript
