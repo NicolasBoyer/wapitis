@@ -1,6 +1,6 @@
 {
   "name": "wapitis",
-  "version": "2.0.29",
+  "version": "2.0.30",
   "description": "Outils permettant de créer et de gérer une web app - WebApp utiliTies pour typescript",
   "repository": {
     "type": "git",
