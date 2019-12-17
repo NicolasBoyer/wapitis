@@ -34,7 +34,7 @@ export interface IPropertyOptions {
     /**
      *
      *
-     * @type {(object | string | number | boolean | unknown)}
+     * @type {(Array | Object | String | Number | Boolean)}
      * @memberof PropertyOptions
      */
     type?: object | string | number | boolean | unknown
