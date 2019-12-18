@@ -106,6 +106,7 @@ export abstract class Component<T> extends HTMLElement {
         this._propertyOptions[classId + '_' + (name as string)] = options || null
         const reflectPropertyInAttribute = (!options || options && options.reflectInAttribute !== false) && (name as string).charAt(0) !== '_'
         const writeOnly = options && options.writeOnly
+        const isBoolean = options && options.type === Boolean
         if (reflectPropertyInAttribute) {
             this._observablesAttributes[classId] = this._observablesAttributes[classId] || []
             this._observablesAttributes[classId].push(name as string)
@@ -115,7 +116,7 @@ export abstract class Component<T> extends HTMLElement {
                 const _val = this[key as string]
                 // Log.debug("get")
                 // Log.debug(`Get: ${name as string} => ${DOM.toString(_val, options && options.type)}`);
-                return _val
+                return isBoolean && _val === '' ? true : isBoolean && !_val ? false : _val
             },
             set(this: Component<any>, newVal: unknown) {
                 // Log.debug(`Set: ${name as string} => ${DOM.toString(newVal, options && options.type)}`);

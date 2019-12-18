@@ -3,7 +3,7 @@ export namespace UTILS {
     export function fromString(value: string | null, type?: unknown) {
         switch (type) {
             case Boolean:
-                return value ? '' : null
+                return value || value === '' ? '' : null
             case Number:
                 return Number(value)
             case Object:
