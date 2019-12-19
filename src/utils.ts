@@ -57,4 +57,14 @@ export namespace UTILS {
             return text
         }
     }
+
+    export function save<T>(key: string, datas: T): void {
+        // Mettre en place la possibilité de sauvegarder le fichier via file et blob cf truc save
+        localStorage.setItem(key, JSON.stringify(datas))
+    }
+
+    export function load<T>(key: string): T {
+        const datas = localStorage.getItem(key) || '{}'
+        return JSON.parse(datas)
+    }
 }
