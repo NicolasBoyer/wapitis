@@ -1038,6 +1038,10 @@ Puis d'appeler la variable dans l'attribut src de la balise image
 
 Rendu ICI !! Expliquer comment fonctionner avec electron
 
+electronStart.ts
+
+Modif electronStart en utilisant la doc : https://electronjs.org/docs
+
 ### Tools import
 Méthodes à décrire
 JSX
