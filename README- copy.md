@@ -41,6 +41,17 @@ Afin de gérer correctement l'affichage de lit-html et typescript, j'utilise pou
 - [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin)
 - [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
 
+electron a été bloqué à la version  7.1.1 car la verion 7.1.4 avait un bug avec electron-updater : `redirect was cancelled sur un test de update-available`. Dès que possible, je reviendrais sur la version en cours.
+
+Lors de l'installation d'un executable via electron, windows a un avertissement lié à son application smart screen. Les seules solutions pour éviter cette avrtissement sont :
+- signer l'application (ce qui coute de l'argent)
+- ignorer cette alerte
+- désactiver smart screen ;)
+
+**TODO :**
+- Intégration de [Capacitor](https://capacitor.ionicframework.com/)
+- Gestion d'une liaison avec IndexedDB dans le Service Worker pour les données provenant d'une base de données
+
 ## Features
 
 - Générer une application web grâce à [FuseBox](https://fuse-box.org)
@@ -53,11 +64,6 @@ Afin de gérer correctement l'affichage de lit-html et typescript, j'utilise pou
 - Styler et surcharger les styles directement dans les composants
 - Utilisation de SVG pour gérer les icons
 - Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne
-
-<!--
-**TODO :**
-- Intégration de [Capacitor](https://capacitor.ionicframework.com/)
-- Gestion d'une liaison avec IndexedDB dans le Service Worker pour les données provenant d'une base de données -->
 
 
 ## Pour commencer
@@ -605,47 +611,13 @@ Et la démo elle même est là : [https://wapitis-todos-test.netlify.com](https:
 
 Tout n'est pas décrit ici, il manque par exemple l'utilisation des slot ou encore la gestion des propriétés de stylage pour surcharger, la publication dans une app electron et pleins d'autres choses qui seront expliqués dans ce qui suit.
 
-
-
 ## Install
 
     npm init
     npm i wapitis -D
     npx wapitis init
 
-## Développer
-### Component
-Possède des méthodes
-directives custom element et property
-### Style
-### icons
-### Tools import
-## Compiler
-### dev
-### prod
-### electron dev prod publish
-### service worker
-## API
-
-## Usages
-
-- Créer un dossier src
-- npm install
-- npx wapitis init
-- Modifier les fichiers du dossier www, contenant les fichiers main.css, icons.svg, manifest.json et icons pour la webapp
-- Utiliser wapitis **$ generate class path/du/fichier.ts(x)** ou **$ generate component path/du/fichier.tsx** pour générer vos fichiers
-- Pour l'utilisation du component, voir la section Typescript
-- Intégrer vos icons dans le fichier icons.svg
-![](ui/svgExample.png)
-- Intégrer vos css dans le fichier main.css
-- Le point de départ est le dossier main.ts
-- Modifier le fichier electronStart si besoin
-- Coder avec [typescript](https://www.typescriptlang.org)
-- Pour l'utilisation de DOM et JSX, voir la section Typescript
-- Compiler avec wapitis dev, prod ou electron
-- Le dossier dist contient le résultat de la transpilation (html ou electron)
-
-### CLI
+## CLI
 
 **$ npx wapitis** pour obtenir l'aide :
 
@@ -663,60 +635,420 @@ directives custom element et property
 
     $ wapitis generate component path/du/fichier.tsx --> génère un composant relatif à src. tsConfig est mis à jour
 
-### Typescript
+## Développer
 
-Import de DOM et JSX
-```Typescript
-import { DOM, JSX } from "wapitis";
+Pendant le développement, il est recommandé de lancer avant
+
 ```
-Exemple d'utilisation de DOM
-```Typescript
-this._icon = DOM.addIcon(this.type, this._renderElements.parentNode as HTMLElement, this._renderElements);
+npx wapitis dev
 ```
-DOM possède les méthodes suivantes :
-```Typescript
-addIcon(name: string, parent: HTMLElement, elementAfter?: Node | null): SVGSVGElement {};
-changeIcon(svg: SVGSVGElement, name: string): SVGSVGElement {};
-removeIcon(svg: SVGSVGElement, parent: HTMLElement) {};
-setAttribute(element: HTMLElement, name: string, value: any) {};
-generateId() {};
-dispatchEvent(name: string, property: object, parent: HTMLElement = document.body) {};
-getWindowSize() {};
-parseStyleToNumber(style: string | null) {};
-removeClassByPrefix(element: HTMLElement, prefix: string) {};
+
+ou
+
 ```
-JSX utilisé dans la fonction render() du component
+npx wapitis electron --dev
+```
+permettant ainsi de mettre à jour ses modifications à la volée grâce au compileur et au watcher intégré
+
+
+### Component
+
+Le composant intégré est comme nous l'avons vu la pierre angulaire du développement avec wapitid. Il permet de poser rapidement un web component en utilisant un langage simplifié, comme les directives intégrés ou son cycle de vie.
+
+#### La directive custom element
+
 ```Typescript
-_render() {
-    return (
-        <div>
-            <div class="bbox"></div>
-        </div>
-    );
+@customElement('x-custom')
+export default class Custom extends Component<IProps> {
+```
+
+permet de créer le nom du composant et de le déclarer comme WebComponent en deux lignes claires en début de fichier.
+
+Il est obligatoire lors de la déclaration dans la directive d'avoir un nom sou la forme `prefixe-component`, en effet cela permet de le différencier des composants web intégré et de la signaler comme custom element. Par convention le nopm donné à la classe reprend en général le nom `Component` avec une majuscule mais cela n'est pas obligatoire.
+
+La proprété générique IPROPS permet la déclaration des propriétés publiques, utilisées ensuite dans le constructeur et permettant la création du composant avec l'écriture `new Composant(IPROPS)`
+
+Pour pouvoir fonctionner, les propriétés doivent être déclarées dans l'interface IPROPS du composant
+
+```Typescript
+interface IProps {
+    maVariable: string
 }
 ```
-La fonction connectedCallback() permet de déclarer les éléments de la fonction render()
+
+Comme on l'a vu dans le composant TodoList, si on ne veux pas de propriétés il est possible de déclarer `{}`
+
+Dans ce cas si on a besoin du constructeur, il prend la forme :
+
 ```Typescript
-this._bbox = this._renderElements.querySelector(".bbox") as HTMLElement;
+constructor() {
+    super()
+}
 ```
-Le component permet de mettre la structure html dans la fonction render() (Cf. plus haut) et les styles dans la fonction style
+
+#### La directive property
+
+En typescript, les propriétés peuvent être publiques, protected ou private. Avec Wapitis, pour rendre des propriétés observables, il faut utiliser la directive @property
+
+Par défaut, cela permet de rendre une propriété observable et de définir par la même occasion un attribut du composant que nous sommes en train de créer.
+
 ```Typescript
-_style() {
-    return  `
-        span {
-            display: none;
+@property() text: string
+```
+
+Le prefixe _ devant le nom permet de rendre la propriété protected tout en restant observable. Elle n'est alors plus déclarable en tant qu'attribut.
+
+Il est possible de passer un objet en paramètre. Cet object peut contenir 3 paramètres:
+
+- type : indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (string par défaut). Important pour préciser comment la conversion doit se faire entre la propriété et l'attribut (qui est obligatoirement un texte). Inutile dans le cas d'une propriété protected mais observable car aucune conversion n'est nécessaire.
+- writeOnly : propriété observable non visible dans l'html rendu mais possible de la créer en html ou en javascript (false par défaut)
+- reflectInAttribute : la propriété est transformée en attribut, de camelCase vers dashCase (true par défaut) et est observable. Passer ce paramètre à false revient à créer une propriété publique mais non observable.
+
+#### Les custom event et les attributs @event
+
+Pour passer des fonctions dans les attributs d'un composant avec Wapitis et permettre à deux composants de communiquer entre eux, on utilisera les customEvents, comme on l'a vu avec le composant Todo
+
+On crée ainsi un customEvent en utilisant la méthode dispatchEvent de la librairie UTILS :
+
+```Typescript
+UTILS.dispatchEvent('remove', { index: this.index }, this)
+```
+
+Grâce à LitHtml pour ajouter un addEventListener sur le composant on pourra créer un attribut avec @NomDeLevent sur le composant.
+
+```Typescript
+${this._todos.map((todo, index) => html`<w-todo ?checked=${todo.checked} text=${todo.text} .index=${index} @remove=${this._removeTodo} @completed=${this._toggleTodo}></w-todo>`)}
+```
+
+#### Méthodes et utilisation du cycle de vies
+
+Le component a quelques méthodes intégrées qui définissent son cycle de vie.
+
+##### constructor
+```Typescript
+constructor(options: IProps) {
+    super(options)
+}
+```
+Appelé lors de la création du composant seulement. Intéressant pour déclarer les variables et propriétés. Possible d'accéder aux propriétés déclarées (props) lors de la création du composant avec new Composant(props).
+
+##### connectedCallback
+```Typescript
+connectedCallback() {
+    super.connectedCallback()
+}
+```
+Appelé lorsque l'élément est connecté pour la première fois au DOM du document.
+
+##### attributeChangedCallback
+```Typescript
+attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
+    super.attributeChangedCallback(attrName, oldVal, newVal)
+}
+```
+Appelé lorsque l'un des attributs de l'élément personnalisé est ajouté, supprimé ou modifié.
+
+##### shouldUpdate
+```Typescript
+shouldUpdate(_changedProperties: PropertyValues): boolean {
+    return true
+}
+```
+Permet de conditionner le rendu du composant. render() est appelé si la foinction retourne true. Ce qui est le comportement par défaut.
+**_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
+
+##### beforeRender
+```Typescript
+beforeRender(_changedProperties: PropertyValues) {
+    //
+}
+```
+Appelé avant le rendu du composant. Permet d'interagir avec les éléments à chaque appel du composant avant sa création dans le dom.
+**_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
+
+##### render
+```Typescript
+render() {
+    return html`
+        <!--  -->
+    `
+}
+```
+La méthode permet de créer le composant dans le dom grâce au tag html de lit-html. Il retourne un TemplateResult qui est ensuite interprété et permet la mise à jour du DOM.
+
+##### firstUpdated
+```Typescript
+firstUpdated(_changedProperties: PropertyValues) {
+    //
+}
+```
+Appelé lors de la première mise à jour du composant. Utile pour réaliser des actions qui ne doivent avoir lieu qu'une fois, comme la récupération des différents éléments rendu dans la méthode render(). En utilisant les methodes existantes dans les librairies DOM et SHADOWDOM de WAPITIS (cf. plus bas) ou l'API DOM, par exemple avec querySelector et la propriété shadowRoot :
+``` Typescript
+this._input = this.shadowRoot!.querySelector('input')
+```
+**_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
+
+##### updated
+```Typescript
+updated(_changedProperties: PropertyValues) {
+    //
+}
+```
+Appelé lors de chaque mise à jour du composant. Permet de réaliser des tâches après le rendu du composant à chaque appel en utilisant l'API DOM, par exemple pour le focus d'un élément.
+**_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
+
+##### disconnectedCallback
+```Typescript
+disconnectedCallback() {
+    super.disconnectedCallback()
+}
+```
+Appelé lorsque l'élément personnalisé est déconnecté du DOM du document.
+
+#### Slot
+
+Lors de la création d'un custom element si on veut permettre l'ajout d'enfant à notre composant, on peut utiliser le principe de slot.
+
+Ainsi, on définit dans la méthode render une balise slot qui appellera tout enfant déclaré dans le composant. Imaginon un composant w-info possédant la méthode render suivante :
+
+```Typescript
+render() {
+    html`
+        <div class='title'>Informations</div>
+        <slot></slot>
+    `
+}
+```
+
+Lors de l'appel du composant info on pourra écrire n'importe quel enfant dans le composant qui sera alors appelé à la place du slot dans le DOM.
+
+```Typescript
+render() {
+    html`
+        <w-info>
+            <p>Les slot c'est super !</p>
+        </w-info>
+    `
+}
+```
+
+Il est également possible d'être plus précis en donnant un nom précis au slot.
+
+```Typescript
+render() {
+    html`
+        <slot name='title'></slot>
+        <slot name='content'></slot>
+    `
+}
+```
+
+Dans ce cas lors de l'appel du composant et de la création des enfants, il sera necessaire de préciser à quel slot l'enfant sera affectée :
+
+```Typescript
+render() {
+    html`
+        <w-info>
+            <h1 slot='title'>Informations</h1>
+            <p slot='content'>Les slot c'est super !</p>
+        </w-info>
+    `
+}
+```
+
+Dans ce cas tout autre enfant ne sera pas affecté car le composant w-infos ne contient que deux slots title et content. Il serait possible d'ajouter une balise slot sans nom
+
+```Typescript
+render() {
+    html`
+        <slot name='title'></slot>
+        <slot name='content'></slot>
+        <slot>
+            <p>Contenu par défaut</p>
+        </slot>
+    `
+}
+```
+
+Dans ce cas tout autre enfant nom nommé serait affecté à la balise slot. Si aucun autre enfant n'est ajouté, c'est le contenu par défaut qui est utilisé.
+
+Pour sélectionner un élément en slot on doit utiliser le sélecteur ```::slotted()```.
+
+#### Possibilité de lit-html
+
+Tout ce qui est possible avec lit html est possible dans wapitis comme:
+
+- le conditionnal rendering. Par exemple :
+
+```Typescript
+${this.checked ? html`<svg class="icon"><use href=${icons}#icon-check-circle></use></svg>` : html`<svg class="icon"><use href=${icons}#icon-circle></use></svg>`}
+```
+
+- des template de boucles Par exemple :
+
+```Typescript
+${this._todos.map((todo, index) => html`<w-todo ?checked=${todo.checked} text=${todo.text} .index=${index} @remove=${this._removeTodo} @completed=${this._toggleTodo}></w-todo>`)}
+```
+
+- Tout ce que l'on trouvera sur : [https://lit-html.polymer-project.org/guide/template-reference](https://lit-html.polymer-project.org/guide/template-reference) dont la directive repeat, until, ...
+
+### Style
+
+Dans wapitis la gestion des CSS peut se gérer de plusieurs façons différentes.
+
+
+#### main.css
+
+Le fichiers main.css permet de gérer les css du body et de tout ce qui n'est pas un composant.
+
+#### La propriété statique style
+
+Chaque composant ensuite possède ses propres CSS.
+
+Pour les créer on utilise la propriété statique styles associé avec le tag CSS qui permet d'assurer un traitement sécurisé du texte passé en CSS.
+
+```Typescript
+static get styles() {
+    return css`
+    :host {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: auto;
+        width: 25rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    `
+}
+```
+
+Dans cette propriété, toutes les balises du composant pourront être stylés directement et aucun style provenant d'un autre compoosant n'affectera ce composant.
+
+Pour styler le composant lui même, le sélecteur ```:host()``` doit être utilisé. Pour styler des enfants à l'intérieur d'un slot on utilise ```::slotted(element)```
+
+Il est également possible de surcharger des styles déclarés dans le compopsant parent en utilisant super.styles :
+
+```Typescript
+static get styles() {
+    const mainColor = css`red`
+    return [
+        super.styles,
+        css`
+        :host {
+            display: block;
+            text-align: center;
         }
-    `;
+        `
+    ]
 }
 ```
-La déclaration d'un component s'exécute ainsi :
-```Typescript
-@Component.register("prefixe-balise")
 
-export default class Balise extends Component {
+Ainsi on hérite des styles du composant parent. Inutile dans le cas où on hérite diretcement de Component.
+
+#### Le chargement externe
+
+Si on souhaite partager une css entre plusieurs composant il est possible de le faire en déclarant directement dans la méthode render() dans le tag html :
+```Typescript
+render() {
+    return html`
+        <link rel="stylesheet" href="styles/sharedCSS.css">
+
+    ...
+```
+
+Dans ce cas le fichier css devra être déclaré dans le dossier www/styles
+
+Par ailleurs il faut également réaliser l'import de ce fichier en début de document :
+```Typescript
+import '../www/styles/sharedCSS.css'
+```
+
+#### Surcharge avec slot override
+
+Si on veut surcharger les styles d'un composant existant que l'on est en train de déclarer, il est possible de la faire en utilisant une technique spécifique à wapitis. On va pour cela s'appuyer sur les slots et déclarer dans la méthode render :
+
+```Typescript
+render() {
+    return html`
+    ...
+        <style slot='override'>
+            :host {
+                background: pink;
+            }
+        </style>
+    ...
+```
+
+#### Utilisation des variables
+
+Enfin pour s'approprier un composant graphiquement et si ces dernières ont bien été déclarées, il est possible d'utiliser les variables CSS.
+
+L'utilisation est alors assez simple :
+```Typescript
+static get styles() {
+  return css`
+    :host { color: var(--themeColor, black); }
+  `;
 }
 ```
-disconnectedCallback() et attributeChangedCallback(attrName: string, oldVal: any, newVal: any) à utiliser comme dans n'importe quel Custom Element
+
+```html
+<style>
+  html {
+    --themeColor: #123456;
+  }
+</style>
+<my-element></my-element>
+```
+
+Enfin toutes les directives proposées par lit-html sont disponibles dont : classMap et styleMap
+
+cf [https://lit-html.polymer-project.org/guide/template-reference](https://lit-html.polymer-project.org/guide/template-reference)
+
+### icons et images
+
+Comme nous l'avons vu dans le composant Todos, dans wapitis, la gestion des images se fait grâce aux svg et plus précisément à un fichier SVG contenant toutes les images que l'on veut utiliser sous forme de symbole accompagné d'un id.
+
+Il suffit alors d'importer le fichier svg inclus dans www :
+```Typescript
+import icons from '../www/assets/img/icons.svg'
+```
+
+Puis de créer une balise svg pointant vers ce fichier et vers l'id de l'image souhaité.
+```Typescript
+html`<svg class="icon"><use href=${icons}#icon-check-circle></use></svg>`
+```
+
+De cette manière il est facile de changer la couleur et la taille du svg en css.
+
+Il est néanmoins toujours possible d'utiliser des fichiers images png, jpeg ou autres. Il suffit alors d'importer l'image
+
+```Typescript
+import image from '../www/assets/img/image.png'
+```
+
+Puis d'appeler la variable dans l'attribut src de la balise image
+```Typescript
+ render() {
+    return html`<img src=${image}>`
+    ...
+```
+
+### electron
+
+Rendu ICI !! Expliquer comment fonctionner avec electron
+
+### Tools import
+Méthodes à décrire
+JSX
+## Compiler
+### dev
+### clear
+### prod
+### electron dev prod publish
+### service worker
+## API
+
 
 ### Service Worker
 Possibilité de récupérer un message pour préciser que le cache a été mis à jour
