@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Menu } from 'electron'
+import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import * as path from 'path'
 import * as url from 'url'
@@ -72,7 +72,12 @@ function createWindow() {
         {
             label: 'Aide',
             submenu: [
-                { label: 'Documentation (non actif)' },
+                {
+                    label: 'Documentation',
+                    click() {
+                        shell.openExternal('https://github.com/NicolasBoyer/wapitis#readme')
+                    }
+                },
                 { type: 'separator' },
                 {
                     label: 'Rechercher une mise à jour...',

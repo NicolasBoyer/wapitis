@@ -1,4 +1,4 @@
-# WApiTis 2
+# WApiTis 2 <!-- omit in toc -->
 ![](ui/logo.png)
 
 > WebApp utiliTies est un set d'outils pour développer et compiler une application web avec ou sans client lourd. Il ne s'agit pas d'un framlework. Il ne contient pas de composants préexistants (cela sera l'objet d'un autre projet).
@@ -6,6 +6,27 @@
 > L'idée est ainsi plus de faciliter la mise en oeuvre de ses composants grâce aux web components et à la surcouche qui y est apportée et qui sera décrite plus bas.
 >
 > Afin de faciliter la compilation de cette application, des scripts en ligne de commanbde permettent très rapidement d'initialiser, de tester et de publier en production pour une sortie sur le Web ou dans une épplication packagée.
+
+- [Technologies utilisées](#technologies-utilis%c3%a9es)
+- [Disclaimer](#disclaimer)
+- [Features](#features)
+- [Pour commencer](#pour-commencer)
+- [Install](#install)
+- [CLI](#cli)
+- [Développer](#d%c3%a9velopper)
+  - [Component](#component)
+  - [Style](#style)
+  - [Icons, images et font](#icons-images-et-font)
+  - [Electron](#electron)
+  - [Utilitaires](#utilitaires)
+- [Compiler](#compiler)
+  - [Service Worker](#service-worker)
+  - [Le manifest](#le-manifest)
+  - [clear](#clear)
+  - [generate](#generate)
+  - [dev et prod](#dev-et-prod)
+  - [electron dev prod publish](#electron-dev-prod-publish)
+- [API](#api)
 
 ## Technologies utilisées
 
@@ -655,7 +676,7 @@ permettant ainsi de mettre à jour ses modifications à la volée grâce au comp
 
 Le composant intégré est comme nous l'avons vu la pierre angulaire du développement avec wapitid. Il permet de poser rapidement un web component en utilisant un langage simplifié, comme les directives intégrés ou son cycle de vie.
 
-#### La directive custom element
+#### La directive custom element <!-- omit in toc -->
 
 ```Typescript
 @customElement('x-custom')
@@ -686,7 +707,7 @@ constructor() {
 }
 ```
 
-#### La directive property
+#### La directive property <!-- omit in toc -->
 
 En typescript, les propriétés peuvent être publiques, protected ou private. Avec Wapitis, pour rendre des propriétés observables, il faut utiliser la directive @property
 
@@ -704,7 +725,7 @@ Il est possible de passer un objet en paramètre. Cet object peut contenir 3 par
 - writeOnly : propriété observable non visible dans l'html rendu mais possible de la créer en html ou en javascript (false par défaut)
 - reflectInAttribute : la propriété est transformée en attribut, de camelCase vers dashCase (true par défaut) et est observable. Passer ce paramètre à false revient à créer une propriété publique mais non observable.
 
-#### Les custom event et les attributs @event
+#### Les custom event et les attributs @event <!-- omit in toc -->
 
 Pour passer des fonctions dans les attributs d'un composant avec Wapitis et permettre à deux composants de communiquer entre eux, on utilisera les customEvents, comme on l'a vu avec le composant Todo
 
@@ -720,11 +741,11 @@ Grâce à LitHtml pour ajouter un addEventListener sur le composant on pourra cr
 ${this._todos.map((todo, index) => html`<w-todo ?checked=${todo.checked} text=${todo.text} .index=${index} @remove=${this._removeTodo} @completed=${this._toggleTodo}></w-todo>`)}
 ```
 
-#### Méthodes et utilisation du cycle de vies
+#### Méthodes et utilisation du cycle de vies <!-- omit in toc -->
 
 Le component a quelques méthodes intégrées qui définissent son cycle de vie.
 
-##### constructor
+##### constructor <!-- omit in toc -->
 ```Typescript
 constructor(options: IProps) {
     super(options)
@@ -732,7 +753,7 @@ constructor(options: IProps) {
 ```
 Appelé lors de la création du composant seulement. Intéressant pour déclarer les variables et propriétés. Possible d'accéder aux propriétés déclarées (props) lors de la création du composant avec new Composant(props).
 
-##### connectedCallback
+##### connectedCallback <!-- omit in toc -->
 ```Typescript
 connectedCallback() {
     super.connectedCallback()
@@ -740,7 +761,7 @@ connectedCallback() {
 ```
 Appelé lorsque l'élément est connecté pour la première fois au DOM du document.
 
-##### attributeChangedCallback
+##### attributeChangedCallback <!-- omit in toc -->
 ```Typescript
 attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
     super.attributeChangedCallback(attrName, oldVal, newVal)
@@ -748,7 +769,7 @@ attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
 ```
 Appelé lorsque l'un des attributs de l'élément personnalisé est ajouté, supprimé ou modifié.
 
-##### shouldUpdate
+##### shouldUpdate <!-- omit in toc -->
 ```Typescript
 shouldUpdate(_changedProperties: PropertyValues): boolean {
     return true
@@ -757,7 +778,7 @@ shouldUpdate(_changedProperties: PropertyValues): boolean {
 Permet de conditionner le rendu du composant. render() est appelé si la foinction retourne true. Ce qui est le comportement par défaut.
 **_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
 
-##### beforeRender
+##### beforeRender <!-- omit in toc -->
 ```Typescript
 beforeRender(_changedProperties: PropertyValues) {
     //
@@ -766,7 +787,7 @@ beforeRender(_changedProperties: PropertyValues) {
 Appelé avant le rendu du composant. Permet d'interagir avec les éléments à chaque appel du composant avant sa création dans le dom.
 **_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
 
-##### render
+##### render <!-- omit in toc -->
 ```Typescript
 render() {
     return html`
@@ -776,7 +797,7 @@ render() {
 ```
 La méthode permet de créer le composant dans le dom grâce au tag html de lit-html. Il retourne un TemplateResult qui est ensuite interprété et permet la mise à jour du DOM.
 
-##### firstUpdated
+##### firstUpdated <!-- omit in toc -->
 ```Typescript
 firstUpdated(_changedProperties: PropertyValues) {
     //
@@ -788,7 +809,7 @@ this._input = this.shadowRoot!.querySelector('input')
 ```
 **_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
 
-##### updated
+##### updated <!-- omit in toc -->
 ```Typescript
 updated(_changedProperties: PropertyValues) {
     //
@@ -797,7 +818,7 @@ updated(_changedProperties: PropertyValues) {
 Appelé lors de chaque mise à jour du composant. Permet de réaliser des tâches après le rendu du composant à chaque appel en utilisant l'API DOM, par exemple pour le focus d'un élément.
 **_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
 
-##### disconnectedCallback
+##### disconnectedCallback <!-- omit in toc -->
 ```Typescript
 disconnectedCallback() {
     super.disconnectedCallback()
@@ -805,7 +826,7 @@ disconnectedCallback() {
 ```
 Appelé lorsque l'élément personnalisé est déconnecté du DOM du document.
 
-#### Slot
+#### Slot <!-- omit in toc -->
 
 Lors de la création d'un custom element si on veut permettre l'ajout d'enfant à notre composant, on peut utiliser le principe de slot.
 
@@ -874,7 +895,7 @@ Dans ce cas tout autre enfant nom nommé serait affecté à la balise slot. Si a
 
 Pour sélectionner un élément en slot on doit utiliser le sélecteur ```::slotted()```.
 
-#### Possibilité de lit-html
+#### Possibilité de lit-html <!-- omit in toc -->
 
 Tout ce qui est possible avec lit html est possible dans wapitis comme:
 
@@ -897,11 +918,11 @@ ${this._todos.map((todo, index) => html`<w-todo ?checked=${todo.checked} text=${
 Dans wapitis la gestion des CSS peut se gérer de plusieurs façons différentes.
 
 
-#### main.css
+#### main.css <!-- omit in toc -->
 
 Le fichiers main.css permet de gérer les css du body et de tout ce qui n'est pas un composant.
 
-#### La propriété statique style
+#### La propriété statique style <!-- omit in toc -->
 
 Chaque composant ensuite possède ses propres CSS.
 
@@ -945,7 +966,7 @@ static get styles() {
 
 Ainsi on hérite des styles du composant parent. Inutile dans le cas où on hérite diretcement de Component.
 
-#### Le chargement externe
+#### Le chargement externe <!-- omit in toc -->
 
 Si on souhaite partager une css entre plusieurs composant il est possible de le faire en déclarant directement dans la méthode render() dans le tag html :
 ```Typescript
@@ -963,7 +984,7 @@ Par ailleurs il faut également réaliser l'import de ce fichier en début de do
 import '../www/styles/sharedCSS.css'
 ```
 
-#### Surcharge avec slot override
+#### Surcharge avec slot override <!-- omit in toc -->
 
 Si on veut surcharger les styles d'un composant existant que l'on est en train de déclarer, il est possible de la faire en utilisant une technique spécifique à wapitis. On va pour cela s'appuyer sur les slots et déclarer dans la méthode render :
 
@@ -979,7 +1000,7 @@ render() {
     ...
 ```
 
-#### Utilisation des variables
+#### Utilisation des variables <!-- omit in toc -->
 
 Enfin pour s'approprier un composant graphiquement et si ces dernières ont bien été déclarées, il est possible d'utiliser les variables CSS.
 
@@ -1005,7 +1026,7 @@ Enfin toutes les directives proposées par lit-html sont disponibles dont : clas
 
 cf [https://lit-html.polymer-project.org/guide/template-reference](https://lit-html.polymer-project.org/guide/template-reference)
 
-### icons et images
+### Icons, images et font
 
 Comme nous l'avons vu dans le composant Todos, dans wapitis, la gestion des images se fait grâce aux svg et plus précisément à un fichier SVG contenant toutes les images que l'on veut utiliser sous forme de symbole accompagné d'un id.
 
@@ -1034,30 +1055,328 @@ Puis d'appeler la variable dans l'attribut src de la balise image
     ...
 ```
 
-### electron
+Il est également possible d'utiliser des fonts (police classique ou icones)
 
-Rendu ICI !! Expliquer comment fonctionner avec electron
+Il suffit ainsi de déclarer la font dans les styles
 
-electronStart.ts
+```CSS
+@font-face {
+    font-family: "RobotoLight";
+    src: url(../assets/fonts/Roboto-Light.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+```
 
-Modif electronStart en utilisant la doc : https://electronjs.org/docs
+Puis d'appeler la font dans le selecteur choisi
 
-### Tools import
-Méthodes à décrire
-JSX
+```CSS
+body {
+    font-family: "RobotoLight";
+}
+```
+
+### Electron
+
+Avec Wapitis, il est possible de créer une application electron
+
+Pour lancer un test dans une app electron, il suffit d'appeler la ligne de commande
+
+```
+npx wapitis electron --dev
+```
+
+Une nouvelle fenetre s'ouvre alors contenant l'application electron vers le fichier index.html de la web app.
+
+Par défaut certains éléments sont déclarés dans le fichier electronStart.ts, comme la déclaration des menus, l'appel du fichier index.html pour fonctionner en dev et en prod, la déclaration du splash et de la fenetre about et la liaison avec electron auto update pour permettre de proposer des mises à jour automatiques.
+
+electronStart.ts contient toutes les déclarations nécessaires au bon fonctionnement de l'application electron et en est la porte d'entrée.
+
+Tout peut évidemment être modifié en utilisant la documentation d'electron : [https://electronjs.org/docs](https://electronjs.org/docs)
+
+Il est possible d'ajouter des fichiers dans le dossier electron (où l'on trouve le splash et le fichier about). Ces derniers seront alors automatiquement compiler dans l'application.
+
+On trouve également un fichier index.js dans le dossier electron. Ce fichier permet d'ajouter des scripts dans l'index.html afin de modifier l'application et de faire la liaison avec les messages envoyés par elestronStart.ts
+
+Exemple avec le menu a propos qui envoie le message suivant :
+
+```Typescript
+win.webContents.send('show_about',
+    {
+        appVersion: app.getVersion(),
+        chromeVersion: process.versions.chrome,
+        electronVersion: process.versions.electron,
+        nodeJsVersion: process.versions.node,
+        v8Version: process.versions.v8
+    }
+)
+```
+
+Message récupéré dans l'index.js afin de créer la fenetre à propos permettant de voir les versions de l'application et des applications tiers
+```Javascript
+ipcRenderer.on('show_about', (event, arg) => {
+    const style = document.createElement('style')
+    style.innerHTML = `.about {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    border-radius: 0.3125rem;
+    box-shadow: 0 0.0625rem 0.1875rem 0 rgba(0, 0, 0, 0.2), 0 0.0625rem 0.0625rem 0 rgba(0, 0, 0, 0.14), 0 0.125rem 0.0625rem -0.0625rem rgba(0, 0, 0, 0.12);
+    width: 40rem;
+    position: absolute;
+    top: 10rem;
+    left: 50%;
+    margin-left: -20rem;
+    text-align: center;
+    background: #fff;
+    padding: 0.5rem;
+    font-family: monospace;
+    font-weight: bold;
+    user-select: none;
+}
+
+.background {
+    background: #000;
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
+}
+
+.credit {
+    display: flex;
+    justify-content: space-between;
+}
+
+.infos {
+    padding: 0.5rem
+}`
+    document.head.appendChild(style)
+    const about = document.createElement('div')
+    about.classList.add('about')
+    about.addEventListener("click", () => document.body.removeChild(about))
+    const background = document.createElement('div')
+    background.classList.add('background')
+    about.appendChild(background)
+    const container = document.createElement('div')
+    container.classList.add('container')
+    about.appendChild(container)
+    container.innerHTML = `<img src="./about.png"/>
+<div class="infos">
+<div>Version : ${arg.appVersion}</div>
+<div>Date : ${new Date().toLocaleDateString()}</div>
+<div>Electron : ${arg.electronVersion}</div>
+<div>Chrome : ${arg.chromeVersion}</div>
+<div>Node.js : ${arg.nodeJsVersion}</div>
+<div>V8 : ${arg.v8Version}</div>
+</div>
+<div class="credit">
+<div>© 2019</div>
+<div>Tous droits réservés.</div>
+</div>`
+    document.body.appendChild(about)
+})
+```
+
+L'ensemble de la liaison entre electron et la web app peut être réalisé de cette façon ou en utilisant ce qui est proposé dans la documentation d'electron.
+
+Lors de la modification des fichiers de la webapp il est inutile de relancer npx wapitis electron --dev, en revanche toutes modifications sur electronStart.ts nécessite de relancer la ligne de commande.
+
+Le favicon.ico intégré dans le dossier www est utilisé comme icon pour l'application.
+
+### Utilitaires
+
+Afin de permettre d'accéder à certaines méthodes utiles, tropis classes ont été créés :
+
+- UTILS - contient différentes méthodes permettant de simplifier certaines actions, comme la génération d'id, la transformation entre différents types, l'envoie de customEvent, la sauvegarde en local storage ...
+```Typescript
+    /** Transforme une string dans le type renseigné */
+    function fromString(value: string | null, type?: unknown): any
+    /** Transforme une valeure du type renseigné en string */
+    function toString(value: unknown, type?: unknown): any
+    /** Transforme une chaine du type camelCase en DashCase */
+    function camelCaseToDashCase(name): any
+    /** Transforme une chaine du type DashCase en camelCase */
+    function dashCaseToCamelCase(name): any
+    /** Retourne un id de type string */
+    function generateId(): string
+    /** Envoie un customEvent en fonction du parent renseigné, avec les propriétés renseignés dans property */
+    function dispatchEvent(name: string, property: object, parent: HTMLElement = document.body): void
+    /** Retourne la taille et al position de la fenêtre web courante */
+    function getWindowSize() : { width: number, height: number, top: number, left: number }
+    /** Retourne le texte contenu dans le fichier spécifié de facçon asynchrone */
+    async function getFile(url: string): string
+    /** Enregistre les données dans la cle spécifié en local storage */
+    function save<T>(key: string, datas: T): void
+    /** Retourne les données spécifié dans la clé en local storage */
+    function load<T>(key: string): T
+```
+
+- DOM - contient des méthodes permettant de manipuler le dom
+```Typescript
+    /** Assigne l'attribut spécifié et sa valeur à l'élément spécifié. Si isStyle, l'ajoute en tant que que style */
+    function setAttribute(element: HTMLElement, name: string, value: any, isStyle?: boolean): void
+    /** Transforme un style en nombre */
+    function parseStyleToNumber(style: string): number
+    /** Supprime la classe contenant le préfix renseigné */
+    function removeClassByPrefix(element: HTMLElement, prefix: string): void
+    /** Assigne la propriété renseignée dans le style si la valeur est différente. Retourne true dans ce cas */
+    function setStyle(element: HTMLElement, name: string, value: string): boolean
+```
+- SHADOWDOM - contient des méthodes permettant de manipuler et de retrouver les shadowdom entre eux
+```Typescript
+    /** Retrouve le host du shadowTree de ce noeud. */
+    function findHost<T extends Element = Element>(from: Node): T
+    /** Retrouve le 1er DocumentOrShadowRoot ancêtre d'un noeud. */
+    function findDocumentOrShadowRoot(from: Node): Document | ShadowRoot
+    /** Retourne le parent, incluant la balise <slot> dans la chaine. */
+    function deepClosestElement(selector: string, base: Element): Element
+    /** Retrouve l'activeElement en pénétrant tous les shadowDOM. */
+    function findDeepActiveElement(from?: DocumentOrShadowRoot): Element
+    /** Retrouve tous les éléments assignés dans les slot de l'élément courant. */
+    function findAssignedElements(from: Element): Element[]
+    /** Retrouve le ou les éléments assignés dans le slotName. */
+    function findAssignedElementBySlotName(from: Element, slotName: string): Element | Element[]
+    /** Retrouve les éléments spécifiés dans le selector en fonction du root ou du document. */
+    function querySelectorAllDeep(selector: string, root?: Element | Document): Element[]
+    /** Retrouve l'élément spécifié dans le selector en fonction du root ou du document. */
+    function querySelectorDeep(selector: string, root?: Element | Document): Element
+```
+
+- LOG - permet de faire différents type de log dans la console JS
+```Typescript
+    /** log classique avec le message renseigné et les données datas si elles existent. */
+    function info(message: string, ...datas: any[]): void
+    /** log de type debug avec le message renseigné et les données datas si elles existent. */
+    function debug(message: string, ...datas: any[]): void
+    /** log de type warn (marron sur fond jaune) avec le message renseigné et les données datas si elles existent. */
+    function warn(message: string, ...datas: any[]): void
+    /** log de type error (rouge sur fond rose) avec le message renseigné et les données datas si elles existent. */
+    function error(message: string, ...datas: any[]): void
+```
+
+Il est également possible d'utiliser JSX en important la classe JSX. Exemple :
+```Typescript
+    import { JSX } from 'wapitis'
+    ...
+    document.body.appendChild(<div>Contenu</div>)
+```
+
 ## Compiler
-### dev
-### clear
-### prod
-### electron dev prod publish
-### service worker
-## API
 
+La compilation peut s'effectuer de différentes manières, en dev ou en prod, pour electron ou pour le web
 
 ### Service Worker
-Possibilité de récupérer un message pour préciser que le cache a été mis à jour
-```JS
-navigator.serviceWorker.addEventListener('message', event => {
-    // ...
-    console.log(event.data.msg, event.origin);
-});
+
+Lors de la compilation en prod ou en dev avec --webapp pour le web, un service worker est généré. Ce dernier permet d'enregistrer dans le cache du navigateur les différents éléments composant la webapp, permettant ainsi de la consulter offline.
+
+Comme vu lors, de l'exemple TODO, il permet aussi d'accéder aux boutons donnant accès à l'installation en tant qu'application autonome et activant les notifications.
+
+### Le manifest
+
+Dans le dossier www, un fichier manifest.json est présent. Il est rempli par défaut, mais il est possible de le modifier :
+
+```JSON
+{
+    "short_name": "NomDeLApp",
+    "name": "NomDeLApp",
+    "icons": [
+        {
+            "src": "/assets/icons/icons-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/assets/icons/icons-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#FFFFFF",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#317EFB"
+}
+```
+Voir [https://developer.mozilla.org/fr/docs/Mozilla/Add-ons/WebExtensions/manifest.json](https://developer.mozilla.org/fr/docs/Mozilla/Add-ons/WebExtensions/manifest.json)
+
+Ce fichier est nécessaire pour permettre à la webapp de s'installer en tant qu'application autonome.
+
+### clear
+
+```
+npx wapitis clear
+```
+Cette ligne de commande permet de supprimer le cache et de supprimer les éventuelles anciennes compilations.
+
+### generate
+
+Comme vu dans l'exemple TODO, pour générer les fichiers il est conseillé d'utiliser les signes de commandes suivantes
+
+```
+npx wapitis generate class path/du/fichier.ts(x)
+```
+et
+```
+npx wapitis generate component path/du/fichier.ts(x)
+```
+
+La première permet de créer une classe  contenant divers éléments par défaut.
+
+La deuxième permet de créer un composant dérivant de component et les divers éléments disponibles. Il est vivement conseillé d'utiliser cette ligne de commande lors de la création d'un composant car des commentaires d'aide y sont apporté et la structure du component est disponible par défaut.
+
+### dev et prod
+
+En web, on peut compiler pour le dev :
+```
+npx wapitis dev
+```
+Cela permet d'accéder à un serveur en localhost à l'adresse suivante : http://localhost:4444/
+
+Toute modification est mise à jour automatiquement sans avoir à relancer la ligne de commande
+
+Si besoin de tester, on peut ajouter --webapp, qui permet de générer le service worker et les différents fichiers permettant le fonctionnement hors ligne de l'application. Attention toutefois, car dans ce cas la mise à jour automatique ne pourra plus être effective.
+
+On peut également compiler pour la prod :
+```
+npx wapitis prod
+```
+
+Dans ce cas les fichiers sont alors rendus disponibles dans un dossier dist. Ces fichiers peuvent ensuite être envoyés sur un serveur.
+
+Si les fichiers sont sur un git, il est également possible d'utiliser cette ligne de commande avec un service du type [netlify](https://www.netlify.com/)
+
+### electron dev prod publish
+
+Comme vu précédemment, il est possible de générer et de tester une application dans electron avec :
+```
+npx wapitis electron --dev
+```
+Cela ouvre une fenetre d'application electron contenant un lien vers la webapp.
+
+Toute modification de la webapp met à jour automatiquement l'application.
+
+Pour publier en prod une application de type electron, deux possibilités existent:
+```
+npx wapitis electron --prod
+```
+et
+```
+npx wapitis electron --publish
+```
+Dans le premier cas, on obtient un executable ou un fichier installable sous mac ou sous linux qui peut ensuite être utilisé pour installer l'application.
+
+Le deuxième est utile si les sources sont sur git. Cela permet alors d'obtenir des mises à jour automatique.
+
+Pour ce faire, il est alors demander de rentrer le provider et le personal access token permettant de donner accès aux sources (plus d'infos sur la procédure pour Github [ici](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line.))).
+
+Une fois cela fait et le tout recompilé avec succès, il ne reste plus qu'à passer les sources en release sur votre git.
+
+## API
+
+> A venir
