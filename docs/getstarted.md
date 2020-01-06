@@ -174,7 +174,7 @@ document.body.appendChild(<TodoList></TodoList>)
 ```
 
 Enfin pour voir le résultat nous allons lancer un serveur de test en exécutant la ligne de commande :
-```
+```properties
 npx wapitis dev
 ```
 Et en nous rendant sur : http://localhost:4444/
@@ -232,7 +232,7 @@ Ce qui donne :
 
 On pourrait s'arrêter ici, mais nous voulions également pouvoir supprimer les tâches et les marquer comme réalisées. Pour ce faire nous allons créer un autre composant que nous pourrons ensuite instancier dans le composant TodoList
 
-```
+```properties
 npx wapitis generate component components/todo.ts
 ```
 
@@ -463,7 +463,7 @@ Au final on obtient:
 
 Une fois terminé notre webapp, il est tout à fait possible de tester l'app sous electron en lançant
 
-```
+```properties
 npx wapitis electron --dev
 ```
 
@@ -479,7 +479,7 @@ Si nous ne verrons pas directement comment publier cette application pour la pro
 
 Enfin si nous voulons publier notre webapp pour la production et profiter du service worker et de ses possibilités, il suffi de lancer
 
-```
+```properties
 npx wapitis prod
 ```
 
@@ -491,7 +491,7 @@ Il n'y a rien à faire pour activer le service worker. sw.js s'en occupe. Par ai
 
 Pour cela nous allons remplir styles/main.css.
 
-```CSS
+```css
 body {
     margin: 0;
 }
