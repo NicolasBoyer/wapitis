@@ -6,7 +6,7 @@ import { arrayFlat, CSSResult, CSSResultArray } from './css'
  * La directive @customElement permet de créer le nom du composant et de le déclarer comme WebComponent.
  *
  * Elle se place au dessus du nom de la classe. Exemple :
- * ```Typescript
+ * ```typescript
  * @customElement('w-todo')
  * export default class Todo extends Component<IProps> {
  * ```
@@ -52,7 +52,7 @@ export interface IPropertyOptions {
  * La directive @property rend la propriété observable et dynamique. La propriété est aussi accessible lors de la création de la classe via new Class() et intégrée à l'interface : IProps
  *
  * Elle se place à gauche du nom de la propriété. Exemple :
- * ```Typescript
+ * ```typescript
  * @property({ type: Boolean }) checked: boolean = false
  * ```
  * @category Directive
@@ -98,7 +98,7 @@ export abstract class Component<T> extends HTMLElement {
 
     /**
      * Permet de déclarer les styles en utilisant le tag css, exemple :
-     * ```Typescript
+     * ```typescript
      *   static get styles() {
      *       return css`
      *       :host {
@@ -283,7 +283,7 @@ export abstract class Component<T> extends HTMLElement {
      * Utile pour réaliser des actions qui ne doivent avoir lieu qu'une fois, comme la récupération des différents éléments rendu dans la méthode [[render]]
      *
      * En utilisant les methodes existantes dans les librairies [[DOM]] et [[SHADOWDOM]] de WAPITIS ou l'API DOM, par exemple avec querySelector et la propriété shadowRoot :
-     * ``` Typescript
+     * ``` typescript
      *   this._input = this.shadowRoot!.querySelector('input')
      * ```
      *

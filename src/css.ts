@@ -19,7 +19,7 @@ export class CSSResult {
  * A utiliser si nécessaire, mais passer de préférence par le tag css qui est plus sur
  *
  * Exemple via le tag css :
- * ```Typescript
+ * ```typescript
  * const mainColor = css`red`;
  * ...
  * static get styles() {
@@ -29,7 +29,7 @@ export class CSSResult {
  * }
  * ```
  * Exemple via le tag unsafeCSS :
- * ```Typescript
+ * ```typescript
  * static get styles() {
  *    const mainColor = 'red';
  *    return css`
@@ -70,7 +70,7 @@ export function arrayFlat(
 
 /**
  * Tag permettant d'insérer du CSS dans la propriété styles du composant. Exemple :
- * ```Typescript
+ * ```typescript
  * static get styles() {
  *     return css`
  *     :host {
@@ -85,7 +85,7 @@ export function arrayFlat(
  * }
  * ```
  * ou avec un array pour par exemple hériter des styles du parent :
- * ```Typescript
+ * ```typescript
  * static get styles() {
  *     const mainColor = css`red`
  *     return [

@@ -51,7 +51,7 @@ Nous commencerons donc par créer un composant en utilisant la ligne de commande
 
 Le fichier suivant est alors créé :
 
-```Typescript
+```typescript
 import { Component, css, customElement, html, property, PropertyValues } from 'wapitis'
 
 interface IProps {
@@ -116,7 +116,7 @@ export default class Custom extends Component<IProps> {
 Ce fichier contient les méthodes accessible tout le long du cycle de vie du composant nouvellement créé (pour en savoir plus voir plus bas)
 
 Nous allons l'éditer de cette façon :
-```Typescript
+```typescript
 import { Component, customElement, html, property } from 'wapitis'
 
 // Nous définissons notre custom element dans la directive suivante et la classe associée
@@ -165,7 +165,7 @@ Afin de voir le résultat, il est nécessaire d'appeler ce composant. Nous pouvo
 
 Nous allons utiliser ici JSX afin d'appeler directement le composant en Javascript, en modifiant le fichier app.tsx de cette façon
 
-```Typescript
+```typescript
 import { JSX } from 'wapitis'
 import TodoList from './components/todo-list'
 import './www/styles/main.css'
@@ -189,7 +189,7 @@ Il y a évidemment des passerelles et des surcharges possibles, comme cela sera 
 
 Ici nous allons transformer le code en ajoutant
 
-```Typescript
+```typescript
 export default class TodoList extends Component<{}> {
     static get styles() {
         return css`
@@ -238,7 +238,7 @@ npx wapitis generate component components/todo.ts
 
 Un fois le composant créé, il est édité comme ceci (Lire les commentaires pour comprendre le fonctionnement)
 
-```Typescript
+```typescript
 import { Component, customElement, html, property, UTILS } from 'wapitis'
 
 // On déclare les prporiétés puvliques obsevables. Ainsi si un constructor est déclarée on peut utiliser la forme new Todo({...}) pour créer la Todo. Et cela permet aux composants appelant d'avoir connaissances de ces propriétés
@@ -277,7 +277,7 @@ export default class Todo extends Component<IProps> {
 
 Nous allons ensuite modifier todo-list afin de déclarer le nouveau composant créé et les méthodes nécessaires à son fonctionnement.
 
-```Typescript
+```typescript
 import { Component, css, customElement, html, property } from 'wapitis'
 // On importe le composant
 import './todo'
@@ -331,7 +331,7 @@ Cela nous donne ainsi
 
 Afin d'améliorer le rendu, un peu de stylage est nécessaire
 
-```Typescript
+```typescript
 // On importe les icons avec le fichier icons.svg
 import { Component, css, customElement, html, property, UTILS } from 'wapitis'
 import icons from '../www/assets/img/icons.svg'
