@@ -118,7 +118,7 @@ Le composant intégré est comme nous l'avons vu la pierre angulaire du dévelop
 
 #### La directive custom element <!-- omit in toc -->
 
-```Typescript
+```typescript
 @customElement('x-custom')
 export default class Custom extends Component<IProps> {
 ```
