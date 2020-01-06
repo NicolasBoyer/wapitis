@@ -100,13 +100,13 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 
 Pendant le développement, il est recommandé de lancer avant
 
-```properties
+```bash
 npx wapitis dev
 ```
 
 ou
 
-```properties
+```bash
 npx wapitis electron --dev
 ```
 permettant ainsi de mettre à jour ses modifications à la volée grâce au compileur et au watcher intégré
@@ -522,7 +522,7 @@ Avec Wapitis, il est possible de créer une application electron
 
 Pour lancer un test dans une app electron, il suffit d'appeler la ligne de commande
 
-```properties
+```bash
 npx wapitis electron --dev
 ```
 
@@ -749,7 +749,7 @@ Ce fichier est nécessaire pour permettre à la webapp de s'installer en tant qu
 
 ### clear
 
-```properties
+```bash
 npx wapitis clear
 ```
 Cette ligne de commande permet de supprimer le cache et de supprimer les éventuelles anciennes compilations.
@@ -758,11 +758,11 @@ Cette ligne de commande permet de supprimer le cache et de supprimer les éventu
 
 Comme vu dans l'exemple TODO, pour générer les fichiers il est conseillé d'utiliser les signes de commandes suivantes
 
-```properties
+```bash
 npx wapitis generate class path/du/fichier.ts(x)
 ```
 et
-```properties
+```bash
 npx wapitis generate component path/du/fichier.ts(x)
 ```
 
@@ -773,7 +773,7 @@ La deuxième permet de créer un composant dérivant de component et les divers 
 ### dev et prod
 
 En web, on peut compiler pour le dev :
-```properties
+```bash
 npx wapitis dev
 ```
 Cela permet d'accéder à un serveur en localhost à l'adresse suivante : http://localhost:4444/
@@ -783,7 +783,7 @@ Toute modification est mise à jour automatiquement sans avoir à relancer la li
 Si besoin de tester, on peut ajouter --webapp, qui permet de générer le service worker et les différents fichiers permettant le fonctionnement hors ligne de l'application. Attention toutefois, car dans ce cas la mise à jour automatique ne pourra plus être effective.
 
 On peut également compiler pour la prod :
-```properties
+```bash
 npx wapitis prod
 ```
 
@@ -794,7 +794,7 @@ Si les fichiers sont sur un git, il est également possible d'utiliser cette lig
 ### electron dev prod publish
 
 Comme vu précédemment, il est possible de générer et de tester une application dans electron avec :
-```properties
+```bash
 npx wapitis electron --dev
 ```
 Cela ouvre une fenetre d'application electron contenant un lien vers la webapp.
@@ -802,11 +802,11 @@ Cela ouvre une fenetre d'application electron contenant un lien vers la webapp.
 Toute modification de la webapp met à jour automatiquement l'application.
 
 Pour publier en prod une application de type electron, deux possibilités existent:
-```properties
+```bash
 npx wapitis electron --prod
 ```
 et
-```properties
+```bash
 npx wapitis electron --publish
 ```
 Dans le premier cas, on obtient un executable ou un fichier installable sous mac ou sous linux qui peut ensuite être utilisé pour installer l'application.
