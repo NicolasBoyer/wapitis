@@ -2,6 +2,14 @@ import { UTILS } from '.'
 
 // tslint:disable-next-line:no-namespace
 export namespace DOM {
+    /**
+     * Assigne l'attribut spécifié et sa valeur à l'élément spécifié
+     *
+     * @param {HTMLElement} element L'élément sur lequel l'attribue est affecté
+     * @param {string} name Nom de l'attribut
+     * @param {*} value Valeur de l'attribut
+     * @param {boolean} isStyle Si true, ajoute en tant que que style
+     */
     export function setAttribute(element: HTMLElement, name: string, value: any, isStyle?: boolean) {
         try {
             if (value !== null) {
@@ -21,15 +29,35 @@ export namespace DOM {
         }
     }
 
+    /**
+     * Transforme un style en nombre
+     *
+     * @param {(string | null)} style Le style à transformer
+     * @returns
+     */
     export function parseStyleToNumber(style: string | null) {
         return parseInt(String(style), 10)
     }
 
+    /**
+     * Supprime la classe contenant le préfix renseigné
+     *
+     * @param {HTMLElement} element L'élément sur lequel la classe sera supprimé
+     * @param {string} prefix Le préfix de la classe à supprimer
+     */
     export function removeClassByPrefix(element: HTMLElement, prefix: string) {
         const regx = new RegExp('\\b' + prefix + '.*?\\b', 'g');
         [...element.classList].map((className) => regx.test(className) && element.classList.remove(className))
     }
 
+    /**
+     * Assigne la propriété renseignée dans le style si la valeur est différente
+     *
+     * @param {HTMLElement} element L'élément sur lequel appliquer le style
+     * @param {string} name Le nom du style à assigner
+     * @param {string} value La valeur du style à assigner
+     * @returns {boolean} Retourne true si le style est appliqué
+     */
     export function setStyle(element: HTMLElement, name: string, value: string): boolean {
         if (element.style.getPropertyValue(name) !== value) {
             element.style.setProperty(name, value)

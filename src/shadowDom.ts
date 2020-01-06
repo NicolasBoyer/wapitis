@@ -1,18 +1,35 @@
 // tslint:disable-next-line:no-namespace
 export namespace SHADOWDOM {
-    /** Retrouve le host du shadowTree de ce noeud. */
+    /**
+     * Retrouve le host du shadowTree de ce noeud
+     *
+     * @typeparam T Type générique de l'host recherché
+     * @param {Node} from Noeud sur lequel on cherche le host
+     * @returns {T} Retourne le host de type T
+     */
     export function findHost<T extends Element = Element>(from: Node): T {
         while (from.parentNode) { from = from.parentNode }
         return (from as ShadowRoot).host as T
     }
 
-    /** Retrouve le 1er DocumentOrShadowRoot ancêtre d'un noeud. */
+    /**
+     * Retrouve le premier DocumentOrShadowRoot ancêtre d'un noeud
+     *
+     * @param {Node} from Noeud sur lequel la recherche est effectuée
+     * @returns {(Document | ShadowRoot)} Retourne le premier shadowroot ancêtre ou le Document
+     */
     export function findDocumentOrShadowRoot(from: Node): Document | ShadowRoot {
         while (from.parentNode) { from = from.parentNode }
         return (from.nodeType === Node.DOCUMENT_NODE || (from instanceof ShadowRoot)) ? from as Document | ShadowRoot : null
     }
 
-    /** Retourne le parent, incluant la balise <slot> dans la chaine. */
+    /**
+     * Retourne le parent, incluant la balise <slot> dans la chaine
+     *
+     * @param {string} selector Le parent le plus proche à célectionner
+     * @param {Element} base L'élément sur lequel est effectuée la recherche
+     * @returns
+     */
     export function deepClosestElement(selector: string, base: Element) {
         function __closestFrom(element: Element | Window | Document | null): Element | null {
             if (!element || element === document || element === window) {
@@ -27,13 +44,24 @@ export namespace SHADOWDOM {
         return __closestFrom(base)
     }
 
-    /** Retrouve l'activeElement en pénétrant tous les shadowDOM. */
+    /**
+     * Retrouve l'activeElement en pénétrant tous les shadowDOM
+     *
+     * @param {DocumentOrShadowRoot} from Le shadowroot sur lequel la recherche est effectuée ou le document
+     * @returns
+     */
     export function findDeepActiveElement(from?: DocumentOrShadowRoot) {
         let a = (from || document).activeElement
         while (a && a.shadowRoot && a.shadowRoot.activeElement) { a = a.shadowRoot.activeElement }
         return a
     }
 
+    /**
+     * Retrouve tous les éléments assignés dans les slot de l'élément courant
+     *
+     * @param {Element} from L'élément sur lequle est effectuée la recherche
+     * @returns {Element[]} Retourne un tableau avec les éléments retrouvés
+     */
     export function findAssignedElements(from: Element): Element[] {
         let elements: Element[] = []
         querySelectorAllDeep('slot', from).forEach((slot) => {
@@ -42,19 +70,39 @@ export namespace SHADOWDOM {
         return elements
     }
 
+    /**
+     * Retrouve le ou les éléments assignés dans le slotName
+     *
+     * @param {Element} from l'élément sur lequel la recherche est effectuée
+     * @param {string} slotName Le nom du slot recherché
+     * @returns {(Element | Element[])}
+     */
     export function findAssignedElementBySlotName(from: Element, slotName: string): Element | Element[] {
         return findAssignedElements(from).filter((element) => element.getAttribute('slot') === slotName)[0]
     }
 
     /**
-     * @author Georgegriff@ (George Griffiths)
-     * License Apache-2.0
-     * Adapdée à Typescript
+     * Retrouve les éléments spécifiés dans le selector en fonction du root ou du document
+     *
+     * @author Georgegriff@ (George Griffiths). License Apache-2.0. Adapdée à Typescript
+     *
+     * @param {string} selector Le sélecteur de recherche
+     * @param {(Element | Document)} root L'élément sur lequel la recherche est effectuée ou le document
+     * @returns {Element[]}
      */
     export function querySelectorAllDeep(selector: string, root: Element | Document = document): Element[] {
         return _querySelectorDeep(selector, true, root)
     }
 
+    /**
+     * Retrouve l'élément spécifié dans le selector en fonction du root ou du document
+     *
+     * @author Georgegriff@ (George Griffiths). License Apache-2.0. Adapdée à Typescript
+     *
+     * @param {string} selector Le sélecteur de recherche
+     * @param {(Element | Document)} root L'élément sur lequel la recherche est effectuée ou le document
+     * @returns {Element}
+     */
     export function querySelectorDeep(selector: string, root: Element | Document = document): Element {
         return _querySelectorDeep(selector, false, root)
     }
