@@ -50,3 +50,9 @@ permettant ainsi de mettre à jour ses modifications à la volée grâce au comp
 - [Développer - utilitaires](./docs/pages/utils.md)
 - [Compiler](./docs/pages/compil.md)
 - [API](./docs/api/index.html)
+
+[](./docs/api/modules/_component_.html)
+[](./docs/api/modules/_dom_.html)
+[](./docs/api/modules/_log_.html)
+[](./docs/api/modules/_shadowdom_.html)
+[](./docs/api/modules/_utils_.html)
