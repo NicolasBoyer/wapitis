@@ -51,8 +51,8 @@ permettant ainsi de mettre à jour ses modifications à la volée grâce au comp
 - [Compiler](./docs/pages/compil.md)
 - [API](./docs/api/index.html)
 
-[](./docs/api/modules/_component_.html)
-[](./docs/api/modules/_dom_.html)
-[](./docs/api/modules/_log_.html)
-[](./docs/api/modules/_shadowdom_.html)
-[](./docs/api/modules/_utils_.html)
+[a](./docs/api/modules/_component_.html)
+[b](./docs/api/modules/_dom_.html)
+[c](./docs/api/modules/_log_.html)
+[d](./docs/api/modules/_shadowdom_.html)
+[e](./docs/api/modules/_utils_.html)
