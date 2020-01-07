@@ -65,4 +65,4 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 - Utilisation de SVG pour gérer les icons
 - Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne
 
-[Documentation]([./docs/pages/getstarted.md](https://nicolasboyer.github.io/wapitis/))
+## [Documentation](https://nicolasboyer.github.io/wapitis/)

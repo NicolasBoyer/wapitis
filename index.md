@@ -1,6 +1,8 @@
 # WApiTis 2 - Documentation
 ![](ui/logo.png)
 
+[Présentation de wapitis](https://github.com/NicolasBoyer/wapitis/blob/master/README.md)
+
 ## Install
 
     npm init
