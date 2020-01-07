@@ -2,8 +2,7 @@
     <div class="tsd-page-toolbar">
         <div class="container">
             <div class="table-wrap">
-                <div class="table-cell" id="tsd-search" data-index="{{relativeURL "assets/js/search.js"}}"
-                    data-base="{{relativeURL "./"}}">
+                <div class="table-cell" id="tsd-search" data-index="{{relativeURL "assets/js/search.js"}}" data-base="{{relativeURL "./"}}">
                     <div class="field">
                         <label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
                         <input id="tsd-search-field" type="text" />
@@ -21,7 +20,6 @@
                     <div id="tsd-filter">
                         <a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
                         <div class="tsd-filter-group">
-                            {{#unless settings.excludeExternals}}
                             <div class="tsd-select" id="tsd-filter-visibility">
                                 <span class="tsd-select-label">All</span>
                                 <ul class="tsd-select-list">
@@ -30,19 +28,18 @@
                                     <li data-value="private" class="selected">All</li>
                                 </ul>
                             </div>
-                            {{/unless}}
 
                             <input type="checkbox" id="tsd-filter-inherited" checked />
                             <label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 
                             {{#unless settings.excludeExternals}}
-                            <input type="checkbox" id="tsd-filter-externals" checked />
-                            <label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+                                <input type="checkbox" id="tsd-filter-externals" checked />
+                                <label class="tsd-widget" for="tsd-filter-externals">Externals</label>
                             {{/unless}}
 
                             {{#unless settings.excludeNotExported}}
-                            <input type="checkbox" id="tsd-filter-only-exported" />
-                            <label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+                                <input type="checkbox" id="tsd-filter-only-exported" />
+                                <label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
                             {{/unless}}
                         </div>
                     </div>
@@ -61,14 +58,14 @@
                 {{model.kindString}}&nbsp;
                 {{model.name}}
                 {{#if model.typeParameters}}
-                &lt;
-                {{#each model.typeParameters}}
-                {{#if @index}},&nbsp;{{/if}}
-                {{name}}
-                {{/each}}
-                &gt;
+                    &lt;
+                    {{#each model.typeParameters}}
+                        {{#if @index}},&nbsp;{{/if}}
+                        {{name}}
+                    {{/each}}
+                    &gt;
                 {{/if}}
-                {{/compact}}</h1>
+            {{/compact}}</h1>
         </div>
     </div>
 </header>

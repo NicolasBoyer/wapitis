@@ -5,5 +5,5 @@
     "excludeNotExported": true,
     "excludePrivate": true,
     "readme": "none",
-    "theme": "./docs/wapitisTheme"
+    "theme": "./docs/theme"
 }
