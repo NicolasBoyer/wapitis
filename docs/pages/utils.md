@@ -1,3 +1,5 @@
+[Retour](../../index.md)
+
 # Utilitaires
 
 Afin de permettre d'accéder à certaines méthodes utiles, quatre modules ont été créés :

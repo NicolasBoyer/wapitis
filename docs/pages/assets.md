@@ -1,3 +1,5 @@
+[Retour](../../index.md)
+
 # Icons, images et font
 
 Comme nous l'avons vu dans le composant Todos, dans wapitis, la gestion des images se fait grâce aux svg et plus précisément à un fichier SVG contenant toutes les images que l'on veut utiliser sous forme de symbole accompagné d'un id.

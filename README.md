@@ -66,3 +66,5 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 - Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne
 
 ## [Documentation](https://nicolasboyer.github.io/wapitis/)
+
+## [API](https://nicolasboyer.github.io/wapitis/docs/api/index.html)
