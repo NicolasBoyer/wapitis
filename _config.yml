@@ -1,4 +1,4 @@
-theme: jekyll-theme-cayman
+remote_theme: chrisrhymes/bulma-clean-theme
 include:
   - "_*_.md"
   - "_*_.*.md"
