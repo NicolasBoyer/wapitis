@@ -1,6 +1,8 @@
-[wapitis - v2.0.35](README.md)
-
-# wapitis - v2.0.35
+---
+id: "index"
+title: "wapitis - v2.0.35"
+sidebar_label: "Globals"
+---
 
 ## Index
 

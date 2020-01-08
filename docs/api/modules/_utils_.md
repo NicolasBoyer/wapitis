@@ -1,6 +1,8 @@
-[wapitis - v2.0.35](../README.md) › ["utils"](_utils_.md)
-
-# External module: "utils"
+---
+id: "_utils_"
+title: "utils"
+sidebar_label: "utils"
+---
 
 ## Index
 

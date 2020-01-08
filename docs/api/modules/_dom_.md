@@ -1,6 +1,8 @@
-[wapitis - v2.0.35](../README.md) › ["dom"](_dom_.md)
-
-# External module: "dom"
+---
+id: "_dom_"
+title: "dom"
+sidebar_label: "dom"
+---
 
 ## Index
 

@@ -1,6 +1,8 @@
-[wapitis - v2.0.35](../README.md) › ["shadowDom"](_shadowdom_.md) › [SHADOWDOM](_shadowdom_.shadowdom.md)
-
-# Module: SHADOWDOM
+---
+id: "_shadowdom_.shadowdom"
+title: "SHADOWDOM"
+sidebar_label: "SHADOWDOM"
+---
 
 ## Index
 
@@ -21,7 +23,7 @@
 
 ▸ **deepClosestElement**(`selector`: string, `base`: Element): *Element*
 
-*Defined in [src/shadowDom.ts:33](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/shadowDom.ts#L33)*
+*Defined in [src/shadowDom.ts:33](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/shadowDom.ts#L33)*
 
 Retourne le parent, incluant la balise <slot> dans la chaine
 
@@ -40,7 +42,7 @@ ___
 
 ▸ **findAssignedElementBySlotName**(`from`: Element, `slotName`: string): *Element | Element[]*
 
-*Defined in [src/shadowDom.ts:80](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/shadowDom.ts#L80)*
+*Defined in [src/shadowDom.ts:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/shadowDom.ts#L80)*
 
 Retrouve le ou les éléments assignés dans le slotName
 
@@ -59,7 +61,7 @@ ___
 
 ▸ **findAssignedElements**(`from`: Element): *Element[]*
 
-*Defined in [src/shadowDom.ts:65](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/shadowDom.ts#L65)*
+*Defined in [src/shadowDom.ts:65](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/shadowDom.ts#L65)*
 
 Retrouve tous les éléments assignés dans les slot de l'élément courant
 
@@ -79,7 +81,7 @@ ___
 
 ▸ **findDeepActiveElement**(`from?`: DocumentOrShadowRoot): *Element*
 
-*Defined in [src/shadowDom.ts:53](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/shadowDom.ts#L53)*
+*Defined in [src/shadowDom.ts:53](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/shadowDom.ts#L53)*
 
 Retrouve l'activeElement en pénétrant tous les shadowDOM
 
@@ -97,7 +99,7 @@ ___
 
 ▸ **findDocumentOrShadowRoot**(`from`: Node): *Document | ShadowRoot*
 
-*Defined in [src/shadowDom.ts:21](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/shadowDom.ts#L21)*
+*Defined in [src/shadowDom.ts:21](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/shadowDom.ts#L21)*
 
 Retrouve le premier DocumentOrShadowRoot ancêtre d'un noeud
 
@@ -117,7 +119,7 @@ ___
 
 ▸ **findHost**<**T**>(`from`: Node): *T*
 
-*Defined in [src/shadowDom.ts:10](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/shadowDom.ts#L10)*
+*Defined in [src/shadowDom.ts:10](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/shadowDom.ts#L10)*
 
 Retrouve le host du shadowTree de ce noeud
 
@@ -143,7 +145,7 @@ ___
 
 ▸ **querySelectorAllDeep**(`selector`: string, `root`: Element | Document): *Element[]*
 
-*Defined in [src/shadowDom.ts:93](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/shadowDom.ts#L93)*
+*Defined in [src/shadowDom.ts:93](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/shadowDom.ts#L93)*
 
 Retrouve les éléments spécifiés dans le selector en fonction du root ou du document
 
@@ -164,7 +166,7 @@ ___
 
 ▸ **querySelectorDeep**(`selector`: string, `root`: Element | Document): *Element*
 
-*Defined in [src/shadowDom.ts:106](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/shadowDom.ts#L106)*
+*Defined in [src/shadowDom.ts:106](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/shadowDom.ts#L106)*
 
 Retrouve l'élément spécifié dans le selector en fonction du root ou du document
 

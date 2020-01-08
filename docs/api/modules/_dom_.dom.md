@@ -1,6 +1,8 @@
-[wapitis - v2.0.35](../README.md) › ["dom"](_dom_.md) › [DOM](_dom_.dom.md)
-
-# Module: DOM
+---
+id: "_dom_.dom"
+title: "DOM"
+sidebar_label: "DOM"
+---
 
 ## Index
 
@@ -17,7 +19,7 @@
 
 ▸ **parseStyleToNumber**(`style`: string | null): *number*
 
-*Defined in [src/dom.ts:38](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/dom.ts#L38)*
+*Defined in [src/dom.ts:38](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L38)*
 
 Transforme un style en nombre
 
@@ -35,7 +37,7 @@ ___
 
 ▸ **removeClassByPrefix**(`element`: HTMLElement, `prefix`: string): *void*
 
-*Defined in [src/dom.ts:48](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/dom.ts#L48)*
+*Defined in [src/dom.ts:48](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L48)*
 
 Supprime la classe contenant le préfix renseigné
 
@@ -54,7 +56,7 @@ ___
 
 ▸ **setAttribute**(`element`: HTMLElement, `name`: string, `value`: any, `isStyle?`: boolean): *void*
 
-*Defined in [src/dom.ts:13](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/dom.ts#L13)*
+*Defined in [src/dom.ts:13](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L13)*
 
 Assigne l'attribut spécifié et sa valeur à l'élément spécifié
 
@@ -75,7 +77,7 @@ ___
 
 ▸ **setStyle**(`element`: HTMLElement, `name`: string, `value`: string): *boolean*
 
-*Defined in [src/dom.ts:61](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/dom.ts#L61)*
+*Defined in [src/dom.ts:61](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L61)*
 
 Assigne la propriété renseignée dans le style si la valeur est différente
 

@@ -1,6 +1,8 @@
-[wapitis - v2.0.35](../README.md) › ["component"](../modules/_component_.md) › [IPropertyOptions](_component_.ipropertyoptions.md)
-
-# Interface: IPropertyOptions
+---
+id: "_component_.ipropertyoptions"
+title: "IPropertyOptions"
+sidebar_label: "IPropertyOptions"
+---
 
 Paramètres de la directive @property. Trois options possibles :
 - type : indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (string par défaut)
@@ -25,7 +27,7 @@ Paramètres de la directive @property. Trois options possibles :
 
 • **reflectInAttribute**? : *boolean*
 
-*Defined in [src/component.tsx:44](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/component.tsx#L44)*
+*Defined in [src/component.tsx:44](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L44)*
 
 La propriété est transformée en attribut, de camelCase vers dashCase (true par défaut) et est observable
 
@@ -35,7 +37,7 @@ ___
 
 • **type**? : *object | string | number | boolean | unknown*
 
-*Defined in [src/component.tsx:40](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/component.tsx#L40)*
+*Defined in [src/component.tsx:40](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L40)*
 
 Indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (string par défaut)
 
@@ -45,6 +47,6 @@ ___
 
 • **writeOnly**? : *boolean*
 
-*Defined in [src/component.tsx:48](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/component.tsx#L48)*
+*Defined in [src/component.tsx:48](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L48)*
 
 Propriété observable non visible dans l'html rendu mais possible de la créer en html ou en javascript (false par défaut)

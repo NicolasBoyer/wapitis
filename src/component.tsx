@@ -82,6 +82,7 @@ export type PropertyValues = Map<PropertyKey, { oldVal: unknown, newVal: unknown
 /**
  * Classe qui étend HTMLElement et qui associée à la directive @customElement permet la création d'un customElement
  *
+ * @noInheritDoc
  * @typeparam T Type générique de la classe définit grâce à la directive customElement
  */
 export abstract class Component<T> extends HTMLElement {

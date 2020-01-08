@@ -1,6 +1,8 @@
-[wapitis - v2.0.35](../README.md) › ["shadowDom"](_shadowdom_.md)
-
-# External module: "shadowDom"
+---
+id: "_shadowdom_"
+title: "shadowDom"
+sidebar_label: "shadowDom"
+---
 
 ## Index
 

@@ -1,6 +1,8 @@
-[wapitis - v2.0.35](../README.md) › ["component"](_component_.md)
-
-# External module: "component"
+---
+id: "_component_"
+title: "component"
+sidebar_label: "component"
+---
 
 ## Index
 
@@ -27,7 +29,7 @@
 
 Ƭ **PropertyValues**: *Map‹PropertyKey, object›*
 
-*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/component.tsx#L80)*
+*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*
 
 Définit les paramètres des methodes du cycle de vie de Component
 
@@ -43,7 +45,7 @@ Map<PropertyKey, { oldVal: unknown, newVal: unknown }>
 
 ▸ **customElement**(`tagName?`: string): *(Anonymous function)*
 
-*Defined in [src/component.tsx:18](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/component.tsx#L18)*
+*Defined in [src/component.tsx:18](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L18)*
 
 La directive @customElement permet de créer le nom du composant et de le déclarer comme WebComponent.
 
@@ -69,7 +71,7 @@ ___
 
 ▸ **property**(`options?`: [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)): *(Anonymous function)*
 
-*Defined in [src/component.tsx:62](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/component.tsx#L62)*
+*Defined in [src/component.tsx:62](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L62)*
 
 La directive @property rend la propriété observable et dynamique. La propriété est aussi accessible lors de la création de la classe via new Class() et intégrée à l'interface : IProps
 

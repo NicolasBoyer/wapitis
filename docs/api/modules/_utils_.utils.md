@@ -1,6 +1,8 @@
-[wapitis - v2.0.35](../README.md) › ["utils"](_utils_.md) › [UTILS](_utils_.utils.md)
-
-# Module: UTILS
+---
+id: "_utils_.utils"
+title: "UTILS"
+sidebar_label: "UTILS"
+---
 
 ## Index
 
@@ -23,7 +25,7 @@
 
 ▸ **camelCaseToDashCase**(`name`: any): *any*
 
-*Defined in [src/utils.ts:40](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/utils.ts#L40)*
+*Defined in [src/utils.ts:40](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L40)*
 
 Transforme une chaine du type camelCase en DashCase
 
@@ -41,7 +43,7 @@ ___
 
 ▸ **dashCaseToCamelCase**(`name`: any): *any*
 
-*Defined in [src/utils.ts:50](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/utils.ts#L50)*
+*Defined in [src/utils.ts:50](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L50)*
 
 Transforme une chaine du type DashCase en camelCase
 
@@ -59,7 +61,7 @@ ___
 
 ▸ **dispatchEvent**(`name`: string, `property`: object, `parent`: HTMLElement): *void*
 
-*Defined in [src/utils.ts:70](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/utils.ts#L70)*
+*Defined in [src/utils.ts:70](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L70)*
 
 Envoie un customEvent sur l'élément parent, avec les propriétés renseignés dans property
 
@@ -79,7 +81,7 @@ ___
 
 ▸ **fromString**(`value`: string | null, `type?`: unknown): *any*
 
-*Defined in [src/utils.ts:10](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/utils.ts#L10)*
+*Defined in [src/utils.ts:10](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L10)*
 
 Transforme une string dans le type renseigné
 
@@ -98,7 +100,7 @@ ___
 
 ▸ **generateId**(): *string*
 
-*Defined in [src/utils.ts:59](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/utils.ts#L59)*
+*Defined in [src/utils.ts:59](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L59)*
 
 Retourne un id de type string
 
@@ -110,7 +112,7 @@ ___
 
 ▸ **getFile**(`url`: string): *Promise‹any›*
 
-*Defined in [src/utils.ts:100](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/utils.ts#L100)*
+*Defined in [src/utils.ts:100](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L100)*
 
 Retourne le texte contenu dans le fichier spécifié de façon asynchrone
 
@@ -128,7 +130,7 @@ ___
 
 ▸ **getWindowSize**(): *object*
 
-*Defined in [src/utils.ts:80](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/utils.ts#L80)*
+*Defined in [src/utils.ts:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L80)*
 
 Retourne la taille et la position de la fenêtre web courante
 
@@ -142,7 +144,7 @@ ___
 
 ▸ **load**<**T**>(`key`: string): *T*
 
-*Defined in [src/utils.ts:129](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/utils.ts#L129)*
+*Defined in [src/utils.ts:129](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L129)*
 
 Retourne les données spécifié dans la clé en local storage
 
@@ -168,7 +170,7 @@ ___
 
 ▸ **save**<**T**>(`key`: string, `datas`: T): *void*
 
-*Defined in [src/utils.ts:117](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/utils.ts#L117)*
+*Defined in [src/utils.ts:117](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L117)*
 
 Enregistre les données dans la clé spécifié en local storage
 
@@ -193,7 +195,7 @@ ___
 
 ▸ **toString**(`value`: unknown, `type?`: unknown): *unknown*
 
-*Defined in [src/utils.ts:30](https://github.com/NicolasBoyer/wapitis/blob/4592d80/src/utils.ts#L30)*
+*Defined in [src/utils.ts:30](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L30)*
 
 Transforme une valeur du type renseigné en string
 
