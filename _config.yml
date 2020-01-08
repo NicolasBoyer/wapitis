@@ -5,6 +5,11 @@ include:
   - "_*_.html"
   - "_*_.*.html"
 defaults:
-  - toc: true
-  - show_sidebar: true
-  - hide_hero: true
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      author: "Nicolas Boyer"
+      layout: page
+      show_sidebar: true
+      toc: true
