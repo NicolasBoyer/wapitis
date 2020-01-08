@@ -5,5 +5,5 @@
     "excludeNotExported": true,
     "excludePrivate": true,
     "readme": "none",
-    "theme": "./docs/theme"
+    "plugin": "typedoc-plugin-markdown"
 }
