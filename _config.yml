@@ -1,8 +1,10 @@
 remote_theme: chrisrhymes/bulma-clean-theme
-toc: true
-show_sidebar: true
 include:
   - "_*_.md"
   - "_*_.*.md"
   - "_*_.html"
   - "_*_.*.html"
+defaults:
+  - toc: true
+  - show_sidebar: true
+  - hide_hero: true
