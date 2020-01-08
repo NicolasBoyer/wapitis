@@ -1,3 +1,9 @@
+---
+id: "index"
+title: "WApiTis 2"
+sidebar_label: "Wapitis"
+---
+
 # WApiTis 2 - Documentation
 ![](ui/logo.png)
 
