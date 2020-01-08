@@ -50,5 +50,3 @@ permettant ainsi de mettre à jour ses modifications à la volée grâce au comp
 - [Développer - utilitaires](./docs/pages/utils.md)
 - [Compiler](./docs/pages/compil.md)
 - [API](https://rawcdn.githack.com/NicolasBoyer/wapitis/6b1bb24d0b231f397aa473801d568b255730a1a9/docs/api/index.html)
-- [API](./docs/api/index.html)
-- [API](./docs/api/modules/test.html)
