@@ -12,5 +12,3 @@ defaults:
       author: "Nicolas Boyer"
       layout: page
       show_sidebar: false
-      toc: true
-      menu: menu
