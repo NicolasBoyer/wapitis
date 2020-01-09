@@ -1,4 +1,4 @@
-remote_theme: aksakalli/jekyll-doc-theme@gh-pages
+remote_theme: leakyabstractions/pretty-docs
 include:
   - "_*_.md"
   - "_*_.*.md"
