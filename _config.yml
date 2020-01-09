@@ -12,3 +12,5 @@ defaults:
       author: "Nicolas Boyer"
       layout: page
       show_sidebar: false
+
+theme: jekyll-theme-leap-day
