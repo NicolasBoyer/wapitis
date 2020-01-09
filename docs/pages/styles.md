@@ -1,4 +1,9 @@
-[Retour](../../index.md)
+---
+layout: default
+title: Les styles
+nav_order: 2
+parent: Développer
+---
 
 # Style <!-- omit in toc -->
 

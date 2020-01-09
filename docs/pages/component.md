@@ -1,6 +1,11 @@
-[Retour](../../index.md)
+---
+layout: default
+title: Le component
+nav_order: 1
+parent: Développer
+---
 
-# Component <!-- omit in toc -->
+# Le component <!-- omit in toc -->
 
 Le composant intégré est comme nous l'avons vu la pierre angulaire du développement avec wapitis. Il permet de poser rapidement un web component en utilisant un langage simplifié, comme les directives intégrés ou son cycle de vie.
 
