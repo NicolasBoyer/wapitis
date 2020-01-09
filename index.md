@@ -2,7 +2,7 @@
 id: "index"
 title: "WApiTis 2"
 subtitle: WebApp utiliTies pour typescript
-sidebar_label: "Wapitis"
+menu: menu
 ---
 
 # WApiTis 2 - Documentation
