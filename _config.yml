@@ -11,5 +11,6 @@ defaults:
     values:
       author: "Nicolas Boyer"
       layout: page
-      show_sidebar: true
+      show_sidebar: false
       toc: true
+      menu: menu
