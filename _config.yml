@@ -1,4 +1,4 @@
-remote_theme: minimal-mistakes-jekyll
+theme: jekyll-theme-leap-day
 include:
   - "_*_.md"
   - "_*_.*.md"
