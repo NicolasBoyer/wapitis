@@ -1,11 +1,10 @@
 ---
-id: "index"
-title: "WApiTis 2"
+layout: default
+title: Home
+nav_order: 1
 ---
 
 # WApiTis 2 - Documentation
-![](ui/logo.png)
-
 [Présentation de wapitis](https://github.com/NicolasBoyer/wapitis/blob/master/README.md)
 
 ## Install
