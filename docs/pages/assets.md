@@ -1,4 +1,9 @@
-[Retour](../../index.md)
+---
+layout: default
+title: Icons, images et font
+nav_order: 3
+parent: Développer
+---
 
 # Icons, images et font
 
