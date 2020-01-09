@@ -1,6 +1,13 @@
-remote_theme: minimal-mistakes-jekyll
 include:
   - "_*_.md"
   - "_*_.*.md"
   - "_*_.html"
   - "_*_.*.html"
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      author: "Nicolas Boyer"
+      layout: page
+      show_sidebar: false
