@@ -2,7 +2,7 @@
 layout: default
 title: Développer
 nav_order: 3
-has_childre: true
+has_children: true
 ---
 
 # Développer
