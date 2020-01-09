@@ -4,3 +4,12 @@ include:
   - "_*_.*.md"
   - "_*_.html"
   - "_*_.*.html"
+title: WApiTis 2
+description: WebApp utiliTies pour typescript
+baseurl: "/wapitis"
+url: "https://nicolasboyer.github.io/"
+footer_content: 'Copyright &copy; 2017-2020 Nicolas Boyer. Distributed by an <a href="https://github.com/NicolasBoyer/wapitis/blob/master/LICENSE.md">MIT license.</a>'
+logo: "/ui/logo.png"
+aux_links:
+  "WApiTis sur GitHub":
+    - "//github.com/NicolasBoyer/wapitis"

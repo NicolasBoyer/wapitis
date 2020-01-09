@@ -1,11 +1,6 @@
 ---
 id: "index"
 title: "WApiTis 2"
-subtitle: WebApp utiliTies pour typescript
-layout: home
-navigation:
-  - /getstarted
-  - /api
 ---
 
 # WApiTis 2 - Documentation
