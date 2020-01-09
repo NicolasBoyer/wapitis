@@ -1,3 +1,4 @@
+theme: jekyll-theme-leap-day
 include:
   - "_*_.md"
   - "_*_.*.md"
@@ -11,5 +12,3 @@ defaults:
       author: "Nicolas Boyer"
       layout: page
       show_sidebar: false
-
-theme: jekyll-theme-leap-day
