@@ -1,4 +1,4 @@
-remote_theme: leakyabstractions/pretty-docs
+remote_theme: pmarsceill/just-the-docs
 include:
   - "_*_.md"
   - "_*_.*.md"
