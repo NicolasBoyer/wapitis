@@ -1,3 +1,9 @@
+---
+layout: default
+title: NonUse
+nav_exclude: true
+---
+
 # WApiTis 2
 ![](ui/logo.png)
 
