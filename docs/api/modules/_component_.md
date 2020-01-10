@@ -12,31 +12,30 @@ has_children: true
 
 
 <div style="width: 100%;max-width: 100%;margin-bottom: 1.5rem;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.08);padding: .5rem .75rem;">
-
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Classes
 </div>
-
-[Component](../classes/_component_.component.md)
-
+<div style="margin-top: 0.5rem;">
+<a href="../classes/_component_.component.md">Component</a>
+</div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Classes
 </div>
-
-[IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)
-
+<div style="margin-top: 0.5rem;">
+<a href="../interfaces/_component_.ipropertyoptions.md">IPropertyOptions</a>
+</div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Type aliases
 </div>
-
-[PropertyValues](_component_.md#propertyvalues)
-
+<div style="margin-top: 0.5rem;">
+<a href="_component_.md#propertyvalues">PropertyValues</a>
+</div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Directive Functions
 </div>
-
-[customElement](_component_.md#customelement) [property](_component_.md#property)
-
+<div style="margin-top: 0.5rem;">
+<a href="_component_.md#customelement">customElement</a> <a href="_component_.md#property">property</a>
+</div>
 </div>
 
 ## Type aliases
