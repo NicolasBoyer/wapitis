@@ -10,17 +10,17 @@ has_children: true
 
 ## Index
 
-| Classes|
-{: .fw-700 }
+| Classes {: .fw-700 }                                                              |
+|:-------------------|
 | [Component](../classes/_component_.component.md)                                  |
-| Interfaces|
-{: .fw-700 }
+| Interfaces {: .fw-700 }                                                           |
+|:-------------------|
 | [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)                 |
-| Type aliases|
-{: .fw-700 }
+| Type aliases {: .fw-700 }                                                         |
+|:-------------------|
 | [PropertyValues](_component_.md#propertyvalues)                                   |
-| Directive Functions|
-{: .fw-700 }
+| Directive Functions {: .fw-700 }                                                  |
+|:-------------------|
 | [customElement](_component_.md#customelement) [property](_component_.md#property) |
 
 ## Type aliases
