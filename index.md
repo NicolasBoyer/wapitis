@@ -4,7 +4,7 @@ title: Home
 nav_order: 1
 ---
 
-# WApiTis 2 - Documentation
+# WApiTis - Documentation (v2)
 {: .fs-9 }
 
 WebApp utiliTies est un set d'outils pour développer et compiler une application web avec ou sans client lourd.
