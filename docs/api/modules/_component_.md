@@ -10,22 +10,19 @@ has_children: true
 
 ## Index
 
-### Classes
-
-* [Component](../classes/_component_.component.md)
-
-### Interfaces
-
-* [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)
-
-### Type aliases
-
-* [PropertyValues](_component_.md#propertyvalues)
-
-### Directive Functions
-
-* [customElement](_component_.md#customelement)
-* [property](_component_.md#property)
+| Classes                                                           |
+|:------------------------------------------------------------------|
+| [Component](../classes/_component_.component.md)                  |
+| Interfaces                                                        |
+|:------------------------------------------------------------------|
+| [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md) |
+| Type aliases                                                      |
+|:------------------------------------------------------------------|
+| [PropertyValues](_component_.md#propertyvalues)                   |
+| Directive Functions                                               |
+|:------------------------------------------------------------------|
+| [customElement](_component_.md#customelement)                     |
+| [property](_component_.md#property)                               |
 
 ## Type aliases
 
