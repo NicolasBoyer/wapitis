@@ -1,7 +1,9 @@
 ---
-id: "_dom_"
-title: "dom"
-sidebar_label: "dom"
+layout: default
+title: dom
+nav_order: 2
+parent: API
+has_children: true
 ---
 
 ## Index

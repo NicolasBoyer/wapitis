@@ -5,16 +5,12 @@ nav_order: 1
 parent: Développer
 ---
 
-# Le component <!-- omit in toc -->
+# Le component
+{: .no_toc }
 
 Le composant intégré est comme nous l'avons vu la pierre angulaire du développement avec wapitis. Il permet de poser rapidement un web component en utilisant un langage simplifié, comme les directives intégrés ou son cycle de vie.
 
-- [La directive custom element](#la-directive-custom-element)
-- [La directive property](#la-directive-property)
-- [Les custom event et les attributs @event](#les-custom-event-et-les-attributs-event)
-- [Méthodes et utilisation du cycle de vies](#m%c3%a9thodes-et-utilisation-du-cycle-de-vies)
-- [Slot](#slot)
-- [Possibilité de lit-html](#possibilit%c3%a9-de-lit-html)
+1.TOC {:toc}
 
 ## La directive custom element
 
@@ -85,7 +81,9 @@ ${this._todos.map((todo, index) => html`<w-todo ?checked=${todo.checked} text=${
 
 Le component a quelques méthodes intégrées qui définissent son cycle de vie.
 
-### constructor <!-- omit in toc -->
+### constructor
+{: .no_toc }
+
 ```typescript
 constructor(options: IProps) {
     super(options)
@@ -93,7 +91,9 @@ constructor(options: IProps) {
 ```
 Appelé lors de la création du composant seulement. Intéressant pour déclarer les variables et propriétés. Possible d'accéder aux propriétés déclarées (props) lors de la création du composant avec new Composant(props).
 
-### connectedCallback <!-- omit in toc -->
+### connectedCallback
+{: .no_toc }
+
 ```typescript
 connectedCallback() {
     super.connectedCallback()
@@ -101,7 +101,9 @@ connectedCallback() {
 ```
 Appelé lorsque l'élément est connecté pour la première fois au DOM du document.
 
-### attributeChangedCallback <!-- omit in toc -->
+### attributeChangedCallback
+{: .no_toc }
+
 ```typescript
 attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
     super.attributeChangedCallback(attrName, oldVal, newVal)
@@ -109,7 +111,9 @@ attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
 ```
 Appelé lorsque l'un des attributs de l'élément personnalisé est ajouté, supprimé ou modifié.
 
-### shouldUpdate <!-- omit in toc -->
+### shouldUpdate
+{: .no_toc }
+
 ```typescript
 shouldUpdate(_changedProperties: PropertyValues): boolean {
     return true
@@ -118,7 +122,9 @@ shouldUpdate(_changedProperties: PropertyValues): boolean {
 Permet de conditionner le rendu du composant. render() est appelé si la fonction retourne true. Ce qui est le comportement par défaut.
 **_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
 
-### beforeRender <!-- omit in toc -->
+### beforeRender
+{: .no_toc }
+
 ```typescript
 beforeRender(_changedProperties: PropertyValues) {
     //
@@ -127,7 +133,9 @@ beforeRender(_changedProperties: PropertyValues) {
 Appelé avant le rendu du composant. Permet d'interagir avec les éléments à chaque appel du composant avant sa création dans le dom.
 **_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
 
-### render <!-- omit in toc -->
+### render
+{: .no_toc }
+
 ```typescript
 render() {
     return html`
@@ -137,7 +145,9 @@ render() {
 ```
 La méthode permet de créer le composant dans le dom grâce au tag html de lit-html. Il retourne un TemplateResult qui est ensuite interprété et permet la mise à jour du DOM.
 
-### firstUpdated <!-- omit in toc -->
+### firstUpdated
+{: .no_toc }
+
 ```typescript
 firstUpdated(_changedProperties: PropertyValues) {
     //
@@ -149,7 +159,9 @@ this._input = this.shadowRoot!.querySelector('input')
 ```
 **_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
 
-### updated <!-- omit in toc -->
+### updated
+{: .no_toc }
+
 ```typescript
 updated(_changedProperties: PropertyValues) {
     //
@@ -158,7 +170,9 @@ updated(_changedProperties: PropertyValues) {
 Appelé lors de chaque mise à jour du composant. Permet de réaliser des tâches après le rendu du composant à chaque appel en utilisant l'API DOM, par exemple pour le focus d'un élément.
 **_changedProperties** permet d'accéder aux propriétés en cours de changement dans leur ancienne et leur nouvelle valeur grâce à une map ```PropertyValues = new Map<PropertyKey, { oldVal: unknown, newVal: unknown }>```
 
-### disconnectedCallback <!-- omit in toc -->
+### disconnectedCallback
+{: .no_toc }
+
 ```typescript
 disconnectedCallback() {
     super.disconnectedCallback()

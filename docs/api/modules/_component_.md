@@ -1,7 +1,9 @@
 ---
-id: "_component_"
-title: "component"
-sidebar_label: "component"
+layout: default
+title: component
+nav_order: 1
+parent: API
+has_children: true
 ---
 
 ## Index
@@ -57,9 +59,9 @@ export default class Todo extends Component<IProps> {
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`tagName?` | string | Nom du custom element. Si aucun tagName n'est spécifié, il prend alors le nom ```x-${type.name.toLowerCase()}``` |
+| Name       | Type   | Description                                                                                                      |
+| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| `tagName?` | string | Nom du custom element. Si aucun tagName n'est spécifié, il prend alors le nom ```x-${type.name.toLowerCase()}``` |
 
 **Returns:** *(Anonymous function)*
 
@@ -82,9 +84,9 @@ Elle se place à gauche du nom de la propriété. Exemple :
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`options?` | [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md) |
+| Name       | Type                                                              |
+| ---------- | ----------------------------------------------------------------- |
+| `options?` | [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md) |
 
 **Returns:** *(Anonymous function)*
 

@@ -1,7 +1,9 @@
 ---
-id: "_css_"
-title: "css"
-sidebar_label: "css"
+layout: default
+title: css
+nav_order: 2
+parent: API
+has_children: true
 ---
 
 ## Index
@@ -52,10 +54,10 @@ static get styles() {
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`strings` | TemplateStringsArray |
-`...values` | Array‹CSSResult &#124; number› |
+| Name        | Type                           |
+| ----------- | ------------------------------ |
+| `strings`   | TemplateStringsArray           |
+| `...values` | Array‹CSSResult &#124; number› |
 
 **Returns:** *CSSResult‹›*
 
@@ -93,8 +95,8 @@ static get styles() {
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`value` | unknown |
+| Name    | Type    |
+| ------- | ------- |
+| `value` | unknown |
 
 **Returns:** *CSSResult‹›*
