@@ -555,7 +555,7 @@ body {
 
 ---
 
-Quelques éléments ont été rajoutés sur le sit envoyés sur le serveur. Ils ne seront pas décrit ici ...
+Quelques éléments ont été rajoutés sur le site envoyé sur le serveur. Ils ne seront pas décrit ici ...
 
 Il ne reste plus alors qu'à tout envoyer sur le serveur de son choix. Dans mon cas, j'ai utilisé netlify.
 
