@@ -60,7 +60,7 @@ Ce fichier est nécessaire pour permettre à la webapp de s'installer en tant qu
 
 ---
 
-## clear
+## Nettoyer
 
 ```bash
 npx wapitis clear
@@ -69,7 +69,7 @@ Cette ligne de commande permet de supprimer le cache et de supprimer les éventu
 
 ---
 
-## generate
+## Générer des fichiers
 
 Comme vu dans l'exemple TODO, pour générer les fichiers il est conseillé d'utiliser les signes de commandes suivantes
 
@@ -87,7 +87,7 @@ La deuxième permet de créer un composant dérivant de component et les divers 
 
 ---
 
-## dev et prod
+## Compiler pour le WEB : dev et prod
 
 En web, on peut compiler pour le dev :
 ```bash
@@ -110,7 +110,7 @@ Si les fichiers sont sur un git, il est également possible d'utiliser cette lig
 
 ---
 
-## electron dev prod publish
+## Compiler avec electron : dev, prod et publish
 
 Comme vu précédemment, il est possible de générer et de tester une application dans electron avec :
 ```bash
