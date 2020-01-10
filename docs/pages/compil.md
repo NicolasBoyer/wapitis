@@ -8,6 +8,7 @@ nav_order: 4
 {: .no_toc }
 
 La compilation peut s'effectuer de différentes manières, en dev ou en prod, pour electron ou pour le web
+{: .fs-6 .fw-300 }
 
 ---
 

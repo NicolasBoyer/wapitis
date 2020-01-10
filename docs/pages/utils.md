@@ -8,7 +8,8 @@ parent: Développer
 # Utilitaires
 {: .no_toc }
 
-Afin de permettre d'accéder à certaines méthodes utiles, quatre modules ont été créés :
+Afin de permettre d'accéder à certaines méthodes utiles, quatre modules ont été créés.
+{: .fs-6 .fw-300 }
 
 ---
 

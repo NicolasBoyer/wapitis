@@ -21,6 +21,8 @@ Répondez aux questions. Dans notre cas :
 
 L'installation se poursuit alors avec ts-lint et electron-updater.
 
+---
+
 Une fois l'installation terminée les sources se présentent ainsi :
 
 ![](images/wapitisSrc.png)
@@ -50,6 +52,8 @@ Pour créer notre application, nous aurons besoin de deux composants:
 
 TodoList aura une propriété observée todos : un array contenant la liste  des todos
 Todo aura 3 attributs : checked, text, index, peut etre plus
+
+---
 
 Nous commencerons donc par créer un composant en utilisant la ligne de commande suivante :
 
@@ -189,6 +193,8 @@ Cela donne :
 
 ![](images/wapitisTodoList01.png)
 
+---
+
 Afin d'améliorer un peu la présentation, nous allons intégrer un peu de stylage. Les composants portent leur stylage, ce qui rend très facile leur utilisation. De plus avec les shadow DOM, les CSS sont bloqués à l'intérieur du composant, ce qui veut dire que les CSS des autres composants n'agissent pas sur lui et inversement.
 
 Il y a évidemment des passerelles et des surcharges possibles, comme cela sera expliqué plus loin dans la doc.
@@ -235,6 +241,8 @@ export default class TodoList extends Component<{}> {
 Ce qui donne :
 
 ![](images/wapitisTodoList02.png)
+
+---
 
 On pourrait s'arrêter ici, mais nous voulions également pouvoir supprimer les tâches et les marquer comme réalisées. Pour ce faire nous allons créer un autre composant que nous pourrons ensuite instancier dans le composant TodoList
 
@@ -334,6 +342,8 @@ render() {
 Cela nous donne ainsi
 
 ![](images/wapitisTodoList03.png)
+
+---
 
 Afin d'améliorer le rendu, un peu de stylage est nécessaire
 
@@ -435,7 +445,7 @@ export default class Todo extends Component<IProps> {
 
 Dans un contexte de vrai webapp on aurait probablement créé un composant icon à la place de la balise SVG.
 
-Celda dit, comme expliqué plus haut pour avoir des icones on utilise une balise SVG appelant le fichier d'icones icones.svg présent dans les assets/img. et l'id associé à l'icone voulu
+Cela dit, comme expliqué plus haut pour avoir des icones on utilise une balise SVG appelant le fichier d'icones icones.svg présent dans les assets/img. et l'id associé à l'icone voulu
 On va lui ajouter les icones :
 
 ```xml
@@ -467,6 +477,8 @@ Au final on obtient:
 
 ![](images/wapitisTodoList05.png)
 
+---
+
 Une fois terminé notre webapp, il est tout à fait possible de tester l'app sous electron en lançant
 
 ```bash
@@ -482,6 +494,8 @@ Il est alors possible de continuer à développer notre webapp comme on le faisa
 Pour modifier les menus ou tout ce qui concerne electron, il suffit de modifier le fichier electronSTart.ts. Nous ne le ferons pas ici.
 
 Si nous ne verrons pas directement comment publier cette application pour la production avec electron, cela est tout à fait possible et sera expliqué plus bas.
+
+---
 
 Enfin si nous voulons publier notre webapp pour la production et profiter du service worker et de ses possibilités, il suffi de lancer
 
@@ -538,6 +552,8 @@ body {
     display: none;
 }
 ```
+
+---
 
 Quelques éléments ont été rajoutés sur le sit envoyés sur le serveur. Ils ne seront pas décrit ici ...
 

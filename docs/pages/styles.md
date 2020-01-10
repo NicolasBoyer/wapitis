@@ -9,6 +9,7 @@ parent: Développer
 {: .no_toc }
 
 Dans wapitis la gestion des CSS peut se gérer de plusieurs façons différentes.
+{: .fs-6 .fw-300 }
 
 ---
 
