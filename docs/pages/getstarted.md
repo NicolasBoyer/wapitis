@@ -40,6 +40,8 @@ Une fois l'installation terminée les sources se présentent ainsi :
 - main.css contient les css générales de l'application (il ne s'applique pas aux différents composants qui contiennet leurs propres styles)
 - app.tsx est le point de départ de l'application. L'endroit ou nous appellerons le fichier racine de notre WebApp
 
+---
+
 Pour créer notre application, nous aurons besoin de deux composants:
 
     TodoList
