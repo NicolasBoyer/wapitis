@@ -10,14 +10,34 @@ has_children: true
 
 ## Index
 
-| Classes                                                                           |
-| [Component](../classes/_component_.component.md)                                  |
-| Interfaces                                                                        |
-| [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)                 |
-| Type aliases                                                                      |
-| [PropertyValues](_component_.md#propertyvalues)                                   |
-| Directive Functions                                                               |
-| [customElement](_component_.md#customelement) [property](_component_.md#property) |
+
+<div style="width: 100%;max-width: 100%;margin-bottom: 1.5rem;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.08);padding: .5rem .75rem;">
+
+<div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
+Classes
+</div>
+
+[Component](../classes/_component_.component.md)
+
+<div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
+Classes
+</div>
+
+[IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)
+
+<div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
+Type aliases
+</div>
+
+[PropertyValues](_component_.md#propertyvalues)
+
+<div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
+Directive Functions
+</div>
+
+[customElement](_component_.md#customelement) [property](_component_.md#property)
+
+</div>
 
 ## Type aliases
 
