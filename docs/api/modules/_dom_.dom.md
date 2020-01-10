@@ -1,8 +1,11 @@
 ---
-id: "_dom_.dom"
-title: "DOM"
-sidebar_label: "DOM"
+layout: default
+title: DOM
+nav_order: 3
+parent: API
 ---
+
+# DOM
 
 ## Index
 
@@ -25,9 +28,9 @@ Transforme un style en nombre
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`style` | string &#124; null | Le style à transformer |
+| Name    | Type               | Description            |
+| ------- | ------------------ | ---------------------- |
+| `style` | string &#124; null | Le style à transformer |
 
 **Returns:** *number*
 
@@ -43,10 +46,10 @@ Supprime la classe contenant le préfix renseigné
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`element` | HTMLElement | L'élément sur lequel la classe sera supprimé |
-`prefix` | string | Le préfix de la classe à supprimer  |
+| Name      | Type        | Description                                  |
+| --------- | ----------- | -------------------------------------------- |
+| `element` | HTMLElement | L'élément sur lequel la classe sera supprimé |
+| `prefix`  | string      | Le préfix de la classe à supprimer           |
 
 **Returns:** *void*
 
@@ -62,12 +65,12 @@ Assigne l'attribut spécifié et sa valeur à l'élément spécifié
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`element` | HTMLElement | L'élément sur lequel l'attribue est affecté |
-`name` | string | Nom de l'attribut |
-`value` | any | Valeur de l'attribut |
-`isStyle?` | boolean | Si true, ajoute en tant que que style  |
+| Name       | Type        | Description                                 |
+| ---------- | ----------- | ------------------------------------------- |
+| `element`  | HTMLElement | L'élément sur lequel l'attribue est affecté |
+| `name`     | string      | Nom de l'attribut                           |
+| `value`    | any         | Valeur de l'attribut                        |
+| `isStyle?` | boolean     | Si true, ajoute en tant que que style       |
 
 **Returns:** *void*
 
@@ -83,11 +86,11 @@ Assigne la propriété renseignée dans le style si la valeur est différente
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`element` | HTMLElement | L'élément sur lequel appliquer le style |
-`name` | string | Le nom du style à assigner |
-`value` | string | La valeur du style à assigner |
+| Name      | Type        | Description                             |
+| --------- | ----------- | --------------------------------------- |
+| `element` | HTMLElement | L'élément sur lequel appliquer le style |
+| `name`    | string      | Le nom du style à assigner              |
+| `value`   | string      | La valeur du style à assigner           |
 
 **Returns:** *boolean*
 

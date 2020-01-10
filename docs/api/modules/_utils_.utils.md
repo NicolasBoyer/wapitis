@@ -1,8 +1,11 @@
 ---
-id: "_utils_.utils"
-title: "UTILS"
-sidebar_label: "UTILS"
+layout: default
+title: UTILS
+nav_order: 5
+parent: API
 ---
+
+# UTILS
 
 ## Index
 

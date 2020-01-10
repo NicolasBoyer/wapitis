@@ -1,8 +1,11 @@
 ---
-id: "_shadowdom_.shadowdom"
-title: "SHADOWDOM"
-sidebar_label: "SHADOWDOM"
+layout: default
+title: SHADOWDOM
+nav_order: 5
+parent: API
 ---
+
+# SHADOWDOM
 
 ## Index
 

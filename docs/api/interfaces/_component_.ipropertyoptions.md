@@ -1,8 +1,12 @@
 ---
-id: "_component_.ipropertyoptions"
-title: "IPropertyOptions"
-sidebar_label: "IPropertyOptions"
+layout: default
+title: IPropertyOptions
+nav_order: 2
+grand_parent: API
+parent: component
 ---
+
+# IPropertyOptions
 
 Paramètres de la directive @property. Trois options possibles :
 - type : indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (string par défaut)

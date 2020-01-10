@@ -1,8 +1,11 @@
 ---
-id: "_log_.log"
-title: "Log"
-sidebar_label: "Log"
+layout: default
+title: Log
+nav_order: 4
+parent: API
 ---
+
+# Log
 
 ## Hierarchy
 

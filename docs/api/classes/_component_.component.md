@@ -1,8 +1,12 @@
 ---
-id: "_component_.component"
-title: "Component"
-sidebar_label: "Component"
+layout: default
+title: Component
+nav_order: 1
+grand_parent: API
+parent: component
 ---
+
+# Component
 
 Classe qui étend HTMLElement et qui associée à la directive @customElement permet la création d'un customElement
 
@@ -58,9 +62,9 @@ Crée une instance de Component
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`options?` | T | Paramètre de type {{ [x: string]: any }}, nécessaire pour la création de la classe sous la forme new({options})  Une fois appelées, les propriétés sont automatiquement prises en compte, si elles ont été déclarées sur le composant |
+| Name       | Type | Description                                                                                                                                                                                                                           |
+| ---------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options?` | T    | Paramètre de type {{ [x: string]: any }}, nécessaire pour la création de la classe sous la forme new({options})  Une fois appelées, les propriétés sont automatiquement prises en compte, si elles ont été déclarées sur le composant |
 
 **Returns:** *[Component](_component_.component.md)*
 
@@ -138,11 +142,11 @@ Spécifique au web component. Si la nouvelle valeur de l'attribut observé est d
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`attrName` | string | Nom de l'attribut |
-`oldVal` | any | Ancienne valeur de l'attribut |
-`newVal` | any | Nouvelle valeur de l'attribut  |
+| Name       | Type   | Description                   |
+| ---------- | ------ | ----------------------------- |
+| `attrName` | string | Nom de l'attribut             |
+| `oldVal`   | any    | Ancienne valeur de l'attribut |
+| `newVal`   | any    | Nouvelle valeur de l'attribut |
 
 **Returns:** *void*
 
@@ -158,9 +162,9 @@ Appelé avant le rendu du composant. Permet d'interagir avec les éléments à c
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |   |
+| | | | Name                                                                 | Type                                                                                                                                                                                                                         | Description |
+| -----| -----| -----| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| | | | `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |                                           |
 
 **Returns:** *void*
 
@@ -283,9 +287,9 @@ Il n'est ni necessaire ni recommandé d'utiliser cette méthode qui est appelé 
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`name` | PropertyKey | Nom de la propriété |
-`options?` | [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md) | - |
+| Name       | Type                                                              | Description         |
+| ---------- | ----------------------------------------------------------------- | ------------------- |
+| `name`     | PropertyKey                                                       | Nom de la propriété |
+| `options?` | [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md) | -                   |
 
 **Returns:** *void*
