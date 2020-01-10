@@ -10,7 +10,8 @@ parent: Développer
 
 Le composant intégré est comme nous l'avons vu la pierre angulaire du développement avec wapitis. Il permet de poser rapidement un web component en utilisant un langage simplifié, comme les directives intégrés ou son cycle de vie.
 
-1.TOC {:toc}
+1. TOC
+{:toc}
 
 ## La directive custom element
 
