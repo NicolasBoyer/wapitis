@@ -4,22 +4,28 @@ title: Compiler
 nav_order: 4
 ---
 
-# Compiler <!-- omit in toc -->
+# Compiler
+{: .no_toc }
 
 La compilation peut s'effectuer de différentes manières, en dev ou en prod, pour electron ou pour le web
 
-- [Service Worker](#service-worker)
-- [Le manifest](#le-manifest)
-- [clear](#clear)
-- [generate](#generate)
-- [dev et prod](#dev-et-prod)
-- [electron dev prod publish](#electron-dev-prod-publish)
+---
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
 
 ## Service Worker
 
 Lors de la compilation en prod ou en dev avec --webapp pour le web, un service worker est généré. Ce dernier permet d'enregistrer dans le cache du navigateur les différents éléments composant la webapp, permettant ainsi de la consulter offline.
 
 Comme vu lors, de l'exemple TODO, il permet aussi d'accéder aux boutons donnant accès à l'installation en tant qu'application autonome et activant les notifications.
+
+---
 
 ## Le manifest
 
@@ -52,12 +58,16 @@ Voir [https://developer.mozilla.org/fr/docs/Mozilla/Add-ons/WebExtensions/manife
 
 Ce fichier est nécessaire pour permettre à la webapp de s'installer en tant qu'application autonome.
 
+---
+
 ## clear
 
 ```bash
 npx wapitis clear
 ```
 Cette ligne de commande permet de supprimer le cache et de supprimer les éventuelles anciennes compilations.
+
+---
 
 ## generate
 
@@ -74,6 +84,8 @@ npx wapitis generate component path/du/fichier.ts(x)
 La première permet de créer une classe  contenant divers éléments par défaut.
 
 La deuxième permet de créer un composant dérivant de component et les divers éléments disponibles. Il est vivement conseillé d'utiliser cette ligne de commande lors de la création d'un composant car des commentaires d'aide y sont apporté et la structure du component est disponible par défaut.
+
+---
 
 ## dev et prod
 
@@ -95,6 +107,8 @@ npx wapitis prod
 Dans ce cas les fichiers sont alors rendus disponibles dans un dossier dist. Ces fichiers peuvent ensuite être envoyés sur un serveur.
 
 Si les fichiers sont sur un git, il est également possible d'utiliser cette ligne de commande avec un service du type [netlify](https://www.netlify.com/)
+
+---
 
 ## electron dev prod publish
 

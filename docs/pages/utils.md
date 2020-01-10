@@ -9,7 +9,20 @@ parent: Développer
 
 Afin de permettre d'accéder à certaines méthodes utiles, quatre modules ont été créés :
 
-- UTILS - contient différentes méthodes permettant de simplifier certaines actions, comme la génération d'id, la transformation entre différents types, l'envoie de customEvent, la sauvegarde en local storage ...
+---
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
+# UTILS
+
+Contient différentes méthodes permettant de simplifier certaines actions, comme la génération d'id, la transformation entre différents types, l'envoie de customEvent, la sauvegarde en local storage ...
+
 ```typescript
     /** Transforme une string dans le type renseigné */
     function fromString(value: string | null, type?: unknown): any
@@ -32,8 +45,12 @@ Afin de permettre d'accéder à certaines méthodes utiles, quatre modules ont �
     /** Retourne les données spécifié dans la clé en local storage */
     function load<T>(key: string): T
 ```
+---
 
-- DOM - contient des méthodes permettant de manipuler le dom
+# DOM
+
+Contient des méthodes permettant de manipuler le dom
+
 ```typescript
     /** Assigne l'attribut spécifié et sa valeur à l'élément spécifié. Si isStyle, l'ajoute en tant que que style */
     function setAttribute(element: HTMLElement, name: string, value: any, isStyle?: boolean): void
@@ -44,7 +61,13 @@ Afin de permettre d'accéder à certaines méthodes utiles, quatre modules ont �
     /** Assigne la propriété renseignée dans le style si la valeur est différente. Retourne true dans ce cas */
     function setStyle(element: HTMLElement, name: string, value: string): boolean
 ```
-- SHADOWDOM - contient des méthodes permettant de manipuler et de retrouver les shadowdom entre eux
+
+---
+
+# SHADOWDOM
+
+Contient des méthodes permettant de manipuler et de retrouver les shadowdom entre eux
+
 ```typescript
     /** Retrouve le host du shadowTree de ce noeud. */
     function findHost<T extends Element = Element>(from: Node): T
@@ -64,7 +87,12 @@ Afin de permettre d'accéder à certaines méthodes utiles, quatre modules ont �
     function querySelectorDeep(selector: string, root?: Element | Document): Element
 ```
 
-- LOG - permet de faire différents type de log dans la console JS
+---
+
+# LOG
+
+Permet de faire différents type de log dans la console JS
+
 ```typescript
     /** log classique avec le message renseigné et les données datas si elles existent. */
     function info(message: string, ...datas: any[]): void
@@ -75,6 +103,8 @@ Afin de permettre d'accéder à certaines méthodes utiles, quatre modules ont �
     /** log de type error (rouge sur fond rose) avec le message renseigné et les données datas si elles existent. */
     function error(message: string, ...datas: any[]): void
 ```
+
+---
 
 Il est également possible d'utiliser JSX en important le module JSX. Exemple :
 ```typescript

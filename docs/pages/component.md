@@ -10,11 +10,15 @@ parent: Développer
 
 Le composant intégré est comme nous l'avons vu la pierre angulaire du développement avec wapitis. Il permet de poser rapidement un web component en utilisant un langage simplifié, comme les directives intégrés ou son cycle de vie.
 
+---
+
 ## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
+
+---
 
 ## La directive custom element
 
@@ -47,6 +51,8 @@ constructor() {
 }
 ```
 
+---
+
 ## La directive property
 
 En typescript, les propriétés peuvent être publiques, protected ou private. Avec Wapitis, pour rendre des propriétés observables, il faut utiliser la directive @property
@@ -65,6 +71,8 @@ Il est possible de passer un objet en paramètre. Cet object peut contenir 3 par
 - writeOnly : propriété observable non visible dans l'html rendu mais possible de la créer en html ou en javascript (false par défaut)
 - reflectInAttribute : la propriété est transformée en attribut, de camelCase vers dashCase (true par défaut) et est observable. Passer ce paramètre à false revient à créer une propriété publique mais non observable.
 
+---
+
 ## Les custom event et les attributs @event
 
 Pour passer des fonctions dans les attributs d'un composant avec Wapitis et permettre à deux composants de communiquer entre eux, on utilisera les customEvents, comme on l'a vu avec le composant Todo
@@ -80,6 +88,8 @@ Grâce à LitHtml pour ajouter un addEventListener sur le composant on pourra cr
 ```typescript
 ${this._todos.map((todo, index) => html`<w-todo ?checked=${todo.checked} text=${todo.text} .index=${index} @remove=${this._removeTodo} @completed=${this._toggleTodo}></w-todo>`)}
 ```
+
+---
 
 ## Méthodes et utilisation du cycle de vies
 
@@ -184,6 +194,8 @@ disconnectedCallback() {
 ```
 Appelé lorsque l'élément personnalisé est déconnecté du DOM du document.
 
+---
+
 ## Slot
 
 Lors de la création d'un custom element si on veut permettre l'ajout d'enfant à notre composant, on peut utiliser le principe de slot.
@@ -252,6 +264,8 @@ render() {
 Dans ce cas tout autre enfant nom nommé serait affecté à la balise slot. Si aucun autre enfant n'est ajouté, c'est le contenu par défaut qui est utilisé.
 
 Pour sélectionner un élément en slot on doit utiliser le sélecteur ```::slotted()```.
+
+---
 
 ## Possibilité de lit-html
 

@@ -5,19 +5,26 @@ nav_order: 2
 parent: Développer
 ---
 
-# Style <!-- omit in toc -->
+# Style
+{: .no_toc }
 
 Dans wapitis la gestion des CSS peut se gérer de plusieurs façons différentes.
 
-- [main.css](#maincss)
-- [La propriété statique style](#la-propri%c3%a9t%c3%a9-statique-style)
-- [Le chargement externe](#le-chargement-externe)
-- [Surcharge avec slot override](#surcharge-avec-slot-override)
-- [Utilisation des variables](#utilisation-des-variables)
+---
 
-## main.css
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
+## Le fichier main.css
 
 Le fichiers main.css permet de gérer les css du body et de tout ce qui n'est pas un composant.
+
+---
 
 ## La propriété statique style
 
@@ -63,6 +70,8 @@ static get styles() {
 
 Ainsi on hérite des styles du composant parent. Inutile dans le cas où on hérite diretcement de Component.
 
+---
+
 ## Le chargement externe
 
 Si on souhaite partager une css entre plusieurs composant il est possible de le faire en déclarant directement dans la méthode render() dans le tag html :
@@ -81,6 +90,8 @@ Par ailleurs il faut également réaliser l'import de ce fichier en début de do
 import '../www/styles/sharedCSS.css'
 ```
 
+---
+
 ## Surcharge avec slot override
 
 Si on veut surcharger les styles d'un composant existant que l'on est en train de déclarer, il est possible de la faire en utilisant une technique spécifique à wapitis. On va pour cela s'appuyer sur les slots et déclarer dans la méthode render :
@@ -96,6 +107,8 @@ render() {
         </style>
     ...
 ```
+
+---
 
 ## Utilisation des variables
 
