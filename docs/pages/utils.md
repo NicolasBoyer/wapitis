@@ -6,6 +6,7 @@ parent: Développer
 ---
 
 # Utilitaires
+{: .no_toc }
 
 Afin de permettre d'accéder à certaines méthodes utiles, quatre modules ont été créés :
 
@@ -19,7 +20,7 @@ Afin de permettre d'accéder à certaines méthodes utiles, quatre modules ont �
 
 ---
 
-# UTILS
+## UTILS
 
 Contient différentes méthodes permettant de simplifier certaines actions, comme la génération d'id, la transformation entre différents types, l'envoie de customEvent, la sauvegarde en local storage ...
 
@@ -47,7 +48,7 @@ Contient différentes méthodes permettant de simplifier certaines actions, comm
 ```
 ---
 
-# DOM
+## DOM
 
 Contient des méthodes permettant de manipuler le dom
 
@@ -64,7 +65,7 @@ Contient des méthodes permettant de manipuler le dom
 
 ---
 
-# SHADOWDOM
+## SHADOWDOM
 
 Contient des méthodes permettant de manipuler et de retrouver les shadowdom entre eux
 
@@ -89,7 +90,7 @@ Contient des méthodes permettant de manipuler et de retrouver les shadowdom ent
 
 ---
 
-# LOG
+## LOG
 
 Permet de faire différents type de log dans la console JS
 

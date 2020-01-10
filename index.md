@@ -5,13 +5,22 @@ nav_order: 1
 ---
 
 # WApiTis 2 - Documentation
-[Présentation de wapitis](https://github.com/NicolasBoyer/wapitis/blob/master/README.md)
+{: .fs-9 }
+
+WebApp utiliTies est un set d'outils pour développer et compiler une application web avec ou sans client lourd.
+{: .fs-6 .fw-300 }
+
+[Get started now](./docs/pages/getstarted.md){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Voir sur GitHub](https://github.com/NicolasBoyer/wapitis){: .btn .fs-5 .mb-4 .mb-md-0 } [Présentation](https://github.com/NicolasBoyer/wapitis/blob/master/README.md){: .btn .fs-5 .mb-4 .mb-md-0 }
+
+---
 
 ## Install
 
     npm init
     npm i wapitis -D
     npx wapitis init
+
+---
 
 ## CLI
 
@@ -30,27 +39,3 @@ nav_order: 1
     $ wapitis generate class path/du/fichier.ts(x) --> génère une classe relatif à src. tsConfig est mis à jour
 
     $ wapitis generate component path/du/fichier.tsx --> génère un composant relatif à src. tsConfig est mis à jour
-
-## Documentation
-
-Pendant le développement, il est recommandé de lancer avant
-
-```bash
-npx wapitis dev
-```
-
-ou
-
-```bash
-npx wapitis electron --dev
-```
-permettant ainsi de mettre à jour ses modifications à la volée grâce au compileur et au watcher intégré
-
-- [Pour commencer](./docs/pages/getstarted.md)
-- [Développer - le component](./docs/pages/component.md)
-- [Développer - les styles](./docs/pages/styles.md)
-- [Développer - icons, images et font](./docs/pages/assets.md)
-- [Développer - electron](./docs/pages/electron.md)
-- [Développer - utilitaires](./docs/pages/utils.md)
-- [Compiler](./docs/pages/compil.md)
-- [API](./docs/api/index.md)
