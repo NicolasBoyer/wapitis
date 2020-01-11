@@ -34,16 +34,30 @@ Type aliases
 Directive Functions
 </div>
 <div style="margin-top: 0.5rem;">
-<a href="_component_.md#customelement">customElement</a> <a href="_component_.md#property">property</a>
+<a href="_component_.md#customelement">customElement</a> | <a href="_component_.md#property">property</a>
 </div>
 </div>
 
 ## Type aliases
 
-| PropertyValues|
+<table>
+<tr>
+<th>PropertyValues</th>
+</tr>
+<tr>
+<td>Ƭ **PropertyValues**: *Map‹PropertyKey, object›*</td>
+</tr>
+<tr>
+<td>
+<div>*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*</div><div>Définit les paramètres des methodes du cycle de vie de Component</div><div>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :<ul><li>oldVal Ancienne valeur de la propriété</li><li>newVal Nouvelle valeur de la propriété</li></ul><div>Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>
+</td>
+</tr>
+</table>
+
+<!-- | PropertyValues|
 |:-------------|
 | Ƭ **PropertyValues**: *Map‹PropertyKey, object›*|
-| <div>*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*</div><div>Définit les paramètres des methodes du cycle de vie de Component</div><div>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :<ul><li>oldVal Ancienne valeur de la propriété</li><li>newVal Nouvelle valeur de la propriété</li></ul><div>Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>|
+| <div>*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*</div><div>Définit les paramètres des methodes du cycle de vie de Component</div><div>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :<ul><li>oldVal Ancienne valeur de la propriété</li><li>newVal Nouvelle valeur de la propriété</li></ul><div>Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>| -->
 
 <!-- ###  PropertyValues
 
