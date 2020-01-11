@@ -42,22 +42,31 @@ Directive Functions
 
 <table>
 <tr>
-<th>PropertyValues</th>
+<td>
+<h3 style="margin:0;">PropertyValues</h3>
+</td>
 </tr>
 <tr>
 <td>Ƭ **PropertyValues**: *Map‹PropertyKey, object›*</td>
 </tr>
 <tr>
 <td>
-<div>*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*</div><div>Définit les paramètres des methodes du cycle de vie de Component</div><div>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :<ul><li>oldVal Ancienne valeur de la propriété</li><li>newVal Nouvelle valeur de la propriété</li></ul><div>Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>
+<div style="font-style:italic;margin-bottom:0.5em;">Defined in <a href="[_component_.md#customelement](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)">src/component.tsx:80</a></div>
+<div style="margin-bottom:0.5em;">Définit les paramètres des methodes du cycle de vie de Component</div>
+<div style="margin-bottom:0.5em;">Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :
+<ul>
+<li>oldVal Ancienne valeur de la propriété</li>
+<li>newVal Nouvelle valeur de la propriété</li>
+</ul>
+<div style="margin-bottom:0.5em;">Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>
 </td>
 </tr>
 </table>
 
-| PropertyValues|
+<!-- | PropertyValues|
 |:-------------|
 | Ƭ **PropertyValues**: *Map‹PropertyKey, object›*|
-| <div>*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*</div><div>Définit les paramètres des methodes du cycle de vie de Component</div><div>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :<ul><li>oldVal Ancienne valeur de la propriété</li><li>newVal Nouvelle valeur de la propriété</li></ul><div>Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>|
+| <div>*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*</div><div>Définit les paramètres des methodes du cycle de vie de Component</div><div>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :<ul><li>oldVal Ancienne valeur de la propriété</li><li>newVal Nouvelle valeur de la propriété</li></ul><div>Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>| -->
 
 <!-- ###  PropertyValues
 
