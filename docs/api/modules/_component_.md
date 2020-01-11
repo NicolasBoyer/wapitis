@@ -16,57 +16,57 @@ has_children: true
 Classes
 </div>
 <div style="margin-top: 0.5rem;">
-<a href="../classes/_component_.component.md">Component</a>
+<a href="../classes/_component_.component.html">Component</a>
 </div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Classes
 </div>
 <div style="margin-top: 0.5rem;">
-<a href="../interfaces/_component_.ipropertyoptions.md">IPropertyOptions</a>
+<a href="../interfaces/_component_.ipropertyoptions.html">IPropertyOptions</a>
 </div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Type aliases
 </div>
 <div style="margin-top: 0.5rem;">
-<a href="_component_.md#propertyvalues">PropertyValues</a>
+<a href="_component_.html#propertyvalues">PropertyValues</a>
 </div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Directive Functions
 </div>
 <div style="margin-top: 0.5rem;">
-<a href="_component_.md#customelement">customElement</a> | <a href="_component_.md#property">property</a>
+<a href="_component_.html#customelement">@customElement</a> | <a href="_component_.html#property">@property</a>
 </div>
 </div>
 
 ## Type aliases
 
-<table>
+<table style="padding: 0.5rem;">
 <tr>
 <td>
 <h3 style="margin:0;">PropertyValues</h3>
 </td>
 </tr>
 <tr>
-<td>Ƭ **PropertyValues**: *Map‹PropertyKey, object›*</td>
+<td>Ƭ <strong>PropertyValues</strong>: <em>Map‹PropertyKey, object›</em></td>
 </tr>
 <tr>
 <td>
-<div style="font-style:italic;margin-bottom:0.5em;">Defined in <a href="[_component_.md#customelement](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)">src/component.tsx:80</a></div>
+<div style="font-style:italic;margin-bottom:0.5em;">Defined in <a href="https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80">src/component.tsx:80</a></div>
 <div style="margin-bottom:0.5em;">Définit les paramètres des methodes du cycle de vie de Component</div>
 <div style="margin-bottom:0.5em;">Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :
 <ul>
 <li>oldVal Ancienne valeur de la propriété</li>
 <li>newVal Nouvelle valeur de la propriété</li>
 </ul>
-<div style="margin-bottom:0.5em;">Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>
+<div>Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>
 </td>
 </tr>
 </table>
 
-<!-- | PropertyValues|
+| PropertyValues|
 |:-------------|
 | Ƭ **PropertyValues**: *Map‹PropertyKey, object›*|
-| <div>*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*</div><div>Définit les paramètres des methodes du cycle de vie de Component</div><div>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :<ul><li>oldVal Ancienne valeur de la propriété</li><li>newVal Nouvelle valeur de la propriété</li></ul><div>Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>| -->
+| <div>*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*</div><div>Définit les paramètres des methodes du cycle de vie de Component</div><div>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :<ul><li>oldVal Ancienne valeur de la propriété</li><li>newVal Nouvelle valeur de la propriété</li></ul><div>Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>|
 
 <!-- ###  PropertyValues
 
@@ -84,9 +84,9 @@ Map<PropertyKey, { oldVal: unknown, newVal: unknown }> -->
 
 ## Directive Functions
 
-###  customElement
+###  @customElement
 
-▸ **customElement**(`tagName?`: string): *(Anonymous function)*
+▸ **@customElement**(`tagName?`: string): *(Anonymous function)*
 
 *Defined in [src/component.tsx:18](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L18)*
 
@@ -110,9 +110,9 @@ Retourne le custom element T avec le nom tagName
 
 ___
 
-###  property
+###  @property
 
-▸ **property**(`options?`: [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)): *(Anonymous function)*
+▸ **@property**(`options?`: [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)): *(Anonymous function)*
 
 *Defined in [src/component.tsx:62](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L62)*
 
