@@ -109,9 +109,9 @@ export default class Todo extends Component<IProps> {
 ```
 **Parameters:**
 
-| Name       | Type   | Description |
-| ---------- | ------ |------------ |
-| `tagName?` | string | Nom du custom element. Si aucun tagName n'est spécifié, il prend alors le nom ```x-${type.name.toLowerCase()}``` |
+| Name                                         | Type   | Description                                                                                                      |
+| -------------------------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| Optional {: .label .label-green } `tagName?` | string | Nom du custom element. Si aucun tagName n'est spécifié, il prend alors le nom ```x-${type.name.toLowerCase()}``` |
 
 **Returns:** *(Anonymous function)*
 
