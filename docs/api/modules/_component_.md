@@ -28,7 +28,12 @@ Classes
 Type aliases
 </div>
 <div style="margin-top: 0.5rem;">
-<a href="_component_.html#propertyvalues">PropertyValues</a>
+<a href="_component_.html#propertyvalues" markdown="1">
+
+PropertyValues
+{: .text-green-100 }
+
+</a>
 </div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Directive Functions
@@ -38,6 +43,8 @@ Directive Functions
 </div>
 </div>
 
+___
+
 ## Type aliases
 
 <table style="padding: 0.5rem;">
@@ -45,7 +52,7 @@ Directive Functions
 <td markdown="1">
 
 ### PropertyValues
-{: .m-0 }
+{: .m-0 .text-green-100 }
 
 </td>
 </tr>
@@ -75,6 +82,8 @@ Map<PropertyKey, { oldVal: unknown, newVal: unknown }>
 </td>
 </tr>
 </table>
+
+___
 
 ## Directive Functions
 
