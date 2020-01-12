@@ -40,6 +40,9 @@ Directive Functions
 
 ## Type aliases
 
+Ƭ **PropertyValues**: *Map‹PropertyKey, object›*
+{: .mb-0 }
+
 <table style="padding: 0.5rem;">
 <tr>
 <td>
