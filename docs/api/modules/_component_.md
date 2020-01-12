@@ -66,12 +66,45 @@ Directive Functions
 | PropertyValues|
 |:-------------|
 | Ƭ **PropertyValues**: *Map‹PropertyKey, object›*|
-| *Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*<br><br>Définit les paramètres des methodes du cycle de vie de Component<br><br>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :<br>&bull; oldVal Ancienne valeur de la propriété<br>&bull; newVal Nouvelle valeur de la propriété<br><br>Map<PropertyKey, { oldVal: unknown, newVal: unknown }>|
-
-| PropertyValues|
-|:-------------|
-| Ƭ **PropertyValues**: *Map‹PropertyKey, object›*|
 | *Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*<br><br>Définit les paramètres des methodes du cycle de vie de Component<br><br>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :<ul><li>oldVal Ancienne valeur de la propriété</li><li>newVal Nouvelle valeur de la propriété</li></ul>Map<PropertyKey, { oldVal: unknown, newVal: unknown }>|
+
+<table style="padding: 0.5rem;">
+<tr>
+<td>
+
+### PropertyValues
+
+</td>
+</tr>
+<tr>
+<td>
+
+Ƭ **PropertyValues**: *Map‹PropertyKey, object›*
+
+</td>
+</tr>
+<tr>
+<td>
+
+*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*
+
+<div style="margin-bottom:0.5em;">Définit les paramètres des methodes du cycle de vie de Component</div>
+<div style="margin-bottom:0.5em;">Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :
+
+- oldVal Ancienne valeur de la propriété
+- newVal Nouvelle valeur de la propriété
+
+```typescript
+@customElement('w-todo')
+export default class Todo extends Component<IProps> {
+```
+
+Map<PropertyKey, { oldVal: unknown, newVal: unknown }>
+
+</div>
+</td>
+</tr>
+</table>
 
 <!-- ###  PropertyValues
 
