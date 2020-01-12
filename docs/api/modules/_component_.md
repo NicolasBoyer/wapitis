@@ -43,34 +43,6 @@ Directive Functions
 <table style="padding: 0.5rem;">
 <tr>
 <td>
-<h3 style="margin:0;">PropertyValues</h3>
-</td>
-</tr>
-<tr>
-<td>Ƭ <strong>PropertyValues</strong>: <em>Map‹PropertyKey, object›</em></td>
-</tr>
-<tr>
-<td>
-<div style="font-style:italic;margin-bottom:0.5em;">Defined in <a href="https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80">src/component.tsx:80</a></div>
-<div style="margin-bottom:0.5em;">Définit les paramètres des methodes du cycle de vie de Component</div>
-<div style="margin-bottom:0.5em;">Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :
-<ul>
-<li>oldVal Ancienne valeur de la propriété</li>
-<li>newVal Nouvelle valeur de la propriété</li>
-</ul>
-<div>Map<PropertyKey, { oldVal: unknown, newVal: unknown }></div></div>
-</td>
-</tr>
-</table>
-
-| PropertyValues|
-|:-------------|
-| Ƭ **PropertyValues**: *Map‹PropertyKey, object›*|
-| *Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*<br><br>Définit les paramètres des methodes du cycle de vie de Component<br><br>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :<ul><li>oldVal Ancienne valeur de la propriété</li><li>newVal Nouvelle valeur de la propriété</li></ul>Map<PropertyKey, { oldVal: unknown, newVal: unknown }>|
-
-<table style="padding: 0.5rem;">
-<tr>
-<td>
 
 ### PropertyValues
 
@@ -78,9 +50,11 @@ Directive Functions
 </tr>
 <tr>
 <td>
+<div>
 
 Ƭ **PropertyValues**: *Map‹PropertyKey, object›*
 
+</div>
 </td>
 </tr>
 <tr>
@@ -88,16 +62,12 @@ Directive Functions
 
 *Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*
 
-<div style="margin-bottom:0.5em;">Définit les paramètres des methodes du cycle de vie de Component</div>
-<div style="margin-bottom:0.5em;">Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :
+Définit les paramètres des methodes du cycle de vie de Component
+
+<div>Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :
 
 - oldVal Ancienne valeur de la propriété
 - newVal Nouvelle valeur de la propriété
-
-```typescript
-@customElement('w-todo')
-export default class Todo extends Component<IProps> {
-```
 
 Map<PropertyKey, { oldVal: unknown, newVal: unknown }>
 
