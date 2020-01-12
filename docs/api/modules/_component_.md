@@ -15,31 +15,34 @@ has_children: true
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Classes
 </div>
-<div style="margin-top: 0.5rem;">
-<a href="../classes/_component_.component.html">Component</a>
+<div style="margin-top: 0.5rem;" markdown="1">
+
+[Component](../classes/_component_.component.md)
+
 </div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Classes
 </div>
-<div style="margin-top: 0.5rem;">
-<a href="../interfaces/_component_.ipropertyoptions.html">IPropertyOptions</a>
+<div style="margin-top: 0.5rem;" markdown="1">
+
+[IPropertyOptions](./interfaces/_component_.ipropertyoptions.md)
+
 </div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Type aliases
 </div>
-<div style="margin-top: 0.5rem;">
-<a href="_component_.html#propertyvalues" markdown="1">
+<div style="margin-top: 0.5rem;" markdown="1">
 
-PropertyValues
-{: .text-green-100 }
+[PropertyValues](_component_.md#propertyvalues)
 
-</a>
 </div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Directive Functions
 </div>
-<div style="margin-top: 0.5rem;">
-<a href="_component_.html#customelement">@customElement</a> | <a href="_component_.html#property">@property</a>
+<div style="margin-top: 0.5rem;" markdown="1">
+
+[@customElement](_component_.md#@customElement) | [@property](_component_.md#@property)
+
 </div>
 </div>
 
@@ -52,7 +55,7 @@ ___
 <td markdown="1">
 
 ### PropertyValues
-{: .m-0 .text-green-100 }
+{: .m-0 }
 
 </td>
 </tr>
