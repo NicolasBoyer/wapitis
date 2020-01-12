@@ -25,7 +25,7 @@ Classes
 </div>
 <div style="margin-top: 0.5rem;" markdown="1">
 
-[IPropertyOptions](./interfaces/_component_.ipropertyoptions.md)
+[IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)
 
 </div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
@@ -41,7 +41,8 @@ Directive Functions
 </div>
 <div style="margin-top: 0.5rem;" markdown="1">
 
-[@customElement](_component_.md#customElement) / [@property](_component_.md#property)
+* [@customElement](_component_.md#customElement)
+* [@property](_component_.md#property)
 
 </div>
 </div>
