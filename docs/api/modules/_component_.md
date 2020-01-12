@@ -109,9 +109,9 @@ export default class Todo extends Component<IProps> {
 ```
 **Parameters:**
 
-| Name                                         | Type   | Description                                                                                                      |
-| -------------------------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
-| Optional {: .label .label-green } `tagName?` | string | Nom du custom element. Si aucun tagName n'est spécifié, il prend alors le nom ```x-${type.name.toLowerCase()}``` |
+| Name       | Type   | Description                                                                                                      |
+| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| `tagName?` | string | Nom du custom element. Si aucun tagName n'est spécifié, il prend alors le nom ```x-${type.name.toLowerCase()}``` |
 
 **Returns:** *(Anonymous function)*
 
@@ -124,9 +124,25 @@ Retourne le custom element T avec le nom tagName
 
 ___
 
-###  @property
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
+### @property
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **@property**(`options?`: [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)): *(Anonymous function)*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:62](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L62)*
 
@@ -146,3 +162,8 @@ Elle se place à gauche du nom de la propriété. Exemple :
 **Returns:** *(Anonymous function)*
 
 Retourne la propriété observable
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
