@@ -42,7 +42,7 @@ Directive Functions
 
 <table style="padding: 0.5rem;">
 <tr>
-<td markdown="1">
+<td>
 
 ### PropertyValues
 {: .m-0 }
@@ -50,7 +50,7 @@ Directive Functions
 </td>
 </tr>
 <tr>
-<td markdown="1">
+<td>
 
 Ƭ **PropertyValues**: *Map‹PropertyKey, object›*
 {: .mb-0 }
@@ -58,13 +58,13 @@ Directive Functions
 </td>
 </tr>
 <tr>
-<td markdown="1">
+<td>
 
 *Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*
 
 Définit les paramètres des methodes du cycle de vie de Component
 
-<div markdown="1">Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :
+Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :
 
 - oldVal Ancienne valeur de la propriété
 - newVal Nouvelle valeur de la propriété
@@ -72,7 +72,6 @@ Définit les paramètres des methodes du cycle de vie de Component
 Map<PropertyKey, { oldVal: unknown, newVal: unknown }>
 {: .mb-0 }
 
-</div>
 </td>
 </tr>
 </table>
