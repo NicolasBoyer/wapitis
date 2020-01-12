@@ -40,7 +40,7 @@ Directive Functions
 
 ## Type aliases
 
-<table style="padding: 0.5rem;">
+<table style="padding: 0.5rem;" markdown="1">
 <tr>
 <td>
 
