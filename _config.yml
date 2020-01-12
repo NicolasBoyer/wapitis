@@ -11,4 +11,7 @@ logo: "/ui/logodoc.png"
 aux_links:
   "WApiTis sur GitHub":
     - "//github.com/NicolasBoyer/wapitis"
-markdown: kramdown
+markdown: CommonMarkGhPages
+commonmark:
+  options: ["SMART", "FOOTNOTES"]
+  extensions: ["strikethrough", "autolink", "table", "tagfilter"]
