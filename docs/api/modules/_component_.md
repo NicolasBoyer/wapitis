@@ -40,23 +40,20 @@ Directive Functions
 
 ## Type aliases
 
-test
-{: .mb-1 }
+test {: .mb-0 }
 
 <table style="padding: 0.5rem;">
 <tr>
 <td>
 
-### PropertyValues
-{: .m-1 }
+### PropertyValues {: .m-1 }
 
 </td>
 </tr>
 <tr>
 <td>
 
-Ƭ **PropertyValues**: *Map‹PropertyKey, object›*
-{: .mb-1 }
+Ƭ **PropertyValues**: *Map‹PropertyKey, object›* {: .mb-1 }
 
 </td>
 </tr>
@@ -72,8 +69,7 @@ Définit les paramètres des methodes du cycle de vie de Component
 - oldVal Ancienne valeur de la propriété
 - newVal Nouvelle valeur de la propriété
 
-Map<PropertyKey, { oldVal: unknown, newVal: unknown }>
-{: .mb-1 }
+Map<PropertyKey, { oldVal: unknown, newVal: unknown }> {: .mb-1 }
 
 </div>
 </td>
