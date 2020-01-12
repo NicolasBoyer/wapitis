@@ -45,6 +45,7 @@ Directive Functions
 <td>
 
 ### PropertyValues
+{: .m-1 }
 
 </td>
 </tr>
@@ -52,7 +53,7 @@ Directive Functions
 <td>
 
 Ƭ **PropertyValues**: *Map‹PropertyKey, object›*
-{: .m-0 }
+{: .mb-1 }
 
 </td>
 </tr>
@@ -69,7 +70,7 @@ Définit les paramètres des methodes du cycle de vie de Component
 - newVal Nouvelle valeur de la propriété
 
 Map<PropertyKey, { oldVal: unknown, newVal: unknown }>
-{: .mb-0 }
+{: .mb-1 }
 
 </div>
 </td>
