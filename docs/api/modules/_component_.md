@@ -41,7 +41,7 @@ Directive Functions
 </div>
 <div style="margin-top: 0.5rem;" markdown="1">
 
-[@customElement](_component_.md#@customElement) | [@property](_component_.md#@property)
+[@customElement](_component_.md#customElement) / [@property](_component_.md#property)
 
 </div>
 </div>
