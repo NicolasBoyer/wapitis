@@ -40,8 +40,8 @@ Directive Functions
 
 ## Type aliases
 
-Ƭ **PropertyValues**: *Map‹PropertyKey, object›*
-{: .mb-0 }
+test
+{: .mb-1 }
 
 <table style="padding: 0.5rem;">
 <tr>
