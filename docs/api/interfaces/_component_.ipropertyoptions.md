@@ -73,7 +73,7 @@ ___
 <tr>
 <td markdown="1">
 
-• **type**? : *object | string | number | boolean | unknown*
+• **type**? : *object \| string \| number \| boolean \| unknown*
 {: .mb-0 }
 
 </td>
