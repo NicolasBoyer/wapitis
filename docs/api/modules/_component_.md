@@ -40,9 +40,9 @@ Directive Functions
 
 ## Type aliases
 
-<table style="padding: 0.5rem;" markdown="1">
+<table style="padding: 0.5rem;">
 <tr>
-<td>
+<td markdown="1">
 
 ### PropertyValues
 {: .m-0 }
@@ -50,7 +50,7 @@ Directive Functions
 </td>
 </tr>
 <tr>
-<td>
+<td markdown="1">
 
 Ƭ **PropertyValues**: *Map‹PropertyKey, object›*
 {: .mb-0 }
@@ -58,7 +58,7 @@ Directive Functions
 </td>
 </tr>
 <tr>
-<td>
+<td markdown="1">
 
 *Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*
 
@@ -76,25 +76,27 @@ Map<PropertyKey, { oldVal: unknown, newVal: unknown }>
 </tr>
 </table>
 
-<!-- ###  PropertyValues
-
-Ƭ **PropertyValues**: *Map‹PropertyKey, object›*
-
-*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*
-
-Définit les paramètres des methodes du cycle de vie de Component
-
-Il s'agit d'une map définit avec l'entrée PropertyKey et la valeur { oldVal: unknown, newVal: unknown } :
-- oldVal Ancienne valeur de la propriété
-- newVal Nouvelle valeur de la propriété
-
-Map<PropertyKey, { oldVal: unknown, newVal: unknown }> -->
-
 ## Directive Functions
 
-###  @customElement
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
+### @customElement
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **@customElement**(`tagName?`: string): *(Anonymous function)*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:18](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L18)*
 
@@ -105,7 +107,6 @@ Elle se place au dessus du nom de la classe. Exemple :
 @customElement('w-todo')
 export default class Todo extends Component<IProps> {
 ```
-
 **Parameters:**
 
 | Name       | Type   | Description                                                                                                      |
@@ -115,6 +116,11 @@ export default class Todo extends Component<IProps> {
 **Returns:** *(Anonymous function)*
 
 Retourne le custom element T avec le nom tagName
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
