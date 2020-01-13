@@ -10,35 +10,53 @@ parent: component
 
 Classe qui étend HTMLElement et qui associée à la directive @customElement permet la création d'un customElement
 
+___
+
 ## Type parameters
 
-▪ **T**
+▪ **T** : Type générique de la classe définit grâce à la directive customElement
 
-Type générique de la classe définit grâce à la directive customElement
+___
 
 ## Hierarchy
 
-* HTMLElement
+HTMLElement
+↳ **Component**
 
-  ↳ **Component**
+___
 
 ## Index
 
-### Constructors
+<div style="width: 100%;max-width: 100%;margin-bottom: 1.5rem;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.08);padding: .5rem .75rem;">
+<div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
+Constructors
+</div>
+<div style="margin-top: 0.5rem;" markdown="1">
 
 * [constructor](_component_.component.md#constructor)
 
-### Properties
+</div>
+<div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
+Properties
+</div>
+<div style="margin-top: 0.5rem;" markdown="1">
 
-* [_props](_component_.component.md#protected-_props)
-* [HTMLElement](_component_.component.md#static-htmlelement)
+* [\_props](_component_.component.md#protected-_props)
 * [styles](_component_.component.md#static-optional-styles)
 
-### Accessors
+</div>
+<div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
+Accessors
+</div>
+<div style="margin-top: 0.5rem;" markdown="1">
 
 * [observedAttributes](_component_.component.md#static-observedattributes)
 
-### Methods
+</div>
+<div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
+Methods
+</div>
+<div style="margin-top: 0.5rem;" markdown="1">
 
 * [attributeChangedCallback](_component_.component.md#attributechangedcallback)
 * [beforeRender](_component_.component.md#protected-beforerender)
@@ -50,11 +68,32 @@ Type générique de la classe définit grâce à la directive customElement
 * [updated](_component_.component.md#protected-updated)
 * [createProperty](_component_.component.md#static-createproperty)
 
+</div>
+</div>
+
+___
+
 ## Constructors
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ###  constructor
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 \+ **new Component**(`options?`: T): *[Component](_component_.component.md)*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:182](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L182)*
 
@@ -69,32 +108,66 @@ Crée une instance de Component
 **Returns:** *[Component](_component_.component.md)*
 
 Retourne le composant avec le nom définit par la directive customElement.
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
+
+___
 
 ## Properties
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Protected` _props
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 • **_props**: *T*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:174](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L174)*
 
 Propriété qui permet de définir les attributs lors de l'utilisation de cette classe avec [[JSX]]
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
-### `Static` HTMLElement
-
-▪ **HTMLElement**: *object*
-
-Defined in node_modules/typescript/lib/lib.dom.d.ts:6717
-
-#### Type declaration:
-
-___
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
 
 ### `Static` `Optional` styles
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▪ **styles**? : *CSSResult | CSSResultArray*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:117](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L117)*
 
@@ -113,12 +186,35 @@ Permet de déclarer les styles en utilisant le tag css, exemple :
       `
   }
 ```
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
+
+___
 
 ## Accessors
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Static` observedAttributes
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 • **get observedAttributes**(): *string[]*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:96](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L96)*
 
@@ -129,12 +225,35 @@ Inutile d'utiliser cette méthode. Elle est appelé automatiquement grâce à la
 **Returns:** *string[]*
 
 Retourne un tableau contenant les noms des attributs que vous voulez observer
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
+
+___
 
 ## Methods
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ###  attributeChangedCallback
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **attributeChangedCallback**(`attrName`: string, `oldVal`: any, `newVal`: any): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:231](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L231)*
 
@@ -149,12 +268,33 @@ Spécifique au web component. Si la nouvelle valeur de l'attribut observé est d
 | `newVal`   | any    | Nouvelle valeur de l'attribut |
 
 **Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Protected` beforeRender
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **beforeRender**(`_changedProperties`: [PropertyValues](../modules/_component_.md#propertyvalues)): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:258](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L258)*
 
@@ -162,41 +302,104 @@ Appelé avant le rendu du composant. Permet d'interagir avec les éléments à c
 
 **Parameters:**
 
-| | | | Name                                                                 | Type                                                                                                                                                                                                                         | Description |
-| -----| -----| -----| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| | | | `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |                                           |
+|     |     |     | Name                 | Type                                                       | Description |
+| --- | --- | --- | -------------------- | ---------------------------------------------------------- | ----------- |
+|     |     |     | `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |             |
 
 **Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ###  connectedCallback
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **connectedCallback**(): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:208](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L208)*
 
 Spécifique au web component. Appelé lorsque l'élément personnalisé est connecté pour la première fois au DOM du document
 
 **Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ###  disconnectedCallback
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **disconnectedCallback**(): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:220](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L220)*
 
 Spécifique au web component. Appelé lorsque l'élément personnalisé est déconnecté du DOM du document
 
 **Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Protected` firstUpdated
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **firstUpdated**(`_changedProperties`: [PropertyValues](../modules/_component_.md#propertyvalues)): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:293](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L293)*
 
@@ -211,17 +414,38 @@ En utilisant les methodes existantes dans les librairies [DOM](../modules/_dom_.
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |   |
+|     |     | Name                 | Type                                                       | Description |
+| --- | --- | -------------------- | ---------------------------------------------------------- | ----------- |
+|     |     | `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |             |
 
 **Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Protected` render
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **render**(): *TemplateResult | void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:268](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L268)*
 
@@ -230,12 +454,33 @@ Permet de créer le composant dans le DOM grâce au tag html de lit-html.
 **Returns:** *TemplateResult | void*
 
 Retourne un TemplateResult qui est ensuite interprété et permet la mise à jour du DOM
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Protected` shouldUpdate
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **shouldUpdate**(`_changedProperties`: [PropertyValues](../modules/_component_.md#propertyvalues)): *boolean*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:248](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L248)*
 
@@ -245,17 +490,38 @@ Permet de conditionner le rendu du composant.
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |   |
+|     | Name                 | Type                                                       | Description |
+| --- | -------------------- | ---------------------------------------------------------- | ----------- |
+|     | `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |             |
 
 **Returns:** *boolean*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Protected` updated
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **updated**(`_changedProperties`: [PropertyValues](../modules/_component_.md#propertyvalues)): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:277](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L277)*
 
@@ -265,17 +531,38 @@ Permet de réaliser des tâches après le rendu du composant à chaque appel en 
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |   |
+| Name                 | Type                                                       | Description |
+| -------------------- | ---------------------------------------------------------- | ----------- |
+| `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |             |
 
 **Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Static` createProperty
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **createProperty**(`name`: PropertyKey, `options?`: [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/component.tsx:128](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L128)*
 
@@ -293,3 +580,8 @@ Il n'est ni necessaire ni recommandé d'utiliser cette méthode qui est appelé 
 | `options?` | [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md) | -                   |
 
 **Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>

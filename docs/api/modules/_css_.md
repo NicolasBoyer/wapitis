@@ -10,16 +10,41 @@ has_children: true
 
 ## Index
 
-### Functions
+<div style="width: 100%;max-width: 100%;margin-bottom: 1.5rem;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.08);padding: .5rem .75rem;">
+<div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
+Functions
+</div>
+<div style="margin-top: 0.5rem;" markdown="1">
 
 * [css](_css_.md#const-css)
 * [unsafeCSS](_css_.md#const-unsafecss)
 
+</div>
+</div>
+
+---
+
 ## Functions
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Const` css
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **css**(`strings`: TemplateStringsArray, ...`values`: Array‹CSSResult | number›): *CSSResult‹›*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/css.ts:106](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/css.ts#L106)*
 
@@ -62,12 +87,33 @@ static get styles() {
 | `...values` | Array‹CSSResult &#124; number› |
 
 **Returns:** *CSSResult‹›*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Const` unsafeCSS
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **unsafeCSS**(`value`: unknown): *CSSResult‹›*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/css.ts:43](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/css.ts#L43)*
 
@@ -102,3 +148,8 @@ static get styles() {
 | `value` | unknown |
 
 **Returns:** *CSSResult‹›*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>

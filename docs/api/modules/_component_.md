@@ -10,14 +10,13 @@ has_children: true
 
 ## Index
 
-
 <div style="width: 100%;max-width: 100%;margin-bottom: 1.5rem;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.08);padding: .5rem .75rem;">
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Classes
 </div>
 <div style="margin-top: 0.5rem;" markdown="1">
 
-[Component](../classes/_component_.component.md)
+* [Component](../classes/_component_.component.md)
 
 </div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
@@ -25,7 +24,7 @@ Classes
 </div>
 <div style="margin-top: 0.5rem;" markdown="1">
 
-[IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)
+* [IPropertyOptions](../interfaces/_component_.ipropertyoptions.md)
 
 </div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
@@ -33,7 +32,7 @@ Type aliases
 </div>
 <div style="margin-top: 0.5rem;" markdown="1">
 
-[PropertyValues](_component_.md#propertyvalues)
+* [PropertyValues](_component_.md#propertyvalues)
 
 </div>
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">

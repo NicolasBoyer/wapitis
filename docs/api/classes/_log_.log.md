@@ -7,24 +7,44 @@ parent: API
 
 # Log
 
-## Hierarchy
-
-* **Log**
-
 ## Index
-
-### Methods
+<div style="width: 100%;max-width: 100%;margin-bottom: 1.5rem;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.08);padding: .5rem .75rem;">
+<div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
+Methods
+</div>
+<div style="margin-top: 0.5rem;" markdown="1">
 
 * [debug](_log_.log.md#static-debug)
 * [error](_log_.log.md#static-error)
 * [info](_log_.log.md#static-info)
 * [warn](_log_.log.md#static-warn)
 
+</div>
+</div>
+
+---
+
 ## Methods
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Static` debug
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **debug**(`message`: string, ...`datas`: any[]): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/log.ts:19](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/log.ts#L19)*
 
@@ -38,12 +58,33 @@ Name | Type | Description |
 `...datas` | any[] | Les données envoyées et affichées  |
 
 **Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Static` error
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **error**(`message`: string, ...`datas`: any[]): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/log.ts:41](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/log.ts#L41)*
 
@@ -57,12 +98,33 @@ Name | Type | Description |
 `...datas` | any[] | Les données envoyées et affichées  |
 
 **Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Static` info
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **info**(`message`: string, ...`datas`: any[]): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/log.ts:9](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/log.ts#L9)*
 
@@ -76,12 +138,33 @@ Name | Type | Description |
 `...datas` | any[] | Les données envoyées et affichées  |
 
 **Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ___
 
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Static` warn
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 ▸ **warn**(`message`: string, ...`datas`: any[]): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
 
 *Defined in [src/log.ts:31](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/log.ts#L31)*
 
@@ -95,3 +178,8 @@ Name | Type | Description |
 `...datas` | any[] | Les données envoyées et affichées  |
 
 **Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
