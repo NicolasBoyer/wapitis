@@ -11,3 +11,4 @@ logo: "/ui/logodoc.png"
 aux_links:
   "WApiTis sur GitHub":
     - "//github.com/NicolasBoyer/wapitis"
+highlighter: rouge
