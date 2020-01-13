@@ -10,7 +10,7 @@ nav_order: 1
 WebApp utiliTies est un set d'outils pour développer et compiler une application web avec ou sans client lourd.
 {: .fs-6 .fw-300 }
 
-[Get started now](./docs/pages/getstarted.md){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Voir sur GitHub](https://github.com/NicolasBoyer/wapitis){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Présentation](https://github.com/NicolasBoyer/wapitis/blob/master/README.md){: .btn .fs-5 .mb-4 .mb-md-0 }
+[Commencer maintenant](./docs/pages/getstarted.md){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Voir sur GitHub](https://github.com/NicolasBoyer/wapitis){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Présentation](https://github.com/NicolasBoyer/wapitis/blob/master/README.md){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
