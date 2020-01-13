@@ -83,7 +83,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **findAssignedElementBySlotName**(`from`: Element, `slotName`: string): *Element | Element[]*
+▸ **findAssignedElementBySlotName**(`from`: Element, `slotName`: string): *Element \| Element[]*
 {: .mb-0 }
 
 </td>
@@ -102,7 +102,7 @@ Name | Type | Description |
 `from` | Element | l'élément sur lequel la recherche est effectuée |
 `slotName` | string | Le nom du slot recherché |
 
-**Returns:** *Element | Element[]*
+**Returns:** *Element \| Element[]*
 {: .mb-0 }
 
 </td>
@@ -203,7 +203,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **findDocumentOrShadowRoot**(`from`: Node): *Document | ShadowRoot*
+▸ **findDocumentOrShadowRoot**(`from`: Node): *Document \| ShadowRoot*
 {: .mb-0 }
 
 </td>
@@ -221,7 +221,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `from` | Node | Noeud sur lequel la recherche est effectuée |
 
-**Returns:** *Document | ShadowRoot*
+**Returns:** *Document \| ShadowRoot*
 
 Retourne le premier shadowroot ancêtre ou le Document
 {: .mb-0 }
@@ -291,7 +291,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **querySelectorAllDeep**(`selector`: string, `root`: Element | Document): *Element[]*
+▸ **querySelectorAllDeep**(`selector`: string, `root`: Element \| Document): *Element[]*
 {: .mb-0 }
 
 </td>
@@ -333,7 +333,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **querySelectorDeep**(`selector`: string, `root`: Element | Document): *Element*
+▸ **querySelectorDeep**(`selector`: string, `root`: Element \| Document): *Element*
 {: .mb-0 }
 
 </td>

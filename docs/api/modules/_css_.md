@@ -38,7 +38,7 @@ Functions
 <tr>
 <td markdown="1">
 
-▸ **css**(`strings`: TemplateStringsArray, ...`values`: Array‹CSSResult | number›): *CSSResult‹›*
+▸ **css**(`strings`: TemplateStringsArray, ...`values`: Array‹CSSResult \| number›): *CSSResult‹›*
 {: .mb-0 }
 
 </td>

@@ -161,7 +161,7 @@ ___
 <tr>
 <td markdown="1">
 
-▪ **styles**? : *CSSResult | CSSResultArray*
+▪ **styles**? : *CSSResult \| CSSResultArray*
 {: .mb-0 }
 
 </td>
@@ -302,9 +302,9 @@ Appelé avant le rendu du composant. Permet d'interagir avec les éléments à c
 
 **Parameters:**
 
-|     |     |     | Name                 | Type                                                       | Description |
-| --- | --- | --- | -------------------- | ---------------------------------------------------------- | ----------- |
-|     |     |     | `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |             |
+| Name                 | Type                                                       |
+| -------------------- | ---------------------------------------------------------- |
+| `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |
 
 **Returns:** *void*
 {: .mb-0 }
@@ -414,9 +414,9 @@ En utilisant les methodes existantes dans les librairies [DOM](../modules/_dom_.
 
 **Parameters:**
 
-|     |     | Name                 | Type                                                       | Description |
-| --- | --- | -------------------- | ---------------------------------------------------------- | ----------- |
-|     |     | `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |             |
+| Name                 | Type                                                       |
+| -------------------- | ---------------------------------------------------------- |
+| `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |
 
 **Returns:** *void*
 {: .mb-0 }
@@ -490,9 +490,9 @@ Permet de conditionner le rendu du composant.
 
 **Parameters:**
 
-|     | Name                 | Type                                                       | Description |
-| --- | -------------------- | ---------------------------------------------------------- | ----------- |
-|     | `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |             |
+| Name                 | Type                                                       |
+| -------------------- | ---------------------------------------------------------- |
+| `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |
 
 **Returns:** *boolean*
 {: .mb-0 }
@@ -531,9 +531,9 @@ Permet de réaliser des tâches après le rendu du composant à chaque appel en 
 
 **Parameters:**
 
-| Name                 | Type                                                       | Description |
-| -------------------- | ---------------------------------------------------------- | ----------- |
-| `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |             |
+| Name                 | Type                                                       |
+| -------------------- | ---------------------------------------------------------- |
+| `_changedProperties` | [PropertyValues](../modules/_component_.md#propertyvalues) |
 
 **Returns:** *void*
 {: .mb-0 }

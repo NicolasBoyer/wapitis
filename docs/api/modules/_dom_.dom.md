@@ -39,7 +39,7 @@ Functions
 <tr>
 <td markdown="1">
 
-▸ **parseStyleToNumber**(`style`: string | null): *number*
+▸ **parseStyleToNumber**(`style`: string \| null): *number*
 {: .mb-0 }
 
 </td>

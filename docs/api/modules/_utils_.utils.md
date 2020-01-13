@@ -164,7 +164,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **fromString**(`value`: string | null, `type?`: unknown): *any*
+▸ **fromString**(`value`: string \| null, `type?`: unknown): *any*
 {: .mb-0 }
 
 </td>
