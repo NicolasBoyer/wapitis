@@ -10,3 +10,8 @@ transpile.js
 test
 docs
 _apisave
+404.html
+/favicon.ico
+_config.yml
+typedoc.json
+/index.md
