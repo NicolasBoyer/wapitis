@@ -56,6 +56,7 @@ const buildIndexFile = async (isProd, isElectron) => {
 	html = html.replace('$appDesc$', wapitisConfig.appDesc)
 	html = html.replace('$themeColor$', wapitisConfig.themeColor)
 	html = html.replace('$appName$', wapitisConfig.appName)
+	html = html.replace('$appleTouchIcon$', wapitisConfig.appleTouchIcon)
 	html = html.replace('$electron$', isElectron ? '<script src="index.js"></script>' : '')
 	if (isProd) {
 		const quantumFile = JSON.parse(files.readFileSync(completeDistPath + '/quantum.json', 'utf8'))
@@ -279,6 +280,7 @@ if (arg) {
 		"distPath": "${answers.srcproject}/../dist",
 		"startFile": "app.tsx",
 		"electronStartFile": "electronStart.ts",
+		"appleTouchIcon": "${answers.srcproject}/../dist/assets/icons/apple-touch-icon.png",
 		"appName": "${answers.appName}",
 		"appDesc": "${answers.appDesc}",
 		"themeColor": "${answers.themeColor}"
@@ -346,7 +348,7 @@ if (arg) {
 				})
 
 				context(class {
-					getConfig () {
+					getConfig() {
 						return FuseBox.init({
 							homeDir: completeSrcPath,
 							output: completeDistPath + '/$name.js',
@@ -397,7 +399,7 @@ if (arg) {
 						})
 					}
 
-					createBundle (fuse, bundleName = 'bundle', startFile = wapitisConfig.startFile) {
+					createBundle(fuse, bundleName = 'bundle', startFile = wapitisConfig.startFile) {
 						const app = fuse.bundle(bundleName)
 						if (!this.isProduction && !this.isElectronTask) {
 							app.watch()
