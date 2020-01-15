@@ -280,10 +280,10 @@ if (arg) {
 		"distPath": "${answers.srcproject}/../dist",
 		"startFile": "app.tsx",
 		"electronStartFile": "electronStart.ts",
-		"appleTouchIcon": "${answers.srcproject}/../dist/assets/icons/apple-touch-icon.png",
 		"appName": "${answers.appName}",
 		"appDesc": "${answers.appDesc}",
-		"themeColor": "${answers.themeColor}"
+		"themeColor": "${answers.themeColor}",
+		"appleTouchIcon": "./assets/icons/apple-touch-icon.png"
 	}`
 				files.appendFile(directoryBase + '/wapitis.json', wapitisTxt, true)
 				files.copy(path.resolve(__dirname, '.includes/tsconfig.json'), directoryBase + '/tsconfig.json')
@@ -318,8 +318,10 @@ if (arg) {
 			/** MIGRATION */
 			// ADD LINK APPLE TOUCH ICON TO WAPITIS.JSON
 			if (!wapitisConfig.appleTouchIcon) {
-				wapitisConfig.appleTouchIcon = wapitisConfig.srcPath + '/../dist/assets/icons/apple-touch-icon.png'
-				files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
+				files.copy(path.resolve(__dirname, '.includes/www/assets/icons/apple-touch-icon.png'), directoryBase + '/' + wapitisConfig.srcPath + '/www/assets/icons/apple-touch-icon.png').then(async () => {
+					wapitisConfig.appleTouchIcon = wapitisConfig.srcPath + './assets/icons/apple-touch-icon.png'
+					await files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
+				})
 			}
 			/** */
 
