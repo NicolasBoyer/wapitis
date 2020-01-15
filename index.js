@@ -58,7 +58,7 @@ const buildIndexFile = async (isProd, isElectron) => {
 	html = html.replace('$appName$', wapitisConfig.appName)
 	html = html.replace('$electron$', isElectron ? '<script src="index.js"></script>' : '')
 	if (isProd) {
-		html = html.replace('$appleTouchIcon$', wapitisConfig.appleTouchIcon)
+		html = html.replace('$appleTouchIcon$', `<link rel="apple-touch-icon" href="${wapitisConfig.appleTouchIcon}">`)
 		const quantumFile = JSON.parse(files.readFileSync(completeDistPath + '/quantum.json', 'utf8'))
 		html = html.replace('$bundle$', `<script src="${quantumFile.bundle.relativePath}"></script>`)
 		files.remove(completeDistPath + '/quantum.json')
