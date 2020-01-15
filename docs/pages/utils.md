@@ -30,21 +30,21 @@ Contient différentes méthodes permettant de simplifier certaines actions, comm
     function fromString(value: string | null, type?: unknown): any
     /** Transforme une valeur du type renseigné en string */
     function toString(value: unknown, type?: unknown): any
-    /** Transforme une chaine du type camelCase en DashCase */
+    /** Transforme une chaîne du type camelCase en DashCase */
     function camelCaseToDashCase(name): any
-    /** Transforme une chaine du type DashCase en camelCase */
+    /** Transforme une chaîne du type DashCase en camelCase */
     function dashCaseToCamelCase(name): any
     /** Retourne un id de type string */
     function generateId(): string
-    /** Envoie un customEvent sur l'élément parent, avec les propriétés renseignés dans property */
+    /** Envoie un customEvent sur l'élément parent, avec les propriétés renseignées dans property */
     function dispatchEvent(name: string, property: object, parent: HTMLElement = document.body): void
     /** Retourne la taille et la position de la fenêtre web courante */
     function getWindowSize() : { width: number, height: number, top: number, left: number }
     /** Retourne le texte contenu dans le fichier spécifié de façon asynchrone */
     async function getFile(url: string): string
-    /** Enregistre les données dans la clé spécifié en local storage */
+    /** Enregistre les données dans la clé spécifiée en local storage */
     function save<T>(key: string, datas: T): void
-    /** Retourne les données spécifié dans la clé en local storage */
+    /** Retourne les données spécifiées dans la clé en local storage */
     function load<T>(key: string): T
 ```
 ---
@@ -75,7 +75,7 @@ Contient des méthodes permettant de manipuler et de retrouver les shadowdom ent
     function findHost<T extends Element = Element>(from: Node): T
     /** Retrouve le 1er DocumentOrShadowRoot ancêtre d'un noeud. */
     function findDocumentOrShadowRoot(from: Node): Document | ShadowRoot
-    /** Retourne le parent, incluant la balise <slot> dans la chaine. */
+    /** Retourne le parent, incluant la balise <slot> dans la chaîne. */
     function deepClosestElement(selector: string, base: Element): Element
     /** Retrouve l'activeElement en pénétrant tous les shadowDOM. */
     function findDeepActiveElement(from?: DocumentOrShadowRoot): Element

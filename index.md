@@ -38,7 +38,7 @@ WebApp utiliTies est un set d'outils pour développer et compiler une applicatio
 
     $ wapitis generate class path/du/fichier.ts(x) --> génère une classe relatif à src. tsConfig est mis à jour
 
-    $ wapitis generate component path/du/fichier.tsx --> génère un composant relatif à src. tsConfig est mis à jour
+    $ wapitis generate component path/du/fichier.ts(x) --> génère un composant relatif à src. tsConfig est mis à jour
 
 ---
 

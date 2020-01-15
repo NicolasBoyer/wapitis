@@ -31,12 +31,12 @@ Une fois l'installation terminée les sources se présentent ainsi :
 - tslint.json permet de mettre en place l'aide à la saisie.
 - tsconfig.json configure comment typescript doit fonctionner.
 - .env contient les divers variables d'environnement nécessaires au bon fonctionnement de wapitis
-- le dossier src contient les sources de l'applications. A commencer par les assets (images, icons, fonts ...)
+- le dossier src contient les sources de l'application. A commencer par les assets (images, icons, fonts ...)
 - le dossier electron contient un fichier splash.html avec une icon éditable qui sera visible lors du lancement de l'application
   - about.png est éditable et comme son nom l'indique est visible dans la fenetre à propos de l'application electron
   - index.js contient le code js permettant de créer la popup de mise à jour et de recevoir les messages en provenance de l'application.
   - electronStart.ts est le fichier permettant de lancer l'application electron et contient la création des menus et des messages envoyés par l'application
-- manifest.json est le manifest necessaire pour permettre d'installer l'application comme une WebApp
+- manifest.json est le manifest nécessaire pour permettre d'installer l'application comme une WebApp
 - main.css contient les css générales de l'application (il ne s'applique pas aux différents composants qui contiennet leurs propres styles)
 - app.tsx est le point de départ de l'application. L'endroit ou nous appellerons le fichier racine de notre WebApp
 
@@ -53,6 +53,7 @@ Pour créer notre application, nous aurons besoin de deux composants:
         Bouton de suppression
 
 TodoList aura une propriété observée todos : un array contenant la liste  des todos
+
 Todo aura 3 attributs : checked, text, index, peut etre plus
 
 ---
@@ -125,27 +126,27 @@ export default class Custom extends Component<IProps> {
 }
 ```
 
-Ce fichier contient les méthodes accessible tout le long du cycle de vie du composant nouvellement créé (pour en savoir plus voir plus bas)
+Ce fichier contient les méthodes accessible tout le long du cycle de vie du composant nouvellement créé (pour en savoir plus, cliquez [ici](./component.md))
 
 Nous allons l'éditer de cette façon :
 ```typescript
 import { Component, customElement, html, property } from 'wapitis'
 
 // Nous définissons notre custom element dans la directive suivante et la classe associée
-// w pour wapitis. il est obligatoire d'avoir "prefixe-nom" dans le nom d'un custom element
+// w pour wapitis. il est obligatoire d'avoir "prefix-nom" dans le nom d'un custom element
 @customElement('w-todo-list')
 export default class TodoList extends Component<{}> {
-    // Une propriété _todos est déclaré avec la directive @property en indiquant le type dont il s'agit ici un Array d'objet
-    // Le préfixe _ permet à la propriété d'être obervable tout en étant considérée comme protected. Elle n'apparait ainsi pas dans les attributs de l'élément il n'y a donc pas de conversion
+    // Une propriété _todos est déclarée avec la directive @property en indiquant le type dont il s'agit, ici un Array d'objet
+    // Le préfixe _ permet à la propriété d'être obervable tout en étant considérée comme protected. Elle n'apparait ainsi pas dans les attributs de l'élément, il n'y a donc pas de conversion
     @property() _todos: Array<{ text: string; }> = []
-    // Une propriété input non observable et protected est déclarée pour pouvoir y accéder ci après
+    // Une propriété input non observable et protected est déclarée
     protected _input: HTMLInputElement | null
 
     render() {
-        // On utilise ensuite le helper html afin de créer un template avec les événements et les variables observées à mettre à jour
+        // On utilise ensuite le tag html afin de créer un template avec les événements et les variables observées à mettre à jour
         // @click correspond à addEventListener('click', this.addTodos)
         // La partie du template this._todos est mis à jour car il s'agit d'une propriété observable
-        // L'écriture est ici également la même que https://lit-html.polymer-project.org/guide/template-reference
+        // Voir https://lit-html.polymer-project.org/guide/template-reference, pour en savoir plus sur les possibilités de lit-html
         return html`
             <div class='title'>todos</div>
             <form>
@@ -161,7 +162,7 @@ export default class TodoList extends Component<{}> {
     // On va chercher l'élément input
     firstUpdated = () => this._input = this.shadowRoot!.querySelector('input')
 
-    // On ajoute à la propriété _todos la nouvelle tâche créée. C'est la methode render qui se charge de l'affichage lorsque _todos change
+    // On ajoute à la propriété _todos la nouvelle tâche créée. C'est la méthode render qui se charge de l'affichage lorsque _todos change
     protected _addTodo = (event: MouseEvent) => {
         event.preventDefault()
         if (this._input!.value.length > 0) {
@@ -171,11 +172,11 @@ export default class TodoList extends Component<{}> {
     }
 }
 ```
-Voir directement dans le code pour avoir les informations sur la création de ce composant
+Voir directement dans le code pour avoir les informations sur la création de ce composant.
 
 Afin de voir le résultat, il est nécessaire d'appeler ce composant. Nous pouvons le faire facilement dans la racine de l'application app.tsx.
 
-Nous allons utiliser ici JSX afin d'appeler directement le composant en Javascript, en modifiant le fichier app.tsx de cette façon
+Nous allons utiliser JSX afin d'appeler directement le composant en Javascript, en modifiant le fichier app.tsx de cette façon :
 
 ```typescript
 import { JSX } from 'wapitis'
@@ -199,7 +200,7 @@ Cela donne :
 
 Afin d'améliorer un peu la présentation, nous allons intégrer un peu de stylage. Les composants portent leur stylage, ce qui rend très facile leur utilisation. De plus avec les shadow DOM, les CSS sont bloqués à l'intérieur du composant, ce qui veut dire que les CSS des autres composants n'agissent pas sur lui et inversement.
 
-Il y a évidemment des passerelles et des surcharges possibles, comme cela sera expliqué plus loin dans la doc.
+Il y a évidemment des passerelles et des surcharges possibles, comme cela sera expliqué [ici](./styles.md).
 
 Ici nous allons transformer le code en ajoutant
 
@@ -246,18 +247,18 @@ Ce qui donne :
 
 ---
 
-On pourrait s'arrêter ici, mais nous voulions également pouvoir supprimer les tâches et les marquer comme réalisées. Pour ce faire nous allons créer un autre composant que nous pourrons ensuite instancier dans le composant TodoList
+Nous pourrions nous arrêter ici, mais nous voulions également pouvoir supprimer les tâches et les marquer comme réalisées. Pour ce faire nous allons créer un autre composant que nous pourrons ensuite instancier dans le composant TodoList :
 
 ```bash
 npx wapitis generate component components/todo.ts
 ```
 
-Un fois le composant créé, il est édité comme ceci (Lire les commentaires pour comprendre le fonctionnement)
+Une fois le composant créé, il est édité comme ceci (lire les commentaires pour comprendre le fonctionnement).
 
 ```typescript
 import { Component, customElement, html, property, UTILS } from 'wapitis'
 
-// On déclare les prporiétés puvliques obsevables. Ainsi si un constructor est déclarée on peut utiliser la forme new Todo({...}) pour créer la Todo. Et cela permet aux composants appelant d'avoir connaissances de ces propriétés
+// On déclare les propriétés publiques obsevables. Ainsi si un constructor est déclarée, on peut utiliser la forme new Todo({...}) pour créer la Todo. Et cela permet aux composants appelant d'avoir connaissances de ces propriétés
 interface IProps {
     text: string
     index: number
@@ -266,14 +267,14 @@ interface IProps {
 
 @customElement('w-todo')
 export default class Todo extends Component<IProps> {
-    // On déclare les 3 propiétés observable en utilisant la directive @property. Comme il s'agit d'attribut, afin d'indiquer comment la conversion doit être faite entre l'attribut et la propriété, on indique le type pour index et checked, text étant un string il est inutile de l'indiquer. writeOnly est passé à true pour l'index afin qu'il n'apparaisse pas en tant qu'attribut html dans le dom
+    // On déclare les 3 propiétés observables en utilisant la directive @property. Comme il s'agit d'attribut, afin d'indiquer comment la conversion doit être faite entre l'attribut et la propriété, on indique le type pour index et checked, text étant un string il est inutile de l'indiquer. writeOnly est passé à true pour l'index afin qu'il n'apparaisse pas en tant qu'attribut html dans le dom
     @property() text: string
     @property({ type: Number, writeOnly: true }) index: number
     @property({ type: Boolean }) checked: boolean = false
 
     render() {
-        // https://lit-html.polymer-project.org/guide/template-reference
-        // On utilise .checked pour indiquer qu'on utilisera une valeur true ou false pour l'attribut html checked de l'input dans le DOM
+        // Voir https://lit-html.polymer-project.org/guide/template-reference
+        // On utilise .checked pour indiquer qu'on utilisera une valeur true ou false et pas un booleen pour l'attribut html checked de l'input dans le DOM
         // Un custom event est utilisé pour préciser aux autres composants que la tâche est complétée ou supprimée (cf todo-list pour voir comment cela est traité)
         // Un autre custom event est utilisé pour preciser que la tâche est supprimée
         return html`
@@ -301,14 +302,13 @@ import './todo'
 ...
 
 render() {
-        // On utilise ensuite le helper html afin de créer un template avec les événements et les variables observées à mettre à jour
+        // On utilise ensuite le tag html afin de créer un template avec les événements et les variables observées à mettre à jour
         // @click correspond à addEventListener('click', this.addTodos)
         // La partie du template this._todos est mis à jour car il s'agit d'une propriété observable
-        // L'écriture est ici également la même que https://lit-html.polymer-project.org/guide/template-reference
-        // On remplace l'ancien div par le composant w-todo en déclarant les différentes variables
-        // text et index avec un . car c'est une valeur
-        // .checked permet d'indiquer qu'il s'agit d'un booleen. En tant qu'attribut seul checked sera écrit quand l'attribut sera à true. S'il est à false il ne sera pas présent
-        // Enfin commen on ferait un addEventListener sur les custom event de ce composant on pose ici un @ accompagné du nom de ce custom event et d'une méthode associée
+        // Voir https://lit-html.polymer-project.org/guide/template-reference, pour en savoir plus sur les possibilités de lit-html
+        // On remplace l'ancien div par le composant w-todo en déclarant les différentes variables : text et index avec un . en préfix car il s'agit d'une valeur
+        // ?checked permet d'indiquer qu'il s'agit d'un booleen et non d'une valeur. En tant qu'attribut seul checked sera écrit quand l'attribut sera à true. S'il est à false il ne sera pas présent
+        // Enfin pour réaliser un addEventListener sur les custom event de ce composant nous posons un @ accompagné du nom de ce custom event et d'une méthode associée
         return html`
             <div class='title'>todos</div>
             <form>
@@ -341,7 +341,7 @@ render() {
 }
 ```
 
-Cela nous donne ainsi
+Cela nous donne :
 
 ![](images/wapitisTodoList03.png)
 
@@ -354,7 +354,7 @@ Afin d'améliorer le rendu, un peu de stylage est nécessaire
 import { Component, css, customElement, html, property, UTILS } from 'wapitis'
 import icons from '../www/assets/img/icons.svg'
 
-// On déclare les prporiétés puvliques obsevables. Ainsi si un constructor est déclarée on peut utiliser la forme new Todo({...}) pour créer la Todo. Et cela permet aux composants appelant d'avoir connaissances de ces propriétés
+// On déclare les propriétés publiques obsevables. Ainsi si un constructor est déclarée, on peut utiliser la forme new Todo({...}) pour créer la Todo. Et cela permet aux composants appelant d'avoir connaissances de ces propriétés
 interface IProps {
     text: string
     index: number
@@ -421,14 +421,14 @@ export default class Todo extends Component<IProps> {
         `
     }
 
-    // On déclare les 3 propiétés observable en utilisant la directive @property. Comme il s'agit d'attribut, afin d'indiquer comment la conversion doit être faite entre l'attribut et la propriété, on indique le type pour index et checked, text étant un string il est inutile de l'indiquer. writeOnly est passé à true pour l'index afin qu'il n'apparaisse pas en tant qu'attribut html dans le dom
+    // On déclare les 3 propiétés observables en utilisant la directive @property. Comme il s'agit d'attribut, afin d'indiquer comment la conversion doit être faite entre l'attribut et la propriété, on indique le type pour index et checked, text étant un string il est inutile de l'indiquer. writeOnly est passé à true pour l'index afin qu'il n'apparaisse pas en tant qu'attribut html dans le dom
     @property() text: string
     @property({ type: Number, writeOnly: true }) index: number
     @property({ type: Boolean }) checked: boolean = false
 
     render() {
-        // https://lit-html.polymer-project.org/guide/template-reference
-        // On utilise .checked pour indiquer qu'on utilisera une valeur true ou false pour l'attribut html checked de l'input dans le DOM
+        // Voir https://lit-html.polymer-project.org/guide/template-reference
+        // On utilise .checked pour indiquer qu'on utilisera une valeur true ou false et pas un booleen pour l'attribut html checked de l'input dans le DOM
         // Un custom event est utilisé pour préciser aux autres composants que la tâche est complétée ou supprimée (cf todo-list pour voir comment cela est traité)
         // Un autre custom event est utilisé pour preciser que la tâche est supprimée
         // On déclare une balise SVG qui va chercher les icones déclarés dans le fichier icons.svg
@@ -445,10 +445,10 @@ export default class Todo extends Component<IProps> {
     ...
 ```
 
-Dans un contexte de vrai webapp on aurait probablement créé un composant icon à la place de la balise SVG.
+Dans un contexte de vrai webapp nous aurions probablement créé un composant icon à la place de la balise SVG.
 
-Cela dit, comme expliqué plus haut pour avoir des icones on utilise une balise SVG appelant le fichier d'icones icones.svg présent dans les assets/img. et l'id associé à l'icone voulu
-On va lui ajouter les icones :
+Comme expliqué plus haut, pour avoir des icones, nous utilisons une balise SVG appelant le fichier d'icones icones.svg présent dans les assets/img et l'id associé à l'icone voulu.
+Nous allons ajouter les icones a ce fichier :
 
 ```xml
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"
@@ -471,7 +471,7 @@ On va lui ajouter les icones :
 </svg>
 ```
 
-Pour récupérer ces icônes et leur code il suffit de se rendre sur [icomoon](https://icomoon.io/app/) et de d'appuyer sur generate SVG, il est alors possible de récupérer ces codes comme on le voit ici
+Pour récupérer ces icônes et leur code il suffit de se rendre sur [icomoon](https://icomoon.io/app/) et d'appuyer sur generate SVG, il est alors possible de récupérer ces codes comme on le voit ici :
 
 ![](images/wapitisTodoList04.png)
 
@@ -481,25 +481,25 @@ Au final on obtient:
 
 ---
 
-Une fois terminé notre webapp, il est tout à fait possible de tester l'app sous electron en lançant
+Une fois terminée notre webapp, il est tout à fait possible de tester l'app sous electron en lançant :
 
 ```bash
 npx wapitis electron --dev
 ```
 
-Cela ouvre alors une fenetre en plein écran. Il s'agi d'une app electron contenant notre nouvelle webapp.
+Cela ouvre alors une fenêtre en plein écran. Il s'agit d'une app electron contenant notre nouvelle webapp.
 
 ![](images/wapitisTodoList06.png)
 
 Il est alors possible de continuer à développer notre webapp comme on le faisait en test web. La mise à jour est automatique.
 
-Pour modifier les menus ou tout ce qui concerne electron, il suffit de modifier le fichier electronSTart.ts. Nous ne le ferons pas ici.
+Pour modifier les menus ou tout ce qui concerne electron, il suffit de modifier le fichier electronSTart.ts.
 
-Si nous ne verrons pas directement comment publier cette application pour la production avec electron, cela est tout à fait possible et sera expliqué plus bas.
+Si nous ne verrons pas directement comment publier cette application pour la production avec electron, cela est tout à fait possible et est expliqué [ici](./electron.md).
 
 ---
 
-Enfin si nous voulons publier notre webapp pour la production et profiter du service worker et de ses possibilités, il suffi de lancer
+Enfin si nous voulons publier notre webapp pour la production et profiter du service worker et de ses possibilités, il suffit de d'utiliser :
 
 ```bash
 npx wapitis prod
@@ -509,9 +509,9 @@ Le résultat de la compilation est disponible dans le dossier dist :
 
 ![](images/wapitisTodoList07.png)
 
-Il n'y a rien à faire pour activer le service worker. sw.js s'en occupe. Par ailleurs un polyfill est intégré afin de gérer le passage sur les différents navigateurs. La seule chose à faire est de styler les boutons permettant d'activer les notifications et l'ajout en tant qu'application à l'écran d'accueil
+Il n'y a rien à faire pour activer le service worker. sw.js s'en occupe. Par ailleurs, un polyfill est intégré afin de gérer le passage sur les différents navigateurs. La seule chose à faire est de styler les boutons permettant d'activer les notifications et l'ajout en tant qu'application à l'écran d'accueil
 
-Pour cela nous allons remplir styles/main.css.
+Pour cela nous allons remplir styles/main.css :
 
 ```css
 body {
@@ -557,7 +557,7 @@ body {
 
 ---
 
-Quelques éléments ont été rajoutés sur le site envoyé sur le serveur. Ils ne seront pas décrit ici ...
+*Quelques éléments ont été rajoutés sur le site envoyé sur le serveur. Ils ne seront pas décrit ici ...*
 
 Il ne reste plus alors qu'à tout envoyer sur le serveur de son choix. Dans mon cas, j'ai utilisé netlify.
 
@@ -565,4 +565,4 @@ Le code de la démo est disponible ici : [https://github.com/NicolasBoyer/wapiti
 
 Et la démo elle même est là : [https://wapitis-todos-test.netlify.com](https://wapitis-todos-test.netlify.com)
 
-Tout n'est pas décrit ici, il manque par exemple l'utilisation des slot ou encore la gestion des propriétés de stylage pour surcharger, la publication dans une app electron et pleins d'autres choses qui seront expliqués dans le reste de la documentation.
+Tout n'est pas décrit ici, il manque par exemple l'utilisation des slot ou encore la gestion des propriétés de stylage pour surcharger, la publication dans une app electron et pleins d'autres choses qui seront expliquées dans le reste de la documentation.

@@ -53,13 +53,13 @@ Functions
 
 *Defined in [src/shadowDom.ts:33](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/shadowDom.ts#L33)*
 
-Retourne le parent, incluant la balise <slot> dans la chaine
+Retourne le parent, incluant la balise <slot> dans la chaîne
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`selector` | string | Le parent le plus proche à célectionner |
+`selector` | string | Le parent le plus proche à sélectionner |
 `base` | Element | L'élément sur lequel est effectuée la recherche |
 
 **Returns:** *Element*
@@ -99,7 +99,7 @@ Retrouve le ou les éléments assignés dans le slotName
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`from` | Element | l'élément sur lequel la recherche est effectuée |
+`from` | Element | L'élément sur lequel la recherche est effectuée |
 `slotName` | string | Le nom du slot recherché |
 
 **Returns:** *Element \| Element[]*
@@ -139,7 +139,7 @@ Retrouve tous les éléments assignés dans les slot de l'élément courant
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`from` | Element | L'élément sur lequle est effectuée la recherche |
+`from` | Element | L'élément sur lequel est effectuée la recherche |
 
 **Returns:** *Element[]*
 

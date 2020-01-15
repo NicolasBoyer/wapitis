@@ -101,9 +101,9 @@ Crée une instance de Component
 
 **Parameters:**
 
-| Name       | Type | Description                                                                                                                                                                                                                           |
-| ---------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `options?` | T    | Paramètre de type {{ [x: string]: any }}, nécessaire pour la création de la classe sous la forme new({options})  Une fois appelées, les propriétés sont automatiquement prises en compte, si elles ont été déclarées sur le composant |
+| Name       | Type | Description                                                                                                                                                                                                                             |
+| ---------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options?` | T    | Paramètre de type `{{ [x: string]: any }}`, nécessaire pour la création de la classe sous la forme new({options})  Une fois appelées, les propriétés sont automatiquement prises en compte, si elles ont été déclarées sur le composant |
 
 **Returns:** *[Component](_component_.component.md)*
 
@@ -218,7 +218,7 @@ ___
 
 *Defined in [src/component.tsx:96](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L96)*
 
-Spécifique au web component. Permet de déclarer les propriétés qui seront observés et provoqueront un nouveau rendu via [render](_component_.component.md#protected-render) et le rappel de [attributeChangedCallback](_component_.component.md#attributechangedcallback)
+Spécifique au web component. Permet de déclarer les propriétés qui seront observées et provoqueront un nouveau rendu via [render](_component_.component.md#protected-render) et le rappel de [attributeChangedCallback](_component_.component.md#attributechangedcallback)
 
 Inutile d'utiliser cette méthode. Elle est appelé automatiquement grâce à la directive @property
 
@@ -257,7 +257,7 @@ ___
 
 *Defined in [src/component.tsx:231](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L231)*
 
-Spécifique au web component. Si la nouvelle valeur de l'attribut observé est différent de l'ancienne, l'attribut est alords affecté comme propriété. La méthode [render](_component_.component.md#protected-render) est par conséquent relancée
+Spécifique au web component. Si la nouvelle valeur de l'attribut observé est différente de l'ancienne, l'attribut est alors affecté comme propriété. La méthode [render](_component_.component.md#protected-render) est par conséquent relancée
 
 **Parameters:**
 
@@ -298,7 +298,7 @@ ___
 
 *Defined in [src/component.tsx:258](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L258)*
 
-Appelé avant le rendu du composant. Permet d'interagir avec les éléments à chaque appel du composant avant sa création dans le dom.
+Appelé avant le rendu du composant. Permet d'interagir avec les éléments à chaque appel du composant avant sa création dans le dom
 
 **Parameters:**
 
@@ -405,9 +405,7 @@ ___
 
 Appelé lors de la première mise à jour du composant
 
-Utile pour réaliser des actions qui ne doivent avoir lieu qu'une fois, comme la récupération des différents éléments rendu dans la méthode [render](_component_.component.md#protected-render)
-
-En utilisant les methodes existantes dans les librairies [DOM](../modules/_dom_.dom.md) et [SHADOWDOM](../modules/_shadowdom_.shadowdom.md) de WAPITIS ou l'API DOM, par exemple avec querySelector et la propriété shadowRoot :
+Utile pour réaliser des actions qui ne doivent avoir lieu qu'une fois, comme la récupération des différents éléments rendus dans la méthode [render](_component_.component.md#protected-render), en utilisant les méthodes existantes dans les librairies [DOM](../modules/_dom_.dom.md) et [SHADOWDOM](../modules/_shadowdom_.shadowdom.md) de WAPITIS ou l'API DOM. Par exemple avec querySelector et la propriété shadowRoot :
 ``` typescript
   this._input = this.shadowRoot!.querySelector('input')
 ```
@@ -449,7 +447,7 @@ ___
 
 *Defined in [src/component.tsx:268](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L268)*
 
-Permet de créer le composant dans le DOM grâce au tag html de lit-html.
+Permet de créer le composant dans le DOM grâce au tag html de lit-html
 
 **Returns:** *TemplateResult | void*
 
@@ -484,9 +482,9 @@ ___
 
 *Defined in [src/component.tsx:248](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L248)*
 
-Permet de conditionner le rendu du composant.
+Permet de conditionner le rendu du composant
 
-[render](_component_.component.md#protected-render) est appelé si la fonction retourne true. Ce qui est le comportement par défaut.
+[render](_component_.component.md#protected-render) est appelé si la fonction retourne true. Ce qui est le comportement par défaut
 
 **Parameters:**
 
@@ -566,11 +564,11 @@ ___
 
 *Defined in [src/component.tsx:128](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L128)*
 
-Crée une propriété avec son setter et son getter et définit grâce aux options, si elle est observable et l'ajoute en tant qu'attribut, le cas échéant
+Crée une propriété avec son setter et son getter et définit, grâce aux options, si elle est observable et l'ajoute en tant qu'attribut, le cas échéant
 
 Lors de la création, demande une update et la lance si aucune autre demande n'est en cours. Ce qui amène ensuite à relancer la méthode [render](_component_.component.md#protected-render)
 
-Il n'est ni necessaire ni recommandé d'utiliser cette méthode qui est appelé via la directive @property
+Il n'est ni necessaire ni recommandé d'utiliser cette méthode qui est appelée via la directive @property
 
 **Parameters:**
 

@@ -31,7 +31,7 @@ export function customElement(tagName?: string) {
  * Paramètres de la directive @property. Trois options possibles :
  * - type : indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (string par défaut)
  * - reflectInAttribute : la propriété est transformée en attribut, de camelCase vers dashCase (true par défaut) et est observable
- * - writeOnly : propriété observable non visible dans l'html rendu mais possible de la créer en html ou en javascript (false par défaut)
+ * - writeOnly : propriété observable non visible dans l'html 'rendu', mais il est possible de la créer en html ou en javascript (false par défaut)
  */
 export interface IPropertyOptions {
     /**
@@ -43,7 +43,7 @@ export interface IPropertyOptions {
      */
     reflectInAttribute?: boolean
     /**
-     * Propriété observable non visible dans l'html rendu mais possible de la créer en html ou en javascript (false par défaut)
+     * Propriété observable non visible dans l'html 'rendu', mais il est possible de la créer en html ou en javascript (false par défaut)
      */
     writeOnly?: boolean
 }
@@ -88,7 +88,7 @@ export type PropertyValues = Map<PropertyKey, { oldVal: unknown, newVal: unknown
 export abstract class Component<T> extends HTMLElement {
 
     /**
-     * Spécifique au web component. Permet de déclarer les propriétés qui seront observés et provoqueront un nouveau rendu via [[render]] et le rappel de [[attributeChangedCallback]]
+     * Spécifique au web component. Permet de déclarer les propriétés qui seront observées et provoqueront un nouveau rendu via [[render]] et le rappel de [[attributeChangedCallback]]
      *
      * Inutile d'utiliser cette méthode. Elle est appelé automatiquement grâce à la directive @property
      * @returns Retourne un tableau contenant les noms des attributs que vous voulez observer
@@ -117,11 +117,11 @@ export abstract class Component<T> extends HTMLElement {
     static styles?: CSSResult | CSSResultArray
 
     /**
-     * Crée une propriété avec son setter et son getter et définit grâce aux options, si elle est observable et l'ajoute en tant qu'attribut, le cas échéant
+     * Crée une propriété avec son setter et son getter et définit, grâce aux options, si elle est observable et l'ajoute en tant qu'attribut, le cas échéant
      *
      * Lors de la création, demande une update et la lance si aucune autre demande n'est en cours. Ce qui amène ensuite à relancer la méthode [[render]]
      *
-     * Il n'est ni necessaire ni recommandé d'utiliser cette méthode qui est appelé via la directive @property
+     * Il n'est ni necessaire ni recommandé d'utiliser cette méthode qui est appelée via la directive @property
      * @param {PropertyKey} name Nom de la propriété
      * @param {IPropertyOptions} [options]
      */
@@ -222,7 +222,7 @@ export abstract class Component<T> extends HTMLElement {
     }
 
     /**
-     * Spécifique au web component. Si la nouvelle valeur de l'attribut observé est différent de l'ancienne, l'attribut est alords affecté comme propriété. La méthode [[render]] est par conséquent relancée
+     * Spécifique au web component. Si la nouvelle valeur de l'attribut observé est différente de l'ancienne, l'attribut est alors affecté comme propriété. La méthode [[render]] est par conséquent relancée
      *
      * @param {string} attrName Nom de l'attribut
      * @param {*} oldVal Ancienne valeur de l'attribut
@@ -251,7 +251,7 @@ export abstract class Component<T> extends HTMLElement {
     }
 
     /**
-     * Appelé avant le rendu du composant. Permet d'interagir avec les éléments à chaque appel du composant avant sa création dans le dom.
+     * Appelé avant le rendu du composant. Permet d'interagir avec les éléments à chaque appel du composant avant sa création dans le dom
      *
      * @param {PropertyValues} _changedProperties
      */
@@ -260,7 +260,7 @@ export abstract class Component<T> extends HTMLElement {
     }
 
     /**
-     * Permet de créer le composant dans le DOM grâce au tag html de lit-html.
+     * Permet de créer le composant dans le DOM grâce au tag html de lit-html
      *
      * @returns {(TemplateResult | void)} Retourne un TemplateResult qui est ensuite interprété et permet la mise à jour du DOM
      */
@@ -281,9 +281,7 @@ export abstract class Component<T> extends HTMLElement {
     /**
      * Appelé lors de la première mise à jour du composant
      *
-     * Utile pour réaliser des actions qui ne doivent avoir lieu qu'une fois, comme la récupération des différents éléments rendu dans la méthode [[render]]
-     *
-     * En utilisant les methodes existantes dans les librairies [[DOM]] et [[SHADOWDOM]] de WAPITIS ou l'API DOM, par exemple avec querySelector et la propriété shadowRoot :
+     * Utile pour réaliser des actions qui ne doivent avoir lieu qu'une fois, comme la récupération des différents éléments rendus dans la méthode [[render]], , en utilisant les méthodes existantes dans les librairies [[DOM]] et [[SHADOWDOM]] de WAPITIS ou l'API DOM. Par exemple avec querySelector et la propriété shadowRoot :
      * ``` typescript
      *   this._input = this.shadowRoot!.querySelector('input')
      * ```

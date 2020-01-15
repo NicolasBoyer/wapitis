@@ -55,7 +55,7 @@ Functions
 
 *Defined in [src/utils.ts:40](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L40)*
 
-Transforme une chaine du type camelCase en DashCase
+Transforme une chaîne du type camelCase en DashCase
 
 **Parameters:**
 
@@ -94,7 +94,7 @@ ___
 
 *Defined in [src/utils.ts:50](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L50)*
 
-Transforme une chaine du type DashCase en camelCase
+Transforme une chaîne du type DashCase en camelCase
 
 **Parameters:**
 
@@ -133,7 +133,7 @@ ___
 
 *Defined in [src/utils.ts:70](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L70)*
 
-Envoie un customEvent sur l'élément parent, avec les propriétés renseignés dans property
+Envoie un customEvent sur l'élément parent, avec les propriétés renseignées dans property
 
 **Parameters:**
 
@@ -141,7 +141,7 @@ Name | Type | Default | Description |
 ------ | ------ | ------ | ------ |
 `name` | string | - | Nom du custom Event |
 `property` | object | - | Propriétés à envoyer |
-`parent` | HTMLElement |  document.body | Element sur lequel le custom event est envoyé, document.body par défaut  |
+`parent` | HTMLElement |  document.body | Elément sur lequel le custom event est envoyé, document.body par défaut  |
 
 **Returns:** *void*
 {: .mb-0 }
@@ -181,7 +181,7 @@ Transforme une string dans le type renseigné
 Name | Type | Description |
 ------ | ------ | ------ |
 `value` | string &#124; null | Chaîne à transformer |
-`type?` | unknown | Type dans lequel transformer la chaine : Boolean, Number, Object, Array, ... |
+`type?` | unknown | Type dans lequel transformer la chaîne : Boolean, Number, Object, Array, ... |
 
 **Returns:** *any*
 {: .mb-0 }
@@ -321,7 +321,7 @@ ___
 
 *Defined in [src/utils.ts:129](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L129)*
 
-Retourne les données spécifié dans la clé en local storage
+Retourne les données spécifiées dans la clé en local storage
 
 **Type parameters:**
 
@@ -368,7 +368,7 @@ ___
 
 *Defined in [src/utils.ts:117](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L117)*
 
-Enregistre les données dans la clé spécifié en local storage
+Enregistre les données dans la clé spécifiée en local storage
 
 **Type parameters:**
 

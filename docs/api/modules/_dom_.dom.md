@@ -92,10 +92,10 @@ Supprime la classe contenant le préfix renseigné
 
 **Parameters:**
 
-| Name      | Type        | Description                                  |
-| --------- | ----------- | -------------------------------------------- |
-| `element` | HTMLElement | L'élément sur lequel la classe sera supprimé |
-| `prefix`  | string      | Le préfix de la classe à supprimer           |
+| Name      | Type        | Description                                   |
+| --------- | ----------- | --------------------------------------------- |
+| `element` | HTMLElement | L'élément sur lequel la classe sera supprimée |
+| `prefix`  | string      | Le préfix de la classe à supprimer            |
 
 **Returns:** *void*
 {: .mb-0 }
@@ -134,7 +134,7 @@ Assigne l'attribut spécifié et sa valeur à l'élément spécifié
 
 | Name       | Type        | Description                                 |
 | ---------- | ----------- | ------------------------------------------- |
-| `element`  | HTMLElement | L'élément sur lequel l'attribue est affecté |
+| `element`  | HTMLElement | L'élément sur lequel l'attribut est affecté |
 | `name`     | string      | Nom de l'attribut                           |
 | `value`    | any         | Valeur de l'attribut                        |
 | `isStyle?` | boolean     | Si true, ajoute en tant que que style       |
@@ -174,11 +174,11 @@ Assigne la propriété renseignée dans le style si la valeur est différente
 
 **Parameters:**
 
-| Name      | Type        | Description                             |
-| --------- | ----------- | --------------------------------------- |
-| `element` | HTMLElement | L'élément sur lequel appliquer le style |
-| `name`    | string      | Le nom du style à assigner              |
-| `value`   | string      | La valeur du style à assigner           |
+| Name      | Type        | Description                                |
+| --------- | ----------- | ------------------------------------------ |
+| `element` | HTMLElement | L'élément sur lequel le style est appliqué |
+| `name`    | string      | Le nom du style à assigner                 |
+| `value`   | string      | La valeur du style à assigner              |
 
 **Returns:** *boolean*
 

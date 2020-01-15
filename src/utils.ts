@@ -4,7 +4,7 @@ export namespace UTILS {
      * Transforme une string dans le type renseigné
      *
      * @param {(string | null)} value Chaîne à transformer
-     * @param {unknown} type Type dans lequel transformer la chaine : Boolean, Number, Object, Array, ...
+     * @param {unknown} type Type dans lequel transformer la chaîne : Boolean, Number, Object, Array, ...
      * @returns
      */
     export function fromString(value: string | null, type?: unknown) {
@@ -32,7 +32,7 @@ export namespace UTILS {
     }
 
     /**
-     * Transforme une chaine du type camelCase en DashCase
+     * Transforme une chaîne du type camelCase en DashCase
      *
      * @param {*} name Chaîne à transformer
      * @returns
@@ -42,7 +42,7 @@ export namespace UTILS {
     }
 
     /**
-     * Transforme une chaine du type DashCase en camelCase
+     * Transforme une chaîne du type DashCase en camelCase
      *
      * @param {*} name Chaîne à transformer
      * @returns
@@ -61,11 +61,11 @@ export namespace UTILS {
     }
 
     /**
-     * Envoie un customEvent sur l'élément parent, avec les propriétés renseignés dans property
+     * Envoie un customEvent sur l'élément parent, avec les propriétés renseignées dans property
      *
      * @param {string} name Nom du custom Event
      * @param {object} property Propriétés à envoyer
-     * @param {HTMLElement} parent Element sur lequel le custom event est envoyé, document.body par défaut
+     * @param {HTMLElement} parent Elément sur lequel le custom event est envoyé, document.body par défaut
      */
     export function dispatchEvent(name: string, property: object, parent: HTMLElement = document.body) {
         const event = new CustomEvent(name, { detail: property })
@@ -108,7 +108,7 @@ export namespace UTILS {
     }
 
     /**
-     * Enregistre les données dans la clé spécifié en local storage
+     * Enregistre les données dans la clé spécifiée en local storage
      *
      * @typeparam T Le type des données à sauvegarder
      * @param {string} key La clé à utiliser pour sauvegarder les données
@@ -120,7 +120,7 @@ export namespace UTILS {
     }
 
     /**
-     * Retourne les données spécifié dans la clé en local storage
+     * Retourne les données spécifiées dans la clé en local storage
      *
      * @typeparam T Le type des données à retourner
      * @param {string} key La clé à utiliser pour charger les données

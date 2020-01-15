@@ -7,17 +7,17 @@ parent: Développer
 
 # Electron
 
-Avec Wapitis, il est possible de créer une application electron
+Avec Wapitis, il est possible de créer une application electron.
 
-Pour lancer un test dans une app electron, il suffit d'appeler la ligne de commande
+Pour lancer un test dans une app electron, il suffit d'appeler la ligne de commande :
 
 ```bash
 npx wapitis electron --dev
 ```
 
-Une nouvelle fenetre s'ouvre alors contenant l'application electron vers le fichier index.html de la web app.
+Une nouvelle fenêtre s'ouvre alors contenant l'application electron vers le fichier index.html de la web app.
 
-Par défaut certains éléments sont déclarés dans le fichier electronStart.ts, comme la déclaration des menus, l'appel du fichier index.html pour fonctionner en dev et en prod, la déclaration du splash et de la fenetre about et la liaison avec electron auto update pour permettre de proposer des mises à jour automatiques.
+Par défaut certains éléments sont déclarés dans le fichier electronStart.ts, comme la déclaration des menus, l'appel du fichier index.html pour fonctionner en dev et en prod, la déclaration du splash et de la fenêtre about et la liaison avec electron auto update pour permettre de proposer des mises à jour automatiques.
 
 electronStart.ts contient toutes les déclarations nécessaires au bon fonctionnement de l'application electron et en est la porte d'entrée.
 
@@ -41,7 +41,8 @@ win.webContents.send('show_about',
 )
 ```
 
-Message récupéré dans l'index.js afin de créer la fenetre à propos permettant de voir les versions de l'application et des applications tiers
+Message récupéré dans index.js afin de créer la fenêtre à propos permettant de voir les versions de l'application et des applications tiers :
+
 ```javascript
 ipcRenderer.on('show_about', (event, arg) => {
     const style = document.createElement('style')
@@ -111,7 +112,7 @@ ipcRenderer.on('show_about', (event, arg) => {
 })
 ```
 
-L'ensemble de la liaison entre electron et la web app peut être réalisé de cette façon ou en utilisant ce qui est proposé dans la documentation d'electron.
+L'ensemble de la liaison entre electron et la web app peut être réalisée de cette façon ou en utilisant ce qui est proposé dans la documentation d'electron.
 
 Lors de la modification des fichiers de la webapp il est inutile de relancer npx wapitis electron --dev, en revanche toutes modifications sur electronStart.ts nécessite de relancer la ligne de commande.
 

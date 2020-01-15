@@ -24,9 +24,9 @@ export namespace SHADOWDOM {
     }
 
     /**
-     * Retourne le parent, incluant la balise <slot> dans la chaine
+     * Retourne le parent, incluant la balise <slot> dans la chaîne
      *
-     * @param {string} selector Le parent le plus proche à célectionner
+     * @param {string} selector Le parent le plus proche à sélectionner
      * @param {Element} base L'élément sur lequel est effectuée la recherche
      * @returns
      */
@@ -59,7 +59,7 @@ export namespace SHADOWDOM {
     /**
      * Retrouve tous les éléments assignés dans les slot de l'élément courant
      *
-     * @param {Element} from L'élément sur lequle est effectuée la recherche
+     * @param {Element} from L'élément sur lequel est effectuée la recherche
      * @returns {Element[]} Retourne un tableau avec les éléments retrouvés
      */
     export function findAssignedElements(from: Element): Element[] {
@@ -73,7 +73,7 @@ export namespace SHADOWDOM {
     /**
      * Retrouve le ou les éléments assignés dans le slotName
      *
-     * @param {Element} from l'élément sur lequel la recherche est effectuée
+     * @param {Element} from L'élément sur lequel la recherche est effectuée
      * @param {string} slotName Le nom du slot recherché
      * @returns {(Element | Element[])}
      */

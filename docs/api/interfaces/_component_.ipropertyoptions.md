@@ -114,7 +114,7 @@ ___
 
 *Defined in [src/component.tsx:48](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L48)*
 
-Propriété observable non visible dans l'html rendu mais possible de la créer en html ou en javascript (false par défaut)
+Propriété observable non visible dans l'html 'rendu', mais il est possible de la créer en html ou en javascript (false par défaut)
 {: .mb-0 }
 
 </td>

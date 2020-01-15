@@ -5,7 +5,7 @@ export namespace DOM {
     /**
      * Assigne l'attribut spécifié et sa valeur à l'élément spécifié
      *
-     * @param {HTMLElement} element L'élément sur lequel l'attribue est affecté
+     * @param {HTMLElement} element L'élément sur lequel l'attribut est affecté
      * @param {string} name Nom de l'attribut
      * @param {*} value Valeur de l'attribut
      * @param {boolean} isStyle Si true, ajoute en tant que que style
@@ -42,7 +42,7 @@ export namespace DOM {
     /**
      * Supprime la classe contenant le préfix renseigné
      *
-     * @param {HTMLElement} element L'élément sur lequel la classe sera supprimé
+     * @param {HTMLElement} element L'élément sur lequel la classe sera supprimée
      * @param {string} prefix Le préfix de la classe à supprimer
      */
     export function removeClassByPrefix(element: HTMLElement, prefix: string) {
@@ -53,7 +53,7 @@ export namespace DOM {
     /**
      * Assigne la propriété renseignée dans le style si la valeur est différente
      *
-     * @param {HTMLElement} element L'élément sur lequel appliquer le style
+     * @param {HTMLElement} element L'élément sur lequel le style est appliqué
      * @param {string} name Le nom du style à assigner
      * @param {string} value La valeur du style à assigner
      * @returns {boolean} Retourne true si le style est appliqué
