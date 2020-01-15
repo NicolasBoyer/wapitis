@@ -315,6 +315,14 @@ if (arg) {
 	} else if (arg === 'dev' || arg === 'prod' || arg === 'clear' || arg === 'electron' || arg === 'generate') {
 		if (!isWapitisFile) log(chalk.red('Lancer `npx wapitis init` afin d\'initialiser l\'application'))
 		else {
+			/** MIGRATION */
+			// ADD LINK APPLE TOUCH ICON TO WAPITIS.JSON
+			if (!wapitisConfig.appleTouchIcon) {
+				wapitisConfig.appleTouchIcon = wapitisConfig.srcPath + '/../dist/assets/icons/apple-touch-icon.png'
+				files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
+			}
+			/** */
+
 			// GLOBALS
 			const isElectron = arg === 'electron'
 			const tsconfigFile = directoryBase + '/tsconfig.json'
