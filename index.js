@@ -56,13 +56,16 @@ const buildIndexFile = async (isProd, isElectron) => {
 	html = html.replace('$appDesc$', wapitisConfig.appDesc)
 	html = html.replace('$themeColor$', wapitisConfig.themeColor)
 	html = html.replace('$appName$', wapitisConfig.appName)
-	html = html.replace('$appleTouchIcon$', wapitisConfig.appleTouchIcon)
 	html = html.replace('$electron$', isElectron ? '<script src="index.js"></script>' : '')
 	if (isProd) {
+		html = html.replace('$appleTouchIcon$', wapitisConfig.appleTouchIcon)
 		const quantumFile = JSON.parse(files.readFileSync(completeDistPath + '/quantum.json', 'utf8'))
 		html = html.replace('$bundle$', `<script src="${quantumFile.bundle.relativePath}"></script>`)
 		files.remove(completeDistPath + '/quantum.json')
-	} else html = html.replace('$bundle$', '<script src="bundle.js"></script>')
+	} else {
+		html = html.replace('$bundle$', '<script src="bundle.js"></script>')
+		html = html.replace('$appleTouchIcon$', '')
+	}
 	await files.appendFile(completeDistPath + '/index.html', html, true)
 }
 const cleanIndexFile = async () => {
@@ -70,6 +73,7 @@ const cleanIndexFile = async () => {
 	let html = await files.readFile(completeDistPath + '/index.html')
 	html = html.replace('$headScripts$', '')
 	html = html.replace('$bodyScript$', '')
+	html = html.replace('$appleTouchIcon$', '')
 	files.appendFile(completeDistPath + '/index.html', html, true)
 }
 
@@ -319,7 +323,7 @@ if (arg) {
 			// ADD LINK APPLE TOUCH ICON TO WAPITIS.JSON
 			if (!wapitisConfig.appleTouchIcon) {
 				files.copy(path.resolve(__dirname, '.includes/www/assets/icons/apple-touch-icon.png'), directoryBase + '/' + wapitisConfig.srcPath + '/www/assets/icons/apple-touch-icon.png').then(async () => {
-					wapitisConfig.appleTouchIcon = wapitisConfig.srcPath + './assets/icons/apple-touch-icon.png'
+					wapitisConfig.appleTouchIcon = './assets/icons/apple-touch-icon.png'
 					await files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
 				})
 			}
