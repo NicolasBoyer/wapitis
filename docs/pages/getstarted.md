@@ -27,7 +27,7 @@ Une fois l'installation terminée les sources se présentent ainsi :
 
 ![](images/wapitisSrc.png)
 
-- wapitis.json contient les divers éléments permettant la création de l'application.
+- wapitis.json contient les divers éléments permettant la création de l'application. Peut être modifié si nécessaire.
 - tslint.json permet de mettre en place l'aide à la saisie.
 - tsconfig.json configure comment typescript doit fonctionner.
 - .env contient les divers variables d'environnement nécessaires au bon fonctionnement de wapitis
