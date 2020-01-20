@@ -1,3 +1,6 @@
+import { directive, PropertyPart } from 'lit-html'
+import { DOM } from './dom'
+
 // tslint:disable-next-line:no-namespace
 export namespace UTILS {
     /**
@@ -130,4 +133,46 @@ export namespace UTILS {
         const datas = localStorage.getItem(key) || '{}'
         return JSON.parse(datas)
     }
+
+    /**
+     * Directive transformant des propriétés de types objet `{ [key: string]: unknown }` en attribut compréhensible par lit-html et le tag html.
+     *
+     * Cela est particulièrement utile dans le cas de données externes.
+     *
+     * @author open-wc@ (open-wc). Adapdée à Wapitis
+     *
+     * Comme toute directive, propsToAttributes est utilisé dans un tag html. Avec la syntaxe de lit-html, il est nécessaire de déclarer un attribut pour appliquer cette directive. Nous utilisons ici la convention `...=`, bien que n'importe quel nom d'attibut puisse être utilisé. Exemple :
+     *
+     * ```typescript
+     * html`
+     *      <div ...="${propsToAttributes({ propertyA: 'a', propertyB: 'b' })}"></div>
+     * `
+     * ```
+     *
+     * @param {{ [key: string]: unknown }} props Les propriétés de type `{ [key: string]: unknown }` à transformer
+     */
+    export const propsToAttributes = directive((props: { [key: string]: unknown }) => (part: PropertyPart) => {
+        const previousProps = new WeakMap()
+        const prev = previousProps.get(part)
+        if (prev === props) {
+            return
+        }
+        previousProps.set(part, props)
+        if (props) {
+            // tslint:disable-next-line: forin
+            for (const key in props) {
+                const value = props[key]
+                if (!prev || prev[key] !== value) {
+                    DOM.setAttribute(part.committer.element as HTMLElement, key, value)
+                }
+            }
+        }
+        if (prev) {
+            for (const key in prev) {
+                if (!props || !(key in props)) {
+                    part.committer.element.removeAttribute(key)
+                }
+            }
+        }
+    })
 }

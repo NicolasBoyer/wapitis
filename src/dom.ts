@@ -1,3 +1,4 @@
+import { html, TemplateResult } from 'lit-html'
 import { UTILS } from '.'
 
 // tslint:disable-next-line:no-namespace
@@ -64,5 +65,28 @@ export namespace DOM {
             return true
         }
         return false
+    }
+
+    /**
+     * Crée un composant `tag` contenant les attributs et l'enfant passés en paramètres
+     *
+     * @param {string} tag Nom du futur composant
+     * @param {{ [key: string]: unknown }} attributes Attributs du futur composant
+     * @param {TemplateResult} children Enfant du futur composant
+     * @returns {TemplateResult} Retourne un TemplateResult à appeler avec le tag html
+     * ```typescript
+     *  return html`
+     *      ${this.createComponent(this.tag, { class: this.type + (this.position && ' ' + this.position) + (this.class && ' ' + this.class) }, html`<slot></slot>`)}
+     *  `
+     * ```
+     */
+    export function createComponent(tag: string, attributes?: { [key: string]: unknown }, children?: TemplateResult) {
+        const template = html`
+            <${tag} ...=${UTILS.propsToAttributes(attributes)}>
+                ${children}
+            </${tag}>
+        `
+        const record: any = [`<${tag} ...=`, '>', `</${tag}>`]
+        return html(record, ...(template.values.filter((value) => value !== tag)))
     }
 }

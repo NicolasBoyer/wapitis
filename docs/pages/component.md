@@ -284,4 +284,8 @@ ${this.checked ? html`<svg class="icon"><use href=${icons}#icon-check-circle></u
 ${this._todos.map((todo, index) => html`<w-todo ?checked=${todo.checked} text=${todo.text} .index=${index} @remove=${this._removeTodo} @completed=${this._toggleTodo}></w-todo>`)}
 ```
 
-- Tout ce que l'on trouvera sur : [https://lit-html.polymer-project.org/guide/template-reference](https://lit-html.polymer-project.org/guide/template-reference) dont la directive repeat, until, ...
+- Tout ce que l'on trouvera sur : [https://lit-html.polymer-project.org/guide/template-reference](https://lit-html.polymer-project.org/guide/template-reference) dont la directive repeat, until, ... L'import se fera en revanche via wapitis. Exemple :
+
+```typescript
+import { repeat, until } from wapitis
+```

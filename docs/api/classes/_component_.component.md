@@ -401,7 +401,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:293](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L293)*
+*Defined in [src/component.tsx:291](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L291)*
 
 Appelé lors de la première mise à jour du composant
 

@@ -319,7 +319,7 @@ if (arg) {
 	} else if (arg === 'dev' || arg === 'prod' || arg === 'clear' || arg === 'electron' || arg === 'generate') {
 		if (!isWapitisFile) log(chalk.red('Lancer `npx wapitis init` afin d\'initialiser l\'application'))
 		else {
-			/** MIGRATION */
+			/** MIGRATION - A supprimer lors de l'augmentation de la medium */
 			// ADD LINK APPLE TOUCH ICON TO WAPITIS.JSON
 			if (!wapitisConfig.appleTouchIcon) {
 				files.copy(path.resolve(__dirname, '.includes/www/assets/icons/apple-touch-icon.png'), directoryBase + '/' + wapitisConfig.srcPath + '/www/assets/icons/apple-touch-icon.png').then(async () => {

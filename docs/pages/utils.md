@@ -46,6 +46,8 @@ Contient différentes méthodes permettant de simplifier certaines actions, comm
     function save<T>(key: string, datas: T): void
     /** Retourne les données spécifiées dans la clé en local storage */
     function load<T>(key: string): T
+    /** Directive transformant des propriétés de types objet `{ [key: string]: unknown }` en attribut compréhensible par lit-html et le tag html */
+    propsToAttributes(...props: { [key: string]: unknown }): void
 ```
 ---
 
@@ -62,6 +64,8 @@ Contient des méthodes permettant de manipuler le dom
     function removeClassByPrefix(element: HTMLElement, prefix: string): void
     /** Assigne la propriété renseignée dans le style si la valeur est différente. Retourne true dans ce cas */
     function setStyle(element: HTMLElement, name: string, value: string): boolean
+    /** Crée un composant `tag` contenant les attributs et l'enfant passés en paramètres */
+    function createComponent(tag: string, attributes?: { [key: string]: unknown }, children?: TemplateResult): TemplateResult
 ```
 
 ---

@@ -15,6 +15,7 @@ Functions
 </div>
 <div style="margin-top: 0.5rem;" markdown="1">
 
+* [createComponent](_dom_.dom.md#createcomponent)
 * [parseStyleToNumber](_dom_.dom.md#parsestyletonumber)
 * [removeClassByPrefix](_dom_.dom.md#removeclassbyprefix)
 * [setAttribute](_dom_.dom.md#setattribute)
@@ -26,6 +27,57 @@ Functions
 ---
 
 ## Functions
+
+###  createComponent
+
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
+###  createComponent
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+▸ **createComponent**(`tag`: string, `attributes?`: { [key: string]: unknown }, `children?`: TemplateResult): *TemplateResult‹›*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+*Defined in [src/dom.ts:83](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L83)*
+
+Crée un composant `tag` contenant les attributs et l'enfant passés en paramètres
+
+**Parameters:**
+
+| Name          | Type           | Description                  |
+| ------------- | -------------- | ---------------------------- |
+| `tag`         | string         | Nom du futur composant       |
+| `attributes?` | object         | Attributs du futur composant |
+| `children?`   | TemplateResult | Enfant du futur composant    |
+
+**Returns:** *TemplateResult‹›*
+
+Retourne un TemplateResult à appeler avec le tag html
+
+```typescript
+    return html`
+        ${this.createComponent(this.tag, { class: this.type + (this.position && ' ' + this.position) + (this.class && ' ' + this.class) }, html`<slot></slot>`)}
+    `
+```
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
+
+___
 
 <table style="padding: 0.5rem;">
 <tr>
@@ -47,7 +99,7 @@ Functions
 <tr>
 <td markdown="1">
 
-*Defined in [src/dom.ts:38](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L38)*
+*Defined in [src/dom.ts:39](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L39)*
 
 Transforme un style en nombre
 
@@ -86,7 +138,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/dom.ts:48](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L48)*
+*Defined in [src/dom.ts:49](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L49)*
 
 Supprime la classe contenant le préfix renseigné
 
@@ -126,7 +178,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/dom.ts:13](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L13)*
+*Defined in [src/dom.ts:14](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L14)*
 
 Assigne l'attribut spécifié et sa valeur à l'élément spécifié
 
@@ -168,7 +220,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/dom.ts:61](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L61)*
+*Defined in [src/dom.ts:62](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L62)*
 
 Assigne la propriété renseignée dans le style si la valeur est différente
 

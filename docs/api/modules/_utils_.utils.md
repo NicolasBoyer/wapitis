@@ -11,6 +11,14 @@ parent: API
 
 <div style="width: 100%;max-width: 100%;margin-bottom: 1.5rem;border-radius: 4px;box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 3px 10px rgba(0,0,0,0.08);padding: .5rem .75rem;">
 <div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
+Variables
+</div>
+<div style="margin-top: 0.5rem;" markdown="1">
+
+* [propsToAttributes](_utils_.utils.md#propstoattributes)
+
+</div>
+<div style="font-weight:bold;padding: 1rem 0 .5rem;border-bottom: 1px solid rgba(238,235,238,0.5);">
 Functions
 </div>
 <div style="margin-top: 0.5rem;" markdown="1">
@@ -28,6 +36,59 @@ Functions
 
 </div>
 </div>
+
+---
+
+## Variables
+
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
+###  propsToAttributes
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+• **propsToAttributes**(`value`: unknown, `type?`: unknown): *(Anonymous function)*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+*Defined in [src/utils.ts:154](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L154)*
+
+Directive transformant des propriétés de types objet `{ [key: string]: unknown }` en attribut compréhensible par lit-html et le tag html.
+
+Cela est particulièrement utile dans le cas de données externes.
+
+**@author** open-wc@ (open-wc). Adapdée à **Wapitis**
+
+Comme toute directive, propsToAttributes est utilisé dans un tag html. Avec la syntaxe de lit-html, il est nécessaire de déclarer un attribut pour appliquer cette directive. Nous utilisons ici la convention `...=`, bien que n'importe quel nom d'attibut puisse être utilisé. Exemple :
+
+```typescript
+    html`
+        <div ...="${propsToAttributes({ propertyA: 'a', propertyB: 'b' })}"></div>
+    `
+```
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`props` | { [key: string]: unknown } | Les propriétés à transformer |
+
+**Returns:** *(Anonymous function)*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -53,7 +114,7 @@ Functions
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:40](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L40)*
+*Defined in [src/utils.ts:43](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L43)*
 
 Transforme une chaîne du type camelCase en DashCase
 
@@ -92,7 +153,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:50](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L50)*
+*Defined in [src/utils.ts:53](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L53)*
 
 Transforme une chaîne du type DashCase en camelCase
 
@@ -131,7 +192,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:70](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L70)*
+*Defined in [src/utils.ts:73](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L73)*
 
 Envoie un customEvent sur l'élément parent, avec les propriétés renseignées dans property
 
@@ -172,7 +233,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:10](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L10)*
+*Defined in [src/utils.ts:13](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L13)*
 
 Transforme une string dans le type renseigné
 
@@ -212,7 +273,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:59](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L59)*
+*Defined in [src/utils.ts:62](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L62)*
 
 Retourne un id de type string
 
@@ -245,7 +306,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:100](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L100)*
+*Defined in [src/utils.ts:103](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L103)*
 
 Retourne le texte contenu dans le fichier spécifié de façon asynchrone
 
@@ -284,7 +345,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L80)*
+*Defined in [src/utils.ts:83](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L83)*
 
 Retourne la taille et la position de la fenêtre web courante
 
@@ -319,7 +380,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:129](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L129)*
+*Defined in [src/utils.ts:132](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L132)*
 
 Retourne les données spécifiées dans la clé en local storage
 
@@ -366,7 +427,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:117](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L117)*
+*Defined in [src/utils.ts:120](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L120)*
 
 Enregistre les données dans la clé spécifiée en local storage
 
@@ -412,7 +473,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:30](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L30)*
+*Defined in [src/utils.ts:33](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L33)*
 
 Transforme une valeur du type renseigné en string
 
