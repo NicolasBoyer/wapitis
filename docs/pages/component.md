@@ -290,6 +290,8 @@ ${this._todos.map((todo, index) => html`<w-todo ?checked=${todo.checked} text=${
 import { repeat, until } from wapitis
 ```
 
+---
+
 ## Etendre un component
 
 Dans certains cas, il peut être nécessaire d'étendre un composant avec un autre composant Wapitis, pour hériter des ses méthodes et propriétés.
