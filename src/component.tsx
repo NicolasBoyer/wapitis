@@ -94,6 +94,20 @@ export abstract class Component<T> extends HTMLElement {
      * @returns Retourne un tableau contenant les noms des attributs que vous voulez observer
      */
     static get observedAttributes() {
+        // Récupère et déclare les propriétés du composant parent si celui-ci est un Component de Wapitis
+        const superCtor = Object.getPrototypeOf(this)
+        if (superCtor.name !== 'Component') {
+            const superProperties = Object.keys(superCtor.prototype).filter((name) => typeof Object.getOwnPropertyDescriptor(superCtor.prototype, name).get === 'function')
+            superProperties.forEach((prop) => {
+                if (!Object.keys(this._propertyOptions).includes(this._id + '_' + this.name + '_' + prop)) {
+                    Object.keys(superCtor._propertyOptions).forEach((option) => {
+                        if (option.includes(superCtor.name + '_' + prop)) {
+                            this.createProperty(prop, superCtor._propertyOptions[option])
+                        }
+                    })
+                }
+            })
+        }
         return this._observablesAttributes[this._id + '_' + this.name]
     }
 
@@ -147,9 +161,8 @@ export abstract class Component<T> extends HTMLElement {
                 // Log.debug(`Set: ${name as string} => ${DOM.toString(newVal, options && options.type)}`);
                 if (!(key as string in this) || key as string in this && this[key as string] !== newVal) {
                     // Log.debug("set")
-                    if (!this._changedProperties.has(name)) {
-                        this._changedProperties.set(name, { oldVal: this[key as string], newVal })
-                    }
+                    const oldVal = this[key as string]
+                    this._changedProperties.set(name, { oldVal, newVal })
                     this[key as string] = newVal
                     const attrName = UTILS.camelCaseToDashCase(name)
                     if (reflectPropertyInAttribute && !writeOnly) {
@@ -157,6 +170,9 @@ export abstract class Component<T> extends HTMLElement {
                     }
                     if (writeOnly) {
                         this.removeAttribute(attrName)
+                        if (oldVal !== newVal) {
+                            this.setPropertyValue(attrName, newVal)
+                        }
                     }
                     this._requestUpdate()
                 }
@@ -231,10 +247,7 @@ export abstract class Component<T> extends HTMLElement {
     attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
         if (oldVal !== newVal) {
             Log.debug('attributeChangedCallback')
-            const name = UTILS.dashCaseToCamelCase(attrName)
-            const ctor = (this.constructor as typeof Component)
-            const options = ctor._propertyOptions[ctor._id + '_' + ctor.name + '_' + name]
-            this[name] = UTILS.fromString(newVal, options && options.type)
+            this.setPropertyValue(attrName, newVal)
         }
     }
 
@@ -290,6 +303,20 @@ export abstract class Component<T> extends HTMLElement {
      */
     protected firstUpdated(_changedProperties: PropertyValues) {
         Log.debug('firstUpdated')
+    }
+
+    /**
+     * Assigne une valeur `value` à la propriété `propName`
+     *
+     * @private
+     * @param {string} propName
+     * @param {unknown} value
+     */
+    private setPropertyValue(propName: string, value: unknown) {
+        const name = UTILS.dashCaseToCamelCase(propName)
+        const ctor = (this.constructor as typeof Component)
+        const options = ctor._propertyOptions[ctor._id + '_' + ctor.name + '_' + name]
+        this[name] = UTILS.fromString(value as string, options && options.type)
     }
 
     /**

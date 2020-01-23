@@ -289,3 +289,45 @@ ${this._todos.map((todo, index) => html`<w-todo ?checked=${todo.checked} text=${
 ```typescript
 import { repeat, until } from wapitis
 ```
+
+## Etendre un component
+
+Dans certains cas, il peut être nécessaire d'étendre un composant avec un autre composant Wapitis, pour hériter des ses méthodes et propriétés.
+
+Dans ce cas le composant qui servira à étendre voit sa déclaration changer légèrement. Il faut en effet alors ajouter une propriété générique à la classe et ajouter cette propriété au constructeur :
+
+```typescript
+...
+
+export class Box<T> extends Component<IProps> {
+
+...
+
+constructor(options?: T) {
+    super(options as unknown as IProps)
+}
+
+...
+```
+
+Dans la classe étendu, au lieu de Component, on appelle la classe que l'on veut utiliser. Si on veut hériter des styles de cette classe il faut également utiliser un array dans la propriété styles et appeler `super.styles` :
+
+```typescript
+...
+
+export default class Footer extends Box<IProps> {
+
+    static get styles() {
+        return [
+            super.styles,
+            css`
+
+...
+```
+
+D'une manière générale, toute méthode que l'on voudra surcharger devra commencer par `super.`. Exemple :
+```typescript
+updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties)
+}
+```

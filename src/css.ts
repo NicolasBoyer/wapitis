@@ -3,7 +3,7 @@ const constructionToken = Symbol()
  * @ignore
  */
 export class CSSResult {
-    readonly cssText: string
+    readonly cssText?: string
 
     constructor(cssText: string, safeToken: symbol) {
         if (safeToken !== constructionToken) { throw new Error('Erreur : Utilez `unsafeCSS` ou `css`.') }
