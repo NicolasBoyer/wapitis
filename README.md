@@ -41,8 +41,6 @@ Afin de gérer correctement l'affichage de lit-html et typescript, j'utilise pou
 - [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin)
 - [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
 
-electron a été bloqué à la version  7.1.1 car la verion 7.1.4 avait un bug avec electron-updater : `redirect was cancelled sur un test de update-available`. Dès que possible, je reviendrais sur la version en cours.
-
 Lors de l'installation d'un executable via electron, windows a un avertissement lié à son application smart screen. Les seules solutions pour éviter cette avrtissement sont :
 - signer l'application (ce qui coute de l'argent)
 - ignorer cette alerte
