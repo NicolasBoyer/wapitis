@@ -89,7 +89,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:198](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L198)*
+*Defined in [src/component.tsx:198](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L198)*
 
 Crée une instance de Component
 
@@ -132,7 +132,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:190](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L190)*
+*Defined in [src/component.tsx:190](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L190)*
 
 Propriété qui permet de définir les attributs lors de l'utilisation de cette classe avec [[JSX]]
 {: .mb-0 }
@@ -163,7 +163,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:131](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L131)*
+*Defined in [src/component.tsx:131](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L131)*
 
 Permet de déclarer les styles en utilisant le tag css, exemple :
 ```typescript
@@ -210,7 +210,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:96](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L96)*
+*Defined in [src/component.tsx:96](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L96)*
 
 Spécifique au web component. Permet de déclarer les propriétés qui seront observées et provoqueront un nouveau rendu via [render](_component_.component.md#protected-render) et le rappel de [attributeChangedCallback](_component_.component.md#attributechangedcallback)
 
@@ -249,7 +249,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:247](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L247)*
+*Defined in [src/component.tsx:247](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L247)*
 
 Spécifique au web component. Si la nouvelle valeur de l'attribut observé est différente de l'ancienne, l'attribut est alors affecté comme propriété. La méthode [render](_component_.component.md#protected-render) est par conséquent relancée
 
@@ -290,7 +290,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:271](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L271)*
+*Defined in [src/component.tsx:271](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L271)*
 
 Appelé avant le rendu du composant. Permet d'interagir avec les éléments à chaque appel du composant avant sa création dans le dom
 
@@ -329,7 +329,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:224](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L224)*
+*Defined in [src/component.tsx:224](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L224)*
 
 Spécifique au web component. Appelé lorsque l'élément personnalisé est connecté pour la première fois au DOM du document
 
@@ -362,7 +362,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:236](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L236)*
+*Defined in [src/component.tsx:236](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L236)*
 
 Spécifique au web component. Appelé lorsque l'élément personnalisé est déconnecté du DOM du document
 
@@ -395,7 +395,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:304](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L304)*
+*Defined in [src/component.tsx:304](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L304)*
 
 Appelé lors de la première mise à jour du composant
 
@@ -439,7 +439,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:281](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L281)*
+*Defined in [src/component.tsx:281](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L281)*
 
 Permet de créer le composant dans le DOM grâce au tag html de lit-html
 
@@ -474,7 +474,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:261](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L261)*
+*Defined in [src/component.tsx:261](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L261)*
 
 Permet de conditionner le rendu du composant
 
@@ -515,7 +515,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:290](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L290)*
+*Defined in [src/component.tsx:290](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L290)*
 
 Appelé lors de chaque mise à jour du composant
 
@@ -556,7 +556,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:142](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L142)*
+*Defined in [src/component.tsx:142](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L142)*
 
 Crée une propriété avec son setter et son getter et définit, grâce aux options, si elle est observable et l'ajoute en tant qu'attribut, le cas échéant
 

@@ -46,7 +46,7 @@ Functions
 <tr>
 <td markdown="1">
 
-*Defined in [src/css.ts:106](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/css.ts#L106)*
+*Defined in [src/css.ts:106](https://github.com/NicolasBoyer/wapitis/blob/master/src/css.ts#L106)*
 
 Tag permettant d'insérer du CSS dans la propriété styles du composant. Exemple :
 ```typescript
@@ -115,7 +115,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/css.ts:43](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/css.ts#L43)*
+*Defined in [src/css.ts:43](https://github.com/NicolasBoyer/wapitis/blob/master/src/css.ts#L43)*
 
 Permet d'insérer un champ de string qui n'est pas un CSSResult et n'a donc pas été traité par un tag CSS dans la string litteral inclus dans le tag CSS
 

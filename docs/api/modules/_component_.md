@@ -40,7 +40,7 @@ Directive Functions
 </div>
 <div style="margin-top: 0.5rem;" markdown="1">
 
-* [@customElement](_component_.md#customElement)
+* [@customElement](_component_.md#customelement)
 * [@property](_component_.md#property)
 
 </div>

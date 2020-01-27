@@ -61,7 +61,7 @@ Functions
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:154](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L154)*
+*Defined in [src/utils.ts:154](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L154)*
 
 Directive transformant des propriétés de types objet `{ [key: string]: unknown }` en attribut compréhensible par lit-html et le tag html.
 
@@ -114,7 +114,7 @@ Name | Type | Description |
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:43](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L43)*
+*Defined in [src/utils.ts:43](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L43)*
 
 Transforme une chaîne du type camelCase en DashCase
 
@@ -153,7 +153,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:53](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L53)*
+*Defined in [src/utils.ts:53](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L53)*
 
 Transforme une chaîne du type DashCase en camelCase
 
@@ -192,7 +192,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:73](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L73)*
+*Defined in [src/utils.ts:73](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L73)*
 
 Envoie un customEvent sur l'élément parent, avec les propriétés renseignées dans property
 
@@ -233,7 +233,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:13](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L13)*
+*Defined in [src/utils.ts:13](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L13)*
 
 Transforme une string dans le type renseigné
 
@@ -273,7 +273,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:62](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L62)*
+*Defined in [src/utils.ts:62](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L62)*
 
 Retourne un id de type string
 
@@ -306,7 +306,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:103](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L103)*
+*Defined in [src/utils.ts:103](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L103)*
 
 Retourne le texte contenu dans le fichier spécifié de façon asynchrone
 
@@ -345,7 +345,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:83](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L83)*
+*Defined in [src/utils.ts:83](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L83)*
 
 Retourne la taille et la position de la fenêtre web courante
 
@@ -380,7 +380,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:132](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L132)*
+*Defined in [src/utils.ts:132](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L132)*
 
 Retourne les données spécifiées dans la clé en local storage
 
@@ -427,7 +427,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:120](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L120)*
+*Defined in [src/utils.ts:120](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L120)*
 
 Enregistre les données dans la clé spécifiée en local storage
 
@@ -473,7 +473,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/utils.ts:33](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/utils.ts#L33)*
+*Defined in [src/utils.ts:33](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L33)*
 
 Transforme une valeur du type renseigné en string
 

@@ -46,7 +46,7 @@ Methods
 <tr>
 <td markdown="1">
 
-*Defined in [src/log.ts:19](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/log.ts#L19)*
+*Defined in [src/log.ts:19](https://github.com/NicolasBoyer/wapitis/blob/master/src/log.ts#L19)*
 
 Log de type debug avec le message renseigné et les données datas si elles existent
 
@@ -86,7 +86,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/log.ts:41](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/log.ts#L41)*
+*Defined in [src/log.ts:41](https://github.com/NicolasBoyer/wapitis/blob/master/src/log.ts#L41)*
 
 Log de type error (rouge sur fond rose) avec le message renseigné et les données datas si elles existent
 
@@ -126,7 +126,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/log.ts:9](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/log.ts#L9)*
+*Defined in [src/log.ts:9](https://github.com/NicolasBoyer/wapitis/blob/master/src/log.ts#L9)*
 
 Log classique avec le message renseigné et les données datas si elles existent
 
@@ -166,7 +166,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/log.ts:31](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/log.ts#L31)*
+*Defined in [src/log.ts:31](https://github.com/NicolasBoyer/wapitis/blob/master/src/log.ts#L31)*
 
 Log de type warn (marron sur fond jaune) avec le message renseigné et les données datas si elles existent
 

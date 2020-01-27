@@ -50,7 +50,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:44](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L44)*
+*Defined in [src/component.tsx:44](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L44)*
 
 La propriété est transformée en attribut, de camelCase vers dashCase (true par défaut) et est observable
 {: .mb-0 }
@@ -81,7 +81,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:40](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L40)*
+*Defined in [src/component.tsx:40](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L40)*
 
 Indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (string par défaut)
 {: .mb-0 }
@@ -112,7 +112,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:48](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L48)*
+*Defined in [src/component.tsx:48](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L48)*
 
 Propriété observable non visible dans l'html 'rendu', mais il est possible de la créer en html ou en javascript (false par défaut)
 {: .mb-0 }

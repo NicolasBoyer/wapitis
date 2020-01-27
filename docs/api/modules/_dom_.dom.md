@@ -50,7 +50,7 @@ Functions
 <tr>
 <td markdown="1">
 
-*Defined in [src/dom.ts:83](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L83)*
+*Defined in [src/dom.ts:83](https://github.com/NicolasBoyer/wapitis/blob/master/src/dom.ts#L83)*
 
 Crée un composant `tag` contenant les attributs et l'enfant passés en paramètres
 
@@ -99,7 +99,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/dom.ts:39](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L39)*
+*Defined in [src/dom.ts:39](https://github.com/NicolasBoyer/wapitis/blob/master/src/dom.ts#L39)*
 
 Transforme un style en nombre
 
@@ -138,7 +138,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/dom.ts:49](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L49)*
+*Defined in [src/dom.ts:49](https://github.com/NicolasBoyer/wapitis/blob/master/src/dom.ts#L49)*
 
 Supprime la classe contenant le préfix renseigné
 
@@ -178,7 +178,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/dom.ts:14](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L14)*
+*Defined in [src/dom.ts:14](https://github.com/NicolasBoyer/wapitis/blob/master/src/dom.ts#L14)*
 
 Assigne l'attribut spécifié et sa valeur à l'élément spécifié
 
@@ -220,7 +220,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/dom.ts:62](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/dom.ts#L62)*
+*Defined in [src/dom.ts:62](https://github.com/NicolasBoyer/wapitis/blob/master/src/dom.ts#L62)*
 
 Assigne la propriété renseignée dans le style si la valeur est différente
 
