@@ -12,12 +12,6 @@ Classe qui étend HTMLElement et qui associée à la directive @customElement pe
 
 ___
 
-## Type parameters
-
-▪ **T** : Type générique de la classe définit grâce à la directive customElement
-
-___
-
 ## Hierarchy
 
 HTMLElement
@@ -87,7 +81,7 @@ ___
 <tr>
 <td markdown="1">
 
-\+ **new Component**(`options?`: T): *[Component](_component_.component.md)*
+\+ **new Component**(`options?`: any): *[Component](_component_.component.md)*
 {: .mb-0 }
 
 </td>
@@ -101,9 +95,9 @@ Crée une instance de Component
 
 **Parameters:**
 
-| Name       | Type | Description                                                                                                                                                                                                                             |
-| ---------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `options?` | T    | Paramètre de type `{{ [x: string]: any }}`, nécessaire pour la création de la classe sous la forme new({options})  Une fois appelées, les propriétés sont automatiquement prises en compte, si elles ont été déclarées sur le composant |
+| Name       | Type | Description                                                                                                                                  |
+| ---------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options?` | any  | Paramètre de type `{{ [x: string]: any }}` ou `any`, utile aux éditeurs pour la création de la classe sous la forme new Component({options}) |
 
 **Returns:** *[Component](_component_.component.md)*
 
@@ -130,7 +124,7 @@ ___
 <tr>
 <td markdown="1">
 
-• **_props**: *T*
+• **_props**: *any*
 {: .mb-0 }
 
 </td>

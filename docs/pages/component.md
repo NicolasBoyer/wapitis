@@ -25,32 +25,12 @@ Le composant intégré est comme nous l'avons vu la pierre angulaire du dévelop
 
 ```typescript
 @customElement('x-custom')
-export default class Custom extends Component<IProps> {
+export default class Custom extends Component {
 ```
 
 permet de créer le nom du composant et de le déclarer comme WebComponent en deux lignes claires en début de fichier.
 
-Il est obligatoire lors de la déclaration dans la directive d'avoir un nom sou la forme `prefixe-component`, en effet cela permet de le différencier des composants web intégrés et de le signaler comme custom element. Par convention le npm donné à la classe reprend en général le nom `Component` avec une majuscule mais cela n'est pas obligatoire.
-
-La proprété générique IPROPS permet la déclaration des propriétés publiques, utilisées ensuite dans le constructeur et permettant la création du composant avec l'écriture `new Component(IPROPS)`
-
-Pour pouvoir fonctionner, les propriétés doivent être déclarées dans l'interface IPROPS du composant :
-
-```typescript
-interface IProps {
-    maVariable: string
-}
-```
-
-Comme nous l'avons vu dans le composant TodoList, si on ne veux pas de propriétés il est possible de déclarer `{}`
-
-Dans ce cas si on a besoin du constructeur, il prend la forme :
-
-```typescript
-constructor() {
-    super()
-}
-```
+Il est obligatoire lors de la déclaration dans la directive d'avoir un nom sou la forme `prefixe-component`, en effet cela permet de le différencier des composants web intégrés et de le signaler comme custom element. Par convention le nom donné à la classe reprend en général le nom `Component` avec une majuscule mais cela n'est pas obligatoire.
 
 ---
 
@@ -97,14 +77,35 @@ ${this._todos.map((todo, index) => html`<w-todo ?checked=${todo.checked} text=${
 Le component a quelques méthodes intégrées qui définissent son cycle de vie.
 
 ### constructor
-{: .no_toc }
+{: .no_toc .d-inline-block }
+
+New {: .label .label-red }
 
 ```typescript
-constructor(options: IProps) {
+constructor(options: any) {
     super(options)
 }
 ```
 Appelé lors de la création du composant seulement. Intéressant pour déclarer les variables et propriétés. Possible d'accéder aux propriétés déclarées (props) lors de la création du composant avec new Composant(props).
+
+On peut déclarer les propriétés publiques obsevables dans le constructor. Bien que cela ne soit pas obligatoire, cela permet d'aider les éditeurs de code à savoir quels paramètres peuvent être utilisés lors de la création du composant sous la forme new Component({...}).
+
+```typescript
+constructor(options: { maVariable: string }) {
+    super(options)
+}
+```
+
+Si la création sous cette forme n'est pas utilisée ou si on a pas besoin de cette aide, la déclaration des paramètres dans le constructeur peut alors être la suivante :
+
+```typescript
+constructor(options: any) {
+    super(options)
+    /* ... */
+}
+```
+
+Comme toutes les autres méthodes, le constructeur peut aussi ne pas être déclaré si on a rien à mettre dedans, puisqu'il est déclaré dans la classe parente.
 
 ### connectedCallback
 {: .no_toc }
@@ -293,31 +294,19 @@ import { repeat, until } from wapitis
 ---
 
 ## Etendre un component
+{: .d-inline-block }
+
+New {: .label .label-red }
 
 Dans certains cas, il peut être nécessaire d'étendre un composant avec un autre composant Wapitis, pour hériter des ses méthodes et propriétés.
 
-Dans ce cas le composant qui servira à étendre voit sa déclaration changer légèrement. Il faut en effet alors ajouter une propriété générique à la classe et ajouter cette propriété au constructeur :
+Dans la classe étendu, au lieu de Component, il suffit d'appeler la classe que l'on veut utiliser. Si on veut hériter des styles de cette classe, il faut également utiliser un array dans la propriété styles et appeler `super.styles` :
 
 ```typescript
 ...
 
-export class Box<T> extends Component<IProps> {
-
-...
-
-constructor(options?: T) {
-    super(options as unknown as IProps)
-}
-
-...
-```
-
-Dans la classe étendu, au lieu de Component, on appelle la classe que l'on veut utiliser. Si on veut hériter des styles de cette classe il faut également utiliser un array dans la propriété styles et appeler `super.styles` :
-
-```typescript
-...
-
-export default class Footer extends Box<IProps> {
+@customElement('x-footer')
+export default class Footer extends Box {
 
     static get styles() {
         return [

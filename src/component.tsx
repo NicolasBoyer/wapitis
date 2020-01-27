@@ -85,7 +85,7 @@ export type PropertyValues = Map<PropertyKey, { oldVal: unknown, newVal: unknown
  * @noInheritDoc
  * @typeparam T Type générique de la classe définit grâce à la directive customElement
  */
-export abstract class Component<T> extends HTMLElement {
+export abstract class Component extends HTMLElement {
 
     /**
      * Spécifique au web component. Permet de déclarer les propriétés qui seront observées et provoqueront un nouveau rendu via [[render]] et le rappel de [[attributeChangedCallback]]
@@ -157,7 +157,7 @@ export abstract class Component<T> extends HTMLElement {
                 // Log.debug(`Get: ${name as string} => ${DOM.toString(_val, options && options.type)}`);
                 return isBoolean && _val === '' ? true : isBoolean && !_val ? false : _val
             },
-            set(this: Component<any>, newVal: unknown) {
+            set(this: Component, newVal: unknown) {
                 // Log.debug(`Set: ${name as string} => ${DOM.toString(newVal, options && options.type)}`);
                 if (!(key as string in this) || key as string in this && this[key as string] !== newVal) {
                     // Log.debug("set")
@@ -187,7 +187,7 @@ export abstract class Component<T> extends HTMLElement {
     /**
      * Propriété qui permet de définir les attributs lors de l'utilisation de cette classe avec [[JSX]]
      */
-    protected _props: T
+    protected _props: any
     private _renderRoot: ShadowRoot
     private _changedProperties: PropertyValues = new Map()
     private _isUpdated: boolean = false
@@ -205,7 +205,7 @@ export abstract class Component<T> extends HTMLElement {
      * Une fois appelées, les propriétés sont automatiquement prises en compte, si elles ont été déclarées sur le composant
      * @returns Retourne le composant avec le nom définit par la directive customElement.
      */
-    constructor(options?: T) {
+    constructor(options?: any) {
         super()
         for (const name in options) {
             if (options.hasOwnProperty(name) && name in this) {

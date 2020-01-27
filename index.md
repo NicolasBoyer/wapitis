@@ -14,6 +14,27 @@ WebApp utiliTies est un set d'outils pour développer et compiler une applicatio
 
 ---
 
+**-- ATTENTION - v2.1.0 --**
+
+Changement dans la création du composant. Il n'est plus utile d'appeler le composant avec une propriété générique !
+
+La déclaration se fait maintenant de la manière suivante :
+
+```Typescript
+...
+
+@customElement('sui-box')
+export class Box extends Component {
+
+...
+```
+
+La doc a été mise à jour.
+
+**-- ATTENTION - v2.1.0 --**
+
+---
+
 ## Install
 
     npm init

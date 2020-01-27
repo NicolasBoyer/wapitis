@@ -67,13 +67,9 @@ Le fichier suivant est alors créé :
 ```typescript
 import { Component, css, customElement, html, property, PropertyValues } from 'wapitis'
 
-interface IProps {
-    maVariable: string
-}
-
 // Entrez le nom du composant (x-nameOfComponent) par défaut en paramètre de register => recquis
 @customElement()
-export default class Custom extends Component<IProps> {
+export default class Custom extends Component {
 
     static get styles() {
         return css`
@@ -85,9 +81,18 @@ export default class Custom extends Component<IProps> {
 
     @property() maVariable: string
 
-    constructor(options: IProps) {
+    // On peut déclarer les propriétés publiques obsevables dans le constructor. Bien que cela ne soit pas obligatoire, cela permet d'aider les éditeurs de code à savoir quels paramètres peuvent être utilisés lors de la création du composant sous la forme new Component({...}).
+    // ```typescript
+    // constructor(options: { maVariable: string }) {
+    //     super(options)
+    // }
+    // ```
+    // Si la création sous cette forme n'est pas utilisée ou si on a pas besoin de cette aide, la déclaration des paramètres dans le constructeur peut alors être la suivante :
+    constructor(options: any) {
         super(options)
+        /* ... */
     }
+    // Comme toutes les autres méthodes, le constructeur peut aussi ne pas être déclaré si on a rien à mettre dedans, puisqu'il est déclaré dans la classe parente.
 
     connectedCallback() {
         super.connectedCallback()
@@ -135,7 +140,7 @@ import { Component, customElement, html, property } from 'wapitis'
 // Nous définissons notre custom element dans la directive suivante et la classe associée
 // w pour wapitis. il est obligatoire d'avoir "prefix-nom" dans le nom d'un custom element
 @customElement('w-todo-list')
-export default class TodoList extends Component<{}> {
+export default class TodoList extends Component {
     // Une propriété _todos est déclarée avec la directive @property en indiquant le type dont il s'agit, ici un Array d'objet
     // Le préfixe _ permet à la propriété d'être obervable tout en étant considérée comme protected. Elle n'apparait ainsi pas dans les attributs de l'élément, il n'y a donc pas de conversion
     @property() _todos: Array<{ text: string; }> = []
@@ -258,15 +263,8 @@ Une fois le composant créé, il est édité comme ceci (lire les commentaires p
 ```typescript
 import { Component, customElement, html, property, UTILS } from 'wapitis'
 
-// On déclare les propriétés publiques obsevables. Ainsi si un constructor est déclarée, on peut utiliser la forme new Todo({...}) pour créer la Todo. Et cela permet aux composants appelant d'avoir connaissances de ces propriétés
-interface IProps {
-    text: string
-    index: number
-    checked: boolean
-}
-
 @customElement('w-todo')
-export default class Todo extends Component<IProps> {
+export default class Todo extends Component {
     // On déclare les 3 propiétés observables en utilisant la directive @property. Comme il s'agit d'attribut, afin d'indiquer comment la conversion doit être faite entre l'attribut et la propriété, on indique le type pour index et checked, text étant un string il est inutile de l'indiquer. writeOnly est passé à true pour l'index afin qu'il n'apparaisse pas en tant qu'attribut html dans le dom
     @property() text: string
     @property({ type: Number, writeOnly: true }) index: number
@@ -354,15 +352,8 @@ Afin d'améliorer le rendu, un peu de stylage est nécessaire
 import { Component, css, customElement, html, property, UTILS } from 'wapitis'
 import icons from '../www/assets/img/icons.svg'
 
-// On déclare les propriétés publiques obsevables. Ainsi si un constructor est déclarée, on peut utiliser la forme new Todo({...}) pour créer la Todo. Et cela permet aux composants appelant d'avoir connaissances de ces propriétés
-interface IProps {
-    text: string
-    index: number
-    checked: boolean
-}
-
 @customElement('w-todo')
-export default class Todo extends Component<IProps> {
+export default class Todo extends Component {
     static get styles() {
         return css`
         :host {

@@ -1,6 +1,29 @@
 # WApiTis 2
 ![](ui/logo.png)
 
+---
+
+**-- ATTENTION - v2.1.0 --**
+
+Changement dans la création du composant. Il n'est plus utile d'appeler le composant avec une propriété générique !
+
+La déclaration se fait maintenant de la manière suivante :
+
+```Typescript
+...
+
+@customElement('sui-box')
+export class Box extends Component {
+
+...
+```
+
+La doc a été mise à jour.
+
+**-- ATTENTION - v2.1.0 --**
+
+---
+
 > WebApp utiliTies est un set d'outils pour développer et compiler une application web avec ou sans client lourd. Il ne s'agit pas d'un framlework. Il ne contient pas de composants préexistants (cela sera l'objet d'un autre projet).
 >
 > L'idée est de faciliter la mise en oeuvre de composants grâce aux web components et à la surcouche qui y est apportée, et de rendre leur compilation plus simple.
