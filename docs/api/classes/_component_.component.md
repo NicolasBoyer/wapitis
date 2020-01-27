@@ -431,7 +431,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **render**(): *TemplateResult | void*
+▸ **render**(): *TemplateResult \| void*
 {: .mb-0 }
 
 </td>
@@ -443,7 +443,7 @@ ___
 
 Permet de créer le composant dans le DOM grâce au tag html de lit-html
 
-**Returns:** *TemplateResult | void*
+**Returns:** *TemplateResult \| void*
 
 Retourne un TemplateResult qui est ensuite interprété et permet la mise à jour du DOM
 {: .mb-0 }

@@ -79,7 +79,8 @@ Le component a quelques méthodes intégrées qui définissent son cycle de vie.
 ### constructor
 {: .no_toc .d-inline-block }
 
-New {: .label .label-red }
+New
+{: .label .label-purple }
 
 ```typescript
 constructor(options: any) {
@@ -296,7 +297,8 @@ import { repeat, until } from wapitis
 ## Etendre un component
 {: .d-inline-block }
 
-New {: .label .label-red }
+New
+{: .label .label-purple }
 
 Dans certains cas, il peut être nécessaire d'étendre un composant avec un autre composant Wapitis, pour hériter des ses méthodes et propriétés.
 
