@@ -9,7 +9,7 @@ Changement dans la création du composant. Il n'est plus utile d'appeler le comp
 
 La déclaration se fait maintenant de la manière suivante :
 
-```Typescript
+```typescript
 ...
 
 @customElement('sui-box')
