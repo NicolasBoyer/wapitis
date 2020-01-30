@@ -14,7 +14,7 @@ WebApp utiliTies est un set d'outils pour développer et compiler une applicatio
 
 ---
 
-**-- ATTENTION - v2.1.0 --**
+**-- ATTENTION - v2.1 --**
 
 Changement dans la création du composant. Il n'est plus utile d'appeler le composant avec une propriété générique !
 
@@ -31,7 +31,7 @@ export class Box extends Component {
 
 La doc a été mise à jour.
 
-**-- ATTENTION - v2.1.0 --**
+**-- ATTENTION - v2.1 --**
 
 ---
 
