@@ -148,7 +148,9 @@ export abstract class Component extends HTMLElement {
         const isBoolean = options && options.type === Boolean
         if (reflectPropertyInAttribute) {
             this._observablesAttributes[classId] = this._observablesAttributes[classId] || []
-            this._observablesAttributes[classId].push(name as string)
+            const attrName = (name as string).toLowerCase()
+            this._observablesAttributes[classId].push(attrName)
+            this._attributesToProperties[attrName] = name
         }
         Object.defineProperty(this.prototype, name, {
             get(): any {
@@ -164,14 +166,14 @@ export abstract class Component extends HTMLElement {
                     const oldVal = this[key as string]
                     this._changedProperties.set(name, { oldVal, newVal })
                     this[key as string] = newVal
-                    const attrName = UTILS.camelCaseToDashCase(name)
+                    const attrName = (name as string).toLowerCase()
                     if (reflectPropertyInAttribute && !writeOnly) {
                         DOM.setAttribute(this, attrName, newVal)
                     }
                     if (writeOnly) {
                         this.removeAttribute(attrName)
                         if (oldVal !== newVal) {
-                            this.setPropertyValue(attrName, newVal)
+                            this.setPropertyValue(name as string, newVal)
                         }
                     }
                     this._requestUpdate()
@@ -184,6 +186,8 @@ export abstract class Component extends HTMLElement {
     private static _observablesAttributes: { [key: string]: string[] } = {}
     private static _propertyOptions: { [key: string]: IPropertyOptions | null } = {}
     private static _id = UTILS.generateId()
+    /** Fait le lien entre le nom de la propriété et celui de l'attribut. Ainsi, si le nom de la propriété est en camelCase, il est alors transformé en minuscule. On peut alors facilement retrouver le nom de la propriété via l'attribut */
+    private static _attributesToProperties: { [key: string]: string | number | symbol } = {}
     /**
      * Propriété qui permet de définir les attributs lors de l'utilisation de cette classe avec [[JSX]]
      */
@@ -313,9 +317,9 @@ export abstract class Component extends HTMLElement {
      * @param {unknown} value
      */
     private setPropertyValue(propName: string, value: unknown) {
-        const name = UTILS.dashCaseToCamelCase(propName)
         const ctor = (this.constructor as typeof Component)
-        const options = ctor._propertyOptions[ctor._id + '_' + ctor.name + '_' + name]
+        const name = ctor._attributesToProperties[propName.toLowerCase()] || propName
+        const options = ctor._propertyOptions[ctor._id + '_' + ctor.name + '_' + (name as string)]
         this[name] = UTILS.fromString(value as string, options && options.type)
     }
 
