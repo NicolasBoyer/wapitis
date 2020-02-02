@@ -71,6 +71,9 @@ import { Component, css, customElement, html, property, PropertyValues } from 'w
 @customElement()
 export default class Custom extends Component {
 
+    // Si true les logs internes de l'item sont publiés
+    showInternalLog = false
+
     static get styles() {
         return css`
         :host {

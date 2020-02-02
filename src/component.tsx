@@ -88,6 +88,11 @@ export type PropertyValues = Map<PropertyKey, { oldVal: unknown, newVal: unknown
 export abstract class Component extends HTMLElement {
 
     /**
+     * Si true, les logs spécifiés dans le composant Component sont publiés. False par défaut
+     */
+    showInternalLog: boolean = false
+
+    /**
      * Spécifique au web component. Permet de déclarer les propriétés qui seront observées et provoqueront un nouveau rendu via [[render]] et le rappel de [[attributeChangedCallback]]
      *
      * Inutile d'utiliser cette méthode. Elle est appelé automatiquement grâce à la directive @property
@@ -231,7 +236,9 @@ export abstract class Component extends HTMLElement {
             this._hasConnectedResolver()
             this._hasConnectedResolver = undefined
         }
-        Log.debug('connectedCallback')
+        if (this.showInternalLog) {
+            Log.debug(this.constructor.name + ' - connectedCallback')
+        }
     }
 
     /**
@@ -250,7 +257,9 @@ export abstract class Component extends HTMLElement {
      */
     attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
         if (oldVal !== newVal) {
-            Log.debug('attributeChangedCallback')
+            if (this.showInternalLog) {
+                Log.debug(this.constructor.name + ' - attributeChangedCallback')
+            }
             this.setPropertyValue(attrName, newVal)
         }
     }
@@ -263,7 +272,9 @@ export abstract class Component extends HTMLElement {
      * @param {PropertyValues} _changedProperties
      */
     protected shouldUpdate(_changedProperties: PropertyValues): boolean {
-        Log.debug('shouldUpdate')
+        if (this.showInternalLog) {
+            Log.debug(this.constructor.name + ' - shouldUpdate')
+        }
         return true
     }
 
@@ -273,7 +284,9 @@ export abstract class Component extends HTMLElement {
      * @param {PropertyValues} _changedProperties
      */
     protected beforeRender(_changedProperties: PropertyValues) {
-        Log.debug('beforeRender')
+        if (this.showInternalLog) {
+            Log.debug(this.constructor.name + ' - beforeRender')
+        }
     }
 
     /**
@@ -292,7 +305,9 @@ export abstract class Component extends HTMLElement {
      * @param {PropertyValues} _changedProperties
      */
     protected updated(_changedProperties: PropertyValues) {
-        Log.debug('updated')
+        if (this.showInternalLog) {
+            Log.debug(this.constructor.name + ' - updated')
+        }
     }
 
     /**
@@ -306,7 +321,9 @@ export abstract class Component extends HTMLElement {
      * @param {PropertyValues} _changedProperties
      */
     protected firstUpdated(_changedProperties: PropertyValues) {
-        Log.debug('firstUpdated')
+        if (this.showInternalLog) {
+            Log.debug(this.constructor.name + ' - firstUpdated')
+        }
     }
 
     /**
@@ -379,7 +396,9 @@ export abstract class Component extends HTMLElement {
                     this._renderRoot.insertBefore(JSX.createElement('style', null, this._styles), this._renderRoot.firstChild)
                 }
                 this._isStylesAdded = true
-                Log.debug('styleadopted')
+                if (this.showInternalLog) {
+                    Log.debug(this.constructor.name + ' - styleadopted')
+                }
             }
             if (!this._isUpdated) {
                 this.firstUpdated(this._changedProperties)
