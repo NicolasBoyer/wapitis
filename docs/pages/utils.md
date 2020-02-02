@@ -100,6 +100,14 @@ Contient des méthodes permettant de manipuler et de retrouver les shadowdom ent
 Permet de faire différents type de log dans la console JS
 
 ```typescript
+    /** Si false, aucun log n'est publié à l'exception du log error. True par défaut */
+    showLog: boolean = true
+    /** Si false, les logs de type info ne sont pas publiés. True par défaut */
+    showInfoLog: boolean = true
+    /** Si false, les logs de type debug ne sont pas publiés. True par défaut */
+    showDebugLog: boolean = true
+    /** Si false, les logs de type warning ne sont pas publiés. True par défaut */
+    showWarnLog: boolean = true
     /** log classique avec le message renseigné et les données datas si elles existent. */
     function info(message: string, ...datas: any[]): void
     /** log de type debug avec le message renseigné et les données datas si elles existent. */
