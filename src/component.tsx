@@ -30,8 +30,7 @@ export function customElement(tagName?: string) {
 /**
  * Paramètres de la directive @property. Trois options possibles :
  * - type : indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (string par défaut)
- * - reflectInAttribute : la propriété est transformée en attribut, de camelCase vers dashCase (true par défaut) et est observable
- * - writeOnly : propriété observable non visible dans l'html 'rendu', mais il est possible de la créer en html ou en javascript (false par défaut)
+ * - attribute : si true, la propriété est alors répliquée en tant qu'attribut dans l'html. Si false, la propriété reste observable mais non visible en tant qu'attribut dans l'html 'rendu', il est néanmoins possible de la créer en html ou en javascript (true par défaut)
  */
 export interface IPropertyOptions {
     /**
@@ -39,13 +38,9 @@ export interface IPropertyOptions {
      */
     type?: object | string | number | boolean | unknown
     /**
-     * La propriété est transformée en attribut, de camelCase vers dashCase (true par défaut) et est observable
+     * Si true, la propriété est alors répliquée en tant qu'attribut dans l'html. Si false, la propriété reste observable mais non visible en tant qu'attribut dans l'html 'rendu', il est néanmoins possible de la créer en html ou en javascript (true par défaut)
      */
-    reflectInAttribute?: boolean
-    /**
-     * Propriété observable non visible dans l'html 'rendu', mais il est possible de la créer en html ou en javascript (false par défaut)
-     */
-    writeOnly?: boolean
+    attribute?: boolean
 }
 
 /**
@@ -148,8 +143,8 @@ export abstract class Component extends HTMLElement {
         const key = typeof name === 'symbol' ? Symbol() : `__${name}`
         const classId = this._id + '_' + this.name
         this._propertyOptions[classId + '_' + (name as string)] = options || null
-        const reflectPropertyInAttribute = (!options || options && options.reflectInAttribute !== false) && (name as string).charAt(0) !== '_'
-        const writeOnly = options && options.writeOnly
+        const reflectPropertyInAttribute = (name as string).charAt(0) !== '_'
+        const attribute = options && options.attribute
         const isBoolean = options && options.type === Boolean
         if (reflectPropertyInAttribute) {
             this._observablesAttributes[classId] = this._observablesAttributes[classId] || []
@@ -172,10 +167,10 @@ export abstract class Component extends HTMLElement {
                     this._changedProperties.set(name, { oldVal, newVal })
                     this[key as string] = newVal
                     const attrName = (name as string).toLowerCase()
-                    if (reflectPropertyInAttribute && !writeOnly) {
+                    if (reflectPropertyInAttribute && attribute) {
                         DOM.setAttribute(this, attrName, newVal)
                     }
-                    if (writeOnly) {
+                    if (!attribute) {
                         this.removeAttribute(attrName)
                         if (oldVal !== newVal) {
                             this.setPropertyValue(name as string, newVal)

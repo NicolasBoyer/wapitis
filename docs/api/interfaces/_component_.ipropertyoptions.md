@@ -19,9 +19,8 @@ Properties
 </div>
 <div style="margin-top: 0.5rem;" markdown="1">
 
-* [reflectInAttribute](_component_.ipropertyoptions.md#optional-reflectinattribute)
 * [type](_component_.ipropertyoptions.md#optional-type)
-* [writeOnly](_component_.ipropertyoptions.md#optional-writeonly)
+* [attribute](_component_.ipropertyoptions.md#optional-attribute)
 
 </div>
 </div>
@@ -29,37 +28,6 @@ Properties
 ___
 
 ## Properties
-
-<table style="padding: 0.5rem;">
-<tr>
-<td markdown="1">
-
-### `Optional` reflectInAttribute
-{: .m-0 }
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-• **reflectInAttribute**? : *boolean*
-{: .mb-0 }
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-*Defined in [src/component.tsx:44](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L44)*
-
-La propriété est transformée en attribut, de camelCase vers dashCase (true par défaut) et est observable
-{: .mb-0 }
-
-</td>
-</tr>
-</table>
-
-___
 
 <table style="padding: 0.5rem;">
 <tr>
@@ -81,7 +49,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:40](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L40)*
+*Defined in [src/component.tsx:39](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L39)*
 
 Indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (string par défaut)
 {: .mb-0 }
@@ -96,7 +64,7 @@ ___
 <tr>
 <td markdown="1">
 
-### `Optional` writeOnly
+### `Optional` attribute
 {: .m-0 }
 
 </td>
@@ -104,7 +72,7 @@ ___
 <tr>
 <td markdown="1">
 
-• **writeOnly**? : *boolean*
+• **attribute**? : *boolean*
 {: .mb-0 }
 
 </td>
@@ -112,9 +80,9 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:48](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L48)*
+*Defined in [src/component.tsx:43](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L43)*
 
-Propriété observable non visible dans l'html 'rendu', mais il est possible de la créer en html ou en javascript (false par défaut)
+Si true, la propriété est alors répliquée en tant qu'attribut dans l'html. Si false, la propriété reste observable mais non visible en tant qu'attribut dans l'html 'rendu', il est néanmoins possible de la créer en html ou en javascript (true par défaut)
 {: .mb-0 }
 
 </td>
