@@ -35,6 +35,10 @@ Il est obligatoire lors de la déclaration dans la directive d'avoir un nom sou 
 ---
 
 ## La directive property
+{: .d-inline-block }
+
+New - 2.1.5
+{: .label .label-purple }
 
 En typescript, les propriétés peuvent être publiques, protected ou private. Avec Wapitis, pour rendre des propriétés observables, il faut utiliser la directive `@property`.
 
@@ -78,7 +82,7 @@ Le component a quelques méthodes intégrées qui définissent son cycle de vie.
 ### constructor
 {: .no_toc .d-inline-block }
 
-New
+New - 2.1.0
 {: .label .label-purple }
 
 ```typescript
@@ -296,7 +300,7 @@ import { repeat, until } from wapitis
 ## Etendre un component
 {: .d-inline-block }
 
-New
+New - 2.1.0
 {: .label .label-purple }
 
 Dans certains cas, il peut être nécessaire d'étendre un composant avec un autre composant Wapitis, pour hériter des ses méthodes et propriétés.

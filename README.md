@@ -3,7 +3,16 @@
 
 ---
 
-**-- ATTENTION - v2.1 --**
+**-- NOUVEAU - v2.1.5 --**
+
+@property():
+
+- Suppression de reflectInAttribute
+- Transformation de writeOnly en attribute et true par défaut
+
+---
+
+**-- NOUVEAU - v2.1.0 --**
 
 Changement dans la création du composant. Il n'est plus utile d'appeler le composant avec une propriété générique !
 
@@ -17,10 +26,6 @@ export class Box extends Component {
 
 ...
 ```
-
-La doc a été mise à jour.
-
-**-- ATTENTION - v2.1 --**
 
 ---
 

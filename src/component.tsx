@@ -144,7 +144,7 @@ export abstract class Component extends HTMLElement {
         const classId = this._id + '_' + this.name
         this._propertyOptions[classId + '_' + (name as string)] = options || null
         const reflectPropertyInAttribute = (name as string).charAt(0) !== '_'
-        const attribute = options && options.attribute
+        const attribute = !options || options && options.attribute !== false
         const isBoolean = options && options.type === Boolean
         if (reflectPropertyInAttribute) {
             this._observablesAttributes[classId] = this._observablesAttributes[classId] || []
