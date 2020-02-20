@@ -3,6 +3,12 @@
 
 ---
 
+**-- NOUVEAU - v2.1.6 --**
+
+Une nouvelle extension pour VSCode spécialisée pour Wapitis est conseillée : [wapitis-plugin](https://marketplace.visualstudio.com/items?itemName=NicolasBoyer.wapitis-plugin)
+
+---
+
 **-- NOUVEAU - v2.1.5 --**
 
 @property():
@@ -66,7 +72,7 @@ Premièrement, de mon côté, cela me permet un contrôle sur tous les élements
 Enfin il s'agit d'un outil complet de création de WebApp, icluant tout ce qui est nécessaire, avec simplicité.
 
 Afin de gérer correctement l'affichage de lit-html et typescript, j'utilise pour ma part [Visual Studio Code](https://code.visualstudio.com/) avec quelques plugins dont :
-- [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin)
+- [wapitis-plugin](https://marketplace.visualstudio.com/items?itemName=NicolasBoyer.wapitis-plugin)
 - [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
 
 Lors de l'installation d'un executable via electron, windows a un avertissement lié à son application smart screen. Les seules solutions pour éviter cette avrtissement sont :

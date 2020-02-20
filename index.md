@@ -14,6 +14,12 @@ WebApp utiliTies est un set d'outils pour développer et compiler une applicatio
 
 ---
 
+**-- NOUVEAU - v2.1.6 --**
+
+Une nouvelle extension pour VSCode spécialisée pour Wapitis est conseillée : [wapitis-plugin](https://marketplace.visualstudio.com/items?itemName=NicolasBoyer.wapitis-plugin)
+
+---
+
 **-- NOUVEAU - v2.1.5 --**
 
 @property():
