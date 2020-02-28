@@ -10,39 +10,7 @@ nav_order: 1
 WebApp utiliTies est un set d'outils pour développer et compiler une application web avec ou sans client lourd.
 {: .fs-6 .fw-300 }
 
-[Commencer maintenant](./docs/pages/getstarted.md){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Voir sur GitHub](https://github.com/NicolasBoyer/wapitis){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Présentation](https://github.com/NicolasBoyer/wapitis/blob/master/README.md){: .btn .fs-5 .mb-4 .mb-md-0 }
-
----
-
-**-- NOUVEAU - v2.1.6 --**
-
-Une nouvelle extension pour VSCode spécialisée pour Wapitis est conseillée : [wapitis-plugin](https://marketplace.visualstudio.com/items?itemName=NicolasBoyer.wapitis-plugin)
-
----
-
-**-- NOUVEAU - v2.1.5 --**
-
-@property():
-
-- Suppression de reflectInAttribute
-- Transformation de writeOnly en attribute et true par défaut
-
----
-
-**-- NOUVEAU - v2.1.0 --**
-
-Changement dans la création du composant. Il n'est plus utile d'appeler le composant avec une propriété générique !
-
-La déclaration se fait maintenant de la manière suivante :
-
-```typescript
-...
-
-@customElement('sui-box')
-export class Box extends Component {
-
-...
-```
+[Commencer maintenant](./docs/pages/getstarted.md){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Voir sur GitHub](https://github.com/NicolasBoyer/wapitis){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [Présentation](https://github.com/NicolasBoyer/wapitis/blob/master/README.md){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 } [CHANGELOG](https://github.com/NicolasBoyer/wapitis/blob/master/CHANGELOG.md){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 

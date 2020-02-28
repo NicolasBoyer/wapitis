@@ -1,0 +1,45 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [2.1.7] - 2020-02-28
+### Added
+- Ajout d'un CHANGELOG.md
+
+### Changed
+- Amélioration de l'extension [wapitis-plugin](https://marketplace.visualstudio.com/items?itemName=NicolasBoyer.wapitis-plugin) pour VSCode avec une complétion et des suggestions améliorées et une meilleure gestion des erreurs.
+- La propriété `showInternalLog` de `component.tsx` a été passée en protected.
+
+## [2.1.6] - 2020-02-20
+### Added
+- Une nouvelle extension pour VSCode spécialisée pour Wapitis est conseillée : [wapitis-plugin](https://marketplace.visualstudio.com/items?itemName=NicolasBoyer.wapitis-plugin).
+
+## [2.1.5] - 2020-02-05
+### Removed
+- Suppression de `reflectInAttribute`.
+
+### Changed
+- Transformation de `writeOnly` en `attribute` et **true** par défaut.
+
+## [2.1.0] - 2020-01-27
+### Changed
+- Changement dans la création du composant. Il n'est plus utile d'appeler le composant avec une propriété générique !
+La déclaration se fait maintenant de la manière suivante :
+```typescript
+...
+
+@customElement('sui-box')
+export class Box extends Component {
+
+...
+```
+
+[Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/v2.1.6...HEAD
+[2.1.7]: https://github.com/NicolasBoyer/wapitis/compare/2.1.6...2.1.7
+[2.1.6]: https://github.com/NicolasBoyer/wapitis/compare/2.1.5...2.1.6
+[2.1.5]: https://github.com/NicolasBoyer/wapitis/compare/2.1.0...2.1.5
+[2.1.0]: https://github.com/NicolasBoyer/wapitis/releases/tag/2.1.0

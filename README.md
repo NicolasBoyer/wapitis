@@ -3,35 +3,7 @@
 
 ---
 
-**-- NOUVEAU - v2.1.6 --**
-
-Une nouvelle extension pour VSCode spécialisée pour Wapitis est conseillée : [wapitis-plugin](https://marketplace.visualstudio.com/items?itemName=NicolasBoyer.wapitis-plugin)
-
----
-
-**-- NOUVEAU - v2.1.5 --**
-
-@property():
-
-- Suppression de reflectInAttribute
-- Transformation de writeOnly en attribute et true par défaut
-
----
-
-**-- NOUVEAU - v2.1.0 --**
-
-Changement dans la création du composant. Il n'est plus utile d'appeler le composant avec une propriété générique !
-
-La déclaration se fait maintenant de la manière suivante :
-
-```typescript
-...
-
-@customElement('sui-box')
-export class Box extends Component {
-
-...
-```
+[CHANGELOG](./CHANGELOG.md)
 
 ---
 
