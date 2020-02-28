@@ -36,7 +36,7 @@ Properties
 <div style="margin-top: 0.5rem;" markdown="1">
 
 * [\_props](_component_.component.md#protected-props)
-* [showInternalLog](_component_.component.md#showinternallog)
+* [showInternalLog](_component_.component.md#protected-showinternallog)
 * [styles](_component_.component.md#static-optional-styles)
 
 </div>
@@ -148,7 +148,7 @@ ___
 <tr>
 <td markdown="1">
 
-### showInternalLog
+### `Protected` showInternalLog
 {: .m-0 }
 
 </td>

@@ -85,7 +85,7 @@ export abstract class Component extends HTMLElement {
     /**
      * Si true, les logs spécifiés dans le composant Component sont publiés. False par défaut
      */
-    showInternalLog: boolean = false
+    protected showInternalLog: boolean = false
 
     /**
      * Spécifique au web component. Permet de déclarer les propriétés qui seront observées et provoqueront un nouveau rendu via [[render]] et le rappel de [[attributeChangedCallback]]
