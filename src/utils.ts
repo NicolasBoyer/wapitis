@@ -1,8 +1,8 @@
 import { directive, PropertyPart } from 'lit-html'
 import { DOM } from './dom'
 
-// tslint:disable-next-line:no-namespace
-export namespace UTILS {
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const UTILS = {
     /**
      * Transforme une string dans le type renseigné
      *
@@ -10,7 +10,7 @@ export namespace UTILS {
      * @param {unknown} type Type dans lequel transformer la chaîne : Boolean, Number, Object, Array, ...
      * @returns
      */
-    export function fromString(value: string | null, type?: unknown) {
+    fromString(value: string | null, type?: unknown): any {
         switch (type) {
             case Boolean:
                 return value === 'true' || value === '' ? '' : null
@@ -21,7 +21,7 @@ export namespace UTILS {
                 return JSON.parse(value)
         }
         return value
-    }
+    },
 
     /**
      * Transforme une valeur du type renseigné en string
@@ -30,9 +30,9 @@ export namespace UTILS {
      * @param {unknown} type Type de la valeur à transformer : Boolean, Number, Object, Array, ...
      * @returns {unknown}
      */
-    export function toString(value: unknown, type?: unknown): unknown {
+    toString(value: unknown, type?: unknown): unknown {
         return type === Object || type === Array || typeof value === 'object' ? JSON.stringify(value) : JSON.parse(value as string)
-    }
+    },
 
     /**
      * Transforme une chaîne du type camelCase en DashCase
@@ -40,9 +40,9 @@ export namespace UTILS {
      * @param {*} name Chaîne à transformer
      * @returns
      */
-    export function camelCaseToDashCase(name) {
+    camelCaseToDashCase(name: any): any {
         return name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
-    }
+    },
 
     /**
      * Transforme une chaîne du type DashCase en camelCase
@@ -50,18 +50,18 @@ export namespace UTILS {
      * @param {*} name Chaîne à transformer
      * @returns
      */
-    export function dashCaseToCamelCase(name) {
+    dashCaseToCamelCase(name: any): any {
         return name.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
-    }
+    },
 
     /**
      * Retourne un id de type string
      *
      * @returns
      */
-    export function generateId() {
+    generateId(): string {
         return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
-    }
+    },
 
     /**
      * Envoie un customEvent sur l'élément parent, avec les propriétés renseignées dans property
@@ -70,17 +70,17 @@ export namespace UTILS {
      * @param {object} property Propriétés à envoyer
      * @param {HTMLElement} parent Elément sur lequel le custom event est envoyé, document.body par défaut
      */
-    export function dispatchEvent(name: string, property: object, parent: HTMLElement = document.body) {
+    dispatchEvent(name: string, property: object, parent: HTMLElement = document.body): void {
         const event = new CustomEvent(name, { detail: property })
         parent.dispatchEvent(event)
-    }
+    },
 
     /**
      * Retourne la taille et la position de la fenêtre web courante
      *
      * @returns Retourne { width: number, height: number, top: number, left: number }
      */
-    export function getWindowSize() {
+    getWindowSize(): { width: number, height: number, top: number, left: number } {
         const window = document.createElement('div')
         window.style.position = 'absolute'
         window.style.top = '0px'
@@ -92,7 +92,7 @@ export namespace UTILS {
         const windowsize: { width: number, height: number, top: number, left: number } = { width: window.offsetWidth, height: window.offsetHeight, top: window.offsetTop, left: window.offsetLeft }
         document.body.removeChild(window)
         return windowsize
-    }
+    },
 
     /**
      * Retourne le texte contenu dans le fichier spécifié de façon asynchrone
@@ -100,7 +100,7 @@ export namespace UTILS {
      * @param {string} url Url du fichier à traiter
      * @returns
      */
-    export async function getFile(url: string) {
+    async getFile(url: string): Promise<any> {
         const response = await fetch(url)
         const text = await response.text()
         try {
@@ -108,7 +108,7 @@ export namespace UTILS {
         } catch (err) {
             return text
         }
-    }
+    },
 
     /**
      * Enregistre les données dans la clé spécifiée en local storage
@@ -117,10 +117,10 @@ export namespace UTILS {
      * @param {string} key La clé à utiliser pour sauvegarder les données
      * @param {T} datas Les données à sauvegarder
      */
-    export function save<T>(key: string, datas: T): void {
+    save<T>(key: string, datas: T): void {
         // Mettre en place la possibilité de sauvegarder le fichier via file et blob cf truc save
         localStorage.setItem(key, JSON.stringify(datas))
-    }
+    },
 
     /**
      * Retourne les données spécifiées dans la clé en local storage
@@ -129,10 +129,10 @@ export namespace UTILS {
      * @param {string} key La clé à utiliser pour charger les données
      * @returns {T} Retourne les données
      */
-    export function load<T>(key: string): T {
+    load<T>(key: string): T {
         const datas = localStorage.getItem(key) || '{}'
         return JSON.parse(datas)
-    }
+    },
 
     /**
      * Directive transformant des propriétés de types objet `{ [key: string]: unknown }` en attribut compréhensible par lit-html et le tag html.
@@ -151,7 +151,7 @@ export namespace UTILS {
      *
      * @param {{ [key: string]: unknown }} props Les propriétés de type `{ [key: string]: unknown }` à transformer
      */
-    export const propsToAttributes = directive((props: { [key: string]: unknown }) => (part: PropertyPart) => {
+    propsToAttributes: directive((props: { [key: string]: unknown }) => (part: PropertyPart) => {
         const previousProps = new WeakMap()
         const prev = previousProps.get(part)
         if (prev === props) {

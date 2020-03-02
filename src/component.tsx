@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { render, TemplateResult } from 'lit-html'
 import { DOM, JSX, Log, UTILS } from '.'
 import { arrayFlat, CSSResult, CSSResultArray } from './css'
@@ -59,6 +61,7 @@ export function property(options?: IPropertyOptions) {
         if (target.hasOwnProperty(propertyName)) {
             return
         }
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         (target.constructor as typeof Component).createProperty(propertyName, options)
     }
 }
@@ -81,11 +84,10 @@ export type PropertyValues = Map<PropertyKey, { oldVal: unknown, newVal: unknown
  * @typeparam T Type générique de la classe définit grâce à la directive customElement
  */
 export abstract class Component extends HTMLElement {
-
     /**
      * Si true, les logs spécifiés dans le composant Component sont publiés. False par défaut
      */
-    protected showInternalLog: boolean = false
+    protected showInternalLog = false
 
     /**
      * Spécifique au web component. Permet de déclarer les propriétés qui seront observées et provoqueront un nouveau rendu via [[render]] et le rappel de [[attributeChangedCallback]]
@@ -93,7 +95,7 @@ export abstract class Component extends HTMLElement {
      * Inutile d'utiliser cette méthode. Elle est appelé automatiquement grâce à la directive @property
      * @returns Retourne un tableau contenant les noms des attributs que vous voulez observer
      */
-    static get observedAttributes() {
+    static get observedAttributes(): string[] {
         // Récupère et déclare les propriétés du composant parent si celui-ci est un Component de Wapitis
         const superCtor = Object.getPrototypeOf(this)
         if (superCtor.name !== 'Component') {
@@ -139,11 +141,11 @@ export abstract class Component extends HTMLElement {
      * @param {PropertyKey} name Nom de la propriété
      * @param {IPropertyOptions} [options]
      */
-    static createProperty(name: PropertyKey, options?: IPropertyOptions) {
+    static createProperty(name: PropertyKey, options?: IPropertyOptions): void {
         const key = typeof name === 'symbol' ? Symbol() : `__${name}`
         const classId = this._id + '_' + this.name
         this._propertyOptions[classId + '_' + (name as string)] = options || null
-        const reflectPropertyInAttribute = (name as string).charAt(0) !== '_'
+        const reflectPropertyInAttribute = !(name as string).startsWith('_')
         const attribute = !options || options && options.attribute !== false
         const isBoolean = options && options.type === Boolean
         if (reflectPropertyInAttribute) {
@@ -154,6 +156,7 @@ export abstract class Component extends HTMLElement {
         }
         Object.defineProperty(this.prototype, name, {
             get(): any {
+                // eslint-disable-next-line @typescript-eslint/naming-convention
                 const _val = this[key as string]
                 // Log.debug("get")
                 // Log.debug(`Get: ${name as string} => ${DOM.toString(_val, options && options.type)}`);
@@ -173,7 +176,7 @@ export abstract class Component extends HTMLElement {
                     if (!attribute) {
                         this.removeAttribute(attrName)
                         if (oldVal !== newVal) {
-                            this.setPropertyValue(name as string, newVal)
+                            this._setPropertyValue(name as string, newVal)
                         }
                     }
                     this._requestUpdate()
@@ -183,6 +186,7 @@ export abstract class Component extends HTMLElement {
             enumerable: true
         })
     }
+
     private static _observablesAttributes: { [key: string]: string[] } = {}
     private static _propertyOptions: { [key: string]: IPropertyOptions | null } = {}
     private static _id = UTILS.generateId()
@@ -194,11 +198,11 @@ export abstract class Component extends HTMLElement {
     protected _props: any
     private _renderRoot: ShadowRoot
     private _changedProperties: PropertyValues = new Map()
-    private _isUpdated: boolean = false
+    private _isUpdated = false
     private _hasConnectedResolver: (() => void) | undefined = undefined
-    private _isConnected: boolean = false
+    private _isConnected = false
     private _styles: string
-    private _isStylesAdded: boolean = false
+    private _isStylesAdded = false
     private _timer = null
 
     /**
@@ -225,7 +229,7 @@ export abstract class Component extends HTMLElement {
     /**
      * Spécifique au web component. Appelé lorsque l'élément personnalisé est connecté pour la première fois au DOM du document
      */
-    connectedCallback() {
+    connectedCallback(): void {
         this._isConnected = true
         if (this._hasConnectedResolver) {
             this._hasConnectedResolver()
@@ -239,7 +243,7 @@ export abstract class Component extends HTMLElement {
     /**
      * Spécifique au web component. Appelé lorsque l'élément personnalisé est déconnecté du DOM du document
      */
-    disconnectedCallback() {
+    disconnectedCallback(): void {
         //
     }
 
@@ -250,12 +254,12 @@ export abstract class Component extends HTMLElement {
      * @param {*} oldVal Ancienne valeur de l'attribut
      * @param {*} newVal Nouvelle valeur de l'attribut
      */
-    attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
+    attributeChangedCallback(attrName: string, oldVal: any, newVal: any): void {
         if (oldVal !== newVal) {
             if (this.showInternalLog) {
                 Log.debug(this.constructor.name + ' - attributeChangedCallback')
             }
-            this.setPropertyValue(attrName, newVal)
+            this._setPropertyValue(attrName, newVal)
         }
     }
 
@@ -278,7 +282,7 @@ export abstract class Component extends HTMLElement {
      *
      * @param {PropertyValues} _changedProperties
      */
-    protected beforeRender(_changedProperties: PropertyValues) {
+    protected beforeRender(_changedProperties: PropertyValues): void {
         if (this.showInternalLog) {
             Log.debug(this.constructor.name + ' - beforeRender')
         }
@@ -289,7 +293,7 @@ export abstract class Component extends HTMLElement {
      *
      * @returns {(TemplateResult | void)} Retourne un TemplateResult qui est ensuite interprété et permet la mise à jour du DOM
      */
-    // tslint:disable-next-line: no-empty
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     protected render(): TemplateResult | void { }
 
     /**
@@ -299,7 +303,7 @@ export abstract class Component extends HTMLElement {
      *
      * @param {PropertyValues} _changedProperties
      */
-    protected updated(_changedProperties: PropertyValues) {
+    protected updated(_changedProperties: PropertyValues): void {
         if (this.showInternalLog) {
             Log.debug(this.constructor.name + ' - updated')
         }
@@ -315,7 +319,7 @@ export abstract class Component extends HTMLElement {
      *
      * @param {PropertyValues} _changedProperties
      */
-    protected firstUpdated(_changedProperties: PropertyValues) {
+    protected firstUpdated(_changedProperties: PropertyValues): void {
         if (this.showInternalLog) {
             Log.debug(this.constructor.name + ' - firstUpdated')
         }
@@ -328,7 +332,7 @@ export abstract class Component extends HTMLElement {
      * @param {string} propName
      * @param {unknown} value
      */
-    private setPropertyValue(propName: string, value: unknown) {
+    private _setPropertyValue(propName: string, value: unknown): void {
         const ctor = (this.constructor as typeof Component)
         const name = ctor._attributesToProperties[propName.toLowerCase()] || propName
         const options = ctor._propertyOptions[ctor._id + '_' + ctor.name + '_' + (name as string)]
@@ -340,7 +344,7 @@ export abstract class Component extends HTMLElement {
      *
      * @param {boolean} [isUpdate=false]
      */
-    private _requestUpdate(isUpdate: boolean = false) {
+    private _requestUpdate(isUpdate = false): void {
         if (isUpdate) {
             clearTimeout(this._timer)
             this._update()
@@ -351,15 +355,15 @@ export abstract class Component extends HTMLElement {
                 clearTimeout(this._timer)
             }
             this._timer = setTimeout(() => this._requestUpdate(true))
-            return
         }
     }
 
     /**
      * Gère le lifecycle
      */
-    private async _update() {
+    private async _update(): Promise<void> {
         if (!this._isConnected) {
+            // eslint-disable-next-line promise/param-names
             await new Promise((res) => this._hasConnectedResolver = res)
         }
         if (this._renderRoot && this.shouldUpdate(this._changedProperties)) {
@@ -377,7 +381,7 @@ export abstract class Component extends HTMLElement {
                 }
                 if (this._styles !== '') {
                     // Polyfill -> A supprimer après intégration de shadowdom et custom elements dans Edge
-                    if ((/Edge/.test(navigator.userAgent))) {
+                    if ((navigator.userAgent.includes('Edge'))) {
                         Array.prototype.slice.call(this._renderRoot.querySelectorAll('link'), 0).forEach(async (link) => {
                             let linkStyle = await UTILS.getFile(link.href)
                             linkStyle = linkStyle.replace(':host', this.tagName)
@@ -405,6 +409,5 @@ export abstract class Component extends HTMLElement {
             this._isUpdated = true
             this._changedProperties = new Map()
         }
-
     }
 }

@@ -1,24 +1,24 @@
+/* eslint-disable no-console */
 export abstract class Log {
-
     /**
      * Si false, aucun log n'est publié à l'exception du log error. True par défaut
      */
-    static showLog: boolean = true
+    static showLog = true
 
     /**
      * Si false, les logs de type info ne sont pas publiés. True par défaut
      */
-    static showInfoLog: boolean = true
+    static showInfoLog = true
 
     /**
      * Si false, les logs de type debug ne sont pas publiés. True par défaut
      */
-    static showDebugLog: boolean = true
+    static showDebugLog = true
 
     /**
      * Si false, les logs de type warning ne sont pas publiés. True par défaut
      */
-    static showWarnLog: boolean = true
+    static showWarnLog = true
 
     /**
      * Log classique avec le message renseigné et les données datas si elles existent
@@ -26,9 +26,9 @@ export abstract class Log {
      * @param {string} message Le message à afficher
      * @param {...any[]} datas Les données envoyées et affichées
      */
-    static info(message: string, ...datas: any[]) {
+    static info(message: string, ...datas: any[]): void {
         if (this.showLog && this.showInfoLog) {
-            this.emitLogMessage('info', message, datas)
+            this._emitLogMessage('info', message, datas)
         }
     }
 
@@ -38,9 +38,9 @@ export abstract class Log {
      * @param {string} message Le message à afficher
      * @param {...any[]} datas Les données envoyées et affichées
      */
-    static debug(message: string, ...datas: any[]) {
+    static debug(message: string, ...datas: any[]): void {
         if (process.env.NODE_ENV !== 'production' && this.showLog && this.showDebugLog) {
-            this.emitLogMessage('debug', message, datas)
+            this._emitLogMessage('debug', message, datas)
         }
     }
 
@@ -50,9 +50,9 @@ export abstract class Log {
      * @param {string} message Le message à afficher
      * @param {...any[]} datas Les données envoyées et affichées
      */
-    static warn(message: string, ...datas: any[]) {
+    static warn(message: string, ...datas: any[]): void {
         if (this.showLog && this.showWarnLog) {
-            this.emitLogMessage('warn', message, datas)
+            this._emitLogMessage('warn', message, datas)
         }
     }
 
@@ -62,16 +62,15 @@ export abstract class Log {
      * @param {string} message Le message à afficher
      * @param {...any[]} datas Les données envoyées et affichées
      */
-    static error(message: string, ...datas: any[]) {
-        this.emitLogMessage('error', message, datas)
+    static error(message: string, ...datas: any[]): void {
+        this._emitLogMessage('error', message, datas)
     }
 
-    private static emitLogMessage(type: 'debug' | 'warn' | 'info' | 'error', message: string, datas: any[]) {
+    private static _emitLogMessage(type: 'debug' | 'warn' | 'info' | 'error', message: string, datas: any[]): void {
         if (datas.length > 0) {
             console[type](message, datas)
         } else {
             console[type](message)
         }
     }
-
 }

@@ -327,8 +327,17 @@ if (arg) {
 					await files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
 				})
 			}
+			// PASSAGE DE TSLINT A ESLINT
+			if (packageJson.devDependencies.tslint) {
+				log('MIGR : Désinstallation de tslint en cours ...')
+				tools.runCommandSync('npm uninstall tslint -D')
+				log(chalk.green('MIGR : tslint a été désinstallé.'))
+				log('MIGR : Installation de eslint en cours ...')
+				tools.runCommandSync('npm i eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin -D')
+				files.remove(directoryBase + '/tslint.json')
+				files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json').then(() => log(chalk.green('MIGR : eslint a été installé, veuillez recharger.')))
+			}
 			/** */
-
 			// GLOBALS
 			const isElectron = arg === 'electron'
 			const tsconfigFile = directoryBase + '/tsconfig.json'

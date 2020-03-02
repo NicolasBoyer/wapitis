@@ -1,5 +1,130 @@
-// tslint:disable-next-line:no-namespace
-export namespace SHADOWDOM {
+/**
+ * Checks if the node is a document node or not.
+ * @param {Node} node
+ * @returns {node is Document | DocumentFragment}
+ */
+function isDocumentNode(node: Document | DocumentFragment): boolean {
+    return node.nodeType === Node.DOCUMENT_FRAGMENT_NODE || node.nodeType === Node.DOCUMENT_NODE
+}
+
+function findParentOrHost(element: any, root: Element): Element {
+    const parentNode = element.parentNode
+    return (parentNode && parentNode.host && parentNode.nodeType === 11) ? parentNode.host : parentNode === root ? null : parentNode
+}
+
+/**
+ * Finds all elements on the page, inclusive of those within shadow roots.
+ * @param {string=} selector Simple selector to filter the elements by. e.g. 'a', 'div.main'
+ * @return {!Array<string>} List of anchor hrefs.
+ * @author ebidel@ (Eric Bidelman)
+ * License Apache-2.0
+ */
+function collectAllElementsDeep(selector: string = null, root: Element | Document): string[] {
+    const allElements = []
+
+    const findAllElements = (nodes: any[] | NodeListOf<Element>): void => {
+        // eslint-disable-next-line no-cond-assign
+        for (let i = 0, el; el = nodes[i]; ++i) {
+            allElements.push(el)
+            // If the element has a shadow root, dig deeper.
+            if (el.shadowRoot) {
+                findAllElements(el.shadowRoot.querySelectorAll('*'))
+            }
+        }
+    }
+    if ((root as Element).shadowRoot) {
+        findAllElements((root as Element).shadowRoot.querySelectorAll('*'))
+    }
+    findAllElements(root.querySelectorAll('*'))
+
+    return selector ? allElements.filter((el) => el.matches(selector)) : allElements
+}
+
+function splitByCharacterUnlessQuoted(selector: any, character: string): any[] {
+    return selector.match(/\\?.|^$/g).reduce((p, c) => {
+        if (c === '"' && !p.sQuote) {
+            // eslint-disable-next-line no-bitwise
+            p.quote ^= 1
+            p.a[p.a.length - 1] += c
+        } else if (c === '\'' && !p.quote) {
+            // eslint-disable-next-line no-bitwise
+            p.sQuote ^= 1
+            p.a[p.a.length - 1] += c
+        } else if (!p.quote && !p.sQuote && c === character) {
+            p.a.push('')
+        } else {
+            p.a[p.a.length - 1] += c
+        }
+        return p
+    }, { a: [''] }).a
+}
+
+function findMatchingElement(splitSelector: string[], possibleElementsIndex: number, root): (element: any) => boolean {
+    return (element) => {
+        let position = possibleElementsIndex
+        let parent = element
+        let foundElement = false
+        while (parent && !isDocumentNode(parent)) {
+            const foundMatch = parent.matches(splitSelector[position])
+            if (foundMatch && position === 0) {
+                foundElement = true
+                break
+            }
+            if (foundMatch) {
+                position--
+            }
+            parent = findParentOrHost(parent, root)
+        }
+        return foundElement
+    }
+}
+
+function _querySelectorDeep(selector: string, findMany: boolean, root: Element | Document): any {
+    const lightElement = root.querySelector(selector)
+
+    if (document.head.attachShadow) {
+        // no need to do any special if selector matches something specific in light-dom
+        if (!findMany && lightElement) {
+            return lightElement
+        }
+
+        // split on commas because those are a logical divide in the operation
+        const selectionsToMake = splitByCharacterUnlessQuoted(selector, ',')
+
+        return selectionsToMake.reduce((acc, minimalSelector) => {
+            // if not finding many just reduce the first match
+            if (!findMany && acc) {
+                return acc
+            }
+            // do best to support complex selectors and split the query
+            const splitSelector = splitByCharacterUnlessQuoted(minimalSelector
+                // remove white space at start of selector
+                .replace(/^\s+/g, '')
+                .replace(/\s*([>+~]+)\s*/g, '$1'), ' ')
+                // filter out entry white selectors
+                .filter((entry) => !!entry)
+            const possibleElementsIndex = splitSelector.length - 1
+            const possibleElements = collectAllElementsDeep(splitSelector[possibleElementsIndex], root)
+            const findElements = findMatchingElement(splitSelector, possibleElementsIndex, root)
+            if (findMany) {
+                acc = acc.concat(possibleElements.filter(findElements))
+                return acc
+            } else {
+                acc = possibleElements.find(findElements)
+                return acc || null
+            }
+        }, findMany ? [] : null)
+    } else {
+        if (!findMany) {
+            return lightElement
+        } else {
+            return root.querySelectorAll(selector)
+        }
+    }
+}
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const SHADOWDOM = {
     /**
      * Retrouve le host du shadowTree de ce noeud
      *
@@ -7,10 +132,10 @@ export namespace SHADOWDOM {
      * @param {Node} from Noeud sur lequel on cherche le host
      * @returns {T} Retourne le host de type T
      */
-    export function findHost<T extends Element = Element>(from: Node): T {
+    findHost<T extends Element = Element>(from: Node): T {
         while (from.parentNode) { from = from.parentNode }
         return (from as ShadowRoot).host as T
-    }
+    },
 
     /**
      * Retrouve le premier DocumentOrShadowRoot ancêtre d'un noeud
@@ -18,10 +143,10 @@ export namespace SHADOWDOM {
      * @param {Node} from Noeud sur lequel la recherche est effectuée
      * @returns {(Document | ShadowRoot)} Retourne le premier shadowroot ancêtre ou le Document
      */
-    export function findDocumentOrShadowRoot(from: Node): Document | ShadowRoot {
+    findDocumentOrShadowRoot(from: Node): Document | ShadowRoot {
         while (from.parentNode) { from = from.parentNode }
         return (from.nodeType === Node.DOCUMENT_NODE || (from instanceof ShadowRoot)) ? from as Document | ShadowRoot : null
-    }
+    },
 
     /**
      * Retourne le parent, incluant la balise <slot> dans la chaîne
@@ -30,8 +155,8 @@ export namespace SHADOWDOM {
      * @param {Element} base L'élément sur lequel est effectuée la recherche
      * @returns
      */
-    export function deepClosestElement(selector: string, base: Element) {
-        function __closestFrom(element: Element | Window | Document | null): Element | null {
+    deepClosestElement(selector: string, base: Element): Element {
+        function _closestFrom(element: Element | Window | Document | null): Element | null {
             if (!element || element === document || element === window) {
                 return null
             }
@@ -39,10 +164,10 @@ export namespace SHADOWDOM {
                 element = (element as Slotable).assignedSlot
             }
             const found = (element as Element).closest(selector)
-            return found ? found : __closestFrom(((element as Element).getRootNode() as ShadowRoot).host)
+            return found || _closestFrom(((element as Element).getRootNode() as ShadowRoot).host)
         }
-        return __closestFrom(base)
-    }
+        return _closestFrom(base)
+    },
 
     /**
      * Retrouve l'activeElement en pénétrant tous les shadowDOM
@@ -50,36 +175,11 @@ export namespace SHADOWDOM {
      * @param {DocumentOrShadowRoot} from Le shadowroot sur lequel la recherche est effectuée ou le document
      * @returns
      */
-    export function findDeepActiveElement(from?: DocumentOrShadowRoot) {
+    findDeepActiveElement(from?: DocumentOrShadowRoot): Element {
         let a = (from || document).activeElement
         while (a && a.shadowRoot && a.shadowRoot.activeElement) { a = a.shadowRoot.activeElement }
         return a
-    }
-
-    /**
-     * Retrouve tous les éléments assignés dans les slot de l'élément courant
-     *
-     * @param {Element} from L'élément sur lequel est effectuée la recherche
-     * @returns {Element[]} Retourne un tableau avec les éléments retrouvés
-     */
-    export function findAssignedElements(from: Element): Element[] {
-        let elements: Element[] = []
-        querySelectorAllDeep('slot', from).forEach((slot) => {
-            elements = elements.concat((slot as HTMLSlotElement).assignedElements())
-        })
-        return elements
-    }
-
-    /**
-     * Retrouve le ou les éléments assignés dans le slotName
-     *
-     * @param {Element} from L'élément sur lequel la recherche est effectuée
-     * @param {string} slotName Le nom du slot recherché
-     * @returns {(Element | Element[])}
-     */
-    export function findAssignedElementBySlotName(from: Element, slotName: string): Element | Element[] {
-        return findAssignedElements(from).filter((element) => element.getAttribute('slot') === slotName)[0]
-    }
+    },
 
     /**
      * Retrouve les éléments spécifiés dans le selector en fonction du root ou du document
@@ -90,9 +190,34 @@ export namespace SHADOWDOM {
      * @param {(Element | Document)} root L'élément sur lequel la recherche est effectuée ou le document
      * @returns {Element[]}
      */
-    export function querySelectorAllDeep(selector: string, root: Element | Document = document): Element[] {
+    querySelectorAllDeep(selector: string, root: Element | Document = document): Element[] {
         return _querySelectorDeep(selector, true, root)
-    }
+    },
+
+    /**
+     * Retrouve tous les éléments assignés dans les slot de l'élément courant
+     *
+     * @param {Element} from L'élément sur lequel est effectuée la recherche
+     * @returns {Element[]} Retourne un tableau avec les éléments retrouvés
+     */
+    findAssignedElements(from: Element): Element[] {
+        let elements: Element[] = []
+        SHADOWDOM.querySelectorAllDeep('slot', from).forEach((slot) => {
+            elements = elements.concat((slot as HTMLSlotElement).assignedElements())
+        })
+        return elements
+    },
+
+    /**
+     * Retrouve le ou les éléments assignés dans le slotName
+     *
+     * @param {Element} from L'élément sur lequel la recherche est effectuée
+     * @param {string} slotName Le nom du slot recherché
+     * @returns {(Element | Element[])}
+     */
+    findAssignedElementBySlotName(from: Element, slotName: string): Element | Element[] {
+        return SHADOWDOM.findAssignedElements(from).filter((element) => element.getAttribute('slot') === slotName)[0]
+    },
 
     /**
      * Retrouve l'élément spécifié dans le selector en fonction du root ou du document
@@ -103,139 +228,7 @@ export namespace SHADOWDOM {
      * @param {(Element | Document)} root L'élément sur lequel la recherche est effectuée ou le document
      * @returns {Element}
      */
-    export function querySelectorDeep(selector: string, root: Element | Document = document): Element {
+    querySelectorDeep(selector: string, root: Element | Document = document): Element {
         return _querySelectorDeep(selector, false, root)
     }
-
-    function _querySelectorDeep(selector: string, findMany: boolean, root: Element | Document) {
-        const lightElement = root.querySelector(selector)
-
-        if (document.head.attachShadow) {
-            // no need to do any special if selector matches something specific in light-dom
-            if (!findMany && lightElement) {
-                return lightElement
-            }
-
-            // split on commas because those are a logical divide in the operation
-            const selectionsToMake = splitByCharacterUnlessQuoted(selector, ',')
-
-            return selectionsToMake.reduce((acc, minimalSelector) => {
-                // if not finding many just reduce the first match
-                if (!findMany && acc) {
-                    return acc
-                }
-                // do best to support complex selectors and split the query
-                const splitSelector = splitByCharacterUnlessQuoted(minimalSelector
-                    // remove white space at start of selector
-                    .replace(/^\s+/g, '')
-                    .replace(/\s*([>+~]+)\s*/g, '$1'), ' ')
-                    // filter out entry white selectors
-                    .filter((entry) => !!entry)
-                const possibleElementsIndex = splitSelector.length - 1
-                const possibleElements = collectAllElementsDeep(splitSelector[possibleElementsIndex], root)
-                const findElements = findMatchingElement(splitSelector, possibleElementsIndex, root)
-                if (findMany) {
-                    acc = acc.concat(possibleElements.filter(findElements))
-                    return acc
-                } else {
-                    acc = possibleElements.find(findElements)
-                    return acc || null
-                }
-            }, findMany ? [] : null)
-
-        } else {
-            if (!findMany) {
-                return lightElement
-            } else {
-                return root.querySelectorAll(selector)
-            }
-        }
-
-    }
-
-    function findMatchingElement(splitSelector: string[], possibleElementsIndex: number, root) {
-        return (element) => {
-            let position = possibleElementsIndex
-            let parent = element
-            let foundElement = false
-            while (parent && !isDocumentNode(parent)) {
-                const foundMatch = parent.matches(splitSelector[position])
-                if (foundMatch && position === 0) {
-                    foundElement = true
-                    break
-                }
-                if (foundMatch) {
-                    position--
-                }
-                parent = findParentOrHost(parent, root)
-            }
-            return foundElement
-        }
-
-    }
-
-    function splitByCharacterUnlessQuoted(selector: any, character: string): any[] {
-        return selector.match(/\\?.|^$/g).reduce((p, c) => {
-            if (c === '"' && !p.sQuote) {
-                // tslint:disable-next-line: no-bitwise
-                p.quote ^= 1
-                p.a[p.a.length - 1] += c
-            } else if (c === '\'' && !p.quote) {
-                // tslint:disable-next-line: no-bitwise
-                p.sQuote ^= 1
-                p.a[p.a.length - 1] += c
-
-            } else if (!p.quote && !p.sQuote && c === character) {
-                p.a.push('')
-            } else {
-                p.a[p.a.length - 1] += c
-            }
-            return p
-        }, { a: [''] }).a
-    }
-
-    /**
-     * Checks if the node is a document node or not.
-     * @param {Node} node
-     * @returns {node is Document | DocumentFragment}
-     */
-    function isDocumentNode(node: Document | DocumentFragment) {
-        return node.nodeType === Node.DOCUMENT_FRAGMENT_NODE || node.nodeType === Node.DOCUMENT_NODE
-    }
-
-    function findParentOrHost(element: any, root: Element): Element {
-        const parentNode = element.parentNode
-        return (parentNode && parentNode.host && parentNode.nodeType === 11) ? parentNode.host : parentNode === root ? null : parentNode
-    }
-
-    /**
-     * Finds all elements on the page, inclusive of those within shadow roots.
-     * @param {string=} selector Simple selector to filter the elements by. e.g. 'a', 'div.main'
-     * @return {!Array<string>} List of anchor hrefs.
-     * @author ebidel@ (Eric Bidelman)
-     * License Apache-2.0
-     */
-    function collectAllElementsDeep(selector: string = null, root: Element | Document): string[] {
-        const allElements = []
-
-        const findAllElements = (nodes) => {
-            // tslint:disable-next-line: no-conditional-assignment
-            for (let i = 0, el; el = nodes[i]; ++i) {
-                allElements.push(el)
-                // If the element has a shadow root, dig deeper.
-                if (el.shadowRoot) {
-                    findAllElements(el.shadowRoot.querySelectorAll('*'))
-                }
-            }
-        }
-        if ((root as Element).shadowRoot) {
-            findAllElements((root as Element).shadowRoot.querySelectorAll('*'))
-        }
-        findAllElements(root.querySelectorAll('*'))
-
-        return selector ? allElements.filter((el) => el.matches(selector)) : allElements
-    }
-    /**
-     *
-     */
 }

@@ -40,9 +40,9 @@ export class CSSResult {
  * @param {unknown} value
  * @returns
  */
-export const unsafeCSS = (value: unknown) => new CSSResult(String(value), constructionToken)
+export const unsafeCSS = (value: unknown): CSSResult => new CSSResult(String(value), constructionToken)
 
-const textFromCSSResult = (value: CSSResult | number) => {
+const textFromCSSResult = (value: CSSResult | number): string | number => {
     if (value instanceof CSSResult) {
         return value.cssText
     } else if (typeof value === 'number') {
@@ -103,7 +103,7 @@ export function arrayFlat(
  * @param {(...Array<CSSResult | number>)} values
  * @returns
  */
-export const css = (strings: TemplateStringsArray, ...values: Array<CSSResult | number>) => {
+export const css = (strings: TemplateStringsArray, ...values: Array<CSSResult | number>): CSSResult => {
     const cssText = values.reduce((acc, v, idx) => acc + textFromCSSResult(v) + strings[idx + 1], strings[0])
     return new CSSResult(cssText, constructionToken)
 }
@@ -111,5 +111,5 @@ export const css = (strings: TemplateStringsArray, ...values: Array<CSSResult | 
 /**
  * @ignore
  */
-// tslint:disable-next-line: interface-name
+// eslint-disable-next-line @typescript-eslint/interface-name-prefix, @typescript-eslint/no-empty-interface
 export interface CSSResultArray extends Array<CSSResult | CSSResultArray> { }

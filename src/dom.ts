@@ -1,8 +1,8 @@
 import { html, TemplateResult } from 'lit-html'
 import { UTILS } from '.'
 
-// tslint:disable-next-line:no-namespace
-export namespace DOM {
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const DOM = {
     /**
      * Assigne l'attribut spécifié et sa valeur à l'élément spécifié
      *
@@ -11,7 +11,7 @@ export namespace DOM {
      * @param {*} value Valeur de l'attribut
      * @param {boolean} isStyle Si true, ajoute en tant que que style
      */
-    export function setAttribute(element: HTMLElement, name: string, value: any, isStyle?: boolean) {
+    setAttribute(element: HTMLElement, name: string, value: any, isStyle?: boolean): void {
         try {
             if (value !== null) {
                 value = UTILS.toString(value)
@@ -28,7 +28,7 @@ export namespace DOM {
         } else {
             element.removeAttribute(name)
         }
-    }
+    },
 
     /**
      * Transforme un style en nombre
@@ -36,9 +36,9 @@ export namespace DOM {
      * @param {(string | null)} style Le style à transformer
      * @returns
      */
-    export function parseStyleToNumber(style: string | null) {
+    parseStyleToNumber(style: string | null): number {
         return parseInt(String(style), 10)
-    }
+    },
 
     /**
      * Supprime la classe contenant le préfix renseigné
@@ -46,10 +46,10 @@ export namespace DOM {
      * @param {HTMLElement} element L'élément sur lequel la classe sera supprimée
      * @param {string} prefix Le préfix de la classe à supprimer
      */
-    export function removeClassByPrefix(element: HTMLElement, prefix: string) {
+    removeClassByPrefix(element: HTMLElement, prefix: string): void {
         const regx = new RegExp('\\b' + prefix + '.*?\\b', 'g');
         [...element.classList].map((className) => regx.test(className) && element.classList.remove(className))
-    }
+    },
 
     /**
      * Assigne la propriété renseignée dans le style si la valeur est différente
@@ -59,13 +59,13 @@ export namespace DOM {
      * @param {string} value La valeur du style à assigner
      * @returns {boolean} Retourne true si le style est appliqué
      */
-    export function setStyle(element: HTMLElement, name: string, value: string): boolean {
+    setStyle(element: HTMLElement, name: string, value: string): boolean {
         if (element.style.getPropertyValue(name) !== value) {
             element.style.setProperty(name, value)
             return true
         }
         return false
-    }
+    },
 
     /**
      * Crée un composant `tag` contenant les attributs et l'enfant passés en paramètres
@@ -80,7 +80,7 @@ export namespace DOM {
      *  `
      * ```
      */
-    export function createComponent(tag: string, attributes?: { [key: string]: unknown }, children?: TemplateResult) {
+    createComponent(tag: string, attributes?: { [key: string]: unknown }, children?: TemplateResult): TemplateResult {
         const template = html`
             <${tag} ...=${UTILS.propsToAttributes(attributes)}>
                 ${children}
