@@ -25,7 +25,7 @@ export function customElement(tagName?: string) {
         if (customElements.get(tagName)) {
             return
         }
-        customElements.define(tagName, type)
+        customElements.define(tagName, type as unknown as CustomElementConstructor)
     }
 }
 
