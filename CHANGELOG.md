@@ -5,14 +5,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- Mise à jour de la doc.
 
 ## [2.1.7] - 2020-02-28
 ### Added
 - Ajout d'un CHANGELOG.md
+- Gestion de readme via blueprint avec `@appnest/readme`.
 
 ### Changed
 - Amélioration de l'extension [wapitis-plugin](https://marketplace.visualstudio.com/items?itemName=NicolasBoyer.wapitis-plugin) pour VSCode avec une complétion et des suggestions améliorées et une meilleure gestion des erreurs.
 - La propriété `showInternalLog` de `component.tsx` a été passée en protected.
+- Passage de tslint à eslint.
+- Refactor du code suite au passage de tslint à eslint.
+- Update electron, typescript et autres modules.
+- Changement des scripts npm pour une meilleure intégration lors de `npm install` et `npm publish`.
 
 ## [2.1.6] - 2020-02-20
 ### Added
