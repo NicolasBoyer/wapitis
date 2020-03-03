@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Changement dans la création du composant. Il n'est plus utile d'appeler le composant avec une propriété générique !
 La déclaration se fait maintenant de la manière suivante :
+
 ```typescript
 ...
 
