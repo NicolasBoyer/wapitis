@@ -4,7 +4,6 @@ import { CSSResult } from 'wapitis/library/css'
 // Entrez le nom du composant (x-nameOfComponent) par défaut en paramètre de register => recquis
 @customElement()
 export default class Custom extends Component {
-
     // Si true les logs internes de l'item sont publiés
     showInternalLog = false
 
@@ -64,5 +63,4 @@ export default class Custom extends Component {
     disconnectedCallback(): void {
         super.disconnectedCallback()
     }
-
 }
