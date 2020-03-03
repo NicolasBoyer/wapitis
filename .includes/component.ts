@@ -1,4 +1,5 @@
-import { Component, css, customElement, html, property, PropertyValues } from 'wapitis'
+import { Component, css, customElement, html, property, PropertyValues, TemplateResult } from 'wapitis'
+import { CSSResult } from 'wapitis/library/css'
 
 // Entrez le nom du composant (x-nameOfComponent) par défaut en paramètre de register => recquis
 @customElement()
@@ -7,11 +8,11 @@ export default class Custom extends Component {
     // Si true les logs internes de l'item sont publiés
     showInternalLog = false
 
-    static get styles() {
+    static get styles(): CSSResult {
         return css`
-        :host {
-            /*  */
-        }
+        /* :host {
+
+        } */
         `
     }
 
@@ -30,11 +31,11 @@ export default class Custom extends Component {
     }
     // Comme toutes les autres méthodes, le constructeur peut aussi ne pas être déclaré si on a rien à mettre dedans, puisqu'il est déclaré dans la classe parente.
 
-    connectedCallback() {
+    connectedCallback(): void {
         super.connectedCallback()
     }
 
-    attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
+    attributeChangedCallback(attrName: string, oldVal: any, newVal: any): void {
         super.attributeChangedCallback(attrName, oldVal, newVal)
     }
 
@@ -42,25 +43,25 @@ export default class Custom extends Component {
         return true
     }
 
-    beforeRender(_changedProperties: PropertyValues) {
+    beforeRender(_changedProperties: PropertyValues): void {
         //
     }
 
-    render() {
+    render(): TemplateResult {
         return html`
             <!--  -->
         `
     }
 
-    firstUpdated(_changedProperties: PropertyValues) {
+    firstUpdated(_changedProperties: PropertyValues): void {
         //
     }
 
-    updated(_changedProperties: PropertyValues) {
+    updated(_changedProperties: PropertyValues): void {
         //
     }
 
-    disconnectedCallback() {
+    disconnectedCallback(): void {
         super.disconnectedCallback()
     }
 

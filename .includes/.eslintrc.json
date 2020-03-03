@@ -82,6 +82,9 @@
         "@typescript-eslint/no-namespace": ["error", {
             "allowDeclarations": true
         }],
-        "@typescript-eslint/type-annotation-spacing": "off"
+        "@typescript-eslint/type-annotation-spacing": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars-experimental": "warn"
     }
 }
