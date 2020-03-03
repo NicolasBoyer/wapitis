@@ -291,7 +291,7 @@ if (arg) {
 	}`
 				files.appendFile(directoryBase + '/wapitis.json', wapitisTxt, true)
 				files.copy(path.resolve(__dirname, '.includes/tsconfig.json'), directoryBase + '/tsconfig.json')
-				files.copy(path.resolve(__dirname, '.includes/tslint.json'), directoryBase + '/tslint.json')
+				files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json')
 				files.copy(path.resolve(__dirname, '.includes/gitignore'), directoryBase + '/.gitignore')
 				files.copy(path.resolve(__dirname, '.includes/app.tsx'), directoryBase + '/' + answers.srcproject + '/app.tsx')
 				files.copy(path.resolve(__dirname, '.includes/custom.d.ts'), directoryBase + '/' + answers.srcproject + '/custom.d.ts')
@@ -311,7 +311,7 @@ if (arg) {
 				manifestJson.theme_color = answers.themeColor
 				files.copy(path.resolve(__dirname, '.includes/www'), directoryBase + '/' + answers.srcproject + '/www').then(async () => {
 					await files.appendFile(directoryBase + '/' + answers.srcproject + '/www/manifest.json', JSON.stringify(manifestJson, null, 2), true)
-					tools.runCommandSync('npm i tslint -D')
+					tools.runCommandSync('npm i eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin typescript -D')
 					tools.runCommandSync('npm i electron-updater --save')
 				})
 			})
@@ -327,6 +327,12 @@ if (arg) {
 					await files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
 				})
 			}
+			// INSTALLATION DE TYPESCRIPT
+			if (packageJson.devDependencies.typescript) {
+				log('MIGR : Installation de typescript en cours ...')
+				tools.runCommandSync('npm i typescript -D')
+				log(chalk.green('MIGR : typescript a été installé.'))
+			}
 			// PASSAGE DE TSLINT A ESLINT
 			if (packageJson.devDependencies.tslint) {
 				log('MIGR : Désinstallation de tslint en cours ...')
@@ -335,8 +341,11 @@ if (arg) {
 				log('MIGR : Installation de eslint en cours ...')
 				tools.runCommandSync('npm i eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin -D')
 				files.remove(directoryBase + '/tslint.json')
-				files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json').then(() => log(chalk.green('MIGR : eslint a été installé, veuillez recharger.')))
+				files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json').then(() => log(chalk.green('MIGR : eslint a été installé.')))
 			}
+			// ESLINT AJOUT RULES SI EXISTE
+			const eslintJson = JSON.parse(files.readFileSync(directoryBase + '/.eslintrc.json', 'utf8'))
+			if (!eslintJson.rules['@typescript-eslint/no-unused-vars-experimental']) files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json')
 			/** */
 			// GLOBALS
 			const isElectron = arg === 'electron'
