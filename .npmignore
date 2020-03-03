@@ -1,7 +1,7 @@
 /tsconfig.json
-/tslint.json
+/.eslintrc.json
+/src/.eslintrc.json
 .eslintignore
-.eslintrc.json
 src
 TOREMEMBER.md
 .todo
@@ -16,3 +16,5 @@ _config.yml
 typedoc.json
 /index.md
 _sass
+readme
+CHANGELOG.md
