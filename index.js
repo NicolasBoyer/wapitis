@@ -335,7 +335,8 @@ if (arg) {
                 log(chalk.green('MIGR : typescript a été installé.'))
             }
             // ESLINT MODIF
-            const eslintJson = JSON.parse(files.readFileSync(directoryBase + '/src/.eslintrc.json', 'utf8'))
+            const eslintFile = files.readFileSync(directoryBase + '/src/.eslintrc.json', 'utf8')
+            const eslintJson = eslintFile && JSON.parse(eslintFile)
             if (!eslintJson) {
                 log('MIGR : Modification et installation de eslint plugins en cours ...')
                 tools.runCommandSync('npm i eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard -D')
