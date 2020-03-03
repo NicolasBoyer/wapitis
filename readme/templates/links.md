@@ -1,8 +1,3 @@
-<p align="center">
-
-### [CHANGELOG] / [DOCUMENTATION]
-
+<p align="center" style="font-size:1.2rem">
+<a href="https://github.com/NicolasBoyer/wapitis/blob/master/CHANGELOG.md">CHANGELOG</a> / <a href="https://nicolasboyer.github.io/wapitis/">DOCUMENTATION</a>
 </p>
-
-[CHANGELOG]: https://github.com/NicolasBoyer/wapitis/blob/master/CHANGELOG.md
-[DOCUMENTATION]: hhttps://nicolasboyer.github.io/wapitis/
