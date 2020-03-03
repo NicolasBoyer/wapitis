@@ -1,3 +1,9 @@
+---
+layout: default
+title: NonUse
+nav_exclude: true
+---
+
 ## Disclaimer
 
 Il existe d'autres librairies plus connues ou plus puissantes comme React ou LitElement, alors pourquoi Wapitis ?
