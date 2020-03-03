@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Mise à jour de la doc.
 
-## [2.1.8] - 2020-03-03
+## [2.1.9] - 2020-03-03
 ### Changed
 - Amélioration règles eslint.
 - Amélioration du fichier de création de component avec eslint.
@@ -57,8 +57,8 @@ export class Box extends Component {
 ...
 ```
 
-[Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/v2.1.7...HEAD
-[2.1.7]: https://github.com/NicolasBoyer/wapitis/compare/2.1.7...2.1.8
+[Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/v2.1.9...HEAD
+[2.1.9]: https://github.com/NicolasBoyer/wapitis/compare/2.1.7...2.1.9
 [2.1.7]: https://github.com/NicolasBoyer/wapitis/compare/2.1.6...2.1.7
 [2.1.6]: https://github.com/NicolasBoyer/wapitis/compare/2.1.5...2.1.6
 [2.1.5]: https://github.com/NicolasBoyer/wapitis/compare/2.1.0...2.1.5

@@ -328,7 +328,7 @@ if (arg) {
 				})
 			}
 			// INSTALLATION DE TYPESCRIPT
-			if (packageJson.devDependencies.typescript) {
+			if (!packageJson.devDependencies.typescript) {
 				log('MIGR : Installation de typescript en cours ...')
 				tools.runCommandSync('npm i typescript -D')
 				log(chalk.green('MIGR : typescript a été installé.'))
