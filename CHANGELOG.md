@@ -13,7 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Mise à jour de la doc.
 
-## [2.1.7] - 2020-02-28
+## [2.1.7]
+{: .d-inline-block }
+
+2020-02-28
+{: .label .label-purple }
 ### Added
 - Ajout d'un CHANGELOG.md
 - Gestion de readme via blueprint avec `@appnest/readme`.
