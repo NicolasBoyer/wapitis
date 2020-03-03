@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
 import { render, TemplateResult } from 'lit-html'
 import { DOM, JSX, Log, UTILS } from '.'
 import { arrayFlat, CSSResult, CSSResultArray } from './css'
