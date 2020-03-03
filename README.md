@@ -1,11 +1,35 @@
-# WApiTis 2
-![](ui/logo.png)
+<p align="center">
+  <img src="https://github.com/NicolasBoyer/wapitis/blob/master/ui/logo.png?raw=true" alt="Logo" width="auto" height="auto" />
+</p>
 
----
-
-[CHANGELOG](./CHANGELOG.md)
-
----
+<p align="center" style="font-size:1.2rem">
+<a style="color: #fff;
+    background-color: #1f63e5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25), 0 4px 10px rgba(0,0,0,0.12);
+    display: inline-block;
+    padding-top: 0.3em;
+    padding-right: 1em;
+    padding-bottom: 0.3em;
+    padding-left: 1em;
+    margin: 0 2rem 0 0;
+    text-decoration: none;
+    vertical-align: baseline;
+    cursor: pointer;
+    border-radius: 4px;" href="https://github.com/NicolasBoyer/wapitis/blob/master/CHANGELOG.md">CHANGELOG</a>
+<a target="_blank" style="color: #fff;
+    background-color: #1f63e5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25), 0 4px 10px rgba(0,0,0,0.12);
+    display: inline-block;
+    padding-top: 0.3em;
+    padding-right: 1em;
+    padding-bottom: 0.3em;
+    padding-left: 1em;
+    margin: 0;
+    text-decoration: none;
+    vertical-align: baseline;
+    cursor: pointer;
+    border-radius: 4px;" href="https://nicolasboyer.github.io/wapitis/">DOCUMENTATION</a>
+</p>
 
 > WebApp utiliTies est un set d'outils pour développer et compiler une application web avec ou sans client lourd. Il ne s'agit pas d'un framlework. Il ne contient pas de composants préexistants (cela sera l'objet d'un autre projet).
 >
@@ -13,7 +37,9 @@
 >
 > Afin de faciliter la compilation de cette application, des scripts en ligne de commanbde permettent très rapidement d'initialiser, de tester et de publier en production pour une sortie sur le Web ou dans une épplication packagée.
 
-## Technologies utilisées
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#technologies-utilises)
+
+## 🠺 Technologies utilisées
 
 Pour développer plus facilement et permettre une mise en place plus facile des composants, Wapitis utilise les [webcomponents](https://developer.mozilla.org/fr/docs/Web/Web_Components). Plus particulièrement une surcouche y est apportée ajoutant encore plus de simplicité.
 
@@ -35,7 +61,9 @@ Afin de faciliter la diffusion, Wapitis utilise [FuseBox](https://fuse-box.org) 
 
 L'utilisation des lignes de commandes permet ainsi d'accéder rapidement et facilement à toutes ces fonctions sans avoir besoin de configurer quoi que ce soit.
 
-## Disclaimer
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#disclaimer)
+
+## 🠺 Disclaimer
 
 Il existe d'autres librairies plus connues ou plus puissantes comme React ou LitElement, alors pourquoi Wapitis ?
 
@@ -56,7 +84,9 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 - Intégration de [Capacitor](https://capacitor.ionicframework.com/)
 - Gestion d'une liaison avec IndexedDB dans le Service Worker pour les données provenant d'une base de données
 
-## Features
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#features)
+
+## 🠺 Features
 
 - Générer une application web grâce à [FuseBox](https://fuse-box.org)
 - Générer une application [electron](https://electronjs.org/)
@@ -69,4 +99,9 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 - Utilisation de SVG pour gérer les icons
 - Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne
 
-## [Documentation](https://nicolasboyer.github.io/wapitis/)
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#license)
+
+## 🠺 License
+	
+Licensed under [MIT](https://opensource.org/licenses/MIT).

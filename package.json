@@ -22,7 +22,7 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "node ./transpile.js",
-    "readme": "readme generate -i readme.blueprint.md -c readme.config.json",
+    "readme": "readme generate -i ./readme/readme.blueprint.md -c ./readme/readme.config.json",
     "doc": "npx typedoc src"
   },
   "bin": {

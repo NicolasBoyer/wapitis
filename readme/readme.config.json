@@ -1,0 +1,13 @@
+{
+	"line": "water",
+	"ids": {
+		"github": "NicolasBoyer/wapitis",
+		"npm": "wapitis"
+	},
+	"logo": {
+		"src": "https://github.com/NicolasBoyer/wapitis/blob/master/ui/logo.png?raw=true"
+	},
+	"headingPrefix": {
+		"2": "🠺 "
+	}
+}
