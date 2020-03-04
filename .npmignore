@@ -1,7 +1,7 @@
 /tsconfig.json
 /.eslintrc.json
 .eslintignore
-src
+/src
 TOREMEMBER.md
 .todo
 ui
