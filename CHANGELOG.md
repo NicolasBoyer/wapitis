@@ -64,7 +64,7 @@ export class Box extends Component {
 ...
 ```
 
-[Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/v2.1.9...HEAD
+[Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...HEAD
 <!-- [2.1.10]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...2.1.10 -->
 [2.1.9]: https://github.com/NicolasBoyer/wapitis/compare/2.1.7...2.1.9
 [2.1.7]: https://github.com/NicolasBoyer/wapitis/compare/2.1.6...2.1.7
