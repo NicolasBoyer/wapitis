@@ -1,6 +1,5 @@
 /tsconfig.json
 /.eslintrc.json
-/src/.eslintrc.json
 .eslintignore
 src
 TOREMEMBER.md

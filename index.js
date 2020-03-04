@@ -292,8 +292,8 @@ if (arg) {
                 files.appendFile(directoryBase + '/wapitis.json', wapitisTxt, true)
                 files.copy(path.resolve(__dirname, '.includes/tsconfig.json'), directoryBase + '/tsconfig.json')
                 files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json')
-                files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/src/.eslintrc.json')
                 files.copy(path.resolve(__dirname, '.includes/gitignore'), directoryBase + '/.gitignore')
+                files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/' + answers.srcproject + '/.eslintrc.json')
                 files.copy(path.resolve(__dirname, '.includes/app.tsx'), directoryBase + '/' + answers.srcproject + '/app.tsx')
                 files.copy(path.resolve(__dirname, '.includes/custom.d.ts'), directoryBase + '/' + answers.srcproject + '/custom.d.ts')
                 files.copy(path.resolve(__dirname, '.includes/electronStart.ts'), directoryBase + '/' + answers.srcproject + '/electronStart.ts')
@@ -335,13 +335,13 @@ if (arg) {
                 log(chalk.green('MIGR : typescript a été installé.'))
             }
             // ESLINT MODIF
-            const eslintFile = files.readFileSync(directoryBase + '/src/.eslintrc.json', 'utf8')
+            const eslintFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json', 'utf8')
             const eslintJson = eslintFile && JSON.parse(eslintFile)
             if (!eslintJson) {
                 log('MIGR : Modification et installation de eslint plugins en cours ...')
                 tools.runCommandSync('npm i eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard -D')
                 files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json')
-                files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/src/.eslintrc.json').then(() => log(chalk.green('MIGR : eslint plugins ont été installés.')))
+                files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json').then(() => log(chalk.green('MIGR : eslint plugins ont été installés.')))
             }
             // PASSAGE DE TSLINT A ESLINT
             if (packageJson.devDependencies.tslint) {
