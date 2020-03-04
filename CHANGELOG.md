@@ -12,10 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Mise à jour de la doc.
+- Amélioration eslint pour typescript et javascript.
+- Fix et refactor eslint et migration.
 
-## [2.1.10] - 2020-03-04
+<!-- ## [2.1.14] - 2020-03-04
 ### Fixed
 - Amélioration eslint pour typescript et javascript.
+- Fix et refactor eslint et migration. -->
 
 ## [2.1.9] - 2020-03-03
 ### Changed
@@ -61,8 +64,8 @@ export class Box extends Component {
 ...
 ```
 
-[Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/v2.1.10...HEAD
-[2.1.10]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...2.1.10
+[Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/v2.1.9...HEAD
+<!-- [2.1.10]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...2.1.10 -->
 [2.1.9]: https://github.com/NicolasBoyer/wapitis/compare/2.1.7...2.1.9
 [2.1.7]: https://github.com/NicolasBoyer/wapitis/compare/2.1.6...2.1.7
 [2.1.6]: https://github.com/NicolasBoyer/wapitis/compare/2.1.5...2.1.6
