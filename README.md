@@ -2,15 +2,33 @@
   <img src="https://github.com/NicolasBoyer/wapitis/blob/master/ui/logo.png?raw=true" alt="Logo" width="auto" height="auto" />
 </p>
 
+---
+layout: default
+title: NonUse
+nav_exclude: true
+---
+
 <p align="center">
 <a href="https://github.com/NicolasBoyer/wapitis/blob/master/CHANGELOG.md">CHANGELOG</a> / <a href="https://nicolasboyer.github.io/wapitis/">DOCUMENTATION</a>
 </p>
+
+---
+layout: default
+title: NonUse
+nav_exclude: true
+---
 
 > WebApp utiliTies est un set d'outils pour développer et compiler une application web avec ou sans client lourd. Il ne s'agit pas d'un framlework. Il ne contient pas de composants préexistants (cela sera l'objet d'un autre projet).
 >
 > L'idée est de faciliter la mise en oeuvre de composants grâce aux web components et à la surcouche qui y est apportée, et de rendre leur compilation plus simple.
 >
 > Afin de faciliter la compilation de cette application, des scripts en ligne de commanbde permettent très rapidement d'initialiser, de tester et de publier en production pour une sortie sur le Web ou dans une épplication packagée.
+---
+layout: default
+title: NonUse
+nav_exclude: true
+---
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#technologies-utilises)
 
@@ -35,6 +53,12 @@ Une librairie de fonctions est également disponible afin de permettre d'accéde
 Afin de faciliter la diffusion, Wapitis utilise [FuseBox](https://fuse-box.org) pour compiler rapidement des versions de dev ou de prod. Ajoutons à cela l'utilisation d'[electron](https://electronjs.org/) pour concevoir des applications sous forme de client lourd installable, le tout intégré de façon simple et facilement accessible.
 
 L'utilisation des lignes de commandes permet ainsi d'accéder rapidement et facilement à toutes ces fonctions sans avoir besoin de configurer quoi que ce soit.
+---
+layout: default
+title: NonUse
+nav_exclude: true
+---
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#disclaimer)
 
@@ -48,7 +72,7 @@ Enfin il s'agit d'un outil complet de création de WebApp, icluant tout ce qui e
 
 Afin de gérer correctement l'affichage de lit-html et typescript, j'utilise pour ma part [Visual Studio Code](https://code.visualstudio.com/) avec quelques plugins dont :
 - [wapitis-plugin](https://marketplace.visualstudio.com/items?itemName=NicolasBoyer.wapitis-plugin)
-- [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 Lors de l'installation d'un executable via electron, windows a un avertissement lié à son application smart screen. Les seules solutions pour éviter cette avrtissement sont :
 - signer l'application (ce qui coute de l'argent)
@@ -58,6 +82,12 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 **TODO :**
 - Intégration de [Capacitor](https://capacitor.ionicframework.com/)
 - Gestion d'une liaison avec IndexedDB dans le Service Worker pour les données provenant d'une base de données
+---
+layout: default
+title: NonUse
+nav_exclude: true
+---
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#features)
 
