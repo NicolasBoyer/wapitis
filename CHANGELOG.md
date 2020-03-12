@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mise à jour de la doc.
 - Amélioration eslint pour typescript et javascript.
 - Fix et refactor eslint et migration.
+- readme : link to eslint.
 
 <!-- ## [2.1.14] - 2020-03-04
 ### Fixed
