@@ -321,37 +321,10 @@ if (arg) {
         if (!isWapitisFile) log(chalk.red('Lancer `npx wapitis init` afin d\'initialiser l\'application'))
         else {
             /** MIGRATION - A supprimer lors de l'augmentation de la medium */
-            // ADD LINK APPLE TOUCH ICON TO WAPITIS.JSON
-            if (!wapitisConfig.appleTouchIcon) {
-                files.copy(path.resolve(__dirname, '.includes/www/assets/icons/apple-touch-icon.png'), directoryBase + '/' + wapitisConfig.srcPath + '/www/assets/icons/apple-touch-icon.png').then(async () => {
-                    wapitisConfig.appleTouchIcon = './assets/icons/apple-touch-icon.png'
-                    await files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
-                })
-            }
-            // INSTALLATION DE TYPESCRIPT
-            if (!packageJson.devDependencies.typescript) {
-                log('MIGR : Installation de typescript en cours ...')
-                tools.runCommandSync('npm i typescript -D')
-                log(chalk.green('MIGR : typescript a été installé.'))
-            }
-            // ESLINT MODIF
             const eslintFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json', 'utf8')
             const eslintJson = eslintFile && JSON.parse(eslintFile)
-            if (!eslintJson) {
-                log('MIGR : Modification et installation de eslint plugins en cours ...')
-                tools.runCommandSync('npm i eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard -D')
-                files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json')
-                files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json').then(() => log(chalk.green('MIGR : eslint plugins ont été installés.')))
-            }
-            // PASSAGE DE TSLINT A ESLINT
-            if (packageJson.devDependencies.tslint) {
-                log('MIGR : Désinstallation de tslint en cours ...')
-                tools.runCommandSync('npm uninstall tslint -D')
-                log(chalk.green('MIGR : tslint a été désinstallé.'))
-                log('MIGR : Installation de eslint en cours ...')
-                tools.runCommandSync('npm i eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin -D')
-                files.remove(directoryBase + '/tslint.json')
-                files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json').then(() => log(chalk.green('MIGR : eslint a été installé.')))
+            if (!wapitisConfig.appleTouchIcon || !packageJson.devDependencies.typescript || packageJson.devDependencies.tslint || !eslintJson) {
+                log(chalk.red('Une migration est nécessaire, lancez `npx wapitis migr`'))
             }
             /** */
             // GLOBALS
@@ -524,6 +497,42 @@ if (arg) {
                 } else log(chalk.red("Cette commande n'est pas pris en charge par wapitis generate"))
             } else startTask(isElectron)
         }
+    } else if (arg === 'migr') {
+        /** MIGRATION - A supprimer lors de l'augmentation de la medium */
+        // ADD LINK APPLE TOUCH ICON TO WAPITIS.JSON
+        if (!wapitisConfig.appleTouchIcon) {
+            files.copy(path.resolve(__dirname, '.includes/www/assets/icons/apple-touch-icon.png'), directoryBase + '/' + wapitisConfig.srcPath + '/www/assets/icons/apple-touch-icon.png').then(async () => {
+                wapitisConfig.appleTouchIcon = './assets/icons/apple-touch-icon.png'
+                await files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
+            })
+        }
+        // INSTALLATION DE TYPESCRIPT
+        if (!packageJson.devDependencies.typescript) {
+            log('MIGR : Installation de typescript en cours ...')
+            tools.runCommandSync('npm i typescript -D')
+            log(chalk.green('MIGR : typescript a été installé.'))
+        }
+        // ESLINT MODIF
+        const eslintFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json', 'utf8')
+        const eslintJson = eslintFile && JSON.parse(eslintFile)
+        if (!eslintJson) {
+            log('MIGR : Modification et installation de eslint plugins en cours ...')
+            tools.runCommandSync('npm i eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard -D')
+            files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json')
+            files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json').then(() => log(chalk.green('MIGR : eslint plugins ont été installés.')))
+        }
+        // PASSAGE DE TSLINT A ESLINT
+        if (packageJson.devDependencies.tslint) {
+            log('MIGR : Désinstallation de tslint en cours ...')
+            tools.runCommandSync('npm uninstall tslint -D')
+            log(chalk.green('MIGR : tslint a été désinstallé.'))
+            log('MIGR : Installation de eslint en cours ...')
+            tools.runCommandSync('npm i eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin -D')
+            files.remove(directoryBase + '/tslint.json')
+            files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json').then(() => log(chalk.green('MIGR : eslint a été installé.')))
+        }
+        log(chalk.green('La migration est terminée.'))
+        /** */
     } else {
         log(chalk.red(arg + " n'est pas pris en charge par wapitis"))
     }
@@ -535,6 +544,7 @@ if (arg) {
     log(chalk.green(chalk.bold('  wapitis prod') + ' ---> web app pour la production'))
     log(chalk.green(chalk.bold('  wapitis electron') + '  ---> lance la webApp dans electron avec un serveur local (--dev), pour la production (--prod) ou pour une publication directe (--publish)'))
     log(chalk.green(chalk.bold('  wapitis clear') + ' ---> supprime le cache et le dossier dist'))
+    log(chalk.green(chalk.bold('  wapitis migr') + ' ---> lance une migration des contenus (un message l\'indique quand cela est nécessaire)'))
     log(chalk.green(chalk.bold('  wapitis generate class path/du/fichier.ts(x)') + ' ---> génère une classe relatif à src'))
     log(chalk.green(chalk.bold('  wapitis generate component path/du/fichier.ts(x)') + ' ---> génère un composant relatif à src'))
 }
