@@ -1,9 +1,3 @@
----
-layout: default
-title: NonUse
-nav_exclude: true
----
-
 # TOREMEMBER
 
 - npm run transpile pour recompiler la librairie

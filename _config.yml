@@ -20,6 +20,7 @@ exclude:
     "bin/",
     "README.md",
     "Rakefile",
+    "TOREMEMBER.md",
   ]
 title: WApiTis
 description: WebApp utiliTies pour typescript
