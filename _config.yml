@@ -4,6 +4,23 @@ include:
   - "_*_.*.md"
   - "_*_.html"
   - "_*_.*.html"
+exclude:
+  [
+    "readme/",
+    "node_modules/",
+    "*.gemspec",
+    "*.gem",
+    "Gemfile",
+    "Gemfile.lock",
+    "package.json",
+    "package-lock.json",
+    "script/",
+    "LICENSE.txt",
+    "lib/",
+    "bin/",
+    "README.md",
+    "Rakefile",
+  ]
 title: WApiTis
 description: WebApp utiliTies pour typescript
 footer_content: 'Copyright &copy; 2020 Nicolas Boyer. Distributed by an <a href="https://github.com/NicolasBoyer/wapitis/blob/master/LICENSE.md">MIT license.</a>'
