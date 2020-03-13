@@ -1,9 +1,3 @@
----
-layout: default
-title: NonUse
-nav_exclude: true
----
-
 ## Technologies utilisées
 
 Pour développer plus facilement et permettre une mise en place plus facile des composants, Wapitis utilise les [webcomponents](https://developer.mozilla.org/fr/docs/Web/Web_Components). Plus particulièrement une surcouche y est apportée ajoutant encore plus de simplicité.

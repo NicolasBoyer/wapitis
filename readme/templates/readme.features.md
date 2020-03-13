@@ -1,9 +1,3 @@
----
-layout: default
-title: NonUse
-nav_exclude: true
----
-
 ## Features
 
 - Générer une application web grâce à [FuseBox](https://fuse-box.org)
