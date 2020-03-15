@@ -29,7 +29,7 @@ Contient différentes méthodes permettant de simplifier certaines actions, comm
     /** Transforme une string dans le type renseigné */
     function fromString(value: string | null, type?: unknown): any
     /** Transforme une valeur du type renseigné en string */
-    function toString(value: unknown, type?: unknown): any
+    function toString(value: unknown, type?: unknown): unknown
     /** Transforme une chaîne du type camelCase en DashCase */
     function camelCaseToDashCase(name): any
     /** Transforme une chaîne du type DashCase en camelCase */
@@ -41,7 +41,7 @@ Contient différentes méthodes permettant de simplifier certaines actions, comm
     /** Retourne la taille et la position de la fenêtre web courante */
     function getWindowSize() : { width: number, height: number, top: number, left: number }
     /** Retourne le texte contenu dans le fichier spécifié de façon asynchrone */
-    async function getFile(url: string): string
+    async function getFile(url: string): Promise<any>
     /** Enregistre les données dans la clé spécifiée en local storage */
     function save<T>(key: string, datas: T): void
     /** Retourne les données spécifiées dans la clé en local storage */

@@ -34,7 +34,7 @@ Chaque composant possède ses propres CSS.
 Pour les créer, on utilise la propriété statique styles associée avec le tag CSS qui permet d'assurer un traitement sécurisé du texte passé en CSS.
 
 ```typescript
-static get styles() {
+static get styles(): CSSResult {
     return css`
     :host {
         font-family: Arial, Helvetica, sans-serif;
@@ -55,7 +55,7 @@ Pour styler le composant lui même, le sélecteur ```:host()``` doit être utili
 Il est également possible de surcharger des styles déclarés dans le composant parent en utilisant super.styles :
 
 ```typescript
-static get styles() {
+static get styles(): CSSResult {
     const mainColor = css`red`
     return [
         super.styles,
@@ -78,7 +78,7 @@ Ainsi on hérite des styles du composant parent. *Inutile dans le cas où on hé
 Si on souhaite partager une css entre plusieurs composants, il est possible de le faire en déclarant directement dans la méthode render(), dans le tag html :
 
 ```typescript
-render() {
+render(): TemplateResult {
     return html`
         <link rel="stylesheet" href="styles/sharedCSS.css">
 
@@ -99,7 +99,7 @@ import '../www/styles/sharedCSS.css'
 Si on veut surcharger les styles d'un composant existant que l'on est en train de déclarer, il est possible de le faire en utilisant les slots et en déclarant dans la méthode render le code suivant :
 
 ```typescript
-render() {
+render(): TemplateResult {
     return html`
     ...
         <style slot='override'>
@@ -121,7 +121,7 @@ L'utilisation est alors assez simple.
 Lors de la création de l'élément, on écrira :
 
 ```typescript
-static get styles() {
+static get styles(): CSSResult {
   return css`
     :host { color: var(--themeColor, black); }
   `;

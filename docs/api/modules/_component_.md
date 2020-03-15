@@ -70,7 +70,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:80](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L80)*
+*Defined in [src/component.tsx:76](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L76)*
 
 Définit les paramètres des methodes du cycle de vie de Component
 
@@ -156,7 +156,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:62](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L62)*
+*Defined in [src/component.tsx:57](https://github.com/NicolasBoyer/wapitis/blob/d619f93/src/component.tsx#L57)*
 
 La directive @property rend la propriété observable et dynamique. La propriété est aussi accessible lors de la création de la classe via new Class() et intégrée à l'interface : IProps
 

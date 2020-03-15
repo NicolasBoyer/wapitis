@@ -51,7 +51,7 @@ Functions
 <tr>
 <td markdown="1">
 
-*Defined in [src/shadowDom.ts:33](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L33)*
+*Defined in [src/shadowDom.ts:158](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L158)*
 
 Retourne le parent, incluant la balise <slot> dans la chaîne
 
@@ -91,7 +91,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/shadowDom.ts:80](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L80)*
+*Defined in [src/shadowDom.ts:218](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L218)*
 
 Retrouve le ou les éléments assignés dans le slotName
 
@@ -131,7 +131,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/shadowDom.ts:65](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L65)*
+*Defined in [src/shadowDom.ts:203](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L203)*
 
 Retrouve tous les éléments assignés dans les slot de l'élément courant
 
@@ -172,7 +172,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/shadowDom.ts:53](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L53)*
+*Defined in [src/shadowDom.ts:178](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L178)*
 
 Retrouve l'activeElement en pénétrant tous les shadowDOM
 
@@ -211,7 +211,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/shadowDom.ts:21](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L21)*
+*Defined in [src/shadowDom.ts:146](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L146)*
 
 Retrouve le premier DocumentOrShadowRoot ancêtre d'un noeud
 
@@ -252,7 +252,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/shadowDom.ts:10](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L10)*
+*Defined in [src/shadowDom.ts:135](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L135)*
 
 Retrouve le host du shadowTree de ce noeud
 
@@ -299,7 +299,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/shadowDom.ts:93](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L93)*
+*Defined in [src/shadowDom.ts:193](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L193)*
 
 Retrouve les éléments spécifiés dans le selector en fonction du root ou du document
 
@@ -341,7 +341,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/shadowDom.ts:106](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L106)*
+*Defined in [src/shadowDom.ts:231](https://github.com/NicolasBoyer/wapitis/blob/master/src/shadowDom.ts#L231)*
 
 Retrouve l'élément spécifié dans le selector en fonction du root ou du document
 

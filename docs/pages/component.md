@@ -64,7 +64,7 @@ Pour passer des fonctions dans les attributs d'un composant avec Wapitis et perm
 On crée ainsi un customEvent en utilisant la méthode dispatchEvent de la librairie [UTILS](./utils.md) :
 
 ```typescript
-UTILS.dispatchEvent('remove', { index: this.index }, this)
+UTILS.dispatchEvent('remove', { index: this.index }, this): void
 ```
 
 Grâce à lit-html, pour ajouter un addEventListener sur le composant, on pourra créer un attribut avec @NomDeLevent sur le composant.
@@ -115,7 +115,7 @@ Comme toutes les autres méthodes, le constructeur peut aussi ne pas être décl
 {: .no_toc }
 
 ```typescript
-connectedCallback() {
+connectedCallback(): void {
     super.connectedCallback()
 }
 ```
@@ -125,7 +125,7 @@ Appelé lorsque l'élément est connecté pour la première fois au DOM du docum
 {: .no_toc }
 
 ```typescript
-attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
+attributeChangedCallback(attrName: string, oldVal: any, newVal: any): void {
     super.attributeChangedCallback(attrName, oldVal, newVal)
 }
 ```
@@ -146,7 +146,7 @@ Permet de conditionner le rendu du composant. render() est appelé si la fonctio
 {: .no_toc }
 
 ```typescript
-beforeRender(_changedProperties: PropertyValues) {
+beforeRender(_changedProperties: PropertyValues): void {
     //
 }
 ```
@@ -157,7 +157,7 @@ Appelé avant le rendu du composant. Permet d'interagir avec les éléments à c
 {: .no_toc }
 
 ```typescript
-render() {
+render(): TemplateResult {
     return html`
         <!--  -->
     `
@@ -169,7 +169,7 @@ La méthode permet de créer le composant dans le dom grâce au tag html de lit-
 {: .no_toc }
 
 ```typescript
-firstUpdated(_changedProperties: PropertyValues) {
+firstUpdated(_changedProperties: PropertyValues): void {
     //
 }
 ```
@@ -183,7 +183,7 @@ this._input = this.shadowRoot!.querySelector('input')
 {: .no_toc }
 
 ```typescript
-updated(_changedProperties: PropertyValues) {
+updated(_changedProperties: PropertyValues): void {
     //
 }
 ```
@@ -194,7 +194,7 @@ Appelé lors de chaque mise à jour du composant. Permet de réaliser des tâche
 {: .no_toc }
 
 ```typescript
-disconnectedCallback() {
+disconnectedCallback(): void {
     super.disconnectedCallback()
 }
 ```
@@ -209,7 +209,7 @@ Lors de la création d'un custom element si on veut permettre l'ajout d'enfant �
 Ainsi, on définit dans la méthode render une balise slot qui appellera tout enfant déclaré dans le composant. Imaginons un composant w-info possédant la méthode render suivante :
 
 ```typescript
-render() {
+render(): TemplateResult {
     html`
         <div class='title'>Informations</div>
         <slot></slot>
@@ -220,7 +220,7 @@ render() {
 Lors de l'appel du composant info on pourra écrire n'importe quel enfant dans le composant qui sera alors appelé à la place du slot dans le DOM.
 
 ```typescript
-render() {
+render(): TemplateResult {
     html`
         <w-info>
             <p>Les slot c'est super !</p>
@@ -232,7 +232,7 @@ render() {
 Il est également possible d'être plus précis en donnant un nom au slot.
 
 ```typescript
-render() {
+render(): TemplateResult {
     html`
         <slot name='title'></slot>
         <slot name='content'></slot>
@@ -243,7 +243,7 @@ render() {
 Dans ce cas lors de l'appel du composant et de la création des enfants, il sera nécessaire de préciser à quel slot l'enfant sera affecté :
 
 ```typescript
-render() {
+render(): TemplateResult {
     html`
         <w-info>
             <h1 slot='title'>Informations</h1>
@@ -256,7 +256,7 @@ render() {
 Dans ce cas tout autre enfant ne sera pas affecté car le composant w-infos ne contient que deux slots title et content. Il serait possible d'ajouter une balise slot sans nom :
 
 ```typescript
-render() {
+render(): TemplateResult {
     html`
         <slot name='title'></slot>
         <slot name='content'></slot>
@@ -313,7 +313,7 @@ Dans la classe étendu, au lieu de Component, il suffit d'appeler la classe que 
 @customElement('x-footer')
 export default class Footer extends Box {
 
-    static get styles() {
+    static get styles(): CSSResult {
         return [
             super.styles,
             css`
@@ -323,7 +323,7 @@ export default class Footer extends Box {
 
 D'une manière générale, toute méthode que l'on voudra surcharger devra commencer par `super.`. Exemple :
 ```typescript
-updated(_changedProperties: PropertyValues) {
+updated(_changedProperties: PropertyValues): void {
     super.updated(_changedProperties)
 }
 ```

@@ -62,6 +62,20 @@ Ce fichier est nécessaire pour permettre à la webapp de s'installer en tant qu
 
 ---
 
+## Migrer les contenus
+{: .d-inline-block }
+
+New - 2.1.15
+{: .label .label-purple }
+
+```bash
+npx wapitis migr
+```
+
+Cette ligne de commande permet de migrer les contenus lors du passage à une nouvelle version. Un message du type `Une migration est nécessaire, lancez npx wapitis migr` indique ce besoin lors du lancement d'une autre ligne de commande.
+
+---
+
 ## Nettoyer
 
 ```bash

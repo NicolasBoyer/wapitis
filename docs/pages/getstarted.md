@@ -65,20 +65,20 @@ Nous commencerons donc par créer un composant en utilisant la ligne de commande
 Le fichier suivant est alors créé :
 
 ```typescript
-import { Component, css, customElement, html, property, PropertyValues } from 'wapitis'
+import { Component, css, customElement, html, property, PropertyValues, TemplateResult } from 'wapitis'
+import { CSSResult } from 'wapitis/library/css'
 
 // Entrez le nom du composant (x-nameOfComponent) par défaut en paramètre de register => recquis
 @customElement()
 export default class Custom extends Component {
-
     // Si true les logs internes de l'item sont publiés
     showInternalLog = false
 
-    static get styles() {
+    static get styles(): CSSResult {
         return css`
-        :host {
-            /*  */
-        }
+        /* :host {
+
+        } */
         `
     }
 
@@ -97,11 +97,11 @@ export default class Custom extends Component {
     }
     // Comme toutes les autres méthodes, le constructeur peut aussi ne pas être déclaré si on a rien à mettre dedans, puisqu'il est déclaré dans la classe parente.
 
-    connectedCallback() {
+    connectedCallback(): void {
         super.connectedCallback()
     }
 
-    attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
+    attributeChangedCallback(attrName: string, oldVal: any, newVal: any): void {
         super.attributeChangedCallback(attrName, oldVal, newVal)
     }
 
@@ -109,28 +109,27 @@ export default class Custom extends Component {
         return true
     }
 
-    beforeRender(_changedProperties: PropertyValues) {
+    beforeRender(_changedProperties: PropertyValues): void {
         //
     }
 
-    render() {
+    render(): TemplateResult {
         return html`
             <!--  -->
         `
     }
 
-    firstUpdated(_changedProperties: PropertyValues) {
+    firstUpdated(_changedProperties: PropertyValues): void {
         //
     }
 
-    updated(_changedProperties: PropertyValues) {
+    updated(_changedProperties: PropertyValues): void {
         //
     }
 
-    disconnectedCallback() {
+    disconnectedCallback(): void {
         super.disconnectedCallback()
     }
-
 }
 ```
 
@@ -138,7 +137,8 @@ Ce fichier contient les méthodes accessible tout le long du cycle de vie du com
 
 Nous allons l'éditer de cette façon :
 ```typescript
-import { Component, customElement, html, property } from 'wapitis'
+import { Component, css, customElement, html, property, UTILS, TemplateResult } from 'wapitis'
+import { CSSResult } from 'wapitis/library/css'
 
 // Nous définissons notre custom element dans la directive suivante et la classe associée
 // w pour wapitis. il est obligatoire d'avoir "prefix-nom" dans le nom d'un custom element
@@ -150,7 +150,7 @@ export default class TodoList extends Component {
     // Une propriété input non observable et protected est déclarée
     protected _input: HTMLInputElement | null
 
-    render() {
+   render(): TemplateResult {
         // On utilise ensuite le tag html afin de créer un template avec les événements et les variables observées à mettre à jour
         // @click correspond à addEventListener('click', this.addTodos)
         // La partie du template this._todos est mis à jour car il s'agit d'une propriété observable
@@ -168,14 +168,16 @@ export default class TodoList extends Component {
     }
 
     // On va chercher l'élément input
-    firstUpdated = () => this._input = this.shadowRoot!.querySelector('input')
+    firstUpdated(): void {
+        this._input = this.shadowRoot?.querySelector('input') as HTMLInputElement
+    }
 
     // On ajoute à la propriété _todos la nouvelle tâche créée. C'est la méthode render qui se charge de l'affichage lorsque _todos change
-    protected _addTodo = (event: MouseEvent) => {
+    protected _addTodo = (event: MouseEvent): void => {
         event.preventDefault()
-        if (this._input!.value.length > 0) {
-            this._todos = [...this._todos, { text: this._input!.value }]
-            this._input!.value = ''
+        if (this._input && this._input.value.length > 0) {
+            this._todos = [...this._todos, { text: this._input.value, checked: false }]
+            this._input.value = ''
         }
     }
 }
@@ -213,8 +215,8 @@ Il y a évidemment des passerelles et des surcharges possibles, comme cela sera 
 Ici nous allons transformer le code en ajoutant
 
 ```typescript
-export default class TodoList extends Component<{}> {
-    static get styles() {
+export default class TodoList extends Component {
+    static get styles(): CSSResult {
         return css`
         :host {
             font-family: Arial, Helvetica, sans-serif;
@@ -245,6 +247,8 @@ export default class TodoList extends Component<{}> {
         `
     }
 
+    // Une propriété _todos est déclarée avec la directive @property en indiquant le type dont il s'agit, ici un Array d'objet
+    // Le préfixe _ permet à la propriété d'être obervable tout en étant considérée comme protected. Elle n'apparait ainsi pas dans les attributs de l'élément, il n'y a donc pas de conversion
     @property() _todos: Array<{ text: string; }> = []
 
     ...
@@ -264,16 +268,17 @@ npx wapitis generate component components/todo.ts
 Une fois le composant créé, il est édité comme ceci (lire les commentaires pour comprendre le fonctionnement).
 
 ```typescript
-import { Component, customElement, html, property, UTILS } from 'wapitis'
+import { Component, css, customElement, html, property, UTILS, TemplateResult } from 'wapitis'
+import { CSSResult } from 'wapitis/library/css'
 
 @customElement('w-todo')
 export default class Todo extends Component {
     // On déclare les 3 propiétés observables en utilisant la directive @property. Comme il s'agit d'attribut, afin d'indiquer comment la conversion doit être faite entre l'attribut et la propriété, on indique le type pour index et checked, text étant un string il est inutile de l'indiquer. attribute est passé à false pour l'index afin qu'il n'apparaisse pas en tant qu'attribut html dans le dom
     @property() text: string
     @property({ attribute: false }) index: number
-    @property({ type: Boolean }) checked: boolean = false
+    @property({ type: Boolean }) checked = false
 
-    render() {
+    render(): TemplateResult {
         // Voir https://lit-html.polymer-project.org/guide/template-reference
         // On utilise .checked pour indiquer qu'on utilisera une valeur true ou false et pas un booleen pour l'attribut html checked de l'input dans le DOM
         // Un custom event est utilisé pour préciser aux autres composants que la tâche est complétée ou supprimée (cf todo-list pour voir comment cela est traité)
@@ -289,20 +294,21 @@ export default class Todo extends Component {
 
     // Une fonction générique est créée pour envoyer le custom event
     // On utilise ici une des méthodes disponibles dans la librairie UTILS : dispatchEvent permettant d'envoyer un custom event
-    protected _fireEvent = (name: string) => UTILS.dispatchEvent(name, { index: this.index }, this)
+    protected _fireEvent = (name: string): void => UTILS.dispatchEvent(name, { index: this.index }, this)
 }
 ```
 
 Nous allons ensuite modifier todo-list afin de déclarer le nouveau composant créé et les méthodes nécessaires à son fonctionnement.
 
 ```typescript
-import { Component, css, customElement, html, property } from 'wapitis'
+import { Component, css, customElement, html, property, UTILS, TemplateResult } from 'wapitis'
+import { CSSResult } from 'wapitis/library/css'
 // On importe le composant
 import './todo'
 
 ...
 
-render() {
+render(): TemplateResult {
         // On utilise ensuite le tag html afin de créer un template avec les événements et les variables observées à mettre à jour
         // @click correspond à addEventListener('click', this.addTodos)
         // La partie du template this._todos est mis à jour car il s'agit d'une propriété observable
@@ -323,22 +329,28 @@ render() {
     }
 
     // On va chercher l'élément input
-    firstUpdated = () => this._input = this.shadowRoot!.querySelector('input')
+    firstUpdated(): void {
+        this._input = this.shadowRoot?.querySelector('input') as HTMLInputElement
+    }
 
     // On ajoute à la propriété _todos la nouvelle tâche créée. C'est la methode render qui se charge de l'affichage lorsque _todos change
-    protected _addTodo = (event: MouseEvent) => {
+    protected _addTodo = (event: MouseEvent): void => {
         event.preventDefault()
-        if (this._input!.value.length > 0) {
-            this._todos = [...this._todos, { text: this._input!.value, checked: false }]
-            this._input!.value = ''
+        if (this._input && this._input.value.length > 0) {
+            this._todos = [...this._todos, { text: this._input.value, checked: false }]
+            this._input.value = ''
         }
     }
 
     // On supprime l'index demandé en filtrant le tableau existant grâce à l'index. La mise à jour du tableau permettra à la methode render de remplacer les élément nécessaires dans le template
-    protected _removeTodo = (event: CustomEvent) => this._todos = this._todos.filter((todo, index) => index !== event.detail.index)
+    protected _removeTodo = (event: CustomEvent): void => {
+        this._todos = this._todos.filter((_todo, _index) => _index !== event.detail.index)
+    }
 
     // On remplace dans le tableau la propriété checked par la valeur renvoyée grâce à l'index. La mise à jour du tableau permettra à la methode render de remplacer les élément nécessaires dans le template
-    protected _toggleTodo = (event: CustomEvent) => this._todos = this._todos.map((todo, index) => index === event.detail.index ? { ...todo, checked: !todo.checked } : todo)
+    protected _toggleTodo = (event: CustomEvent): void => {
+        this._todos = this._todos.map((_todo, _index) => _index === event.detail.index ? { ..._todo, checked: !_todo.checked } : _todo)
+    }
 }
 ```
 
@@ -351,13 +363,14 @@ Cela nous donne :
 Afin d'améliorer le rendu, un peu de stylage est nécessaire
 
 ```typescript
+import { Component, css, customElement, html, property, UTILS, TemplateResult } from 'wapitis'
+import { CSSResult } from 'wapitis/library/css'
 // On importe les icons avec le fichier icons.svg
-import { Component, css, customElement, html, property, UTILS } from 'wapitis'
 import icons from '../www/assets/img/icons.svg'
 
 @customElement('w-todo')
 export default class Todo extends Component {
-    static get styles() {
+    static get styles(): CSSResult {
         return css`
         :host {
             display: flex;
@@ -418,9 +431,9 @@ export default class Todo extends Component {
     // On déclare les 3 propiétés observables en utilisant la directive @property. Comme il s'agit d'attribut, afin d'indiquer comment la conversion doit être faite entre l'attribut et la propriété, on indique le type pour index et checked, text étant un string il est inutile de l'indiquer. attribute est passé à false pour l'index afin qu'il n'apparaisse pas en tant qu'attribut html dans le dom
     @property() text: string
     @property({ attribute: false }) index: number
-    @property({ type: Boolean }) checked: boolean = false
+    @property({ type: Boolean }) checked = false
 
-    render() {
+    render(): TemplateResult {
         // Voir https://lit-html.polymer-project.org/guide/template-reference
         // On utilise .checked pour indiquer qu'on utilisera une valeur true ou false et pas un booleen pour l'attribut html checked de l'input dans le DOM
         // Un custom event est utilisé pour préciser aux autres composants que la tâche est complétée ou supprimée (cf todo-list pour voir comment cela est traité)

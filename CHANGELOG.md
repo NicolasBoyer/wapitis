@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mise à jour de la doc.
 - Amélioration eslint pour typescript et javascript.
 - Fix et refactor eslint et migration.
-- Readme : link to eslint.
+- Readme : link to eslint + fix head.
 - Ajout de `npx wapitis migr` permettant de lancer une migration des contenus si nécessaire.
 
 <!-- ## [2.1.15] - 2020-03-04

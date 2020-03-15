@@ -31,7 +31,7 @@ import image from '../www/assets/img/image.png'
 
 Puis d'appeler la variable dans l'attribut src de la balise image :
 ```typescript
- render() {
+ render(): TemplateResult {
     return html`<img src=${image}>`
     ...
 ```

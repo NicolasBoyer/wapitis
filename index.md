@@ -36,7 +36,7 @@ WebApp utiliTies est un set d'outils pour développer et compiler une applicatio
 
     $ npx wapitis clear --> supprime le cache et le dossier dist
 
-    $ npx wapitis migr --> lance une migration des contenus (un message l\'indique quand cela est nécessaire)
+    $ npx wapitis migr --> lance une migration des contenus (un message l'indique quand cela est nécessaire)
 
     $ wapitis generate class path/du/fichier.ts(x) --> génère une classe relatif à src. tsConfig est mis à jour
 
