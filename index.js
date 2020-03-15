@@ -483,8 +483,8 @@ if (arg) {
         ` : '') +
                                 `export default class ${className} {
 
-        }
-        `
+}
+`
                             files.appendFile(directoryBase + '/' + classFile, classText, true)
                         } else if (arg2 === 'component') {
                             files.copy(path.resolve(__dirname, '.includes/component.ts'), directoryBase + '/' + classFile).then(() => {
