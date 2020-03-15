@@ -1,5 +1,5 @@
 /* eslint-disable no-irregular-whitespace */
-const { ipcRenderer } = require('electron')
+import { ipcRenderer } from 'electron'
 
 const style = document.createElement('style')
 style.innerHTML = `#notification {
@@ -34,6 +34,7 @@ restartButton.innerHTML = 'Redémarrer'
 container.appendChild(restartButton)
 document.body.appendChild(container)
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function showInfos(options) {
     let timer
     container.classList.remove('hidden')
@@ -48,9 +49,9 @@ function showInfos(options) {
     }
 }
 
-ipcRenderer.on('message', (event, options) => showInfos(options))
+ipcRenderer.on('message', (_event, options) => showInfos(options))
 
-ipcRenderer.on('show_about', (event, arg) => {
+ipcRenderer.on('show_about', (_event, arg) => {
     const style = document.createElement('style')
     style.innerHTML = `.about {
     position: fixed;
