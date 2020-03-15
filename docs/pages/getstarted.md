@@ -70,7 +70,7 @@ import { CSSResult } from 'wapitis/library/css'
 
 // Entrez le nom du composant (x-nameOfComponent) par défaut en paramètre de register => recquis
 @customElement()
-export default class Custom extends Component {
+export default class TodoList extends Component {
     // Si true les logs internes de l'item sont publiés
     showInternalLog = false
 

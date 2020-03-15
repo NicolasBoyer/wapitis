@@ -489,7 +489,7 @@ if (arg) {
                         } else if (arg2 === 'component') {
                             files.copy(path.resolve(__dirname, '.includes/component.ts'), directoryBase + '/' + classFile).then(() => {
                                 const componentText = files.readFileSync(directoryBase + '/' + classFile, 'utf8')
-                                files.appendFile(directoryBase + '/' + classFile, componentText.replace('ClassName', className), true)
+                                files.appendFile(directoryBase + '/' + classFile, componentText.replace('Custom', className), true)
                             })
                         }
                         log(chalk.green('Le fichier ' + classFile + ' a été créé'))
