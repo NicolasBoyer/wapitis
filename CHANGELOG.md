@@ -10,7 +10,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-<!-- ## [Unreleased] -->
+## [Unreleased]
+- Update changelog
 
 ## [2.1.23] - 2020-03-16
 ### Todo
@@ -69,7 +70,7 @@ export class Box extends Component {
 ...
 ```
 
-<!-- [Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...HEAD -->
+[Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/2.1.23...HEAD
 [2.1.23]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...2.1.23
 [2.1.9]: https://github.com/NicolasBoyer/wapitis/compare/2.1.7...2.1.9
 [2.1.7]: https://github.com/NicolasBoyer/wapitis/compare/2.1.6...2.1.7
