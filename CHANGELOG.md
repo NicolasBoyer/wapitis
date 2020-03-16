@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- ## [Unreleased] -->
 
 ## [2.1.23] - 2020-03-16
+### Todo
+- Lancer `npx wapitis migr` afin de mettre à jour.
+
 ### Changed
 - Mise à jour de la doc.
 - Amélioration eslint pour typescript et javascript.
