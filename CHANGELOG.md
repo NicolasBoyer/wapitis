@@ -10,17 +10,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+<!-- ## [Unreleased] -->
+
+## [2.1.23] - 2020-03-16
+### Changed
 - Mise à jour de la doc.
 - Amélioration eslint pour typescript et javascript.
 - Fix et refactor eslint et migration.
 - Readme : link to eslint + fix head.
-- Ajout de `npx wapitis migr` permettant de lancer une migration des contenus si nécessaire.
 
-<!-- ## [2.1.15] - 2020-03-04
-### Fixed
-- Amélioration eslint pour typescript et javascript.
-- Fix et refactor eslint et migration. -->
+### Added
+- Ajout de `npx wapitis migr` permettant de lancer une migration des contenus si nécessaire.
 
 ## [2.1.9] - 2020-03-03
 ### Changed
@@ -66,8 +66,8 @@ export class Box extends Component {
 ...
 ```
 
-[Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...HEAD
-<!-- [2.1.15]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...2.1.10 -->
+<!-- [Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...HEAD -->
+[2.1.23]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...2.1.23
 [2.1.9]: https://github.com/NicolasBoyer/wapitis/compare/2.1.7...2.1.9
 [2.1.7]: https://github.com/NicolasBoyer/wapitis/compare/2.1.6...2.1.7
 [2.1.6]: https://github.com/NicolasBoyer/wapitis/compare/2.1.5...2.1.6
