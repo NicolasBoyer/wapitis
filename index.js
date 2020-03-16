@@ -529,7 +529,7 @@ if (arg) {
             log('MIGR : Installation de eslint en cours ...')
             tools.runCommandSync('npm i eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin -D')
             files.remove(directoryBase + '/tslint.json')
-            log(chalk.green('MIGR : eslint a été installé.'))log(chalk.green('MIGR : Les fichiers ont été copiés.'))
+            log(chalk.green('MIGR : eslint a été installé.'))
         }
         // COPY ELECTRONSTART ET INDEX.JS
         const indexjsFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js', 'utf8')
@@ -539,7 +539,7 @@ if (arg) {
                 () => files.copy(path.resolve(__dirname, '.includes/www/electron/index.js'), directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js').then(
                     () => files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json').then(
                         () => files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json').then(
-                            () => log(chalk.green('La migration est terminée.'))
+                            () => log(chalk.green('MIGR : Les fichiers ont été copiés.'))
                         )
                     )
                 )
