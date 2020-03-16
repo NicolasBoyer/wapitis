@@ -323,7 +323,8 @@ if (arg) {
             /** MIGRATION - A supprimer lors de l'augmentation de la medium */
             const eslintFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json', 'utf8')
             const eslintJson = eslintFile && JSON.parse(eslintFile)
-            if (!wapitisConfig.appleTouchIcon || !packageJson.devDependencies.typescript || packageJson.devDependencies.tslint || !eslintJson) {
+            const indexjsFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js', 'utf8')
+            if (!wapitisConfig.appleTouchIcon || !packageJson.devDependencies.typescript || packageJson.devDependencies.tslint || !eslintJson || indexjsFile && !indexjsFile.includes('no-var-requires')) {
                 log(chalk.red('Une migration est nécessaire, lancez `npx wapitis migr`'))
             }
             /** */
@@ -518,7 +519,7 @@ if (arg) {
         if (!eslintJson) {
             log('MIGR : Modification et installation de eslint plugins en cours ...')
             tools.runCommandSync('npm i eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard -D')
-            files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json').then(() => files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json').then(() => log(chalk.green('MIGR : eslint plugins ont été installés.'))))
+            log(chalk.green('MIGR : eslint plugins ont été installés.'))
         }
         // PASSAGE DE TSLINT A ESLINT
         if (packageJson.devDependencies.tslint) {
@@ -528,15 +529,23 @@ if (arg) {
             log('MIGR : Installation de eslint en cours ...')
             tools.runCommandSync('npm i eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin -D')
             files.remove(directoryBase + '/tslint.json')
-            log(chalk.green('MIGR : eslint a été installé.'))
+            log(chalk.green('MIGR : eslint a été installé.'))log(chalk.green('MIGR : Les fichiers ont été copiés.'))
         }
         // COPY ELECTRONSTART ET INDEX.JS
         const indexjsFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js', 'utf8')
         if (indexjsFile && !indexjsFile.includes('no-var-requires')) {
             log('MIGR : Copie des fichiers electronstart.ts et index.js en cours ...')
-            files.copy(path.resolve(__dirname, '.includes/electronStart.ts'), directoryBase + '/' + wapitisConfig.srcPath + '/electronStart.ts').then(() => files.copy(path.resolve(__dirname, '.includes/www/electron/index.js'), directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js').then(() => log(chalk.green('MIGR : Les fichiers ont été copiés.'))))
+            files.copy(path.resolve(__dirname, '.includes/electronStart.ts'), directoryBase + '/' + wapitisConfig.srcPath + '/electronStart.ts').then(
+                () => files.copy(path.resolve(__dirname, '.includes/www/electron/index.js'), directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js').then(
+                    () => files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json').then(
+                        () => files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json').then(
+                            () => log(chalk.green('La migration est terminée.'))
+                        )
+                    )
+                )
+            )
         }
-        log(chalk.green('La migration est terminée.'))
+
         /** */
     } else {
         log(chalk.red(arg + " n'est pas pris en charge par wapitis"))
