@@ -1,5 +1,6 @@
 /* eslint-disable no-irregular-whitespace */
-import { ipcRenderer } from 'electron'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { ipcRenderer } = require('electron')
 
 const style = document.createElement('style')
 style.innerHTML = `#notification {

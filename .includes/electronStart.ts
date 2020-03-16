@@ -77,7 +77,7 @@ function createWindow(): void {
                 {
                     label: 'Documentation',
                     click() {
-                        shell.openExternal('https://github.com/NicolasBoyer/wapitis#readme')
+                        shell.openExternal('https://nicolasboyer.github.io/wapitis/')
                     }
                 },
                 { type: 'separator' },

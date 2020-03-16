@@ -530,6 +530,12 @@ if (arg) {
             files.remove(directoryBase + '/tslint.json')
             log(chalk.green('MIGR : eslint a été installé.'))
         }
+        // COPY ELECTRONSTART ET INDEX.JS
+        const indexjsFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js', 'utf8')
+        if (indexjsFile && !indexjsFile.includes('no-var-requires')) {
+            log('MIGR : Copie des fichiers electronstart.ts et index.js en cours ...')
+            files.copy(path.resolve(__dirname, '.includes/electronStart.ts'), directoryBase + '/' + wapitisConfig.srcPath + '/electronStart.ts').then(() => files.copy(path.resolve(__dirname, '.includes/www/electron/index.js'), directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js').then(() => log(chalk.green('MIGR : Les fichiers ont été copiés.'))))
+        }
         log(chalk.green('La migration est terminée.'))
         /** */
     } else {
