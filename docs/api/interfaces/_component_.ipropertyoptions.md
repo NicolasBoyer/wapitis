@@ -21,7 +21,7 @@ Properties
 
 * [type](_component_.ipropertyoptions.md#optional-type)
 * [attribute](_component_.ipropertyoptions.md#optional-attribute)
-* [fromAttribute](_component_.ipropertyoptions.md#optional-fromAttribute)
+* [fromAttribute](_component_.ipropertyoptions.md#optional-fromattribute)
 
 </div>
 </div>
