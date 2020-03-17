@@ -40,6 +40,9 @@ Il est obligatoire lors de la déclaration dans la directive d'avoir un nom sou 
 New - 2.1.5
 {: .label .label-purple }
 
+New - 2.1.24
+{: .label .label-purple }
+
 En typescript, les propriétés peuvent être publiques, protected ou private. Avec Wapitis, pour rendre des propriétés observables, il faut utiliser la directive `@property`.
 
 Par défaut, cela permet de rendre une propriété observable et de définir par la même occasion un attribut du composant que nous sommes en train de créer.
@@ -55,9 +58,6 @@ Il est possible de passer un objet en paramètre. Cet object peut contenir 3 par
 - type : indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (`String` par défaut) - `Boolean`, `String`, `Number`, `Object`, `Array`. Important pour préciser comment la conversion doit se faire entre la propriété et l'attribut (qui est obligatoirement un texte). Inutile dans le cas d'une propriété protected mais observable car aucune conversion n'est nécessaire.
 - attribute : Si true, la propriété est alors répliquée en tant qu'attribut dans l'html. Si false, la propriété reste observable mais non visible en tant qu'attribut dans l'html 'rendu', il est néanmoins possible de la créer en html ou en javascript (true par défaut).
 - fromAttribute : Indique comment convertir un attribut vers une propriété. Si type est défini, alors ce paramètre est inutile. De même, type est inutile si `fromAttribute` est défini. Dans tous les cas, la conversion de la propriété vers l'attribut est automatique. Lorsque type est précisé, la conversion est automatique dans les deux sens (pour les types suivants : `Boolean`, `String`, `Number`, `Object`, and `Array`). `fromAttribute` permet de gérer plus finement la conversion en provenance de l'attribut. Nécessaire lorsqu'un typage particulier est utilisé.
-
-New - 2.1.24
-{: .label .label-purple }
 
 ---
 
