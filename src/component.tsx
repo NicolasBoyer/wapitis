@@ -338,7 +338,7 @@ export abstract class Component extends HTMLElement {
         const ctor = (this.constructor as typeof Component)
         const name = ctor._attributesToProperties[propName.toLowerCase()] || propName
         const options = ctor._propertyOptions[ctor._id + '_' + ctor.name + '_' + (name as string)]
-        this[name] = options.fromAttribute ? options.fromAttribute(value as string, options && options.type) : UTILS.fromString(value as string, options && options.type)
+        this[name] = options && options.fromAttribute ? options.fromAttribute(value as string, options.type) : UTILS.fromString(value as string, options && options.type)
     }
 
     /**
