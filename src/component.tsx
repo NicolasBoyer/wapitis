@@ -32,15 +32,19 @@ export function customElement(tagName?: string) {
  * - type : indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (string par défaut)
  * - attribute : si true, la propriété est alors répliquée en tant qu'attribut dans l'html. Si false, la propriété reste observable mais non visible en tant qu'attribut dans l'html 'rendu', il est néanmoins possible de la créer en html ou en javascript (true par défaut)
  */
-export interface IPropertyOptions {
+export interface IPropertyOptions<Type = unknown, TypeHint = unknown> {
     /**
-     * Indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (string par défaut)
+     * Indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (`String` par défaut) - `Boolean`, `String`, `Number`, `Object`, `Array`
      */
-    type?: object | string | number | boolean | unknown
+    type?: TypeHint
     /**
      * Si true, la propriété est alors répliquée en tant qu'attribut dans l'html. Si false, la propriété reste observable mais non visible en tant qu'attribut dans l'html 'rendu', il est néanmoins possible de la créer en html ou en javascript (true par défaut)
      */
     attribute?: boolean
+    /**
+     * Indique comment convertir un attribut vers une propriété. Si type est défini, alors ce paramètre est inutile. De même, type est inutile si `fromAttribute` est défini. Dans tous les cas, la conversion de la propriété vers l'attribut est automatique. Lorsque type est précisé, la conversion est automatique dans les deux sens (pour les types suivants : `Boolean`, `String`, `Number`, `Object`, and `Array`). `fromAttribute` permet de gérer plus finement la conversion en provenance de l'attribut. Nécessaire lorsqu'un typage particulier est utilisé
+     */
+    fromAttribute?: (value: string, type?: TypeHint) => Type
 }
 
 /**
@@ -334,7 +338,7 @@ export abstract class Component extends HTMLElement {
         const ctor = (this.constructor as typeof Component)
         const name = ctor._attributesToProperties[propName.toLowerCase()] || propName
         const options = ctor._propertyOptions[ctor._id + '_' + ctor.name + '_' + (name as string)]
-        this[name] = UTILS.fromString(value as string, options && options.type)
+        this[name] = options.fromAttribute ? options.fromAttribute(value as string, options && options.type) : UTILS.fromString(value as string, options && options.type)
     }
 
     /**

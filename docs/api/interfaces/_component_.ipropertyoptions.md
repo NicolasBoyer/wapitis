@@ -21,6 +21,7 @@ Properties
 
 * [type](_component_.ipropertyoptions.md#optional-type)
 * [attribute](_component_.ipropertyoptions.md#optional-attribute)
+* [fromAttribute](_component_.ipropertyoptions.md#optional-fromAttribute)
 
 </div>
 </div>
@@ -41,7 +42,7 @@ ___
 <tr>
 <td markdown="1">
 
-• **type**? : *object \| string \| number \| boolean \| unknown*
+• **type**? : *TypeHint*
 {: .mb-0 }
 
 </td>
@@ -51,7 +52,7 @@ ___
 
 *Defined in [src/component.tsx:39](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L39)*
 
-Indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (string par défaut)
+Indique le type à utiliser lors du passage de la propriété à l'attribut et inversement (`String` par défaut) - `Boolean`, `String`, `Number`, `Object`, `Array`
 {: .mb-0 }
 
 </td>
@@ -83,6 +84,37 @@ ___
 *Defined in [src/component.tsx:43](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L43)*
 
 Si true, la propriété est alors répliquée en tant qu'attribut dans l'html. Si false, la propriété reste observable mais non visible en tant qu'attribut dans l'html 'rendu', il est néanmoins possible de la créer en html ou en javascript (true par défaut)
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
+
+___
+
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
+### `Optional` fromAttribute
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+• **fromAttribute**? : *(value: string, type?: TypeHint) => Type*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+*Defined in [src/component.tsx:47](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L47)*
+
+Indique comment convertir un attribut vers une propriété. Si type est défini, alors ce paramètre est inutile. De même, type est inutile si `fromAttribute` est défini. Dans tous les cas, la conversion de la propriété vers l'attribut est automatique. Lorsque type est précisé, la conversion est automatique dans les deux sens (pour les types suivants : `Boolean`, `String`, `Number`, `Object`, and `Array`). `fromAttribute` permet de gérer plus finement la conversion en provenance de l'attribut. Nécessaire lorsqu'un typage particulier est utilisé
 {: .mb-0 }
 
 </td>
