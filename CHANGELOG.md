@@ -11,6 +11,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!-- ## [Unreleased] -->
+## [2.1.25] - 2020-03-17
+### Changed
+- Correction d'un bug sur fromAttribute.
 
 ## [2.1.24] - 2020-03-17
 ### Added
@@ -74,6 +77,7 @@ export class Box extends Component {
 ```
 
 <!-- [Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/2.1.23...HEAD -->
+[2.1.25]: https://github.com/NicolasBoyer/wapitis/compare/2.1.24...2.1.25
 [2.1.24]: https://github.com/NicolasBoyer/wapitis/compare/2.1.23...2.1.24
 [2.1.23]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...2.1.23
 [2.1.9]: https://github.com/NicolasBoyer/wapitis/compare/2.1.7...2.1.9
