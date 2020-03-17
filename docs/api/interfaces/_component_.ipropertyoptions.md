@@ -114,7 +114,7 @@ ___
 
 *Defined in [src/component.tsx:47](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L47)*
 
-Indique comment convertir un attribut vers une propriété. Si type est défini, alors ce paramètre est inutile. De même, type est inutile si `fromAttribute` est défini. Dans tous les cas, la conversion de la propriété vers l'attribut est automatique. Lorsque type est précisé, la conversion est automatique dans les deux sens (pour les types suivants : `Boolean`, `String`, `Number`, `Object`, and `Array`). `fromAttribute` permet de gérer plus finement la conversion en provenance de l'attribut. Nécessaire lorsqu'un typage particulier est utilisé
+Indique comment convertir un attribut vers une propriété. Si type est défini, alors il est récupérable via le paramètre type de `fromAttribute`. La conversion de la propriété vers l'attribut est toujours automatique. Lorsque type est précisé sans `fromAttribute`, la conversion est automatique dans les deux sens (pour les types suivants : `Boolean`, `String`, `Number`, `Object`, and `Array`). Utiliser `fromAttribute` permet donc de gérer plus finement la conversion en provenance de l'attribut
 {: .mb-0 }
 
 </td>
