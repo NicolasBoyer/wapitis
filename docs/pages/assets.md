@@ -29,6 +29,13 @@ Il est néanmoins toujours possible d'utiliser des fichiers images png, jpeg ou 
 import image from '../www/assets/img/image.png'
 ```
 
+et de déclarer dans le fichier `src/custom.d.ts` l'utilisation des fichiers de type .png :
+```typescript
+declare module '*.svg';
+declare module '*.css';
+declare module '*.png';
+```
+
 Puis d'appeler la variable dans l'attribut src de la balise image :
 ```typescript
  render(): TemplateResult {
