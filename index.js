@@ -399,7 +399,7 @@ if (arg) {
                                         minify: this.isProduction
                                     })
                                 ],
-                                !this.isElectronTask && CopyPlugin({ files: ['**/*.svg', '**/*.png', '**/*.jpg', '**/*.gif', '**/*.ico', '**/*.srt', '**/*.vtt', '**/*.avi', '**/*.mov', '**/*.mp3', '**/*.mp4', '**/*.mpg', '**/*.opus', '**/*.webm', '**/*.doc', '**/*.docx', '**/*.odg', '**/*.odp', '**/*.ods', '**/*.odt', '**/*.pdf', '**/*.ppt', '**/*.rtf', '**/*.xls', '**/*.xlsx', '**/*.zip', '**/*.txt', '**/*.xml', '**/*.json'], dest: 'assets', resolve: 'assets/' }),
+                                !this.isElectronTask && CopyPlugin({ files: ['**/*.svg', '**/*.png', '**/*.jpg', '**/*.gif', '**/*.ico', '**/*.srt', '**/*.vtt', '**/*.avi', '**/*.mov', '**/*.mp3', '**/*.mp4', '**/*.mpg', '**/*.opus', '**/*.webm', '**/*.doc', '**/*.docx', '**/*.odg', '**/*.odp', '**/*.ods', '**/*.odt', '**/*.pdf', '**/*.ppt', '**/*.rtf', '**/*.xls', '**/*.xlsx', '**/*.zip', '**/*.txt', '**/*.xml', '**/*.json'], dest: 'assets' }),
                                 this.isProduction && QuantumPlugin({
                                     manifest: 'quantum.json',
                                     bakeApiIntoBundle: this.isElectronTask ? 'electron' : 'bundle',
