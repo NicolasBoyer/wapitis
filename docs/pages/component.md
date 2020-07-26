@@ -204,6 +204,19 @@ disconnectedCallback(): void {
 ```
 Appelé lorsque le custom element est déconnecté du DOM du document.
 
+### forceUpdate
+{: .no_toc }
+
+New - 2.1.26
+{: .label .label-purple }
+
+```typescript
+forceUpdate(): void {
+    //
+}
+```
+Force le composant à relancer la methode render() et donc une mise à jour du template html. Utile si on souhaite mettre à jour le composant sans modifier une propriété observable.
+
 ---
 
 ## Slot

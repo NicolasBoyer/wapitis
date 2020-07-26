@@ -57,6 +57,7 @@ Methods
 * [beforeRender](_component_.component.md#protected-beforerender)
 * [connectedCallback](_component_.component.md#connectedcallback)
 * [disconnectedCallback](_component_.component.md#disconnectedcallback)
+* [forceUpdate](_component_.component.md#forceUpdate)
 * [firstUpdated](_component_.component.md#protected-firstupdated)
 * [render](_component_.component.md#protected-render)
 * [shouldUpdate](_component_.component.md#protected-shouldupdate)
@@ -322,7 +323,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:287](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L287)*
+*Defined in [src/component.tsx:294](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L294)*
 
 Appelé avant le rendu du composant. Permet d'interagir avec les éléments à chaque appel du composant avant sa création dans le dom
 
@@ -411,6 +412,39 @@ ___
 <tr>
 <td markdown="1">
 
+###  forceUpdate
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+▸ **forceUpdate**(): *void*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+*Defined in [src/component.tsx:271](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L271)*
+
+Force le composant à relancer la methode [render](_component_.component.md#protected-render) et donc une mise à jour du template html. Utile si on souhaite mettre à jour le composant sans modifier une propriété observable
+
+**Returns:** *void*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
+
+___
+
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
 ### `Protected` firstUpdated
 {: .m-0 }
 
@@ -427,7 +461,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:324](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L324)*
+*Defined in [src/component.tsx:331](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L331)*
 
 Appelé lors de la première mise à jour du composant
 
@@ -471,7 +505,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:299](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L299)*
+*Defined in [src/component.tsx:306](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L306)*
 
 Permet de créer le composant dans le DOM grâce au tag html de lit-html
 
@@ -506,7 +540,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:275](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L275)*
+*Defined in [src/component.tsx:282](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L282)*
 
 Permet de conditionner le rendu du composant
 
@@ -547,7 +581,7 @@ ___
 <tr>
 <td markdown="1">
 
-*Defined in [src/component.tsx:308](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L308)*
+*Defined in [src/component.tsx:315](https://github.com/NicolasBoyer/wapitis/blob/master/src/component.tsx#L315)*
 
 Appelé lors de chaque mise à jour du composant
 

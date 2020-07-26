@@ -266,6 +266,13 @@ export abstract class Component extends HTMLElement {
     }
 
     /**
+     * Force le composant à relancer la methode [[render]] et donc une mise à jour du template html. Utile si on souhaite mettre à jour le composant sans modifier une propriété observable.
+     */
+    forceUpdate(): void {
+        this._requestUpdate(false)
+    }
+
+    /**
      * Permet de conditionner le rendu du composant.
      *
      * [[render]] est appelé si la fonction retourne true. Ce qui est le comportement par défaut.
