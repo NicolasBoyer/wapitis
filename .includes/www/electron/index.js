@@ -113,7 +113,7 @@ ipcRenderer.on('show_about', (_event, arg) => {
 <div>V8 : ${arg.v8Version}</div>
 </div>
 <div class="credit">
-<div>© 2019</div>
+<div>© 2020</div>
 <div>Tous droits réservés.</div>
 </div>`
     document.body.appendChild(about)
