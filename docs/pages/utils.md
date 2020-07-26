@@ -23,6 +23,9 @@ Afin de permettre d'accéder à certaines méthodes utiles, quatre modules ont �
 
 ## UTILS
 
+New - 2.1.26
+{: .label .label-purple }
+
 Contient différentes méthodes permettant de simplifier certaines actions, comme la génération d'id, la transformation entre différents types, l'envoie de customEvent, la sauvegarde en local storage ...
 
 ```typescript
@@ -48,6 +51,10 @@ Contient différentes méthodes permettant de simplifier certaines actions, comm
     function load<T>(key: string): T
     /** Directive transformant des propriétés de types objet `{ [key: string]: unknown }` en attribut compréhensible par lit-html et le tag html */
     propsToAttributes(...props: { [key: string]: unknown }): void
+    /** Retourne une string utilisable dans une url (contenant toujours les / et les :) */
+    function slugify(str: string, options?: { isPath?: boolean, replacementChar?: string }): string
+    /** Retourne un id de type number en fonction de la chaîne de caratères passée en paramètre */
+    function generateIdFromString(str: string): number
 ```
 ---
 

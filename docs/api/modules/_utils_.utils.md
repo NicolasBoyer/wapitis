@@ -33,6 +33,8 @@ Functions
 * [load](_utils_.utils.md#load)
 * [save](_utils_.utils.md#save)
 * [toString](_utils_.utils.md#tostring)
+* [slugify](_utils_.utils.md#slugify)
+* [gegenerateIdFromStringn](_utils_.utils.md#generateIdFromString)
 
 </div>
 </div>
@@ -79,9 +81,9 @@ Comme toute directive, propsToAttributes est utilisé dans un tag html. Avec la 
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`props` | { [key: string]: unknown } | Les propriétés à transformer |
+| Name    | Type                       | Description                  |
+| ------- | -------------------------- | ---------------------------- |
+| `props` | { [key: string]: unknown } | Les propriétés à transformer |
 
 **Returns:** *(Anonymous function)*
 {: .mb-0 }
@@ -120,9 +122,9 @@ Transforme une chaîne du type camelCase en DashCase
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`name` | any | Chaîne à transformer |
+| Name   | Type | Description          |
+| ------ | ---- | -------------------- |
+| `name` | any  | Chaîne à transformer |
 
 **Returns:** *any*
 {: .mb-0 }
@@ -159,9 +161,9 @@ Transforme une chaîne du type DashCase en camelCase
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`name` | any | Chaîne à transformer |
+| Name   | Type | Description          |
+| ------ | ---- | -------------------- |
+| `name` | any  | Chaîne à transformer |
 
 **Returns:** *any*
 {: .mb-0 }
@@ -198,11 +200,11 @@ Envoie un customEvent sur l'élément parent, avec les propriétés renseignées
 
 **Parameters:**
 
-Name | Type | Default | Description |
------- | ------ | ------ | ------ |
-`name` | string | - | Nom du custom Event |
-`property` | object | - | Propriétés à envoyer |
-`parent` | HTMLElement |  document.body | Elément sur lequel le custom event est envoyé, document.body par défaut  |
+| Name       | Type        | Default       | Description                                                             |
+| ---------- | ----------- | ------------- | ----------------------------------------------------------------------- |
+| `name`     | string      | -             | Nom du custom Event                                                     |
+| `property` | object      | -             | Propriétés à envoyer                                                    |
+| `parent`   | HTMLElement | document.body | Elément sur lequel le custom event est envoyé, document.body par défaut |
 
 **Returns:** *void*
 {: .mb-0 }
@@ -239,10 +241,10 @@ Transforme une string dans le type renseigné
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`value` | string &#124; null | Chaîne à transformer |
-`type?` | unknown | Type dans lequel transformer la chaîne : Boolean, Number, Object, Array, ... |
+| Name    | Type               | Description                                                                  |
+| ------- | ------------------ | ---------------------------------------------------------------------------- |
+| `value` | string &#124; null | Chaîne à transformer                                                         |
+| `type?` | unknown            | Type dans lequel transformer la chaîne : Boolean, Number, Object, Array, ... |
 
 **Returns:** *any*
 {: .mb-0 }
@@ -312,9 +314,9 @@ Retourne le texte contenu dans le fichier spécifié de façon asynchrone
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`url` | string | Url du fichier à traiter |
+| Name  | Type   | Description              |
+| ----- | ------ | ------------------------ |
+| `url` | string | Url du fichier à traiter |
 
 **Returns:** *Promise‹any›*
 {: .mb-0 }
@@ -392,9 +394,9 @@ Le type des données à retourner
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`key` | string | La clé à utiliser pour charger les données |
+| Name  | Type   | Description                                |
+| ----- | ------ | ------------------------------------------ |
+| `key` | string | La clé à utiliser pour charger les données |
 
 **Returns:** *T*
 
@@ -439,10 +441,10 @@ Le type des données à sauvegarder
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`key` | string | La clé à utiliser pour sauvegarder les données |
-`datas` | T | Les données à sauvegarder  |
+| Name    | Type   | Description                                    |
+| ------- | ------ | ---------------------------------------------- |
+| `key`   | string | La clé à utiliser pour sauvegarder les données |
+| `datas` | T      | Les données à sauvegarder                      |
 
 **Returns:** *void*
 {: .mb-0 }
@@ -479,12 +481,91 @@ Transforme une valeur du type renseigné en string
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`value` | unknown | La valeur à transformer en string |
-`type?` | unknown | Type de la valeur à transformer : Boolean, Number, Object, Array, ... |
+| Name    | Type    | Description                                                           |
+| ------- | ------- | --------------------------------------------------------------------- |
+| `value` | unknown | La valeur à transformer en string                                     |
+| `type?` | unknown | Type de la valeur à transformer : Boolean, Number, Object, Array, ... |
 
 **Returns:** *unknown*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
+
+___
+
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
+###  slugify
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+▸ **slugify**(`str`: string, `options?`: { isPath?: boolean, replacementChar?: string }): *string*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+*Defined in [src/utils.ts:185](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L185)*
+
+Retourne une string utilisable dans une url (contenant toujours les / et les :)
+
+**Parameters:**
+
+| Name       | Type                                           | Description                                                                                                                                            |
+| ---------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `str`      | string                                         | La chaîne à traiter                                                                                                                                    |
+| `options?` | { isPath?: boolean, replacementChar?: string } | `isPath` Ne tramsforme pas les / et les :, utile pour créer une route ou un path, `replacementChar` Le caractère de remplacement utilisé, _ par défaut |
+
+**Returns:** *string*
+{: .mb-0 }
+
+</td>
+</tr>
+</table>
+
+___
+
+<table style="padding: 0.5rem;">
+<tr>
+<td markdown="1">
+
+###  generateIdFromString
+{: .m-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+▸ **generateIdFromString**(`str`: string): *number*
+{: .mb-0 }
+
+</td>
+</tr>
+<tr>
+<td markdown="1">
+
+*Defined in [src/utils.ts:209](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L209)*
+
+Retourne un id de type number en fonction de la chaîne de caratères passée en paramètre
+
+**Parameters:**
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| `str` | string | La chaîne de caractères à utitliser |
+
+**Returns:** *string*
 {: .mb-0 }
 
 </td>

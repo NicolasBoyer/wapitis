@@ -174,5 +174,50 @@ export const UTILS = {
                 }
             }
         }
-    })
+    }),
+
+    /**
+     * Retourne une string utilisable dans une url (contenant toujours les / et les :)
+     *
+     * @param {string} str La chaîne à traiter
+     * @param {{ isPath: boolean, replacementChar: string }} [options={ isPath: true, replacementChar: '_' }] isPath Ne tramsforme pas les / et les :, utile pour créer une route ou un path, replacementChar Le caractère de remplacement utilisé, _ par défaut
+     */
+    slugify(str: string, options?: { isPath?: boolean, replacementChar?: string }): string {
+        const isPath = options && options.isPath !== undefined ? options.isPath : true
+        const replacementChar = options && options.replacementChar || '_'
+        const a = 'ãàáäâèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/-,:;'
+        // eslint-disable-next-line quotes
+        const b = isPath ? `aaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh${replacementChar}/${replacementChar}${replacementChar}:${replacementChar}` : `aaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh${replacementChar}${replacementChar}${replacementChar}${replacementChar}${replacementChar}${replacementChar}`
+        const p = new RegExp(a.split('').join('|'), 'g')
+
+        str = str.toString().toLowerCase()
+            .replace(/\s+/g, replacementChar) // Replace spaces with _
+            .replace(p, c =>
+                b.charAt(a.indexOf(c))) // Replace special chars
+            .replace(/&/g, replacementChar + 'and' + replacementChar) // Replace & with 'and'
+            .replace(/--+/g, replacementChar) // Replace multiple - with single _
+            .replace(/^-+/, '') // Trim - from start of text
+            .replace(/-+$/, '') // Trim - from end of text
+        return isPath ? str : str.replace(/[^\w-]+/g, '') // Remove all non-word chars
+    },
+
+    /**
+     * Retourne un id de type number en fonction de la chaîne de caratères passée en paramètre
+     *
+     * @param {string} str La chaîne de caractères à utitliser
+     */
+    generateIdFromString(str: string): number {
+        let hash = 0
+        if (str.length === 0) {
+            return hash
+        }
+        for (let i = 0; i < str.length; i++) {
+            const charcode = str.charCodeAt(i)
+            // eslint-disable-next-line no-bitwise
+            hash = ((hash << 5) - hash) + charcode
+            // eslint-disable-next-line no-bitwise
+            hash |= 0
+        }
+        return hash
+    }
 }
