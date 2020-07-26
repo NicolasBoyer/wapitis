@@ -1,0 +1,79 @@
+
+
+
+IDEE
+> idée windows component contenant toutes les window compponent avec utilisation array comme todolist ...
+window se supprime envoie customevent et windows suppr de la liste
+windows pour comme window manager mais window est autonome si instancier seul
+
+
+Peut etre utile de créer une methode createPortal dans shadow dom ou dans dom pour créer des items en dehors comm pour la pupup
+
+
+
+A VENIR :
+TODO plus tard remettre en place la possibilité d'envoyer des notif mais pour ça il faudra stocker les souscriptions et les utiliser pour envoyer les notifs ... Plus tard -> Avec GITHUB ?
+TODO une question se pose quand c fait en html - comment faire fonctionner ça dans ce cas et le prendre en compte -> je parle du service worker
+TODO ajout de possibilité de créer un service avec l'app ? avec icon tray ? + tard
+TODO réfléchir à la façon dont ce serait possible de configurer ce que l'on met dans electron (via node flow peut etre ? En modifiant le fichier electronStart.js à la volée ? A voir si utile sinon necessaire de passer en code ...)
+TODO A VOIR EN PROD DANS SPEED UI verify intellisense params ?
+
+A voir comment gérer les config et l'install de speedui qui abesoin de wapitis
+
+fab
+/* color: #ffffff;
+            background: #2b7a77; */
+
+
+            /* :host([variant='rounded']:hover) {
+            background-color: rgba(0, 0, 0, 0.08);
+        } */
+
+        /* :host([variant='fab']:hover) {
+            background: #21605e;
+        } */
+
+
+        // :host([variant='contained']) {
+            /* color: #fff;
+            background-color: #2b7a77; */
+
+
+            /* :host([variant='contained']:hover) {
+            background: #21605e;
+        } */
+
+
+
+gravatar
+highlightjs
+https://picsum.photos/
+
+
+problème sur les imports à gérer ! mon ext + vscode ! src ...
++ pb sur les events qui sont présents partout + finaliser events manager
+
+eventmanager a remettre dans wapitis
+
+Gestion push et pop + extends + component + variable gestion + recuperation de svariables
+
+Verif any dans navmanager et peut etre les suppr et typage
+
+constrole si pas de page si mal positionné si le ath existe pas ...
+
+Dans url test manque l'id specifique ...
+
+créer un log spécifique dans speedui qui trace les erreurs dans le corps du texte
+
+id, path pas obligatoire
+
+route est un string particulier qu'on peut appeler sur le @tap du button ...
+
+Test nécessaire sur le passage par l'url au moins pour les variables de route ... IMPORTANT
+
+Route presque bon mais pas à définir ici mais au moment du load ou de la page created !!!
+
+Variables + anim !!!
+
+
+Pour l'anim peut etre revenir sur ce qui est fait dans swup avec utilisation de anim des css

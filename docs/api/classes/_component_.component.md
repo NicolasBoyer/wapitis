@@ -57,7 +57,7 @@ Methods
 * [beforeRender](_component_.component.md#protected-beforerender)
 * [connectedCallback](_component_.component.md#connectedcallback)
 * [disconnectedCallback](_component_.component.md#disconnectedcallback)
-* [forceUpdate](_component_.component.md#forceUpdate)
+* [forceUpdate](_component_.component.md#forceupdate)
 * [firstUpdated](_component_.component.md#protected-firstupdated)
 * [render](_component_.component.md#protected-render)
 * [shouldUpdate](_component_.component.md#protected-shouldupdate)
