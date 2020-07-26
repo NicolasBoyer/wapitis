@@ -11,6 +11,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!-- ## [Unreleased] -->
+## [2.1.26] - 2020-07-26
+### Changed
+- Précision sur l'utilisation des images dans l'aide avec la déclaration des modules dans `custom.d.ts`.
+
+### Added
+- Ajout de `forceUpdate`, permettant de forcer une mise à jour du composant.
+- Ajout de `sulgify` et `generateIdFromString` dans `UTILS`.
+- Suppression de la propriété resolve dans CopyPlugin lors de la création du bundle (cela créait un bug de path avec l'utilisation des fichiers externes).
+- Mise à jour de l'aide.
+- Update des différents packages utilisés.
+
 ## [2.1.25] - 2020-03-17
 ### Changed
 - Correction d'un bug sur fromAttribute.
@@ -77,6 +88,7 @@ export class Box extends Component {
 ```
 
 <!-- [Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/2.1.23...HEAD -->
+[2.1.26]: https://github.com/NicolasBoyer/wapitis/compare/2.1.25...2.1.26
 [2.1.25]: https://github.com/NicolasBoyer/wapitis/compare/2.1.24...2.1.25
 [2.1.24]: https://github.com/NicolasBoyer/wapitis/compare/2.1.23...2.1.24
 [2.1.23]: https://github.com/NicolasBoyer/wapitis/compare/2.1.9...2.1.23
