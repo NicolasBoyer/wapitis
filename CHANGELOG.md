@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!-- ## [Unreleased] -->
+## [2.1.27] - 2020-07-27
+### Changed
+- Changement credit pour 2020 sur electron about.
+
 ## [2.1.26] - 2020-07-26
 ### Changed
 - Précision sur l'utilisation des images dans l'aide avec la déclaration des modules dans `custom.d.ts`.
@@ -88,6 +92,7 @@ export class Box extends Component {
 ```
 
 <!-- [Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/2.1.23...HEAD -->
+[2.1.27]: https://github.com/NicolasBoyer/wapitis/compare/2.1.26...2.1.27
 [2.1.26]: https://github.com/NicolasBoyer/wapitis/compare/2.1.25...2.1.26
 [2.1.25]: https://github.com/NicolasBoyer/wapitis/compare/2.1.24...2.1.25
 [2.1.24]: https://github.com/NicolasBoyer/wapitis/compare/2.1.23...2.1.24
