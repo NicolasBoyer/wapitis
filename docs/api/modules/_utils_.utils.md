@@ -300,7 +300,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **getFile**(`url`: string): *Promise<{ [name: string]: unknown } | string>*
+▸ **getFile**(`url`: string): *Promise<Record<string, unknown> | string>*
 {: .mb-0 }
 
 </td>
@@ -318,7 +318,7 @@ Retourne le texte contenu dans le fichier spécifié de façon asynchrone
 | ----- | ------ | ------------------------ |
 | `url` | string | Url du fichier à traiter |
 
-**Returns:** *Promise<{ [name: string]: unknown } | string>*
+**Returns:** *Promise<Record<string, unknown> | string>*
 {: .mb-0 }
 
 </td>

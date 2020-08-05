@@ -101,11 +101,11 @@ export const UTILS = {
      * @param {string} url Url du fichier à traiter
      * @returns
      */
-    async getFile(url: string): Promise<{ [name: string]: unknown } | string> {
+    async getFile(url: string): Promise<Record<string, unknown> | string> {
         const response = await fetch(url)
         const text = await response.text()
         try {
-            return JSON.parse(text) as { [name: string]: unknown }
+            return JSON.parse(text) as Record<string, unknown>
         } catch (err) {
             return text
         }

@@ -44,7 +44,7 @@ Contient différentes méthodes permettant de simplifier certaines actions, comm
     /** Retourne la taille et la position de la fenêtre web courante */
     function getWindowSize(): { width: number, height: number, top: number, left: number }
     /** Retourne le texte contenu dans le fichier spécifié de façon asynchrone */
-    async function getFile(url: string): Promise<{ [name: string]: unknown } | string>
+    async function getFile(url: string): Promise<Record<string, unknown> | string>
     /** Enregistre les données dans la clé spécifiée en local storage */
     function save<T>(key: string, datas: T): void
     /** Retourne les données spécifiées dans la clé en local storage */
