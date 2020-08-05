@@ -91,7 +91,7 @@ export default class TodoList extends Component {
     // }
     // ```
     // Si la création sous cette forme n'est pas utilisée ou si on a pas besoin de cette aide, la déclaration des paramètres dans le constructeur peut alors être la suivante :
-    constructor(options: ecord<string, unknown>) {
+    constructor(options: record<string, unknown>) {
         super(options)
         /* ... */
     }
