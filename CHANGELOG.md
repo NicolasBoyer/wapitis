@@ -11,6 +11,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!-- ## [Unreleased] -->
+## [2.1.28] - 2020-08-05
+### Todo
+- Lancer `npx wapitis migr` afin de mettre à jour.
+
+### Changed
+- Remise en place style de doc suite aux changements de Just The Doc.
+- Mise à jour des différentes dépendances npm.
+- Prise en compte des changements de eslint dans le code et la doc : une migration est nécessaire - voir todo.
+
 ## [2.1.27] - 2020-07-27
 ### Changed
 - Changement credit pour 2020 sur electron about.
@@ -92,6 +101,7 @@ export class Box extends Component {
 ```
 
 <!-- [Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/2.1.23...HEAD -->
+[2.1.27]: https://github.com/NicolasBoyer/wapitis/compare/2.1.27...2.1.28
 [2.1.27]: https://github.com/NicolasBoyer/wapitis/compare/2.1.26...2.1.27
 [2.1.26]: https://github.com/NicolasBoyer/wapitis/compare/2.1.25...2.1.26
 [2.1.25]: https://github.com/NicolasBoyer/wapitis/compare/2.1.24...2.1.25
