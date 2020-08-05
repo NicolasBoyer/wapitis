@@ -26,6 +26,7 @@ title: WApiTis
 description: WebApp utiliTies pour typescript
 footer_content: 'Copyright &copy; 2020 Nicolas Boyer. Distributed by an <a href="https://github.com/NicolasBoyer/wapitis/blob/master/LICENSE.md">MIT license.</a>'
 logo: "/ui/logodoc.png"
+color_scheme: wapitis
 aux_links:
   "WApiTis sur GitHub":
     - "//github.com/NicolasBoyer/wapitis"
