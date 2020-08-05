@@ -545,6 +545,20 @@ if (arg) {
                 )
             )
         }
+        // COPY ELECTRON INDEX.JS
+        if (indexjsFile && indexjsFile.includes('2019')) {
+            log('MIGR : Copie du fichier index.js en cours ...')
+            files.copy(path.resolve(__dirname, '.includes/www/electron/index.js'), directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js').then(
+                log(chalk.green('MIGR : Les fichiers ont été copiés.'))
+            )
+        }
+        // COPY ESLINT
+        if (eslintFile && eslintFile.includes('@typescript-eslint/interface-name-prefix')) {
+            log('MIGR : Copie du fichier .eslintrc.json en cours ...')
+            files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/' + wapitisConfig.srcPath + '/.eslintrc.json').then(
+                log(chalk.green('MIGR : Le fichier a été copié.'))
+            )
+        }
 
         /** */
     } else {

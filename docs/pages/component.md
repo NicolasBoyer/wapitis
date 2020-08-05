@@ -90,7 +90,7 @@ New - 2.1.0
 {: .label .label-purple }
 
 ```typescript
-constructor(options: any) {
+constructor(options: Record<string, unknown>) {
     super(options)
 }
 ```
@@ -107,7 +107,7 @@ constructor(options: { maVariable: string }) {
 Si la création sous cette forme n'est pas utilisée ou si on a pas besoin de cette aide, la déclaration des paramètres dans le constructeur peut alors être la suivante :
 
 ```typescript
-constructor(options: any) {
+constructor(options: Record<string, unknown>) {
     super(options)
     /* ... */
 }
@@ -129,7 +129,7 @@ Appelé lorsque l'élément est connecté pour la première fois au DOM du docum
 {: .no_toc }
 
 ```typescript
-attributeChangedCallback(attrName: string, oldVal: any, newVal: any): void {
+attributeChangedCallback(attrName: string, oldVal: unknown, newVal: unknown): void {
     super.attributeChangedCallback(attrName, oldVal, newVal)
 }
 ```

@@ -28,7 +28,7 @@ Une fois l'installation terminée les sources se présentent ainsi :
 ![](images/wapitisSrc.png)
 
 - wapitis.json contient les divers éléments permettant la création de l'application. Peut être modifié si nécessaire.
-- tslint.json permet de mettre en place l'aide à la saisie.
+- .eslintrc.json permet de mettre en place l'aide à la saisie.
 - tsconfig.json configure comment typescript doit fonctionner.
 - .env contient les divers variables d'environnement nécessaires au bon fonctionnement de wapitis
 - le dossier src contient les sources de l'application. A commencer par les assets (images, icons, fonts ...)
@@ -91,7 +91,7 @@ export default class TodoList extends Component {
     // }
     // ```
     // Si la création sous cette forme n'est pas utilisée ou si on a pas besoin de cette aide, la déclaration des paramètres dans le constructeur peut alors être la suivante :
-    constructor(options: any) {
+    constructor(options: ecord<string, unknown>) {
         super(options)
         /* ... */
     }
@@ -101,7 +101,7 @@ export default class TodoList extends Component {
         super.connectedCallback()
     }
 
-    attributeChangedCallback(attrName: string, oldVal: any, newVal: any): void {
+    attributeChangedCallback(attrName: string, oldVal: unknown, newVal: unknown): void {
         super.attributeChangedCallback(attrName, oldVal, newVal)
     }
 

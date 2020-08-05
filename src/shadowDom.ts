@@ -7,8 +7,8 @@ function isDocumentNode(node: Document | DocumentFragment): boolean {
     return node.nodeType === Node.DOCUMENT_FRAGMENT_NODE || node.nodeType === Node.DOCUMENT_NODE
 }
 
-function findParentOrHost(element: any, root: Element): Element {
-    const parentNode = element.parentNode
+function findParentOrHost(element: Node, root: Element | ShadowRoot): Element | ShadowRoot {
+    const parentNode = element.parentNode as ShadowRoot
     return (parentNode && parentNode.host && parentNode.nodeType === 11) ? parentNode.host : parentNode === root ? null : parentNode
 }
 
@@ -22,13 +22,13 @@ function findParentOrHost(element: any, root: Element): Element {
 function collectAllElementsDeep(selector: string = null, root: Element | Document): string[] {
     const allElements = []
 
-    const findAllElements = (nodes: any[] | NodeListOf<Element>): void => {
+    const findAllElements = (nodes: Element[] | ShadowRoot[] | NodeListOf<Element>): void => {
         // eslint-disable-next-line no-cond-assign
         for (let i = 0, el; el = nodes[i]; ++i) {
-            allElements.push(el)
+            (allElements).push(el)
             // If the element has a shadow root, dig deeper.
-            if (el.shadowRoot) {
-                findAllElements(el.shadowRoot.querySelectorAll('*'))
+            if ((el as Element).shadowRoot) {
+                findAllElements((el as Element).shadowRoot.querySelectorAll('*'))
             }
         }
     }
@@ -37,17 +37,16 @@ function collectAllElementsDeep(selector: string = null, root: Element | Documen
     }
     findAllElements(root.querySelectorAll('*'))
 
-    return selector ? allElements.filter((el) => el.matches(selector)) : allElements
+    return (selector ? allElements.filter((el) => (el as Element).matches(selector)) : allElements) as string[]
 }
 
-function splitByCharacterUnlessQuoted(selector: any, character: string): any[] {
+/* eslint-disable */
+function splitByCharacterUnlessQuoted(selector: any, character: string): string[] {
     return selector.match(/\\?.|^$/g).reduce((p, c) => {
         if (c === '"' && !p.sQuote) {
-            // eslint-disable-next-line no-bitwise
             p.quote ^= 1
             p.a[p.a.length - 1] += c
         } else if (c === '\'' && !p.quote) {
-            // eslint-disable-next-line no-bitwise
             p.sQuote ^= 1
             p.a[p.a.length - 1] += c
         } else if (!p.quote && !p.sQuote && c === character) {
@@ -58,14 +57,15 @@ function splitByCharacterUnlessQuoted(selector: any, character: string): any[] {
         return p
     }, { a: [''] }).a
 }
+/* eslint-enable */
 
-function findMatchingElement(splitSelector: string[], possibleElementsIndex: number, root): (element: any) => boolean {
+function findMatchingElement(splitSelector: string[], possibleElementsIndex: number, root): (element: Element | Document | DocumentFragment) => boolean {
     return (element) => {
         let position = possibleElementsIndex
         let parent = element
         let foundElement = false
-        while (parent && !isDocumentNode(parent)) {
-            const foundMatch = parent.matches(splitSelector[position])
+        while (parent && !isDocumentNode(parent as Document | DocumentFragment)) {
+            const foundMatch = (parent as Element).matches(splitSelector[position])
             if (foundMatch && position === 0) {
                 foundElement = true
                 break
@@ -91,7 +91,7 @@ function _querySelectorDeep(selector: string, findMany: boolean, root: Element |
         // split on commas because those are a logical divide in the operation
         const selectionsToMake = splitByCharacterUnlessQuoted(selector, ',')
 
-        return selectionsToMake.reduce((acc, minimalSelector) => {
+        return selectionsToMake.reduce((acc: string[] | string, minimalSelector) => {
             // if not finding many just reduce the first match
             if (!findMany && acc) {
                 return acc
@@ -107,10 +107,10 @@ function _querySelectorDeep(selector: string, findMany: boolean, root: Element |
             const possibleElements = collectAllElementsDeep(splitSelector[possibleElementsIndex], root)
             const findElements = findMatchingElement(splitSelector, possibleElementsIndex, root)
             if (findMany) {
-                acc = acc.concat(possibleElements.filter(findElements))
+                acc = (acc as string[]).concat(possibleElements.filter(() => findElements))
                 return acc
             } else {
-                acc = possibleElements.find(findElements)
+                acc = possibleElements.find(() => findElements)
                 return acc || null
             }
         }, findMany ? [] : null)
@@ -191,7 +191,7 @@ export const SHADOWDOM = {
      * @returns {Element[]}
      */
     querySelectorAllDeep(selector: string, root: Element | Document = document): Element[] {
-        return _querySelectorDeep(selector, true, root)
+        return _querySelectorDeep(selector, true, root) as Element[]
     },
 
     /**
@@ -229,6 +229,6 @@ export const SHADOWDOM = {
      * @returns {Element}
      */
     querySelectorDeep(selector: string, root: Element | Document = document): Element {
-        return _querySelectorDeep(selector, false, root)
+        return _querySelectorDeep(selector, false, root) as Element
     }
 }

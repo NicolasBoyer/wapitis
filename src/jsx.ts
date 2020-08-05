@@ -2,15 +2,15 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 declare global {
     namespace JSX {
-        // eslint-disable-next-line @typescript-eslint/interface-name-prefix
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         interface Element extends HTMLElement {
             [key: string]: any
         }
-        // eslint-disable-next-line @typescript-eslint/interface-name-prefix
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         interface ElementAttributesProperty {
             _props: any
         }
-        // eslint-disable-next-line @typescript-eslint/interface-name-prefix
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         interface IntrinsicElements {
             [key: string]: any
         }
@@ -18,7 +18,7 @@ declare global {
 }
 
 export class JSXServices {
-    public createElement(tag: string | typeof HTMLElement, attributes: { [name: string]: any }, ...children: any[]): Element {
+    public createElement(tag: string | typeof HTMLElement, attributes: { [name: string]: unknown }, ...children: unknown[]): Element {
         let element: HTMLElement
         if (typeof tag === 'string') {
             element = document.createElement(tag)
@@ -29,7 +29,7 @@ export class JSXServices {
         // Add attributes
         for (const name in attributes) {
             if (name && attributes.hasOwnProperty(name)) {
-                (element as any)[name] = attributes[name]
+                (element)[name] = attributes[name]
             }
         }
         // Append children
@@ -39,13 +39,13 @@ export class JSXServices {
         return element
     }
 
-    appendChildren(element: Element | DocumentFragment, children: any): void {
+    appendChildren(element: Element | DocumentFragment, children: unknown): void {
         if (Array.isArray(children)) {
             children.forEach((ch) => JSX.appendChildren(element, ch))
         } else if (children instanceof Node) {
             element.appendChild(children)
         } else {
-            element.appendChild(document.createTextNode(children))
+            element.appendChild(document.createTextNode(String(children)))
         }
     }
 }

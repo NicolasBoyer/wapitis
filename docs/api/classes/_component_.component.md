@@ -83,7 +83,7 @@ ___
 <tr>
 <td markdown="1">
 
-\+ **new Component**(`options?`: any): *[Component](_component_.component.md)*
+\+ **new Component**(`options?`: Record<string, unknown>): *[Component](_component_.component.md)*
 {: .mb-0 }
 
 </td>
@@ -97,9 +97,9 @@ Crée une instance de Component
 
 **Parameters:**
 
-| Name       | Type | Description                                                                                                                                  |
-| ---------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `options?` | any  | Paramètre de type `{{ [x: string]: any }}` ou `any`, utile aux éditeurs pour la création de la classe sous la forme new Component({options}) |
+| Name       | Type                    | Description                                                                                                                             |
+| ---------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `options?` | Record<string, unknown> | Paramètre de type `{{ [x: string]: unknown }}`, utile aux éditeurs pour la création de la classe sous la forme new Component({options}) |
 
 **Returns:** *[Component](_component_.component.md)*
 
@@ -274,7 +274,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **attributeChangedCallback**(`attrName`: string, `oldVal`: any, `newVal`: any): *void*
+▸ **attributeChangedCallback**(`attrName`: string, `oldVal`: unknown, `newVal`: unknown): *void*
 {: .mb-0 }
 
 </td>
@@ -288,11 +288,11 @@ Spécifique au web component. Si la nouvelle valeur de l'attribut observé est d
 
 **Parameters:**
 
-| Name       | Type   | Description                   |
-| ---------- | ------ | ----------------------------- |
-| `attrName` | string | Nom de l'attribut             |
-| `oldVal`   | any    | Ancienne valeur de l'attribut |
-| `newVal`   | any    | Nouvelle valeur de l'attribut |
+| Name       | Type    | Description                   |
+| ---------- | ------- | ----------------------------- |
+| `attrName` | string  | Nom de l'attribut             |
+| `oldVal`   | unknown | Ancienne valeur de l'attribut |
+| `newVal`   | unknown | Nouvelle valeur de l'attribut |
 
 **Returns:** *void*
 {: .mb-0 }

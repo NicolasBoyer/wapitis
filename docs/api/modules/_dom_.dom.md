@@ -42,7 +42,7 @@ Functions
 <tr>
 <td markdown="1">
 
-▸ **createComponent**(`tag`: string, `attributes?`: { [key: string]: unknown }, `children?`: TemplateResult): *TemplateResult‹›*
+▸ **createComponent**(`tag`: string, `attributes?`: Record<string, unknown>, `children?`: TemplateResult): *TemplateResult‹›*
 {: .mb-0 }
 
 </td>
@@ -56,11 +56,11 @@ Crée un composant `tag` contenant les attributs et l'enfant passés en paramèt
 
 **Parameters:**
 
-| Name          | Type           | Description                  |
-| ------------- | -------------- | ---------------------------- |
-| `tag`         | string         | Nom du futur composant       |
-| `attributes?` | object         | Attributs du futur composant |
-| `children?`   | TemplateResult | Enfant du futur composant    |
+| Name          | Type                    | Description                  |
+| ------------- | ----------------------- | ---------------------------- |
+| `tag`         | string                  | Nom du futur composant       |
+| `attributes?` | Record<string, unknown> | Attributs du futur composant |
+| `children?`   | TemplateResult          | Enfant du futur composant    |
 
 **Returns:** *TemplateResult‹›*
 
@@ -170,7 +170,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **setAttribute**(`element`: HTMLElement, `name`: string, `value`: any, `isStyle?`: boolean): *void*
+▸ **setAttribute**(`element`: HTMLElement, `name`: string, `value`: unknown, `isStyle?`: boolean): *void*
 {: .mb-0 }
 
 </td>
@@ -188,7 +188,7 @@ Assigne l'attribut spécifié et sa valeur à l'élément spécifié
 | ---------- | ----------- | ------------------------------------------- |
 | `element`  | HTMLElement | L'élément sur lequel l'attribut est affecté |
 | `name`     | string      | Nom de l'attribut                           |
-| `value`    | any         | Valeur de l'attribut                        |
+| `value`    | unknown     | Valeur de l'attribut                        |
 | `isStyle?` | boolean     | Si true, ajoute en tant que que style       |
 
 **Returns:** *void*

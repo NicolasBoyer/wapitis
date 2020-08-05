@@ -16,6 +16,7 @@ import { arrayFlat, CSSResult, CSSResultArray } from './css'
  * @returns Retourne le custom element T avec le nom tagName
  */
 export function customElement(tagName?: string) {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     return <T extends HTMLElement>(type: new (options: any) => T) => {
         if (!tagName) {
             tagName = `x-${type.name.toLowerCase()}`
@@ -59,6 +60,7 @@ export interface IPropertyOptions<Type = unknown, TypeHint = unknown> {
  * @returns Retourne la propriété observable
  */
 export function property(options?: IPropertyOptions) {
+    // eslint-disable-next-line @typescript-eslint/ban-types
     return (target: object, propertyName?: PropertyKey): any => {
         if (target.hasOwnProperty(propertyName)) {
             return
@@ -99,13 +101,13 @@ export abstract class Component extends HTMLElement {
      */
     static get observedAttributes(): string[] {
         // Récupère et déclare les propriétés du composant parent si celui-ci est un Component de Wapitis
-        const superCtor = Object.getPrototypeOf(this)
+        const superCtor = Object.getPrototypeOf(this) as Record<string, unknown>
         if (superCtor.name !== 'Component') {
             const superProperties = Object.keys(superCtor.prototype).filter((name) => typeof Object.getOwnPropertyDescriptor(superCtor.prototype, name).get === 'function')
             superProperties.forEach((prop) => {
                 if (!Object.keys(this._propertyOptions).includes(this._id + '_' + this.name + '_' + prop)) {
                     Object.keys(superCtor._propertyOptions).forEach((option) => {
-                        if (option.includes(superCtor.name + '_' + prop)) {
+                        if (option.includes(`${String(superCtor.name)}_${prop}`)) {
                             this.createProperty(prop, superCtor._propertyOptions[option])
                         }
                     })
@@ -146,31 +148,32 @@ export abstract class Component extends HTMLElement {
     static createProperty(name: PropertyKey, options?: IPropertyOptions): void {
         const key = typeof name === 'symbol' ? Symbol() : `__${name}`
         const classId = this._id + '_' + this.name
-        this._propertyOptions[classId + '_' + (name as string)] = options || null
-        const reflectPropertyInAttribute = !(name as string).startsWith('_')
+        this._propertyOptions[classId + '_' + String(name)] = options || null
+        const reflectPropertyInAttribute = !String(name).startsWith('_')
         const attribute = !options || options && options.attribute !== false
         const isBoolean = options && options.type === Boolean
         if (reflectPropertyInAttribute) {
             this._observablesAttributes[classId] = this._observablesAttributes[classId] || []
-            const attrName = (name as string).toLowerCase()
+            const attrName = String(name).toLowerCase()
             this._observablesAttributes[classId].push(attrName)
             this._attributesToProperties[attrName] = name
         }
         Object.defineProperty(this.prototype, name, {
             get(): any {
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                const _val = this[key as string]
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                const _val = this[String(key)] as unknown
                 // Log.debug("get")
                 // Log.debug(`Get: ${name as string} => ${DOM.toString(_val, options && options.type)}`);
                 return isBoolean && _val === '' ? true : isBoolean && !_val ? false : _val
             },
             set(this: Component, newVal: unknown) {
                 // Log.debug(`Set: ${name as string} => ${DOM.toString(newVal, options && options.type)}`);
-                if (!(key as string in this) || key as string in this && this[key as string] !== newVal) {
+                if (!(String(key) in this) || String(key) in this && this[String(key)] !== newVal) {
                     // Log.debug("set")
-                    const oldVal = this[key as string]
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    const oldVal = this[String(key)] as unknown
                     this._changedProperties.set(name, { oldVal, newVal })
-                    this[key as string] = newVal
+                    this[String(key)] = newVal
                     const attrName = (name as string).toLowerCase()
                     if (reflectPropertyInAttribute && attribute) {
                         DOM.setAttribute(this, attrName, newVal)
@@ -199,7 +202,7 @@ export abstract class Component extends HTMLElement {
      */
     protected _props: any
     private _renderRoot: ShadowRoot
-    private _changedProperties: PropertyValues = new Map()
+    private _changedProperties: PropertyValues = new Map() as Map<string | number | symbol, { oldVal: unknown, newVal: unknown }>
     private _isUpdated = false
     private _hasConnectedResolver: (() => void) | undefined = undefined
     private _isConnected = false
@@ -210,16 +213,16 @@ export abstract class Component extends HTMLElement {
     /**
      * Crée une instance de Component
      *
-     * @param {T} options Paramètre de type {{ [x: string]: any }}, nécessaire pour la création de la classe sous la forme new({options})
+     * @param {T} options Paramètre de type {Record<string, unknown>}, nécessaire pour la création de la classe sous la forme new({options})
      *
      * Une fois appelées, les propriétés sont automatiquement prises en compte, si elles ont été déclarées sur le composant
      * @returns Retourne le composant avec le nom définit par la directive customElement.
      */
-    constructor(options?: any) {
+    constructor(options?: Record<string, unknown>) {
         super()
         for (const name in options) {
             if (options.hasOwnProperty(name) && name in this) {
-                (this as { [x: string]: any })[name] = options[name]
+                (this as Record<string, unknown>)[name] = options[name]
             }
         }
         this._renderRoot = this.attachShadow({ mode: 'open' })
@@ -256,7 +259,7 @@ export abstract class Component extends HTMLElement {
      * @param {*} oldVal Ancienne valeur de l'attribut
      * @param {*} newVal Nouvelle valeur de l'attribut
      */
-    attributeChangedCallback(attrName: string, oldVal: any, newVal: any): void {
+    attributeChangedCallback(attrName: string, oldVal: unknown, newVal: unknown): void {
         if (oldVal !== newVal) {
             if (this.showInternalLog) {
                 Log.debug(this.constructor.name + ' - attributeChangedCallback')
@@ -345,7 +348,7 @@ export abstract class Component extends HTMLElement {
         const ctor = (this.constructor as typeof Component)
         const name = ctor._attributesToProperties[propName.toLowerCase()] || propName
         const options = ctor._propertyOptions[ctor._id + '_' + ctor.name + '_' + (name as string)]
-        this[name] = options && options.fromAttribute ? options.fromAttribute(value as string, options.type) : UTILS.fromString(value as string, options && options.type)
+        this[String(name)] = options && options.fromAttribute ? options.fromAttribute(value as string, options.type) : UTILS.fromString(value as string, options && options.type)
     }
 
     /**
@@ -356,7 +359,7 @@ export abstract class Component extends HTMLElement {
     private _requestUpdate(isUpdate = false): void {
         if (isUpdate) {
             clearTimeout(this._timer)
-            this._update()
+            this._update().catch((error) => Log.error(`Erreur lors de la mise à jour du composant : ${String(error)}`))
             return
         }
         if (!isUpdate) {
@@ -391,9 +394,10 @@ export abstract class Component extends HTMLElement {
                 if (this._styles !== '') {
                     // Polyfill -> A supprimer après intégration de shadowdom et custom elements dans Edge
                     if ((navigator.userAgent.includes('Edge'))) {
-                        Array.prototype.slice.call(this._renderRoot.querySelectorAll('link'), 0).forEach(async (link) => {
+                        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                        (Array.prototype.slice.call(this._renderRoot.querySelectorAll('link'), 0) as Array<HTMLLinkElement>).forEach(async (link) => {
                             let linkStyle = await UTILS.getFile(link.href)
-                            linkStyle = linkStyle.replace(':host', this.tagName)
+                            linkStyle = String(linkStyle).replace(':host', this.tagName)
                             const style = document.createElement('style')
                             style.innerHTML = linkStyle
                             link.parentNode.insertBefore(style, link)
@@ -416,7 +420,7 @@ export abstract class Component extends HTMLElement {
                 UTILS.dispatchEvent('componentCreated', this)
             }
             this._isUpdated = true
-            this._changedProperties = new Map()
+            this._changedProperties = new Map() as Map<string | number | symbol, { oldVal: unknown, newVal: unknown }>
         }
     }
 }

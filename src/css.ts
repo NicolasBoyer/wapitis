@@ -104,12 +104,11 @@ export function arrayFlat(
  * @returns
  */
 export const css = (strings: TemplateStringsArray, ...values: Array<CSSResult | number>): CSSResult => {
-    const cssText = values.reduce((acc, v, idx) => acc + textFromCSSResult(v) + strings[idx + 1], strings[0])
+    const cssText = values.reduce((acc, v, idx) => `${acc} ${textFromCSSResult(v)}` + strings[idx + 1], strings[0])
     return new CSSResult(cssText, constructionToken)
 }
 
 /**
  * @ignore
  */
-// eslint-disable-next-line @typescript-eslint/interface-name-prefix, @typescript-eslint/no-empty-interface
-export interface CSSResultArray extends Array<CSSResult | CSSResultArray> { }
+export type CSSResultArray = Array<CSSResult | CSSResultArray>

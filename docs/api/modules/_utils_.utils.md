@@ -55,7 +55,7 @@ Functions
 <tr>
 <td markdown="1">
 
-• **propsToAttributes**(`value`: unknown, `type?`: unknown): *(Anonymous function)*
+• **propsToAttributes**(props: Record<string, unknown>): *(Anonymous function)*
 {: .mb-0 }
 
 </td>
@@ -65,7 +65,7 @@ Functions
 
 *Defined in [src/utils.ts:154](https://github.com/NicolasBoyer/wapitis/blob/master/src/utils.ts#L154)*
 
-Directive transformant des propriétés de types objet `{ [key: string]: unknown }` en attribut compréhensible par lit-html et le tag html.
+Directive transformant des propriétés de types objet `Record<string, unknown>` en attribut compréhensible par lit-html et le tag html.
 
 Cela est particulièrement utile dans le cas de données externes.
 
@@ -81,9 +81,9 @@ Comme toute directive, propsToAttributes est utilisé dans un tag html. Avec la 
 
 **Parameters:**
 
-| Name    | Type                       | Description                  |
-| ------- | -------------------------- | ---------------------------- |
-| `props` | { [key: string]: unknown } | Les propriétés à transformer |
+| Name    | Type                    | Description                  |
+| ------- | ----------------------- | ---------------------------- |
+| `props` | Record<string, unknown> | Les propriétés à transformer |
 
 **Returns:** *(Anonymous function)*
 {: .mb-0 }
@@ -108,7 +108,7 @@ Comme toute directive, propsToAttributes est utilisé dans un tag html. Avec la 
 <tr>
 <td markdown="1">
 
-▸ **camelCaseToDashCase**(`name`: any): *any*
+▸ **camelCaseToDashCase**(`name`: unknown): *string*
 {: .mb-0 }
 
 </td>
@@ -122,11 +122,11 @@ Transforme une chaîne du type camelCase en DashCase
 
 **Parameters:**
 
-| Name   | Type | Description          |
-| ------ | ---- | -------------------- |
-| `name` | any  | Chaîne à transformer |
+| Name   | Type    | Description          |
+| ------ | ------- | -------------------- |
+| `name` | unknown | Chaîne à transformer |
 
-**Returns:** *any*
+**Returns:** *string*
 {: .mb-0 }
 
 </td>
@@ -147,7 +147,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **dashCaseToCamelCase**(`name`: any): *any*
+▸ **dashCaseToCamelCase**(`name`: unknown): *string*
 {: .mb-0 }
 
 </td>
@@ -161,11 +161,11 @@ Transforme une chaîne du type DashCase en camelCase
 
 **Parameters:**
 
-| Name   | Type | Description          |
-| ------ | ---- | -------------------- |
-| `name` | any  | Chaîne à transformer |
+| Name   | Type    | Description          |
+| ------ | ------- | -------------------- |
+| `name` | unknown | Chaîne à transformer |
 
-**Returns:** *any*
+**Returns:** *string*
 {: .mb-0 }
 
 </td>
@@ -227,7 +227,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **fromString**(`value`: string \| null, `type?`: unknown): *any*
+▸ **fromString**(`value`: string \| null, `type?`: unknown): *{ [name: string]: unknown } | number | string*
 {: .mb-0 }
 
 </td>
@@ -246,7 +246,7 @@ Transforme une string dans le type renseigné
 | `value` | string &#124; null | Chaîne à transformer                                                         |
 | `type?` | unknown            | Type dans lequel transformer la chaîne : Boolean, Number, Object, Array, ... |
 
-**Returns:** *any*
+**Returns:** *{ [name: string]: unknown } | number | string*
 {: .mb-0 }
 
 </td>
@@ -300,7 +300,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **getFile**(`url`: string): *Promise‹any›*
+▸ **getFile**(`url`: string): *Promise<{ [name: string]: unknown } | string>*
 {: .mb-0 }
 
 </td>
@@ -318,7 +318,7 @@ Retourne le texte contenu dans le fichier spécifié de façon asynchrone
 | ----- | ------ | ------------------------ |
 | `url` | string | Url du fichier à traiter |
 
-**Returns:** *Promise‹any›*
+**Returns:** *Promise<{ [name: string]: unknown } | string>*
 {: .mb-0 }
 
 </td>
@@ -467,7 +467,7 @@ ___
 <tr>
 <td markdown="1">
 
-▸ **toString**(`value`: unknown, `type?`: unknown): *unknown*
+▸ **toString**(`value`: unknown, `type?`: unknown): *string | { [name: string]: unknown }*
 {: .mb-0 }
 
 </td>
@@ -486,7 +486,7 @@ Transforme une valeur du type renseigné en string
 | `value` | unknown | La valeur à transformer en string                                     |
 | `type?` | unknown | Type de la valeur à transformer : Boolean, Number, Object, Array, ... |
 
-**Returns:** *unknown*
+**Returns:** *string | { [name: string]: unknown }*
 {: .mb-0 }
 
 </td>

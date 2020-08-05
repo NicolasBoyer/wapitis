@@ -117,7 +117,7 @@ La directive @customElement permet de créer le nom du composant et de le décla
 Elle se place au dessus du nom de la classe. Exemple :
 ```typescript
 @customElement('w-todo')
-export default class Todo extends Component<IProps> {
+export default class Todo extends Component {
 ```
 **Parameters:**
 

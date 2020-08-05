@@ -30,21 +30,21 @@ Contient différentes méthodes permettant de simplifier certaines actions, comm
 
 ```typescript
     /** Transforme une string dans le type renseigné */
-    function fromString(value: string | null, type?: unknown): any
+    function fromString(value: string | null, type?: unknown): { [name: string]: unknown } | number | string
     /** Transforme une valeur du type renseigné en string */
-    function toString(value: unknown, type?: unknown): unknown
+    function toString(value: unknown, type?: unknown): string | { [name: string]: unknown }
     /** Transforme une chaîne du type camelCase en DashCase */
-    function camelCaseToDashCase(name): any
+    function camelCaseToDashCase(name: unknown): string
     /** Transforme une chaîne du type DashCase en camelCase */
-    function dashCaseToCamelCase(name): any
+    function dashCaseToCamelCase(name: unknown): string
     /** Retourne un id de type string */
     function generateId(): string
     /** Envoie un customEvent sur l'élément parent, avec les propriétés renseignées dans property */
     function dispatchEvent(name: string, property: object, parent: HTMLElement = document.body): void
     /** Retourne la taille et la position de la fenêtre web courante */
-    function getWindowSize() : { width: number, height: number, top: number, left: number }
+    function getWindowSize(): { width: number, height: number, top: number, left: number }
     /** Retourne le texte contenu dans le fichier spécifié de façon asynchrone */
-    async function getFile(url: string): Promise<any>
+    async function getFile(url: string): Promise<{ [name: string]: unknown } | string>
     /** Enregistre les données dans la clé spécifiée en local storage */
     function save<T>(key: string, datas: T): void
     /** Retourne les données spécifiées dans la clé en local storage */
@@ -54,7 +54,7 @@ Contient différentes méthodes permettant de simplifier certaines actions, comm
     /** Retourne une string utilisable dans une url (contenant toujours les / et les :) */
     function slugify(str: string, options?: { isPath?: boolean, replacementChar?: string }): string
     /** Retourne un id de type number en fonction de la chaîne de caratères passée en paramètre */
-    function generateIdFromString(str: string): number
+    function  generateIdFromString(str: string): number
 ```
 ---
 
@@ -72,7 +72,7 @@ Contient des méthodes permettant de manipuler le dom
     /** Assigne la propriété renseignée dans le style si la valeur est différente. Retourne true dans ce cas */
     function setStyle(element: HTMLElement, name: string, value: string): boolean
     /** Crée un composant `tag` contenant les attributs et l'enfant passés en paramètres */
-    function createComponent(tag: string, attributes?: { [key: string]: unknown }, children?: TemplateResult): TemplateResult
+    function createComponent(tag: string, attributes?: Record<string, unknown>, children?: TemplateResult): TemplateResult
 ```
 
 ---

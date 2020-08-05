@@ -11,13 +11,13 @@ export const DOM = {
      * @param {*} value Valeur de l'attribut
      * @param {boolean} isStyle Si true, ajoute en tant que que style
      */
-    setAttribute(element: HTMLElement, name: string, value: any, isStyle?: boolean): void {
+    setAttribute(element: HTMLElement, name: string, value: unknown, isStyle?: boolean): void {
         try {
             if (value !== null) {
                 value = UTILS.toString(value)
                 if (isStyle && (Number(value) || value === 0)) {
-                    const style: any = name
-                    element.style[style] = value + 'px'
+                    const style = name
+                    element.style[style] = `${String(value)} px`
                 }
             }
         } catch (e) {
@@ -71,7 +71,7 @@ export const DOM = {
      * Crée un composant `tag` contenant les attributs et l'enfant passés en paramètres
      *
      * @param {string} tag Nom du futur composant
-     * @param {{ [key: string]: unknown }} attributes Attributs du futur composant
+     * @param {Record<string, unknown>} attributes Attributs du futur composant
      * @param {TemplateResult} children Enfant du futur composant
      * @returns {TemplateResult} Retourne un TemplateResult à appeler avec le tag html
      * ```typescript
@@ -80,7 +80,7 @@ export const DOM = {
      *  `
      * ```
      */
-    createComponent(tag: string, attributes?: { [key: string]: unknown }, children?: TemplateResult): TemplateResult {
+    createComponent(tag: string, attributes?: Record<string, unknown>, children?: TemplateResult): TemplateResult {
         const template = html`
             <${tag} ...=${UTILS.propsToAttributes(attributes)}>
                 ${children}

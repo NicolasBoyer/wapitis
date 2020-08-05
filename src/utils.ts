@@ -10,7 +10,7 @@ export const UTILS = {
      * @param {unknown} type Type dans lequel transformer la chaîne : Boolean, Number, Object, Array, ...
      * @returns
      */
-    fromString(value: string | null, type?: unknown): any {
+    fromString(value: string | null, type?: unknown): { [name: string]: unknown } | number | string {
         switch (type) {
             case Boolean:
                 return value === 'true' || value === '' ? '' : null
@@ -18,7 +18,7 @@ export const UTILS = {
                 return Number(value)
             case Object:
             case Array:
-                return JSON.parse(value)
+                return JSON.parse(value) as { [name: string]: unknown }
         }
         return value
     },
@@ -30,8 +30,8 @@ export const UTILS = {
      * @param {unknown} type Type de la valeur à transformer : Boolean, Number, Object, Array, ...
      * @returns {unknown}
      */
-    toString(value: unknown, type?: unknown): unknown {
-        return type === Object || type === Array || typeof value === 'object' ? JSON.stringify(value) : JSON.parse(value as string)
+    toString(value: unknown, type?: unknown): string | { [name: string]: unknown } {
+        return type === Object || type === Array || typeof value === 'object' ? JSON.stringify(value) : JSON.parse(String(value)) as { [name: string]: unknown }
     },
 
     /**
@@ -40,8 +40,8 @@ export const UTILS = {
      * @param {*} name Chaîne à transformer
      * @returns
      */
-    camelCaseToDashCase(name: any): any {
-        return name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
+    camelCaseToDashCase(name: unknown): string {
+        return String(name).replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
     },
 
     /**
@@ -50,8 +50,8 @@ export const UTILS = {
      * @param {*} name Chaîne à transformer
      * @returns
      */
-    dashCaseToCamelCase(name: any): any {
-        return name.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+    dashCaseToCamelCase(name: unknown): string {
+        return String(name).replace(/-([a-z])/g, (g) => g[1].toUpperCase())
     },
 
     /**
@@ -70,6 +70,7 @@ export const UTILS = {
      * @param {object} property Propriétés à envoyer
      * @param {HTMLElement} parent Elément sur lequel le custom event est envoyé, document.body par défaut
      */
+    // eslint-disable-next-line @typescript-eslint/ban-types
     dispatchEvent(name: string, property: object, parent: HTMLElement = document.body): void {
         const event = new CustomEvent(name, { detail: property })
         parent.dispatchEvent(event)
@@ -100,11 +101,11 @@ export const UTILS = {
      * @param {string} url Url du fichier à traiter
      * @returns
      */
-    async getFile(url: string): Promise<any> {
+    async getFile(url: string): Promise<{ [name: string]: unknown } | string> {
         const response = await fetch(url)
         const text = await response.text()
         try {
-            return JSON.parse(text)
+            return JSON.parse(text) as { [name: string]: unknown }
         } catch (err) {
             return text
         }
@@ -131,11 +132,11 @@ export const UTILS = {
      */
     load<T>(key: string): T {
         const datas = localStorage.getItem(key) || '{}'
-        return JSON.parse(datas)
+        return JSON.parse(datas) as T
     },
 
     /**
-     * Directive transformant des propriétés de types objet `{ [key: string]: unknown }` en attribut compréhensible par lit-html et le tag html.
+     * Directive transformant des propriétés de types objet `Record<string, unknown>` en attribut compréhensible par lit-html et le tag html.
      *
      * Cela est particulièrement utile dans le cas de données externes.
      *
@@ -149,11 +150,11 @@ export const UTILS = {
      * `
      * ```
      *
-     * @param {{ [key: string]: unknown }} props Les propriétés de type `{ [key: string]: unknown }` à transformer
+     * @param {Record<string, unknown>} props Les propriétés de type `Record<string, unknown>` à transformer
      */
-    propsToAttributes: directive((props: { [key: string]: unknown }) => (part: PropertyPart) => {
+    propsToAttributes: directive((props: Record<string, unknown>) => (part: PropertyPart) => {
         const previousProps = new WeakMap()
-        const prev = previousProps.get(part)
+        const prev = previousProps.get(part) as Record<string, unknown>
         if (prev === props) {
             return
         }
