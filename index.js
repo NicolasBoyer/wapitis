@@ -324,7 +324,7 @@ if (arg) {
             const eslintFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json', 'utf8')
             const eslintJson = eslintFile && JSON.parse(eslintFile)
             const indexjsFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js', 'utf8')
-            if (!wapitisConfig.appleTouchIcon || !packageJson.devDependencies.typescript || packageJson.devDependencies.tslint || !eslintJson || indexjsFile && !indexjsFile.includes('no-var-requires')) {
+            if (!wapitisConfig.appleTouchIcon || !packageJson.devDependencies.typescript || packageJson.devDependencies.tslint || !eslintJson || indexjsFile && !indexjsFile.includes('no-var-requires') || indexjsFile && indexjsFile.includes('2019') || eslintFile && eslintFile.includes('@typescript-eslint/interface-name-prefix')) {
                 log(chalk.red('Une migration est nécessaire, lancez `npx wapitis migr`'))
             }
             /** */
