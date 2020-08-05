@@ -49,8 +49,8 @@ Contient différentes méthodes permettant de simplifier certaines actions, comm
     function save<T>(key: string, datas: T): void
     /** Retourne les données spécifiées dans la clé en local storage */
     function load<T>(key: string): T
-    /** Directive transformant des propriétés de types objet `{ [key: string]: unknown }` en attribut compréhensible par lit-html et le tag html */
-    propsToAttributes(...props: { [key: string]: unknown }): void
+    /** Directive transformant des propriétés de types objet `Record<string, unknown>` en attribut compréhensible par lit-html et le tag html */
+    propsToAttributes(...props: Record<string, unknown>): void
     /** Retourne une string utilisable dans une url (contenant toujours les / et les :) */
     function slugify(str: string, options?: { isPath?: boolean, replacementChar?: string }): string
     /** Retourne un id de type number en fonction de la chaîne de caratères passée en paramètre */
