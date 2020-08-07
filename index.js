@@ -291,6 +291,7 @@ if (arg) {
     }`
                 files.appendFile(directoryBase + '/wapitis.json', wapitisTxt, true)
                 files.copy(path.resolve(__dirname, '.includes/tsconfig.json'), directoryBase + '/tsconfig.json')
+                files.copy(path.resolve(__dirname, '.includes/.eslintignore'), directoryBase + '/.eslintignore')
                 files.copy(path.resolve(__dirname, '.includes/.eslintrc.json'), directoryBase + '/.eslintrc.json')
                 files.copy(path.resolve(__dirname, '.includes/gitignore'), directoryBase + '/.gitignore')
                 files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/' + answers.srcproject + '/.eslintrc.json')
@@ -322,9 +323,10 @@ if (arg) {
         else {
             /** MIGRATION - A supprimer lors de l'augmentation de la medium */
             const eslintFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '.eslintrc.json', 'utf8')
+            const eslintIgnoreFile = files.readFileSync(directoryBase + '/' + '.eslintignore', 'utf8')
             const eslintJson = eslintFile && JSON.parse(eslintFile)
             const indexjsFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js', 'utf8')
-            if (!wapitisConfig.appleTouchIcon || !packageJson.devDependencies.typescript || packageJson.devDependencies.tslint || !eslintJson || indexjsFile && !indexjsFile.includes('no-var-requires') || indexjsFile && indexjsFile.includes('2019') || eslintFile && eslintFile.includes('@typescript-eslint/interface-name-prefix')) {
+            if (!wapitisConfig.appleTouchIcon || !packageJson.devDependencies.typescript || packageJson.devDependencies.tslint || !eslintJson || indexjsFile && !indexjsFile.includes('no-var-requires') || indexjsFile && indexjsFile.includes('2019') || eslintFile && eslintFile.includes('@typescript-eslint/interface-name-prefix') || !eslintIgnoreFile) {
                 log(chalk.red('Une migration est nécessaire, lancez `npx wapitis migr`'))
             }
             /** */
@@ -556,6 +558,13 @@ if (arg) {
         if (eslintFile && eslintFile.includes('@typescript-eslint/interface-name-prefix')) {
             log('MIGR : Copie du fichier .eslintrc.json en cours ...')
             files.copy(path.resolve(__dirname, '.includes/src/.eslintrc.json'), directoryBase + '/' + wapitisConfig.srcPath + '/.eslintrc.json').then(
+                log(chalk.green('MIGR : Le fichier a été copié.'))
+            )
+        }
+        // COPY ESLINTIGNORE
+        if (!files.readFileSync(directoryBase + '/' + '.eslintignore', 'utf8')) {
+            log('MIGR : Copie du fichier .eslintignore en cours ...')
+            files.copy(path.resolve(__dirname, '.includes/.eslintignore'), directoryBase + '/.eslintignore').then(
                 log(chalk.green('MIGR : Le fichier a été copié.'))
             )
         }
