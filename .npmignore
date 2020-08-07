@@ -1,6 +1,6 @@
 /tsconfig.json
 /.eslintrc.json
-.eslintignore
+/.eslintignore
 /src
 TOREMEMBER.md
 .todo
