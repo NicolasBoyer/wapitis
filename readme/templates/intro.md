@@ -2,4 +2,4 @@
 >
 > L'idée est de faciliter la mise en oeuvre de composants grâce aux web components et à la surcouche qui y est apportée, et de rendre leur compilation plus simple.
 >
-> Afin de faciliter la compilation de cette application, des scripts en ligne de commanbde permettent très rapidement d'initialiser, de tester et de publier en production pour une sortie sur le Web ou dans une épplication packagée.
+> Afin de faciliter la compilation de cette application, des scripts en ligne de commande permettent très rapidement d'initialiser, de tester et de publier en production pour une sortie sur le Web ou dans une application packagée pour Windows, IOS ou Android.

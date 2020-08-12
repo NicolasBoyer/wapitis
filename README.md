@@ -1,4 +1,4 @@
-<p align="center">
+<!-- ⚠️ This README has been generated from the file(s) "./readme/readme.blueprint.md" ⚠️--><p align="center">
   <img src="https://github.com/NicolasBoyer/wapitis/blob/master/ui/logo.png?raw=true" alt="Logo" width="auto" height="auto" />
 </p>
 
@@ -10,7 +10,7 @@
 >
 > L'idée est de faciliter la mise en oeuvre de composants grâce aux web components et à la surcouche qui y est apportée, et de rendre leur compilation plus simple.
 >
-> Afin de faciliter la compilation de cette application, des scripts en ligne de commanbde permettent très rapidement d'initialiser, de tester et de publier en production pour une sortie sur le Web ou dans une épplication packagée.
+> Afin de faciliter la compilation de cette application, des scripts en ligne de commande permettent très rapidement d'initialiser, de tester et de publier en production pour une sortie sur le Web ou dans une application packagée pour Windows, IOS ou Android.
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#technologies-utilises)
 
