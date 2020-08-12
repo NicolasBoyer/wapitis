@@ -1,6 +1,6 @@
 {
   "name": "wapitis",
-  "version": "2.1.31",
+  "version": "2.1.32",
   "description": "Outils permettant de créer et de gérer une web app - WebApp utiliTies pour typescript",
   "repository": {
     "type": "git",
@@ -29,9 +29,11 @@
     "wapitis": "index.js"
   },
   "dependencies": {
+    "@capacitor/cli": "^2.4.0",
+    "@capacitor/core": "^2.4.0",
     "@types/node": "^14.0.27",
     "chalk": "^4.1.0",
-    "electron": "^9.1.2",
+    "electron": "^9.2.0",
     "electron-builder": "^22.8.0",
     "electron-updater": "^4.3.4",
     "fbcssplugin": "^1.0.3",
@@ -55,9 +57,12 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "typedoc": "^0.17.8",
+    "typedoc": "^0.18.0",
     "typedoc-plugin-markdown": "^2.4.0",
     "typedoc-plugin-no-inherit": "^1.1.10"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "bugs": {
     "url": "https://github.com/NicolasBoyer/wapitis/issues"
