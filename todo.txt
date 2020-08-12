@@ -77,3 +77,7 @@ Variables + anim !!!
 
 
 Pour l'anim peut etre revenir sur ce qui est fait dans swup avec utilisation de anim des css
+
+
++ intégration de capacitor
++ reprendre le service worker avec nouveauté scen
