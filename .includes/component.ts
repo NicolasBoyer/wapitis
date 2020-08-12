@@ -24,7 +24,7 @@ export default class Custom extends Component {
     // }
     // ```
     // Si la création sous cette forme n'est pas utilisée ou si on a pas besoin de cette aide, la déclaration des paramètres dans le constructeur peut alors être la suivante :
-    constructor(options: any) {
+    constructor(options: Record<string, unknown>) {
         super(options)
         /* ... */
     }
@@ -34,7 +34,7 @@ export default class Custom extends Component {
         super.connectedCallback()
     }
 
-    attributeChangedCallback(attrName: string, oldVal: any, newVal: any): void {
+    attributeChangedCallback(attrName: string, oldVal: unknown, newVal: unknown): void {
         super.attributeChangedCallback(attrName, oldVal, newVal)
     }
 
