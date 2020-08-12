@@ -256,6 +256,16 @@ if (arg) {
                     }
                 },
                 {
+                    name: 'appId',
+                    type: 'input',
+                    message: 'Quel est l\'id de votre Web App (utile pour une sortie sur Android ou IOS):',
+                    validate: function (value) {
+                        if (value.length) return true
+                        else return 'Entrez l\'id de votre Web App'
+                    },
+                    default: 'fr.wapitis.`appName`'
+                },
+                {
                     name: 'appDesc',
                     type: 'input',
                     message: 'Donnez une description pour votre Web App:',
@@ -277,6 +287,7 @@ if (arg) {
             ]
 
             inquirer.prompt(questions).then((answers) => {
+                const appId = answers.appId.includes('appName') ? `fr.wapitis.${answers.appName}` : answers.appId
                 const wapitisTxt =
                     `{
         "srcPath": "${answers.srcproject}/",
@@ -285,6 +296,7 @@ if (arg) {
         "startFile": "app.tsx",
         "electronStartFile": "electronStart.ts",
         "appName": "${answers.appName}",
+        "appId": "${appId}",
         "appDesc": "${answers.appDesc}",
         "themeColor": "${answers.themeColor}",
         "appleTouchIcon": "./assets/icons/apple-touch-icon.png"
@@ -315,10 +327,11 @@ if (arg) {
                     await files.appendFile(directoryBase + '/' + answers.srcproject + '/www/manifest.json', JSON.stringify(manifestJson, null, 2), true)
                     tools.runCommandSync('npm i eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin typescript eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard -D')
                     tools.runCommandSync('npm i electron-updater --save')
+                    tools.runCommandSync(`npx cap init "${answers.appName}" "${appId}" --web-dir "dist"`)
                 })
             })
         } else log(chalk.red('L\'initialisation a déjà été effectuée, veuillez modifier directement le fichier wapitis.json !'))
-    } else if (arg === 'dev' || arg === 'prod' || arg === 'clear' || arg === 'electron' || arg === 'generate') {
+    } else if (arg === 'dev' || arg === 'prod' || arg === 'clear' || arg === 'electron' || arg === 'capacitor' || arg === 'generate') {
         if (!isWapitisFile) log(chalk.red('Lancer `npx wapitis init` afin d\'initialiser l\'application'))
         else {
             /** MIGRATION - A supprimer lors de l'augmentation de la medium */
@@ -326,7 +339,7 @@ if (arg) {
             const eslintIgnoreFile = files.readFileSync(directoryBase + '/' + '.eslintignore', 'utf8')
             const eslintJson = eslintFile && JSON.parse(eslintFile)
             const indexjsFile = files.readFileSync(directoryBase + '/' + wapitisConfig.srcPath + '/www/electron/index.js', 'utf8')
-            if (!wapitisConfig.appleTouchIcon || !packageJson.devDependencies.typescript || packageJson.devDependencies.tslint || !eslintJson || indexjsFile && !indexjsFile.includes('no-var-requires') || indexjsFile && indexjsFile.includes('2019') || eslintFile && eslintFile.includes('@typescript-eslint/interface-name-prefix') || !eslintIgnoreFile) {
+            if (!wapitisConfig.appleTouchIcon || !packageJson.devDependencies.typescript || packageJson.devDependencies.tslint || !eslintJson || indexjsFile && !indexjsFile.includes('no-var-requires') || indexjsFile && indexjsFile.includes('2019') || eslintFile && eslintFile.includes('@typescript-eslint/interface-name-prefix') || !eslintIgnoreFile || !wapitisConfig.appId) {
                 log(chalk.red('Une migration est nécessaire, lancez `npx wapitis migr`'))
             }
             /** */
@@ -568,7 +581,14 @@ if (arg) {
                 log(chalk.green('MIGR : Le fichier a été copié.'))
             )
         }
-
+        // ADD CAPACITOR ET COPY ELECTRONSTART
+        if (!wapitisConfig.appId) {
+            files.copy(path.resolve(__dirname, '.includes/electronStart.ts'), directoryBase + '/' + wapitisConfig.srcPath + '/electronStart.ts').then(async () => {
+                wapitisConfig.appId = `fr.wapitis.${wapitisConfig.appName}`
+                await files.appendFile(directoryBase + '/wapitis.json', JSON.stringify(wapitisConfig, null, 2), true)
+                tools.runCommandSync(`npx cap init "${wapitisConfig.appName}" "${wapitisConfig.appId}" --web-dir "dist"`)
+            })
+        }
         /** */
     } else {
         log(chalk.red(arg + " n'est pas pris en charge par wapitis"))
@@ -580,6 +600,8 @@ if (arg) {
     log(chalk.green(chalk.bold('  wapitis dev') + '  ---> lance la web app dans un serveur local. --webapp pour générer service worker, manifest et polyfills'))
     log(chalk.green(chalk.bold('  wapitis prod') + ' ---> web app pour la production'))
     log(chalk.green(chalk.bold('  wapitis electron') + '  ---> lance la webApp dans electron avec un serveur local (--dev), pour la production (--prod) ou pour une publication directe (--publish)'))
+    // TODO A finir d'écrire !
+    log(chalk.green(chalk.bold('  wapitis capacitor') + '  ---> add platform, update platform, run platform(copy + open) --update (sync à la place de copy)'))
     log(chalk.green(chalk.bold('  wapitis clear') + ' ---> supprime le cache et le dossier dist'))
     log(chalk.green(chalk.bold('  wapitis migr') + ' ---> lance une migration des contenus (un message l\'indique quand cela est nécessaire)'))
     log(chalk.green(chalk.bold('  wapitis generate class path/du/fichier.ts(x)') + ' ---> génère une classe relatif à src'))
