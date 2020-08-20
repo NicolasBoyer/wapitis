@@ -351,7 +351,18 @@ if (arg) {
                 process.env.ELECTRON_ENV = process.argv[3] === '--prod' ? 'production' : process.argv[3] === '--publish' ? 'publish' : 'dev'
             }
 
-            if (arg === 'dev' || arg === 'prod' || arg === 'electron') {
+            if (arg === 'capacitor') {
+                process.env.NODE_ENV = 'production'
+                const arg2 = process.argv[3]
+                const arg3 = process.argv[4]
+                if (arg2 === 'add') {
+                    if (arg3 === 'android' || arg3 === 'ios') tools.runCommandSync(`npx cap add ${arg3}`)
+                    else log(chalk.red('Cette commande nécessite un argument supplémentaire'))
+                } else if (arg2 === 'update') tools.runCommandSync('npx cap update')
+                else if (arg2 !== 'run' || !arg2) log(chalk.red('Cette commande nécessite un argument supplémentaire'))
+            }
+
+            if (arg === 'dev' || arg === 'prod' || arg === 'electron' || arg === 'capacitor' && process.argv[3] === 'run') {
                 if (arg !== 'electron') {
                     // Service worker, manifest, polyfills et fichiers pour la web app
                     swBuilder.setOptions({
@@ -481,6 +492,13 @@ if (arg) {
                         })
                     }
                 })
+            } else if (arg === 'capacitor' && process.argv[3] === 'run') {
+                const arg3 = process.argv[4]
+                if (arg3 === 'android' || arg3 === 'ios') {
+                    if (process.argv[5] === '--update') tools.runCommandSync('npx cap sync')
+                    else tools.runCommandSync('npx cap copy')
+                    tools.runCommandSync(`npx cap open ${arg3}`)
+                } else log(chalk.red('Cette commande nécessite un argument supplémentaire'))
             } else if (arg === 'generate') {
                 const arg2 = process.argv[3]
                 const arg3 = process.argv[4]
@@ -601,7 +619,7 @@ if (arg) {
     log(chalk.green(chalk.bold('  wapitis prod') + ' ---> web app pour la production'))
     log(chalk.green(chalk.bold('  wapitis electron') + '  ---> lance la webApp dans electron avec un serveur local (--dev), pour la production (--prod) ou pour une publication directe (--publish)'))
     // TODO A finir d'écrire !
-    log(chalk.green(chalk.bold('  wapitis capacitor') + '  ---> add platform, update platform, run platform(copy + open) --update (sync à la place de copy)'))
+    log(chalk.green(chalk.bold('  wapitis capacitor') + '  ---> `add android or ios` to add the desired platform. `update` to update the plugins and the installed platforms. `run android or ios` to compile and open in Android Studio or XCode, --update to update before compilation'))
     log(chalk.green(chalk.bold('  wapitis clear') + ' ---> supprime le cache et le dossier dist'))
     log(chalk.green(chalk.bold('  wapitis migr') + ' ---> lance une migration des contenus (un message l\'indique quand cela est nécessaire)'))
     log(chalk.green(chalk.bold('  wapitis generate class path/du/fichier.ts(x)') + ' ---> génère une classe relatif à src'))
