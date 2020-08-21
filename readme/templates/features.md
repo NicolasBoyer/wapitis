@@ -10,3 +10,4 @@
 - Styler et surcharger les styles directement dans les composants
 - Utilisation de SVG pour gérer les icons
 - Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne
+- Intégration de [Capacitor](https://capacitorjs.com/) permettant de compiler une app android ou ios

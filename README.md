@@ -11,6 +11,8 @@
 > L'idée est de faciliter la mise en oeuvre de composants grâce aux web components et à la surcouche qui y est apportée, et de rendre leur compilation plus simple.
 >
 > Afin de faciliter la compilation de cette application, des scripts en ligne de commande permettent très rapidement d'initialiser, de tester et de publier en production pour une sortie sur le Web ou dans une application packagée pour Windows, IOS ou Android.
+>
+> ATTENTION ! version 2.1.32 beta en cours avec ajout de Capacitor !
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#technologies-utilises)
 
@@ -56,7 +58,8 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 - désactiver smart screen ;)
 
 **TODO :**
-- Intégration de [Capacitor](https://capacitor.ionicframework.com/)
+- Intégration de [Capacitor](https://capacitor.ionicframework.com/) -> En cours
+- Doc pour Capacitor
 - Gestion d'une liaison avec IndexedDB dans le Service Worker pour les données provenant d'une base de données
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#features)
@@ -73,6 +76,7 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 - Styler et surcharger les styles directement dans les composants
 - Utilisation de SVG pour gérer les icons
 - Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne
+- Intégration de [Capacitor](https://capacitorjs.com/) permettant de compiler une app android ou ios
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#license)

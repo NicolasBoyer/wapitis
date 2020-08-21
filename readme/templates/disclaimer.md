@@ -16,5 +16,6 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 - désactiver smart screen ;)
 
 **TODO :**
-- Intégration de [Capacitor](https://capacitor.ionicframework.com/)
+- Intégration de [Capacitor](https://capacitor.ionicframework.com/) -> En cours
+- Doc pour Capacitor
 - Gestion d'une liaison avec IndexedDB dans le Service Worker pour les données provenant d'une base de données
