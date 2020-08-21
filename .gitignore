@@ -10,4 +10,4 @@ test
 _apisave
 accessInfos.txt
 
-~/.npmrc
+.npmrc
