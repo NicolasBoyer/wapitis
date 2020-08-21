@@ -9,3 +9,5 @@ library
 test
 _apisave
 accessInfos.txt
+
+~/.npmrc
