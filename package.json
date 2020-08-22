@@ -62,7 +62,7 @@
     "typedoc-plugin-no-inherit": "^1.1.10"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/NicolasBoyer"
   },
   "bugs": {
     "url": "https://github.com/NicolasBoyer/wapitis/issues"
