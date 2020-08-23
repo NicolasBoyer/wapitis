@@ -4,7 +4,7 @@
   "description": "Outils permettant de créer et de gérer une web app - WebApp utiliTies pour typescript",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NicolasBoyer/wapitis.git"
+    "url": "https://github.com/NicolasBoyer/wapitis"
   },
   "keywords": [
     "Web",
