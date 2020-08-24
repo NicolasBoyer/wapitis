@@ -2,10 +2,7 @@
   "name": "wapitis",
   "version": "2.1.32",
   "description": "Outils permettant de créer et de gérer une web app - WebApp utiliTies pour typescript",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/NicolasBoyer/wapitis"
-  },
+  "repository": "git://github.com/NicolasBoyer/wapitis.git",
   "keywords": [
     "Web",
     "App",
