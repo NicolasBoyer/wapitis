@@ -160,8 +160,8 @@ export const SHADOWDOM = {
             if (!element || element === document || element === window) {
                 return null
             }
-            if ((element as Slotable).assignedSlot) {
-                element = (element as Slotable).assignedSlot
+            if ((element as Slottable).assignedSlot) {
+                element = (element as Slottable).assignedSlot
             }
             const found = (element as Element).closest(selector)
             return found || _closestFrom(((element as Element).getRootNode() as ShadowRoot).host)
