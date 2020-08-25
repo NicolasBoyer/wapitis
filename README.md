@@ -12,7 +12,7 @@
 >
 > Afin de faciliter la compilation de cette application, des scripts en ligne de commande permettent très rapidement d'initialiser, de tester et de publier en production pour une sortie sur le Web ou dans une application packagée pour Windows, IOS ou Android.
 >
-> ATTENTION ! version 2.1.32 beta en cours avec ajout de Capacitor !
+> **ATTENTION ! version 2.1.38 beta en cours avec ajout de Capacitor !**
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#technologies-utilises)
 
