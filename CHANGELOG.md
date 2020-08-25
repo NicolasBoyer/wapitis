@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Correction orthographique sur le readme et ajout de la mention beta.
 - Update des différents package et passage en 2.1.32 beta.
 - Ajout de [capacitor](https://capacitorjs.com/) en beta avec migration associée.
+- Publication du package sur npm et gthub.
 
 ## [2.1.31] - 2020-08-07
 ### Todo
