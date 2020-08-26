@@ -11,8 +11,6 @@
 > L'idée est de faciliter la mise en oeuvre de composants grâce aux web components et à la surcouche qui y est apportée, et de rendre leur compilation plus simple.
 >
 > Afin de faciliter la compilation de cette application, des scripts en ligne de commande permettent très rapidement d'initialiser, de tester et de publier en production pour une sortie sur le Web ou dans une application packagée pour Windows, IOS ou Android.
->
-> **ATTENTION ! version 2.1.39 beta en cours avec ajout de Capacitor !**
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#technologies-utilises)
 
@@ -34,7 +32,7 @@ En utilisant lit-html, Wapitis met à jour le contenu dans des shadow DOM et ajo
 
 Une librairie de fonctions est également disponible afin de permettre d'accéder rapidement aux différents éléments du DOM ou du shadow DOM.
 
-Afin de faciliter la diffusion, Wapitis utilise [FuseBox](https://fuse-box.org) pour compiler rapidement des versions de dev ou de prod. Ajoutons à cela l'utilisation d'[electron](https://electronjs.org/) pour concevoir des applications sous forme de client lourd installable, le tout intégré de façon simple et facilement accessible.
+Afin de faciliter la diffusion, Wapitis utilise [FuseBox](https://fuse-box.org) pour compiler rapidement des versions de dev ou de prod. Ajoutons à cela l'utilisation d'[electron](https://electronjs.org/) pour concevoir des applications sous forme de client lourd installable et de [Capacitor](https://capacitorjs.com/) pour créer des applications mobiles sous Android ou IOS, le tout intégré de façon simple et facilement accessible.
 
 L'utilisation des lignes de commandes permet ainsi d'accéder rapidement et facilement à toutes ces fonctions sans avoir besoin de configurer quoi que ce soit.
 
@@ -58,8 +56,6 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 - désactiver smart screen ;)
 
 **TODO :**
-- Intégration de [Capacitor](https://capacitor.ionicframework.com/) -> En cours
-- Doc pour Capacitor
 - Gestion d'une liaison avec IndexedDB dans le Service Worker pour les données provenant d'une base de données
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#features)
@@ -68,6 +64,7 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 
 - Générer une application web grâce à [FuseBox](https://fuse-box.org)
 - Générer une application [electron](https://electronjs.org/)
+- Intégration de [Capacitor](https://capacitorjs.com/) permettant de compiler une app android ou ios
 - Mise à jour asynchrone du DOM grâce à [lit-html](https://lit-html.polymer-project.org/)
 - Utilisation possible de jsx via l'import d'un fichier jsx.ts
 - Divers méthodes  disponibles grâce à l'import du fichier log.ts, dom.ts, shadowDom.ts et utils.ts
@@ -76,11 +73,10 @@ Lors de l'installation d'un executable via electron, windows a un avertissement 
 - Styler et surcharger les styles directement dans les composants
 - Utilisation de SVG pour gérer les icons
 - Pré-intégration d'un service-worker, permettant à la web app de fontionner hors ligne
-- Intégration de [Capacitor](https://capacitorjs.com/) permettant de compiler une app android ou ios
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/water.png)](#license)
 
 ## 🠺 License
-	
+
 Licensed under [MIT](https://opensource.org/licenses/MIT).
