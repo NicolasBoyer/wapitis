@@ -344,12 +344,12 @@ render(): TemplateResult {
 
     // On supprime l'index demandé en filtrant le tableau existant grâce à l'index. La mise à jour du tableau permettra à la methode render de remplacer les élément nécessaires dans le template
     protected _removeTodo = (event: CustomEvent): void => {
-        this._todos = this._todos.filter((_todo, _index) => _index !== event.detail.index)
+        this._todos = this._todos.filter((_todo, _index) => _index !== (event.detail as Record<string, unknown>).index)
     }
 
     // On remplace dans le tableau la propriété checked par la valeur renvoyée grâce à l'index. La mise à jour du tableau permettra à la methode render de remplacer les élément nécessaires dans le template
     protected _toggleTodo = (event: CustomEvent): void => {
-        this._todos = this._todos.map((_todo, _index) => _index === event.detail.index ? { ..._todo, checked: !_todo.checked } : _todo)
+        this._todos = this._todos.map((_todo, _index) => _index === (event.detail as Record<string, unknown>).index ? { ..._todo, checked: !_todo.checked } : _todo)
     }
 }
 ```

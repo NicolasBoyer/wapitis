@@ -34,6 +34,8 @@ WebApp utiliTies est un set d'outils pour développer et compiler une applicatio
 
     $ npx wapitis electron --> lance la webApp dans electron avec un serveur local (--dev) ou pour la production(--prod)
 
+    $ npx wapitis capacitor --> permet de créer une application mobile pour Android ou IOS. `add android or ios` pour ajouter la plateforme de votre choix. `update` pour mettre à jour les plugins et les plateformes installés. `run android or ios` pour compiler et ouvrir dans Android Studio ou XCode, `--update` pour mettre à jour avant la compilation'
+
     $ npx wapitis clear --> supprime le cache et le dossier dist
 
     $ npx wapitis migr --> lance une migration des contenus (un message l'indique quand cela est nécessaire)

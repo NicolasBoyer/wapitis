@@ -618,8 +618,7 @@ if (arg) {
     log(chalk.green(chalk.bold('  wapitis dev') + '  ---> lance la web app dans un serveur local. --webapp pour générer service worker, manifest et polyfills'))
     log(chalk.green(chalk.bold('  wapitis prod') + ' ---> web app pour la production'))
     log(chalk.green(chalk.bold('  wapitis electron') + '  ---> lance la webApp dans electron avec un serveur local (--dev), pour la production (--prod) ou pour une publication directe (--publish)'))
-    // TODO A finir d'écrire !
-    log(chalk.green(chalk.bold('  wapitis capacitor') + '  ---> `add android or ios` to add the desired platform. `update` to update the plugins and the installed platforms. `run android or ios` to compile and open in Android Studio or XCode, --update to update before compilation'))
+    log(chalk.green(chalk.bold('  wapitis capacitor') + '  ---> permet de créer une application mobile pour Android ou IOS. `add android or ios` pour ajouter la plateforme de votre choix. `update` pour mettre à jour les plugins et les plateformes installés. `run android or ios` pour compiler et ouvrir dans Android Studio ou XCode, `--update` pour mettre à jour avant la compilation'))
     log(chalk.green(chalk.bold('  wapitis clear') + ' ---> supprime le cache et le dossier dist'))
     log(chalk.green(chalk.bold('  wapitis migr') + ' ---> lance une migration des contenus (un message l\'indique quand cela est nécessaire)'))
     log(chalk.green(chalk.bold('  wapitis generate class path/du/fichier.ts(x)') + ' ---> génère une classe relatif à src'))
