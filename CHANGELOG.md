@@ -10,15 +10,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-- Doc pour capacitor
+<!-- ## [Unreleased] -->
+
+## [2.1.40] - 2020-08-27
+### Changed
+- Update des différents package et passage en 2.1.32 beta.
+- Update vers electron 10 et Typescript 4.
 - Prise en compte eslint pour le composant généré lors de l'utilisation de la task `generate`.
 - Prise en compte eslint pour `electronStart.ts` et migration associée.
-- Correction orthographique sur le readme et ajout de la mention beta.
-- Update des différents package et passage en 2.1.32 beta.
+- Correction orthographique sur le readme.
+
+### Added
+- Doc pour capacitor
 - Ajout de [capacitor](https://capacitorjs.com/) en beta avec migration associée.
 - Publication du package sur npm et gthub.
-- Update vers electron 10 et Typescript 4.
 
 ## [2.1.31] - 2020-08-07
 ### Todo
@@ -116,7 +121,8 @@ export class Box extends Component {
 ...
 ```
 
-[Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/2.1.31...HEAD
+<!-- [Unreleased]: https://github.com/NicolasBoyer/wapitis/compare/2.1.31...HEAD -->
+[2.1.40]: https://github.com/NicolasBoyer/wapitis/compare/2.1.31...2.1.40
 [2.1.31]: https://github.com/NicolasBoyer/wapitis/compare/2.1.29...2.1.31
 [2.1.29]: https://github.com/NicolasBoyer/wapitis/compare/2.1.27...2.1.29
 [2.1.27]: https://github.com/NicolasBoyer/wapitis/compare/2.1.26...2.1.27
